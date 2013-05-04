@@ -1,0 +1,8 @@
+:cachedir: <%= @cachedir %>
+:sources:
+  :jiminy:
+    remote: <%= @remote %>
+    basedir: <%= @basedir %>
+
+:purgedirs:
+  - <%= @purgedirs %>
