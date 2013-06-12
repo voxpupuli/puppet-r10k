@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+# based on https://gist.github.com/rpflorence/478846
+# figure out which repository this is
+# assumes it's a bare repository
+repository = /([^\/]*?)\.git$/.match(`pwd`.chomp)[1]
+
+# get the stdins from git
+stdins = []; stdins << $_ while gets
+
+stdins.each do |str|
+  # parse the stdin string
+  arr = str.split
+  refs = arr[2].split('/')
+
+  # what we're really after
+  oldrev   = arr[0] # SHA
+  newrev   = arr[1] # SHA
+  ref_type = refs[1] # tags || heads (branch)
+  ref_name = refs[2] # develop, 1.4 etc.
+  system('mco r10k synchronize')
+  # now do whatcha gotta do
+end

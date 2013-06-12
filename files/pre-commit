@@ -1,0 +1,25 @@
+#!/usr/bin/ruby
+# Based on an example from Jakov Sosic
+def puppet_parser_validate(file)
+        system('puppet parser validate ' + file)
+end
+
+def puppet_lint(file)
+        system('puppet-lint --no-80chars-check ' + file)
+end
+
+#def puppet_erb_check(file)
+#        system('erb -x -T \'-\' ' + file + ' | ruby -c')
+#end
+
+# go through list of files, and call adequate checks
+IO.popen('git diff --cached --name-only --diff-filter=ACM').readlines.each { |file|
+    file.sub!(/^\w (.*)\n/,'\1')
+    puts "Processing #{file}"
+    if file.match('.pp$')
+        exit 1 unless puppet_parser_validate file
+        exit 1 unless puppet_lint file 
+#    elsif file.match('.erb$')
+#        exit 1 unless puppet_erb_check file
+    end
+}
