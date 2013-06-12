@@ -1,11 +1,12 @@
 name    'zack-r10k'
 version '0.0.1'
-source 'UNKNOWN'
+source 'https://github.com/acidprime/r10k'
 author 'zack'
 license 'Apache License, Version 2.0'
-summary 'UNKNOWN'
-description 'UNKNOWN'
-project_page 'UNKNOWN'
+summary 'Dynamic environments with git & r10k'
+description 'Module for setting up dynamic environments using r10k'
+project_page 'https://github.com/acidprime/r10k'
 
 ## Add dependencies, if any:
-# dependency 'username/name', '>= 1.2.0'
+dependency 'puppetlabs/stdlib', '>= 4.1.0'
+dependency 'puppetlabs/ruby', '>= 0.0.2'
