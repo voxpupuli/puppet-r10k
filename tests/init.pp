@@ -8,4 +8,6 @@
 #
 # Learn more about module testing here: http://docs.puppetlabs.com/guides/tests_smoke.html
 #
-include r10k
+class { 'r10k':
+  remote => 'git@github.com:someuser/puppet.git',
+}
