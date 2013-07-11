@@ -38,7 +38,7 @@ class r10k (
   }
 
   package { 'r10k':
-    ensure   => present,
+    ensure   => '0.0.9',
     provider => 'gem',
   }
 
