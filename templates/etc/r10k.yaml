@@ -1,6 +1,6 @@
 :cachedir: <%= @cachedir %>
 :sources:
-  :jiminy:
+  :<%= @source_name %>:
     remote: <%= @remote %>
     basedir: <%= @basedir %>
 
