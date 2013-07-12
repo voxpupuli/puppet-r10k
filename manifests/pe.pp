@@ -3,7 +3,7 @@ class r10k::pe {
   require make
 
   package { 'r10k':
-    ensure   => '0.0.9',
+    ensure   => '1.0.0',
     provider => 'pe_gem',
   }
 
