@@ -23,6 +23,7 @@ class r10k::params
   $git_server          = $::settings::ca_server
   $repo_path           = '/var/repos'
   $remote              = "ssh://${git_server}${repo_path}/modules.git"
+  $source_name         = 'jiminy'
 
   # Mcollective configuration static
   $mc_agent_name       = "${module_name}.rb"
