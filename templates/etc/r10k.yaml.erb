@@ -6,11 +6,11 @@
     basedir: <%= @basedir %>
 <% else -%>
 :sources:
-  <%# The splitting/joining monkeybuisness trims the YAML document header: `---` -%>
-  <%= @sources.to_yaml.split("\n")[1..-1].join("\n") %>
+<%# The splitting/joining monkeybuisness trims the YAML document header: `---` -%>
+<%= @sources.to_yaml.split("\n")[1..-1].join("\n") %>
 <% end %>
 <%# The Array boxing/flattening ensures we don't get bitten by bug #15813 -%>
 <% unless [@purgedirs].flatten.empty? -%>
 :purgedirs:
-  <%= [@purgedirs].flatten.to_yaml.split("\n")[1..-1].join("\n") %>
+<%= [@purgedirs].flatten.to_yaml.split("\n")[1..-1].join("\n") %>
 <% end -%>
