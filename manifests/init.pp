@@ -1,5 +1,6 @@
 # This class configures r10k
 class r10k (
+  $sources     = {},
   $remote      = $r10k::params::remote,
   $source_name = $r10k::params::source_name,
   $purgedirs   = $r10k::params::r10k_purgedirs,
@@ -18,9 +19,11 @@ class r10k (
       version => $version,
     }
   }
-  # Setup the r10k configuration file
-  file { $configfile :
-    ensure  => present,
-    content => template("${module_name}/${configfile}.erb"),
+
+  class { 'r10k::conf':
+    cachedir   => $cachedir,
+    configfile => $configfile,
+    sources    => $sources,
+    purgedirs  => $purgedirs,
   }
 }
