@@ -1,4 +1,6 @@
-class r10k::foss {
+class r10k::ruby(
+  $version,
+) {
   # Breaking up my chaining a little here
   Class['ruby'] -> Class['ruby::dev'] -> Package['gcc']
 
@@ -30,7 +32,7 @@ class r10k::foss {
   }
 
   package { 'r10k':
-    ensure   => '0.0.9',
+    ensure   => $version,
     provider => 'gem',
   }
 }

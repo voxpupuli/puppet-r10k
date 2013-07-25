@@ -1,9 +1,11 @@
-class r10k::pe {
+class r10k::pe_ruby (
+  $version,
+) {
   require gcc
   require make
 
   package { 'r10k':
-    ensure   => '1.0.0',
+    ensure   => $version,
     provider => 'pe_gem',
   }
 

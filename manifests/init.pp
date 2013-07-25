@@ -6,10 +6,16 @@ class r10k (
   $basedir     = $r10k::params::r10k_basedir,
   $cachedir    = $r10k::params::r10k_cache_dir,
   $configfile  = $r10k::params::r10k_config_file,
+  $version     = $r10k::params::version,
+  $pe_ruby     = $r10k::params::pe_ruby,
 ) inherits r10k::params {
-  if $::is_pe == 'true' {
-    include r10k::pe
+  if $pe_ruby {
+    class { 'r10k::pe_ruby' :
+      version => $version,
+    }
   } else {
-    include r10k::foss
+    class { 'r10k::ruby' :
+      version => $version,
+    }
   }
 }

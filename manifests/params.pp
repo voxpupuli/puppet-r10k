@@ -1,5 +1,12 @@
 class r10k::params
 {
+  $version = '1.0.0'
+
+  $pe_ruby = $::is_pe ? {
+    'true'  => true,
+    'false' => false,
+  }
+
   # Puppet Enterprise specific settings
   if $::is_pe == 'true' {
     # Mcollective configuration dynamic
