@@ -2,11 +2,11 @@ class r10k::ruby(
   $version,
 ) {
   # Breaking up my chaining a little here
-  Class['ruby'] -> Class['ruby::dev'] -> Package['gcc']
+  Class['::ruby'] -> Class['ruby::dev'] -> Package['gcc']
 
   # rubygems_update => false
   # https://projects.puppetlabs.com/issues/19741
-  class {'ruby':
+  class {'::ruby':
     rubygems_update => false,
   }
   class { 'ruby::dev':
