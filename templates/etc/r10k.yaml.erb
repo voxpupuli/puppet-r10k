@@ -1,8 +1,16 @@
 :cachedir: <%= @cachedir %>
 :sources:
+<% if @sources.is_a?(Hash) -%>
+  :sources:
+  <%# The splitting/joining monkeybuisness trims the YAML document header: `---` -%>
+  <%= @sources.to_yaml.split("\n")[1..-1].join("\n") %>
+<% else -%>
   :<%= @source_name %>:
     remote: <%= @remote %>
     basedir: <%= @basedir %>
-
-:purgedirs:
-  - <%= @purgedirs %>
+<% end %>
+<%# The Array boxing/flattening ensures we don't get bitten by bug #15813 -%>
+<% unless [@purgedirs].flatten.empty? -%>
+  :purgedirs:
+  <%= [@purgedirs].flatten.to_yaml.split("\n")[1..-1].join("\n") %>
+<% end -%>
