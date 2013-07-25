@@ -20,7 +20,7 @@ class r10k (
     }
   }
 
-  class { 'r10k::conf':
+  class { 'r10k::config':
     cachedir   => $cachedir,
     configfile => $configfile,
     sources    => $sources,
