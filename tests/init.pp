@@ -9,5 +9,7 @@
 # Learn more about module testing here: http://docs.puppetlabs.com/guides/tests_smoke.html
 #
 class { 'r10k':
-  remote => 'git@github.com:someuser/puppet.git',
+  remote  => 'git@github.com:someuser/puppet.git',
+  pe_ruby => false,
+  version => '0.0.9',
 }
