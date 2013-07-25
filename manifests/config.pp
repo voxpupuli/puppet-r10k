@@ -42,9 +42,9 @@
 # Charlie Sharpsteen <source@sharpsteen.net>
 # Zack Smith <zack@puppetlabs.com>
 class r10k::config (
-  $cachedir  = '/var/cache/r10k',
-  $sources   = {},
-  $purgedirs = [],
+  $cachedir    = '/var/cache/r10k',
+  $sources     = {},
+  $purgedirs   = $r10k::params::r10k_purgedirs,
   $configfile  = $r10k::params::r10k_config_file,
 ) inherits r10k::params {
   file { 'r10k.yaml':
