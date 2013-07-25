@@ -18,4 +18,9 @@ class r10k (
       version => $version,
     }
   }
+  # Setup the r10k configuration file
+  file { $configfile :
+    ensure  => present,
+    content => template("${module_name}/${configfile}.erb"),
+  }
 }
