@@ -9,6 +9,19 @@
 # Learn more about module testing here: http://docs.puppetlabs.com/guides/tests_smoke.html
 #
 class { 'r10k':
-  remote  => 'git@github.com:acidprime/puppet.git',
-  pe_ruby => false,
+  pe_ruby       => false,
+  sources => {
+    'puppet' => {
+      'remote'  => 'git@github.com:acidprime/puppet.git',
+      'basedir' => "${::settings::confdir}/environments"
+    },
+    'hiera' => {
+      'remote'  => 'git@github.com:acidprime/hiera.git',
+      'basedir' => "${::settings::confdir}/hiera"
+    },
+  },
+  purgedirs => [
+    "${::settings::confdir}/environments",
+    "${::settings::confdir}/hiera",
+  ],
 }
