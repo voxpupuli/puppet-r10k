@@ -39,4 +39,18 @@ class r10k::params
   $mc_agent_path       = "${plugins_dir}/agent"
   $mc_application_path = "${plugins_dir}/application"
 
+  # Puppet Enterprise specific settings
+  if $::is_pe == 'true' {
+    # Mcollective configuration dynamic
+    $mc_service_name     = 'pe-mcollective'
+    $plugins_dir         = '/opt/puppet/libexec/mcollective/mcollective'
+    $modulepath          = "${r10k_basedir}/\$environment/modules:/opt/puppet/share/puppet/modules"
+  } else {
+    # Getting ready for FOSS support in this module
+
+    # Mcollective configuration dynamic
+    $mc_service_name     = 'mcollective'
+    $plugins_dir         = '/usr/libexec/mcollective/mcollective'
+    $modulepath          = "${r10k_basedir}/\$environment/modules",
+  }
 }

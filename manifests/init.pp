@@ -9,6 +9,7 @@ class r10k (
   $configfile  = $r10k::params::r10k_config_file,
   $version     = $r10k::params::version,
   $pe_ruby     = $r10k::params::pe_ruby,
+  $modulepath  = $r10k::params::modulepath,
 ) inherits r10k::params {
   if $pe_ruby {
     class { 'r10k::pe_ruby' :
