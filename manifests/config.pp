@@ -46,6 +46,7 @@ class r10k::config (
   $cachedir,
   $sources     = {},
   $purgedirs   = [],
+  $r10k_basedir,
 ) {
   file { 'r10k.yaml':
     ensure  => file,
@@ -55,4 +56,21 @@ class r10k::config (
     content => template("${module_name}/${configfile}.erb"),
   }
 
+  $puppetconf_path = $::is_pe ? {
+    'true'  => '/etc/puppetlabs/puppet',
+    default => '/etc/puppet',
+  }
+
+  $modulepath = $::is_pe ? {
+    'true'  => "${r10k_basedir}/\$environment/modules:/opt/puppet/share/puppet/modules",
+    default => "${r10k_basedir}/\$environment/modules", 
+  }
+
+  ini_setting { "R10k Modulepath":
+    path    => "${puppetconf_path}/puppet.conf",
+    section => 'main',
+    setting => 'modulepath',
+    value   => $modulepath,
+    ensure  => present,
+  }
 }

@@ -21,9 +21,10 @@ class r10k (
   }
 
   class { 'r10k::config':
-    cachedir   => $cachedir,
-    configfile => $configfile,
-    sources    => $sources,
-    purgedirs  => $purgedirs,
+    cachedir     => $cachedir,
+    configfile   => $configfile,
+    sources      => $sources,
+    purgedirs    => $purgedirs,
+    r10k_basedir => $basedir,
   }
 }
