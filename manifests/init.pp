@@ -27,5 +27,6 @@ class r10k (
     sources      => $sources,
     purgedirs    => $purgedirs,
     r10k_basedir => $basedir,
+    modulepath   => $modulepath,
   }
 }
