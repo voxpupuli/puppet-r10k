@@ -15,13 +15,6 @@ class r10k::params
   $remote              = "ssh://${git_server}${repo_path}/modules.git"
   $source_name         = 'jiminy'
 
-  # Mcollective configuration static
-  $mc_agent_name       = "${module_name}.rb"
-  $mc_agent_ddl_name   = "${module_name}.ddl"
-  $mc_app_name         = "${module_name}.rb"
-  $mc_agent_path       = "${plugins_dir}/agent"
-  $mc_application_path = "${plugins_dir}/application"
-
   # Puppet Enterprise specific settings
   if $::is_pe == 'true' {
     # Mcollective configuration dynamic
@@ -38,4 +31,11 @@ class r10k::params
     $modulepath          = "${r10k_basedir}/\$environment/modules"
     $pe_ruby             = false
   }
+
+  # Mcollective configuration static
+  $mc_agent_name       = "${module_name}.rb"
+  $mc_agent_ddl_name   = "${module_name}.ddl"
+  $mc_app_name         = "${module_name}.rb"
+  $mc_agent_path       = "${plugins_dir}/agent"
+  $mc_application_path = "${plugins_dir}/application"
 }
