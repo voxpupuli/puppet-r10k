@@ -34,7 +34,7 @@ class r10k::params
     # Mcollective configuration dynamic
     $mc_service_name     = 'mcollective'
     $plugins_dir         = '/usr/libexec/mcollective/mcollective'
-    $modulepath          = "${r10k_basedir}/\$environment/modules",
+    $modulepath          = "${r10k_basedir}/\$environment/modules"
     $pe_ruby             = false
   }
 }
