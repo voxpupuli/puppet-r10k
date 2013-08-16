@@ -2,29 +2,11 @@ class r10k::params
 {
   $version = '1.0.0'
 
-  $pe_ruby = $::is_pe ? {
-    'true'  => true,
-    'false' => false,
-  }
-
-  # Puppet Enterprise specific settings
-  if $::is_pe == 'true' {
-    # Mcollective configuration dynamic
-    $mc_service_name     = 'pe-mcollective'
-    $plugins_dir         = '/opt/puppet/libexec/mcollective/mcollective'
-  } else {
-    # Getting ready for FOSS support in this module
-
-    # Mcollective configuration dynamic
-    $mc_service_name     = 'mcollective'
-    $plugins_dir         = '/usr/libexec/mcollective/mcollective'
-  }
-
   # r10k configuration
   $r10k_config_file     = '/etc/r10k.yaml'
   $r10k_cache_dir       = '/var/cache/r10k'
   $r10k_basedir         = "${::settings::confdir}/environments"
-  $r10k_purgedirs       = $r10k::params::r10k_basedir
+  $r10k_purgedirs       = $r10k_basedir
 
   # Git configuration
   $git_server          = $::settings::ca_server
@@ -45,6 +27,7 @@ class r10k::params
     $mc_service_name     = 'pe-mcollective'
     $plugins_dir         = '/opt/puppet/libexec/mcollective/mcollective'
     $modulepath          = "${r10k_basedir}/\$environment/modules:/opt/puppet/share/puppet/modules"
+    $pe_ruby             = true
   } else {
     # Getting ready for FOSS support in this module
 
@@ -52,5 +35,6 @@ class r10k::params
     $mc_service_name     = 'mcollective'
     $plugins_dir         = '/usr/libexec/mcollective/mcollective'
     $modulepath          = "${r10k_basedir}/\$environment/modules",
+    $pe_ruby             = false
   }
 }
