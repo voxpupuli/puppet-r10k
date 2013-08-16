@@ -48,6 +48,7 @@ class r10k::config (
   $purgedirs   = [],
   $r10k_basedir,
   $modulepath,
+  $manage_modulepath,
 ) {
   file { 'r10k.yaml':
     ensure  => file,
@@ -62,11 +63,13 @@ class r10k::config (
     default => '/etc/puppet',
   }
 
-  ini_setting { "R10k Modulepath":
-    path    => "${puppetconf_path}/puppet.conf",
-    section => 'main',
-    setting => 'modulepath',
-    value   => $modulepath,
-    ensure  => present,
+  if $manage_modulepath {
+    ini_setting { "R10k Modulepath":
+      path    => "${puppetconf_path}/puppet.conf",
+      section => 'main',
+      setting => 'modulepath',
+      value   => $modulepath,
+      ensure  => present,
+    }
   }
 }

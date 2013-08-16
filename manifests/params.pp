@@ -1,6 +1,7 @@
 class r10k::params
 {
-  $version = '1.0.0'
+  $version           = '1.0.0'
+  $manage_modulepath = true
 
   # r10k configuration
   $r10k_config_file     = '/etc/r10k.yaml'
