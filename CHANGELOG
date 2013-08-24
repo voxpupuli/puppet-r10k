@@ -1,3 +1,9 @@
+2013-08-25 - Zack Smith <zack@puppetlabs.vom> - 0.0.5
+  * Lint and Syntax updates + Forge Release
+2013-08-17 - Zack Smith <zack@puppetlabs.com> - 0.0.4
+  * RC1 of new sources code
+2013-08-15 - Zack Smith <zack@puppetlabs.com> - 0.0.3
+  * Allow for multiple sources
 2013-07-11 - Zack Smith <zack@puppetlabs.com> - 0.0.2
   * Restrict installed version of r10k to 0.0.9
 2013-06-12 - Zack Smith <zack@puppetlabs.com> - 0.0.1
