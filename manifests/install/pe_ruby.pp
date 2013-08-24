@@ -1,4 +1,4 @@
-class r10k::pe_ruby (
+class r10k::install::pe_ruby (
   $version,
 ) {
   require gcc

@@ -1,4 +1,4 @@
-class r10k::ruby(
+class r10k::install::ruby(
   $version,
 ) {
   # Install the r10k dependacies
