@@ -4,8 +4,8 @@ class r10k::pe_ruby (
   require gcc
   require make
 
-  package { 'r10k':
-    ensure   => $version,
+  class { 'r10k::install':
+    version  => $version,
     provider => 'pe_gem',
   }
 }

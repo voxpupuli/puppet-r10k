@@ -1,6 +1,10 @@
 class r10k::ruby(
   $version,
 ) {
+  # Install the r10k dependacies
+  require gcc
+  require make
+
   # Breaking up my chaining a little here
   Class['::ruby'] -> Class['ruby::dev'] -> Package['gcc']
 
@@ -17,22 +21,9 @@ class r10k::ruby(
   # ruby::dev class would have taken care of it
   Package['gcc'] -> Package['make'] -> Package['r10k']
 
-  # Install the r10k gem & dependacies
-  # Check for gcc and make as they might already be in the catalog
-  if ! defined(Package['gcc']) {
-    package { 'gcc':
-      ensure => installed,
-    }
-  }
-
-  if ! defined(Package['make']) {
-    package { 'make':
-      ensure => present,
-    }
-  }
-
-  package { 'r10k':
-    ensure   => $version,
+  class { 'r10k::install':
+    version  => $version,
     provider => 'gem',
   }
+
 }
