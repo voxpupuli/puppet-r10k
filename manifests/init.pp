@@ -13,11 +13,11 @@ class r10k (
   $manage_modulepath = $r10k::params::manage_modulepath,
 ) inherits r10k::params {
   if $pe_ruby {
-    class { 'r10k::pe_ruby' :
+    class { 'r10k::install::pe_ruby' :
       version => $version,
     }
   } else {
-    class { 'r10k::ruby' :
+    class { 'r10k::install::ruby' :
       version => $version,
     }
   }
