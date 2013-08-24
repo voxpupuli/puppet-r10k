@@ -1,3 +1,4 @@
+# Reasonable defaults for all classes
 class r10k::params
 {
   $version           = '1.0.0'

@@ -10,17 +10,17 @@
 #
 class { 'r10k':
   pe_ruby       => false,
-  sources => {
+  sources       => {
     'puppet' => {
       'remote'  => 'git@github.com:acidprime/puppet.git',
       'basedir' => "${::settings::confdir}/environments"
     },
-    'hiera' => {
+    'hiera'  => {
       'remote'  => 'git@github.com:acidprime/hiera.git',
       'basedir' => "${::settings::confdir}/hiera"
     },
   },
-  purgedirs => [
+  purgedirs     => [
     "${::settings::confdir}/environments",
     "${::settings::confdir}/hiera",
   ],

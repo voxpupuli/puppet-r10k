@@ -1,3 +1,4 @@
+# Install r10k using the pe_gem provider
 class r10k::install::pe_ruby (
   $version,
 ) {

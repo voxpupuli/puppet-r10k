@@ -1,3 +1,4 @@
+# Install the r10k mcollective agent
 class r10k::mcollective(
   $agent_name        = $r10k::params::mc_agent_name,
   $app_name          = $r10k::params::mc_app_name,
