@@ -12,13 +12,18 @@ class r10k (
   $modulepath        = $r10k::params::modulepath,
   $manage_modulepath = $r10k::params::manage_modulepath,
 ) inherits r10k::params {
+
+  anchor { 'r10k::begin': }
+
   if $pe_ruby {
     class { 'r10k::install::pe_ruby' :
       version => $version,
+      require => Anchor['r10k::begin'],
     }
   } else {
     class { 'r10k::install::ruby' :
       version => $version,
+      require => Anchor['r10k::begin'],
     }
   }
 
@@ -31,4 +36,6 @@ class r10k (
     modulepath        => $modulepath,
     manage_modulepath => $manage_modulepath,
   }
+
+  anchor { 'r10k::end': require => Class['r10k::config'], }
 }
