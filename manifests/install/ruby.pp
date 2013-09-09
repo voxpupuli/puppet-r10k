@@ -1,17 +1,12 @@
 # Install the r10k gem using system ruby
-class r10k::install::ruby(
-  $version,
-) {
-  # Install the r10k dependacies
-  require gcc
-  require make
+class r10k::install::ruby {
 
   # Breaking up my chaining a little here
   Class['::ruby'] -> Class['ruby::dev'] -> Package['gcc']
 
   # rubygems_update => false
   # https://projects.puppetlabs.com/issues/19741
-  class {'::ruby':
+  class { '::ruby':
     rubygems_update => false,
   }
   class { 'ruby::dev':
@@ -21,10 +16,5 @@ class r10k::install::ruby(
   # I am not sure this is required as I assumed the
   # ruby::dev class would have taken care of it
   Package['gcc'] -> Package['make'] -> Package['r10k']
-
-  class { 'r10k::install':
-    version  => $version,
-    provider => 'gem',
-  }
 
 }
