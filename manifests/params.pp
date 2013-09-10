@@ -14,7 +14,7 @@ class r10k::params
   $git_server          = $::settings::ca_server
   $repo_path           = '/var/repos'
   $remote              = "ssh://${git_server}${repo_path}/modules.git"
-  $source_name         = 'jiminy'
+  $source_name         = 'puppet'
 
   if $::is_pe == 'true' {
     # Puppet Enterprise specific settings
