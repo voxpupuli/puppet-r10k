@@ -1,10 +1,5 @@
 :cachedir: <%= @cachedir %>
-<% if @sources.empty? -%>
-:sources:
-  :<%= @source_name %>:
-    remote: <%= @remote %>
-    basedir: <%= @basedir %>
-<% else -%>
+<% unless @sources.empty? -%>
 :sources:
 <%# The splitting/joining monkeybusiness trims the YAML document header: `---` -%>
 <%= @sources.to_yaml.split("\n")[1..-1].join("\n") %>
