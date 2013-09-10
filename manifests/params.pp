@@ -14,10 +14,9 @@ class r10k::params
   $git_server          = $::settings::ca_server
   $repo_path           = '/var/repos'
   $remote              = "ssh://${git_server}${repo_path}/modules.git"
-  $source_name         = 'puppet'
 
   $sources             = {
-    $source_name => {
+    'puppet' => {
       'remote'  => $remote,
       'basedir' => $r10k_basedir,
     },
