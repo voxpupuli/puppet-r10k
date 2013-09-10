@@ -17,7 +17,7 @@ class r10k::params
 
   $sources             = {
     'puppet' => {
-      'remote'  => $remote,
+      'remote'  => $r10k::remote,
       'basedir' => $r10k_basedir,
     },
   }

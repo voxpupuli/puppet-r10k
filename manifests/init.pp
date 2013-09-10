@@ -3,7 +3,6 @@ class r10k (
   $remote            = $r10k::params::remote,
   $sources           = $r10k::params::sources,
   $purgedirs         = $r10k::params::r10k_purgedirs,
-  $basedir           = $r10k::params::r10k_basedir,
   $cachedir          = $r10k::params::r10k_cache_dir,
   $configfile        = $r10k::params::r10k_config_file,
   $version           = $r10k::params::version,
