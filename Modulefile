@@ -8,7 +8,7 @@ description 'Module for setting up dynamic environments using r10k'
 project_page 'https://github.com/acidprime/r10k'
 
 ## Add dependencies, if any:
-dependency 'puppetlabs/stdlib',  '>= 4.1.0'
+dependency 'puppetlabs/stdlib',  '>= 3.2.0'
 dependency 'puppetlabs/ruby',    '>= 0.0.2'
 dependency 'puppetlabs/gcc',     '>= 0.0.3'
 dependency 'puppetlabs/pe_gem',  '>= 0.0.1'
