@@ -26,5 +26,6 @@ class r10k (
     r10k_basedir      => $basedir,
     modulepath        => $modulepath,
     manage_modulepath => $manage_modulepath,
+    remote            => $remote,
   }
 }
