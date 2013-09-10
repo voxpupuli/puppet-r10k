@@ -44,11 +44,11 @@
 class r10k::config (
   $configfile,
   $cachedir,
-  $sources     = {},
-  $purgedirs   = [],
   $r10k_basedir,
   $modulepath,
   $manage_modulepath,
+  $sources     = {},
+  $purgedirs   = [],
   $puppetconf_path = $r10k::params::puppetconf_path,
 ) inherits r10k::params {
   file { 'r10k.yaml':
