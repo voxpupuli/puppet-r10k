@@ -61,12 +61,12 @@ class r10k::config (
   }
 
   if $manage_modulepath {
-    ini_setting { "R10k Modulepath":
+    ini_setting { 'R10k Modulepath':
+      ensure  => present,
       path    => "${puppetconf_path}/puppet.conf",
       section => 'main',
       setting => 'modulepath',
       value   => $modulepath,
-      ensure  => present,
     }
   }
 }

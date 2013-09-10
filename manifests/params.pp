@@ -21,7 +21,7 @@ class r10k::params
       'remote'  => $remote,
       'basedir' => $r10k_basedir,
     },
-   }
+  }
 
   if $::is_pe == 'true' {
     # Puppet Enterprise specific settings
