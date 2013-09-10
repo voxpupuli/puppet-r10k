@@ -15,13 +15,6 @@ class r10k::params
   $repo_path           = '/var/repos'
   $remote              = "ssh://${git_server}${repo_path}/modules.git"
 
-  $sources             = {
-    'puppet' => {
-      'remote'  => $r10k::remote,
-      'basedir' => $r10k_basedir,
-    },
-  }
-
   if $::is_pe == 'true' {
     # Puppet Enterprise specific settings
     $puppetconf_path     = '/etc/puppetlabs/puppet'

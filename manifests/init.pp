@@ -9,6 +9,7 @@ class r10k (
   $pe_ruby           = $r10k::params::pe_ruby,
   $modulepath        = $r10k::params::modulepath,
   $manage_modulepath = $r10k::params::manage_modulepath,
+  $r10k_basedir      = $r10k::params::r10k_basedir,
 ) inherits r10k::params {
 
   class { 'r10k::install':
@@ -22,6 +23,7 @@ class r10k (
     sources           => $sources,
     purgedirs         => $purgedirs,
     modulepath        => $modulepath,
+    remote            => $remote,
     manage_modulepath => $manage_modulepath,
   }
 }

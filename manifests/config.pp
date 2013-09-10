@@ -46,10 +46,27 @@ class r10k::config (
   $cachedir,
   $modulepath,
   $manage_modulepath,
-  $sources     = {},
-  $purgedirs   = [],
+  $remote          = '',
+  $sources         = 'UNSET',
+  $purgedirs       = [],
   $puppetconf_path = $r10k::params::puppetconf_path,
+  $r10k_basedir    = $r10k::params::r10k_basedir,
 ) inherits r10k::params {
+
+
+  if $sources == 'UNSET' {
+    $r10k_sources  = {
+      'puppet' => {
+        'remote'  => $remote,
+        'basedir' => $r10k_basedir,
+      },
+    }
+  else {
+    validate_hash($sources)
+
+    $r10k_sources = $sources
+  }
+
   file { 'r10k.yaml':
     ensure  => file,
     owner   => 'root',
