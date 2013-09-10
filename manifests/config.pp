@@ -61,7 +61,7 @@ class r10k::config (
         'basedir' => $r10k_basedir,
       },
     }
-  else {
+  } else {
     validate_hash($sources)
 
     $r10k_sources = $sources
