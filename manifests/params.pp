@@ -27,10 +27,11 @@ class r10k::params
     # Puppet Enterprise specific settings
     $puppetconf_path     = '/etc/puppetlabs/puppet'
 
+    $pe_module_path      = '/opt/puppet/share/puppet/modules'
     # Mcollective configuration dynamic
     $mc_service_name     = 'pe-mcollective'
     $plugins_dir         = '/opt/puppet/libexec/mcollective/mcollective'
-    $modulepath          = "${r10k_basedir}/\$environment/modules:/opt/puppet/share/puppet/modules"
+    $modulepath          = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
     $pe_ruby             = true
   } else {
     # Getting ready for FOSS support in this module
