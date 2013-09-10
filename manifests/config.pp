@@ -49,18 +49,14 @@ class r10k::config (
   $r10k_basedir,
   $modulepath,
   $manage_modulepath,
-) {
+  $puppetconf_path = $r10k::params::puppetconf_path,
+) inherits r10k::params {
   file { 'r10k.yaml':
     ensure  => file,
     owner   => 'root',
     group   => 'root',
     path    => $configfile,
     content => template("${module_name}/${configfile}.erb"),
-  }
-
-  $puppetconf_path = $::is_pe ? {
-    'true'  => '/etc/puppetlabs/puppet',
-    default => '/etc/puppet',
   }
 
   if $manage_modulepath {

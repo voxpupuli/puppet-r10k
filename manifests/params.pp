@@ -16,8 +16,10 @@ class r10k::params
   $remote              = "ssh://${git_server}${repo_path}/modules.git"
   $source_name         = 'jiminy'
 
-  # Puppet Enterprise specific settings
   if $::is_pe == 'true' {
+    # Puppet Enterprise specific settings
+    $puppetconf_path     = '/etc/puppetlabs/puppet'
+
     # Mcollective configuration dynamic
     $mc_service_name     = 'pe-mcollective'
     $plugins_dir         = '/opt/puppet/libexec/mcollective/mcollective'
@@ -25,6 +27,7 @@ class r10k::params
     $pe_ruby             = true
   } else {
     # Getting ready for FOSS support in this module
+    $puppetconf_path     = '/etc/puppet'
 
     # Mcollective configuration dynamic
     $mc_service_name     = 'mcollective'
