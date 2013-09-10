@@ -22,9 +22,7 @@ class r10k (
     configfile        => $configfile,
     sources           => $sources,
     purgedirs         => $purgedirs,
-    r10k_basedir      => $basedir,
     modulepath        => $modulepath,
     manage_modulepath => $manage_modulepath,
-    remote            => $remote,
   }
 }

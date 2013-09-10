@@ -44,10 +44,8 @@
 class r10k::config (
   $configfile,
   $cachedir,
-  $r10k_basedir,
   $modulepath,
   $manage_modulepath,
-  $remote      = '',
   $sources     = {},
   $purgedirs   = [],
   $puppetconf_path = $r10k::params::puppetconf_path,
