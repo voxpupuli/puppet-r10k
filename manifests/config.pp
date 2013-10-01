@@ -44,7 +44,7 @@
 class r10k::config (
   $configfile,
   $cachedir,
-  $manage_modulepath
+  $manage_modulepath,
   $modulepath        = undef,
   $remote            = '',
   $sources           = 'UNSET',
