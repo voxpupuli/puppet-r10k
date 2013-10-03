@@ -15,6 +15,9 @@ class r10k::params
   $repo_path           = '/var/repos'
   $remote              = "ssh://${git_server}${repo_path}/modules.git"
 
+  # Bundle to get bleeding edge instead of gem
+  $use_bundle          = false
+
   if $::is_pe == 'true' {
     # Puppet Enterprise specific settings
     $puppetconf_path     = '/etc/puppetlabs/puppet'
