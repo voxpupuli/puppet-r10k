@@ -10,11 +10,13 @@ class r10k (
   $modulepath        = $r10k::params::modulepath,
   $manage_modulepath = $r10k::params::manage_modulepath,
   $r10k_basedir      = $r10k::params::r10k_basedir,
+  $use_bundle        = $r10k::params::use_bundle,
 ) inherits r10k::params {
 
   class { 'r10k::install':
-    version => $version,
-    pe_ruby => $pe_ruby,
+    version    => $version,
+    pe_ruby    => $pe_ruby,
+    use_bundle => $use_bundle,
   }
 
   class { 'r10k::config':
