@@ -44,13 +44,13 @@
 class r10k::config (
   $configfile,
   $cachedir,
-  $modulepath,
   $manage_modulepath,
-  $remote          = '',
-  $sources         = 'UNSET',
-  $purgedirs       = [],
-  $puppetconf_path = $r10k::params::puppetconf_path,
-  $r10k_basedir    = $r10k::params::r10k_basedir,
+  $modulepath        = undef,
+  $remote            = '',
+  $sources           = 'UNSET',
+  $purgedirs         = [],
+  $puppetconf_path   = $r10k::params::puppetconf_path,
+  $r10k_basedir      = $r10k::params::r10k_basedir,
 ) inherits r10k::params {
 
 
