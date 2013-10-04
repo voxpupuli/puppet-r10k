@@ -10,11 +10,13 @@ class r10k (
   $manage_modulepath = $r10k::params::manage_modulepath,
   $r10k_basedir      = $r10k::params::r10k_basedir,
   $provider          = $r10k::params::provider,
+  $gentoo_keywords   = $r10k::params::gentoo_keywords,
 ) inherits r10k::params {
 
   class { 'r10k::install':
     version  => $version,
     provider => $provider,
+    keywords => $gentoo_keywords
   }
 
   class { 'r10k::config':
