@@ -18,8 +18,8 @@ class r10k::params
   # prerun_command in puppet.conf
   $prerun_command = 'r10k deploy environment -p'
 
-  # Bundle to get bleeding edge instead of gem
-  $use_bundle          = false
+  # Installation package manager provider
+  $provider = 'gem'
 
   if $::is_pe == 'true' {
     # Puppet Enterprise specific settings
@@ -30,7 +30,7 @@ class r10k::params
     $mc_service_name     = 'pe-mcollective'
     $plugins_dir         = '/opt/puppet/libexec/mcollective/mcollective'
     $modulepath          = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
-    $pe_ruby             = true
+    $provider            = 'pe_gem'
   } else {
     # Getting ready for FOSS support in this module
     $puppetconf_path     = '/etc/puppet'
@@ -39,7 +39,6 @@ class r10k::params
     $mc_service_name     = 'mcollective'
     $plugins_dir         = '/usr/libexec/mcollective/mcollective'
     $modulepath          = "${r10k_basedir}/\$environment/modules"
-    $pe_ruby             = false
   }
 
   # Mcollective configuration static

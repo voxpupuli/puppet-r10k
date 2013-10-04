@@ -10,5 +10,4 @@
 #
 class { 'r10k':
   remote  => 'git@github.com:acidprime/puppet.git',
-  pe_ruby => false,
 }
