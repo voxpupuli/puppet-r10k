@@ -24,6 +24,7 @@ module MCollective
         'environment',
         'module',
         'synchronize',
+        'deploy_all',
         'sync'].each do |act|
         action act do
           run_cmd act
