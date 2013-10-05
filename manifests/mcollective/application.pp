@@ -17,4 +17,9 @@ class r10k::mcollective::application(
   file { "${app_path}/${app_name}"  :
     source => "puppet:///modules/${module_name}/application/${agent_name}",
   }
+  
+  file { "${agent_path}/${agent_ddl}"  :
+    source => "puppet:///modules/${module_name}/agent/${agent_ddl}",
+  }
+
 }
