@@ -34,8 +34,8 @@ module MCollective
 
       def run_cmd(action,path=nil)
         output = ''
-        git  = ['/usr/bin/git']
-        r10k = ['/usr/bin/r10k']
+        git  = ['/usr/bin/env git']
+        r10k = ['/usr/bin/env r10k']
         case action
         when 'push','pull','status'
           cmd = git
@@ -43,7 +43,7 @@ module MCollective
           cmd << 'pull'   if action == 'pull'
           cmd << 'status' if action == 'status'
           reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true, :cwd => path )
-        when 'cache','environment','module','synchronize','sync'
+        when 'cache','environment','module','synchronize','sync', 'deploy_all'
           cmd = r10k
           cmd << 'cache'       if action == 'cache'
           cmd << 'synchronize' if action == 'synchronize' or action == 'sync'
