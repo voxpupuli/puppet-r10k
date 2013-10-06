@@ -34,8 +34,8 @@ module MCollective
 
       def run_cmd(action,path=nil)
         output = ''
-        git  = ['/usr/bin/env' 'git']
-        r10k = ['/usr/bin/env' 'r10k']
+        git  = ['/usr/bin/env', 'git']
+        r10k = ['/usr/bin/env', 'r10k']
         case action
         when 'push','pull','status'
           cmd = git
