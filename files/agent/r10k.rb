@@ -49,7 +49,7 @@ module MCollective
           cmd << 'synchronize' if action == 'synchronize' or action == 'sync'
           cmd << 'environment' if action == 'environment'
           cmd << 'module'      if action == 'module'
-          cmd << 'deploy environment -p' if action == 'deploy_all'
+          cmd << 'deploy' << 'environment' << '-p' if action == 'deploy_all'
           reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true)
         end
       end
