@@ -29,10 +29,7 @@ class r10k::mcollective(
     require => File["${agent_path}/${agent_ddl}"],
   }
 
-  # Create a service resource for the notification
-  if ! defined(Service[$mc_service]) {
-    service { $mc_service :
-      ensure => running,
-    }
+  Service <| title == $mc_service |> {
+    subscribe => File["${app_path}/${app_name}"],
   }
 }
