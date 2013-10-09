@@ -21,6 +21,9 @@ class r10k::params
   # Installation package manager provider
   $provider = 'gem'
 
+  # Gentoo specific values
+  $gentoo_keywords = ''
+
   if $::is_pe == 'true' {
     # Puppet Enterprise specific settings
     $puppetconf_path     = '/etc/puppetlabs/puppet'
