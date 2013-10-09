@@ -15,6 +15,9 @@ class r10k::params
   $repo_path           = '/var/repos'
   $remote              = "ssh://${git_server}${repo_path}/modules.git"
 
+  # prerun_command in puppet.conf
+  $prerun_command = 'r10k deploy environment -p'
+
   # Bundle to get bleeding edge instead of gem
   $use_bundle          = false
 
