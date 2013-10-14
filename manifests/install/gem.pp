@@ -1,5 +1,5 @@
 # Install the r10k gem using system ruby
-class r10k::install::ruby (
+class r10k::install::gem (
   $version,
 ) {
 
