@@ -1,8 +1,8 @@
 # This class is used by the ruby or pe_ruby class
 class r10k::install (
   $version,
-  $pe_ruby,
-  $use_bundle,
+  $provider,
+  $keywords,
 ) {
   # There are currently bugs in r10k 1.x which make using 0.x desireable in
   # certain circumstances. However, 0.x requires make and gcc. Conditionally
@@ -14,40 +14,23 @@ class r10k::install (
     require make
   }
 
-  if $pe_ruby {
-    $provider = 'pe_gem'
-  } else {
-    $provider = 'gem'
-    class { 'r10k::install::ruby': version => $version; }
-  }
-
-  if ! $r10k::install::use_bundle {
-    package { 'r10k':
-      ensure   => $version,
-      provider => $provider,
+  case $provider {
+    'bundle': { include r10k::install::bundle }
+    'portage': {
+      class { 'r10k::install::portage':
+        keywords => $keywords,
+        version  => $version,
+      }
     }
-  } else {
-    # The bundle install has prefix support as of writing this, I want bleeding edge.
-    class { 'git': }
-    package { "${module_name}-bundle":
-      ensure   => installed,
-      name     => 'bundle',
-      provider => gem,
+    'pe_gem', 'gem': {
+      if $provider == 'gem' {
+        class { 'r10k::install::gem': version => $version; }
+      }
+      package { 'r10k':
+        ensure   => $version,
+        provider => $provider,
+      }
     }
-    vcsrepo { "${module_name}-r10k-github":
-      ensure   => latest,
-      provider => git,
-      path     => '/tmp/r10k',
-      source   => 'https://github.com/adrienthebo/r10k.git',
-      revision => 'master',
-      require  => Class['git'],
-    }
-    exec { "${module_name}-install-via-bundle":
-      command => 'bundle && bundle install --path /opt/ --binstubs /usr/local/bin/',
-      cwd     => '/tmp/r10k',
-      require => [ Package["${module_name}-bundle"] , Vcsrepo["${module_name}-r10k-github"] ],
-      unless  => 'bundle list | grep -q " r10k "',
-      path    => '/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin:/sbin:/bin',
-    }
+    default: { fail("$provider is not supported. Valid values are: 'gem', 'pe_gem', 'bundle'") }
   }
 }
