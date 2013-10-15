@@ -1,5 +1,5 @@
 name    'zack-r10k'
-version '0.0.7'
+version '0.0.8'
 source 'https://github.com/acidprime/r10k'
 author 'zack'
 license 'Apache License, Version 2.0'

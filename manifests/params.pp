@@ -1,7 +1,7 @@
 # Reasonable defaults for all classes
 class r10k::params
 {
-  $version           = '1.0.0'
+  $version           = '1.1.0'
   $manage_modulepath = false
 
   # r10k configuration

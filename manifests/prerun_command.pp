@@ -4,7 +4,7 @@ class r10k::prerun_command (
 ) inherits r10k::params {
 
   Ini_setting {
-    path    => "$puppetconf_path/puppet.conf",
+    path    => "${r10k::params::puppetconf_path}/puppet.conf",
     ensure  => present,
     section => 'agent',
   }

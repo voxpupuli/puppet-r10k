@@ -1,3 +1,5 @@
+2013-10-15 - Theo Chatzimichos <tampakrap>    - 0.0.8
+  * Add gentoo support , refactor install class
 2013-08-25 - Zack Smith <zack@puppetlabs.vom> - 0.0.5
   * Lint and Syntax updates + Forge Release
 2013-08-17 - Zack Smith <zack@puppetlabs.com> - 0.0.4
