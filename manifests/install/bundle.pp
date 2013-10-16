@@ -1,6 +1,5 @@
 class r10k::install::bundle {
   # The bundle install has prefix support as of writing this, I want bleeding edge.
-  class { 'git': }
   package { "${module_name}-bundle":
     ensure   => installed,
     name     => 'bundle',
