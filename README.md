@@ -21,6 +21,8 @@ The concept here is that this is declared on the puppet master(s) that have
 been configured with r10k. This will cause r10k to synchronize before each
 puppet run. Any errors synchronizing will be logged to the standard puppet run.
 
+![alt tag](https://gist.github.com/acidprime/7013041/raw/6748f6173b406c03067884199174ce1df313ad58/post_recieve_overview.png)
+
 An mcollective agent is included in this module which can be used to do 
 on demand synchronization. This mcollective application and agent can be
 installed on all masters using the following class
