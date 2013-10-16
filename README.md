@@ -21,7 +21,7 @@ The concept here is that this is declared on the puppet master(s) that have
 been configured with r10k. This will cause r10k to synchronize before each
 puppet run. Any errors synchronizing will be logged to the standard puppet run.
 
-### mcollective
+### Mcollective Support
 
 ![alt tag](https://gist.github.com/acidprime/7013041/raw/6748f6173b406c03067884199174ce1df313ad58/post_recieve_overview.png)
 
@@ -61,7 +61,7 @@ Copy the peadmin mcollective configuration and private keys from the certificate
 Ensure you update the paths in _~/.mcollective_ when copying to new users whose name is not peadmin.
 Ideally mcollective will be used with more then just the peadmin user's certificate
 in the future. That said, if your git user does not have a home diretory, you can rename .mcollective as /etc/client.cfg
-and copy the certs to somewhere that is readable be the respective user.
+and copy the certs to somewhere that is readable by the respective user.
 ~~~
 /home/gitolite/.mcollective
 /home/gitolite/.mcollective.d/mcollective-public.pem
