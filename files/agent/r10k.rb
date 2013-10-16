@@ -1,13 +1,6 @@
 module MCollective
   module Agent
     class R10k<RPC::Agent
-      metadata :name        => 'r10k',
-               :description => 'Triggers git pulls on multi-master',
-               :author      => 'Zack Smith',
-               :license     => 'MIT',
-               :version     => '1.0',
-               :url         => 'http://puppetlabs.com',
-               :timeout     => 120
        ['push',
         'pull',
         'status'].each do |act|
