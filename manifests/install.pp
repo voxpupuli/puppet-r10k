@@ -26,14 +26,12 @@ class r10k::install (
       if $provider == 'gem' {
         class { 'r10k::install::gem': version => $version; }
       }
+      elsif $provider == 'pe_gem' {
+        include r10k::install::pe_gem
+      }
       package { 'r10k':
         ensure   => $version,
         provider => $provider,
-      }
-      # Create a symlink so env can find r10k via the mco agent
-      file { '/usr/bin/r10k':
-        ensure => link,
-        target => '/opt/puppet/bin/r10k',
       }
     }
     default: { fail("$provider is not supported. Valid values are: 'gem', 'pe_gem', 'bundle'") }
