@@ -39,6 +39,33 @@ An example post-recieve hook is included in the files directory.
 This hook can automatically cause code to synchronize on your
 servers at time of push in git.
 
+###Install mcollective support for post recieve hooks
+Install the `mco` command from the puppet enterprise installation directory i.e.
+```shell
+cd ~/puppet-enterprise-3.0.1-el-6-x86_64/packages/el-6-x86_64
+sudo rpm -i pe-mcollective-client-2.2.4-2.pe.el6.noarch.rpm
+```
+Copy the peadmin mcollective configuration and private keys from the certificate authority (puppet master)
+~~~
+/var/lib/peadmin/.mcollective
+/var/lib/peadmin/.mcollective.d/mcollective-public.pem
+/var/lib/peadmin/.mcollective.d/peadmin-cacert.pem
+/var/lib/peadmin/.mcollective.d/peadmin-cert.pem
+/var/lib/peadmin/.mcollective.d/peadmin-private.pem
+/var/lib/peadmin/.mcollective.d/peadmin-public.pem
+~~~
+Ensure you update the paths in _~/.mcollective_ when copying to new users whose name is not peadmin.
+Ideally mcollective will be used with more then just the peadmin user's certificate
+in the future. That said, if your git user does not have a home diretory, you can rename .mcollective as /etc/client.cfg
+and copy the certs to somewhere that is readable be the respective user.
+~~~
+/home/gitolite/.mcollective
+/home/gitolite/.mcollective.d/mcollective-public.pem
+/home/gitolite/.mcollective.d/peadmin-cacert.pem
+/home/gitolite/.mcollective.d/peadmin-cert.pem
+/home/gitolite/.mcollective.d/peadmin-private.pem
+/home/gitolite/.mcollective.d/peadmin-public.pem
+~~~
 
 ##Support
 
