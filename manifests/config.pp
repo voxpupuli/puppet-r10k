@@ -53,6 +53,7 @@ class r10k::config (
   $r10k_basedir      = $r10k::params::r10k_basedir,
 ) inherits r10k::params {
 
+  validate_bool($manage_modulepath)
 
   if $sources == 'UNSET' {
     $r10k_sources  = {
