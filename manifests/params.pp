@@ -18,8 +18,8 @@ class r10k::params
   # prerun_command in puppet.conf
   $prerun_command = 'r10k deploy environment -p'
 
-  # Installation package manager provider
-  $provider = 'gem'
+  
+  
 
   # Gentoo specific values
   $gentoo_keywords = ''
@@ -35,6 +35,9 @@ class r10k::params
     $modulepath          = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
     $provider            = 'pe_gem'
   } else {
+    # Installation package manager provider
+    $provider = 'gem'                          
+    
     # Getting ready for FOSS support in this module
     $puppetconf_path     = '/etc/puppet'
 
