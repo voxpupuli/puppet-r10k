@@ -18,9 +18,6 @@ class r10k::params
   # prerun_command in puppet.conf
   $prerun_command = 'r10k deploy environment -p'
 
-  
-  
-
   # Gentoo specific values
   $gentoo_keywords = ''
 
