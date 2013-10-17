@@ -17,7 +17,9 @@ class r10k::install (
   }
 
   case $provider {
-    'bundle': { include r10k::install::bundle }
+    'bundle': {
+      include r10k::install::bundle
+    }
     'portage': {
       class { 'r10k::install::portage':
         keywords => $keywords,
