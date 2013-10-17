@@ -63,7 +63,7 @@ describe 'r10k::mcollective' , :type => 'class' do
         'notify'   => 'Service[mcollective]'
       )
     }
-                                                                                                
+
     it { should contain_file("/usr/libexec/mcollective/mcollective/agent/r10k.rb").with(
         'ensure'   => 'present',
         'owner'    => 'root',
