@@ -42,10 +42,10 @@ class r10k::params
     $mc_service_name     = 'mcollective'
     case $::osfamily {
       'debian':  {
-        $plugins_dir         = '/usr/share/mcollective/plugins/mcollective'
+        $plugins_dir  = '/usr/share/mcollective/plugins/mcollective'
       }
       default: {
-        $plugins_dir         = '/usr/libexec/mcollective/mcollective'
+        $plugins_dir  = '/usr/libexec/mcollective/mcollective'
       }
     }
     $modulepath          = "${r10k_basedir}/\$environment/modules"
