@@ -1,4 +1,4 @@
-r10k
+# r10k Configuration Module
 
 [![Build Status](https://travis-ci.org/acidprime/r10k.png?branch=master)](https://travis-ci.org/acidprime/r10k)
 
