@@ -27,8 +27,8 @@ class r10k::install::gem (
 
     Class['::ruby']    ->
     Class['ruby::dev'] ->
-    Package['gcc']     ->
-    Package['make']    ->
+    Class['gcc']       ->
+    Class['make']      ->
     Package['r10k']
   }
 
