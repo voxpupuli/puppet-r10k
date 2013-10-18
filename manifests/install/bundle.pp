@@ -9,14 +9,14 @@ class r10k::install::bundle(
   package { "${module_name}-bundle":
     ensure   => installed,
     name     => 'bundle',
-    provider => gem,
+    provider => 'gem',
   }
   vcsrepo { "${module_name}-r10k-github":
     ensure   => latest,
-    provider => git,
+    provider => 'git',
     path     => '/tmp/r10k',
-    source   => 'https://github.com/adrienthebo/r10k.git',
-    revision => 'master',
+    source   => $source,
+    revision => $revision,
   }
   exec { "${module_name}-install-via-bundle":
     command => 'bundle && bundle install --path /opt/ --binstubs /usr/local/bin/',
