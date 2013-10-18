@@ -1,7 +1,6 @@
 r10k
 
-
-![alt tag](https://travis-ci.org/acidprime/r10k.png)
+[![Build Status](https://travis-ci.org/acidprime/r10k.png?branch=master)](https://travis-ci.org/acidprime/r10k)
 
 This is the r10k setup module. It has a base class to configure r10k to 
 synchronize dynamic environments. You can be simply used by declaring it:
