@@ -33,8 +33,8 @@ class r10k::params
     $provider            = 'pe_gem'
   } else {
     # Installation package manager provider
-    $provider = 'gem'                          
-    
+    $provider = 'gem'
+
     # Getting ready for FOSS support in this module
     $puppetconf_path     = '/etc/puppet'
 
