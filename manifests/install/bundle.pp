@@ -1,4 +1,7 @@
-class r10k::install::bundle {
+class r10k::install::bundle(
+  $revision = 'master',
+  $source   = 'https://github.com/adrienthebo/r10k.git',
+){
 
   require git
 
