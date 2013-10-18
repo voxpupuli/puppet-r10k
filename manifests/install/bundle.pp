@@ -1,4 +1,7 @@
 class r10k::install::bundle {
+
+  require git
+
   # The bundle install has prefix support as of writing this, I want bleeding edge.
   package { "${module_name}-bundle":
     ensure   => installed,
@@ -11,7 +14,6 @@ class r10k::install::bundle {
     path     => '/tmp/r10k',
     source   => 'https://github.com/adrienthebo/r10k.git',
     revision => 'master',
-    require  => Class['git'],
   }
   exec { "${module_name}-install-via-bundle":
     command => 'bundle && bundle install --path /opt/ --binstubs /usr/local/bin/',
