@@ -28,7 +28,6 @@ describe 'r10k::install::bundle' , :type => 'class' do
         'command' => 'bundle && bundle install --path /opt/ --binstubs /usr/local/bin/',
         'cwd'     => '/tmp/r10k',
         'unless'  => 'bundle list | grep -q " r10k "',
-        'require' => '[Package[r10k-bundle]{:name=>"r10k-bundle"}, Vcsrepo[r10k-r10k-github]{:path=>"r10k-r10k-github"}]',
         'path'    => '/usr/bin/usr/local/bin:/usr/sbin'
       )
     }
@@ -67,7 +66,6 @@ describe 'r10k::install::bundle' , :type => 'class' do
         'command' => 'bundle && bundle install --path /opt/ --binstubs /usr/local/bin/',
         'cwd'     => '/tmp/r10k',
         'unless'  => 'bundle list | grep -q " r10k "',
-        'require' => '[Package[r10k-bundle]{:name=>"r10k-bundle"}, Vcsrepo[r10k-r10k-github]{:path=>"r10k-r10k-github"}]',
         'path'    => '/usr/bin/usr/local/bin:/usr/sbin'
       )
     }
