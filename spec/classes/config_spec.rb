@@ -56,7 +56,7 @@ describe 'r10k::config' , :type => 'class' do
       'ensure'  => 'present',
       'path'    => '/etc/puppetlabs/puppet/puppet.conf',
       'section' => 'main',
-      'setting' => 'modulepath',
+      'setting' => 'modulepath'
       )
     }
   end
