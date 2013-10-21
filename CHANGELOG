@@ -1,3 +1,5 @@
+2013-10-20 - Zack Smith <zack@puppetlabs.com> - 0.0.9
+  * Final params list for version 1.0.0 set & Bugfixes
 2013-10-15 - Theo Chatzimichos <tampakrap>    - 0.0.8
   * Add gentoo support , refactor install class
 2013-08-25 - Zack Smith <zack@puppetlabs.vom> - 0.0.5
