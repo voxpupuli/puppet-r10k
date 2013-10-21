@@ -4,7 +4,7 @@ metadata :name        => "r10k",
          :license     => "MIT",
          :version     => "1.0",
          :url         => "http://puppetlabs.com",
-         :timeout     => 120
+         :timeout     => 900
 
   ['push',
    'pull',
