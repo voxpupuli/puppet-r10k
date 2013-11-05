@@ -101,26 +101,38 @@ describe 'r10k::install' , :type => 'class' do
     it { should include_class("r10k::install::bundle") }
     it { should_not contain_package("r10k")}
   end
-  #context "on a Gentoo OS installing 1.1.0 with portage provider" do
-  #  let :params do
-  #    {
-  #      :version  => '1.1.0',
-  #      :provider => 'portage',
-  #      :keywords => 'foo',
-  #    }
-  #  end
-  #  let :facts do
-  #    {
-  #      :osfamily               => 'Gentoo',
-  #      :operatingsystemrelease => '2.1',
-  #    }
-  #  end
-  #  it { should include_class("git") }
-  #  it { should contain_class("r10k::install::portage").with(
-  #      :keywords => 'foo',
-  #      :version  => '1.1.0'
-  #    )
-  #  }
-  #  it { should_not contain_package("r10k")}
-  #end
+  context "on a Gentoo OS installing 1.1.0 with portage provider" do
+    let :params do
+      {
+        :version  => '1.1.0',
+        :provider => 'portage',
+        :keywords => ['~amd64', '~x86'],
+      }
+    end
+    let :facts do
+      {
+        :osfamily               => 'Gentoo',
+        :operatingsystemrelease => '2.1',
+      }
+    end
+    it { should include_class("git") }
+    it { should contain_class("r10k::install::portage").with(
+        :keywords => ['~amd64', '~x86'],
+        :version  => '1.1.0'
+      )
+    }
+    it { should contain_package_keywords("dev-ruby/cri").with(
+        :keywords => ['~amd64', '~x86'],
+        :target   => 'puppet'
+      )
+    }
+    it { should contain_portage__package("app-admin/r10k").with(
+        :keywords => ['~amd64', '~x86'],
+        :ensure   => '1.1.0',
+        :target   => 'puppet'
+      )
+    }
+    it { should contain_package("app-admin/r10k")}
+    it { should_not contain_package("r10k")}
+  end
 end
