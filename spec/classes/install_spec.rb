@@ -48,6 +48,7 @@ describe 'r10k::install' , :type => 'class' do
     it { should include_class("git") }
 
     # On older versions of r10k we need gcc & make
+    let(:pre_condition) { 'class make {}' }
     it { should include_class("gcc") }
     it { should include_class("make") }
 
@@ -100,6 +101,23 @@ describe 'r10k::install' , :type => 'class' do
     it { should include_class("git") }
     it { should include_class("r10k::install::bundle") }
     it { should_not contain_package("r10k")}
+  end
+  context "on a RedHat 5 OS installing latest with yum provider" do
+    let :params do
+      {
+        :version  => 'latest',
+        :provider => 'yum',
+        :keywords => '',
+      }
+    end
+    let :facts do
+      {
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '5',
+      }
+    end
+    it { should include_class("git") }
+    it { should_not contain_package("rubyge-r10k")}
   end
   context "on a Gentoo OS installing 1.1.0 with portage provider" do
     let :params do
