@@ -4,7 +4,7 @@ fixtures:
     ruby:    "git://github.com/puppetlabs/puppetlabs-ruby.git"
     gcc:     "git://github.com/puppetlabs/puppetlabs-gcc.git"
     pe_gem:  "git://github.com/puppetlabs/puppetlabs-pe_gem.git"
-    make:    "git://github.com/mhuffnagle/puppet-make.git"
+#    make:    "git://github.com/mhuffnagle/puppet-make.git"
     inifile: "git://github.com/puppetlabs/puppetlabs-inifile.git"
     vcsrepo: "git://github.com/puppetlabs/puppetlabs-vcsrepo.git"
     git:     "git://github.com/puppetlabs/puppetlabs-git.git"
