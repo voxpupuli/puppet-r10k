@@ -4,7 +4,6 @@ class r10k::install (
   $provider,
   $keywords,
 ) {
-  require git
 
   # There are currently bugs in r10k 1.x which make using 0.x desireable in
   # certain circumstances. However, 0.x requires make and gcc. Conditionally
