@@ -17,13 +17,22 @@ class r10k::install (
     require make
   }
 
+  if $package_name == '' {
+    case $provider {
+      'portage': { $real_package_name = 'app-admin/r10k' }
+      default: { $real_package_name = 'r10k' }
+    }
+  } else {
+    $real_package_name = $package_name
+  }
+
   case $provider {
     'bundle': {
       include r10k::install::bundle
     }
     'portage': {
       class { 'r10k::install::portage':
-        package_name => $package_name,
+        package_name => $real_package_name,
         keywords     => $keywords,
         version      => $version,
       }
@@ -35,7 +44,7 @@ class r10k::install (
       elsif $provider == 'pe_gem' {
         include r10k::install::pe_gem
       }
-      package { $package_name:
+      package { $real_package_name:
         ensure          => $version,
         provider        => $provider,
         install_options => $install_options,
