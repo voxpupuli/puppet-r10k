@@ -1,4 +1,5 @@
 class r10k::install::portage (
+  $package_name,
   $keywords,
   $version,
 ) {
@@ -16,7 +17,7 @@ class r10k::install::portage (
     }
   }
 
-  portage::package { 'app-admin/r10k':
+  portage::package { $package_name:
     ensure   => $version,
     keywords => $keywords,
     target   => 'puppet',

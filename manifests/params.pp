@@ -1,6 +1,7 @@
 # Reasonable defaults for all classes
 class r10k::params
 {
+  $package_name      = 'r10k'
   $version           = '1.1.0'
   $manage_modulepath = false
   $install_options   = ''

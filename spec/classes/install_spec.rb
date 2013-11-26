@@ -3,6 +3,7 @@ describe 'r10k::install' , :type => 'class' do
   context "on a RedHat 5 OS installing 1.1.0 with gem provider" do
     let :params do
       {
+        :package_name    => 'r10k',
         :version         => '1.1.0',
         :provider        => 'gem',
         :keywords        => '',
@@ -34,6 +35,7 @@ describe 'r10k::install' , :type => 'class' do
   context "on a RedHat 5 OS installing 0.0.9 with gem provider" do
     let :params do
       {
+        :package_name    => 'r10k',
         :version         => '0.0.9',
         :provider        => 'gem',
         :keywords        => '',
@@ -66,6 +68,7 @@ describe 'r10k::install' , :type => 'class' do
   context "on a RedHat 5 OS installing 1.1.0 with pe_gem provider" do
     let :params do
       {
+        :package_name    => 'r10k',
         :version         => '1.1.0',
         :provider        => 'pe_gem',
         :keywords        => '',
@@ -89,6 +92,7 @@ describe 'r10k::install' , :type => 'class' do
   context "on a RedHat 5 OS installing 1.1.0 with bundle provider" do
     let :params do
       {
+        :package_name    => 'r10k',
         :version         => '1.1.0',
         :provider        => 'bundle',
         :keywords        => '',
@@ -108,6 +112,7 @@ describe 'r10k::install' , :type => 'class' do
   context "on a Gentoo OS installing 1.1.0 with portage provider" do
     let :params do
       {
+        :package_name    => 'app-admin/r10k',
         :version         => '1.1.0',
         :provider        => 'portage',
         :keywords        => ['~amd64', '~x86'],
@@ -122,8 +127,9 @@ describe 'r10k::install' , :type => 'class' do
     end
     it { should_not include_class("git") }
     it { should contain_class("r10k::install::portage").with(
-        :keywords => ['~amd64', '~x86'],
-        :version  => '1.1.0'
+        :package_name => 'app-admin/r10k',
+        :keywords     => ['~amd64', '~x86'],
+        :version      => '1.1.0'
       )
     }
     it { should contain_package_keywords("dev-ruby/cri").with(

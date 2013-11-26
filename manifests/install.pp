@@ -1,5 +1,6 @@
 # This class is used by the ruby or pe_ruby class
 class r10k::install (
+  $package_name,
   $version,
   $provider,
   $keywords,
@@ -22,8 +23,9 @@ class r10k::install (
     }
     'portage': {
       class { 'r10k::install::portage':
-        keywords => $keywords,
-        version  => $version,
+        package_name => $package_name,
+        keywords     => $keywords,
+        version      => $version,
       }
     }
     'pe_gem', 'gem': {
@@ -33,7 +35,7 @@ class r10k::install (
       elsif $provider == 'pe_gem' {
         include r10k::install::pe_gem
       }
-      package { 'r10k':
+      package { $package_name:
         ensure          => $version,
         provider        => $provider,
         install_options => $install_options,
