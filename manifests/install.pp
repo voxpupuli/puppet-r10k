@@ -37,6 +37,6 @@ class r10k::install (
         provider => $provider,
       }
     }
-    default: { fail("$provider is not supported. Valid values are: 'gem', 'pe_gem', 'bundle'") }
+    default: { fail("$provider is not supported. Valid values are: 'gem', 'pe_gem', 'bundle', 'portage'") }
   }
 }
