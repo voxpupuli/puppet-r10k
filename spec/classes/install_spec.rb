@@ -115,7 +115,7 @@ describe 'r10k::install' , :type => 'class' do
         :operatingsystemrelease => '2.1',
       }
     end
-    it { should include_class("git") }
+    it { should_not include_class("git") }
     it { should contain_class("r10k::install::portage").with(
         :keywords => ['~amd64', '~x86'],
         :version  => '1.1.0'

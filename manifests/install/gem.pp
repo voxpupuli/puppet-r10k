@@ -3,6 +3,8 @@ class r10k::install::gem (
   $version,
 ) {
 
+  require git
+
   # Ideally we would be singleton here but due to the bug we need the param.
   # If we are newer then the failure state, we do the right thing with include
   if versioncmp($::puppetversion,'3.2.2') < 0 {
