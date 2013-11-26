@@ -20,6 +20,7 @@ class r10k::install (
   if $package_name == '' {
     case $provider {
       'portage': { $real_package_name = 'app-admin/r10k' }
+      'yum': { $real_package_name = 'rubygem-r10k' }
       default: { $real_package_name = 'r10k' }
     }
   } else {
@@ -37,7 +38,7 @@ class r10k::install (
         version      => $version,
       }
     }
-    'pe_gem', 'gem': {
+    'pe_gem', 'gem', 'yum': {
       if $provider == 'gem' {
         class { 'r10k::install::gem': version => $version; }
       }
@@ -50,6 +51,6 @@ class r10k::install (
         install_options => $install_options,
       }
     }
-    default: { fail("$provider is not supported. Valid values are: 'gem', 'pe_gem', 'bundle', 'portage'") }
+    default: { fail("$provider is not supported. Valid values are: 'gem', 'pe_gem', 'bundle', 'portage', 'yum'") }
   }
 }
