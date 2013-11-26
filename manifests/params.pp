@@ -34,9 +34,6 @@ class r10k::params
     $modulepath      = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
     $provider        = 'pe_gem'
   } else {
-    # Installation package manager provider
-    $provider = 'gem'
-
     # Getting ready for FOSS support in this module
     $puppetconf_path = '/etc/puppet'
 
@@ -47,9 +44,15 @@ class r10k::params
     case $::osfamily {
       'debian': {
         $plugins_dir = '/usr/share/mcollective/plugins/mcollective'
+        $provider    = 'gem'
+      }
+      'gentoo': {
+        $plugins_dir = '/usr/libexec/mcollective/mcollective'
+        $provider    = 'portage'
       }
       default: {
         $plugins_dir = '/usr/libexec/mcollective/mcollective'
+        $provider    = 'gem'
       }
     }
   }
