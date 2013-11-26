@@ -48,7 +48,6 @@ describe 'r10k::install' , :type => 'class' do
     it { should include_class("git") }
 
     # On older versions of r10k we need gcc & make
-    let(:pre_condition) { 'class make {}' }
     it { should include_class("gcc") }
     it { should include_class("make") }
 
@@ -116,8 +115,8 @@ describe 'r10k::install' , :type => 'class' do
         :operatingsystemrelease => '5',
       }
     end
-    it { should include_class("git") }
-    it { should_not contain_package("rubyge-r10k")}
+    it { should_not include_class("git") }
+    it { should contain_package("rubygem-r10k")}
   end
   context "on a Gentoo OS installing 1.1.0 with portage provider" do
     let :params do

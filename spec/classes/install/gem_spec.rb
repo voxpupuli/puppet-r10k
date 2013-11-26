@@ -57,8 +57,7 @@ describe 'r10k::install::gem' , :type => 'class' do
     let(:pre_condition) {
       [ 'package { "r10k":
           ensure => present,
-        }',
-        'class make {}'
+        }'
       ]}
     it { should include_class("make") }
     it { should include_class("gcc") }
