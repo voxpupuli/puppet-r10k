@@ -3,9 +3,10 @@ describe 'r10k::install' , :type => 'class' do
   context "on a RedHat 5 OS installing 1.1.0 with gem provider" do
     let :params do
       {
-        :version  => '1.1.0',
-        :provider => 'gem',
-        :keywords => '',
+        :version         => '1.1.0',
+        :provider        => 'gem',
+        :keywords        => '',
+        :install_options => '',
       }
     end
     let :facts do
@@ -33,9 +34,10 @@ describe 'r10k::install' , :type => 'class' do
   context "on a RedHat 5 OS installing 0.0.9 with gem provider" do
     let :params do
       {
-        :version  => '0.0.9',
-        :provider => 'gem',
-        :keywords => '',
+        :version         => '0.0.9',
+        :provider        => 'gem',
+        :keywords        => '',
+        :install_options => '',
       }
     end
     let :facts do
@@ -64,9 +66,10 @@ describe 'r10k::install' , :type => 'class' do
   context "on a RedHat 5 OS installing 1.1.0 with pe_gem provider" do
     let :params do
       {
-        :version  => '1.1.0',
-        :provider => 'pe_gem',
-        :keywords => '',
+        :version         => '1.1.0',
+        :provider        => 'pe_gem',
+        :keywords        => '',
+        :install_options => '',
       }
     end
     let :facts do
@@ -86,9 +89,10 @@ describe 'r10k::install' , :type => 'class' do
   context "on a RedHat 5 OS installing 1.1.0 with bundle provider" do
     let :params do
       {
-        :version  => '1.1.0',
-        :provider => 'bundle',
-        :keywords => '',
+        :version         => '1.1.0',
+        :provider        => 'bundle',
+        :keywords        => '',
+        :install_options => '',
       }
     end
     let :facts do
@@ -104,9 +108,10 @@ describe 'r10k::install' , :type => 'class' do
   context "on a Gentoo OS installing 1.1.0 with portage provider" do
     let :params do
       {
-        :version  => '1.1.0',
-        :provider => 'portage',
-        :keywords => ['~amd64', '~x86'],
+        :version         => '1.1.0',
+        :provider        => 'portage',
+        :keywords        => ['~amd64', '~x86'],
+        :install_options => '',
       }
     end
     let :facts do

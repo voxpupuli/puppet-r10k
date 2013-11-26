@@ -11,12 +11,14 @@ class r10k (
   $r10k_basedir      = $r10k::params::r10k_basedir,
   $provider          = $r10k::params::provider,
   $gentoo_keywords   = $r10k::params::gentoo_keywords,
+  $install_options   = $r10k::params::install_options,
 ) inherits r10k::params {
 
   class { 'r10k::install':
-    version  => $version,
-    provider => $provider,
-    keywords => $gentoo_keywords
+    version         => $version,
+    provider        => $provider,
+    keywords        => $gentoo_keywords,
+    install_options => $install_options,
   }
 
   class { 'r10k::config':

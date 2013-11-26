@@ -3,6 +3,7 @@ class r10k::install (
   $version,
   $provider,
   $keywords,
+  $install_options,
 ) {
 
   # There are currently bugs in r10k 1.x which make using 0.x desireable in
@@ -33,8 +34,9 @@ class r10k::install (
         include r10k::install::pe_gem
       }
       package { 'r10k':
-        ensure   => $version,
-        provider => $provider,
+        ensure          => $version,
+        provider        => $provider,
+        install_options => $install_options,
       }
     }
     default: { fail("$provider is not supported. Valid values are: 'gem', 'pe_gem', 'bundle', 'portage'") }
