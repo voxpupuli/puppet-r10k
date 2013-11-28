@@ -1,8 +1,10 @@
 # This class is used by the ruby or pe_ruby class
 class r10k::install (
+  $package_name,
   $version,
   $provider,
   $keywords,
+  $install_options,
 ) {
 
   # There are currently bugs in r10k 1.x which make using 0.x desireable in
@@ -15,28 +17,40 @@ class r10k::install (
     require make
   }
 
+  if $package_name == '' {
+    case $provider {
+      'portage': { $real_package_name = 'app-admin/r10k' }
+      'yum': { $real_package_name = 'rubygem-r10k' }
+      default: { $real_package_name = 'r10k' }
+    }
+  } else {
+    $real_package_name = $package_name
+  }
+
   case $provider {
     'bundle': {
       include r10k::install::bundle
     }
     'portage': {
       class { 'r10k::install::portage':
-        keywords => $keywords,
-        version  => $version,
+        package_name => $real_package_name,
+        keywords     => $keywords,
+        version      => $version,
       }
     }
-    'pe_gem', 'gem': {
+    'pe_gem', 'gem', 'yum', 'zypper': {
       if $provider == 'gem' {
         class { 'r10k::install::gem': version => $version; }
       }
       elsif $provider == 'pe_gem' {
         include r10k::install::pe_gem
       }
-      package { 'r10k':
-        ensure   => $version,
-        provider => $provider,
+      package { $real_package_name:
+        ensure          => $version,
+        provider        => $provider,
+        install_options => $install_options,
       }
     }
-    default: { fail("$provider is not supported. Valid values are: 'gem', 'pe_gem', 'bundle'") }
+    default: { fail("$provider is not supported. Valid values are: 'gem', 'pe_gem', 'bundle', 'portage', 'yum', 'zypper'") }
   }
 }
