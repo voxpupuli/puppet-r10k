@@ -8,7 +8,7 @@ class r10k::install::bundle(
   # The bundle install has prefix support as of writing this, I want bleeding edge.
   package { "${module_name}-bundle":
     ensure   => installed,
-    name     => 'bundle',
+    name     => 'bundler',
     provider => 'gem',
   }
   vcsrepo { "${module_name}-r10k-github":
