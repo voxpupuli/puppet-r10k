@@ -12,7 +12,7 @@ describe 'r10k::install::bundle' , :type => 'class' do
     end
     it { should contain_package("r10k-bundle").with(
         'ensure'     => 'installed',
-        'name'       => 'bundle',
+        'name'       => 'bundler',
         'provider'   => 'gem'
       )
     }
@@ -50,7 +50,7 @@ describe 'r10k::install::bundle' , :type => 'class' do
     end
     it { should contain_package("r10k-bundle").with(
         'ensure'     => 'installed',
-        'name'       => 'bundle',
+        'name'       => 'bundler',
         'provider'   => 'gem'
       )
     }
