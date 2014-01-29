@@ -23,6 +23,9 @@ class r10k::params
   # Gentoo specific values
   $gentoo_keywords = ''
 
+  # Include the mcollective agent
+  $mcollective = false
+
   if $::is_pe == 'true' {
     # Puppet Enterprise specific settings
     $puppetconf_path = '/etc/puppetlabs/puppet'
