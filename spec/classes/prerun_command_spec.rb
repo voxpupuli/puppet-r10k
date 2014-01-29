@@ -11,10 +11,10 @@ describe 'r10k::prerun_command' , :type => 'class' do
         :osfamily               => 'RedHat',
         :operatingsystemrelease => '5',
         :operatingsystem        => 'Centos',
-        :is_pe                  => 'true'
+        :is_pe                  => true
       }
     end
-    it { should include_class("r10k::params") }
+    it { should contain_class("r10k::params") }
     it { should contain_ini_setting("r10k_prerun_command").with(
         'ensure'  => 'present',
         'section' => 'agent',

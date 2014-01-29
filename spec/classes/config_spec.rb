@@ -16,7 +16,7 @@ describe 'r10k::config' , :type => 'class' do
         :is_pe                  => 'true'
       }
     end
-    it { should include_class("r10k::params") }
+    it { should contain_class("r10k::params") }
     it { should contain_file("r10k.yaml").with(
         'ensure' => 'file',
         'owner'  => 'root',
@@ -40,10 +40,10 @@ describe 'r10k::config' , :type => 'class' do
         :osfamily               => 'RedHat',
         :operatingsystemrelease => '5',
         :operatingsystem        => 'Centos',
-        :is_pe                  => 'true',
+        :is_pe                  => true,
       }
     end
-    it { should include_class("r10k::params") }
+    it { should contain_class("r10k::params") }
     it { should contain_file("r10k.yaml").with(
         'ensure' => 'file',
         'owner'  => 'root',

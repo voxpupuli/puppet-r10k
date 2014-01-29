@@ -10,9 +10,9 @@ describe 'r10k' , :type => 'class' do
         :operatingsystemrelease => '5',
       }
     end
-    it { should include_class('r10k::params') }
-    it { should include_class('r10k::install') }
-    it { should include_class('r10k::config') }
+    it { should contain_class('r10k::params') }
+    it { should contain_class('r10k::install') }
+    it { should contain_class('r10k::config') }
     it { should_not contain_class('r10k::mcollective') }
   end
 

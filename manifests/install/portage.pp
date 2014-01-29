@@ -1,3 +1,4 @@
+# This class is used to install r10k from portage
 class r10k::install::portage (
   $package_name,
   $keywords,
