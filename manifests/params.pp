@@ -23,7 +23,7 @@ class r10k::params
   # Gentoo specific values
   $gentoo_keywords = ''
 
-  if $::is_pe == 'true' {
+  if $::is_pe == true {
     # Puppet Enterprise specific settings
     $puppetconf_path = '/etc/puppetlabs/puppet'
 

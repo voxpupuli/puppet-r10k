@@ -1,3 +1,4 @@
+# This class installs the r10k bundle
 class r10k::install::bundle(
   $revision = 'master',
   $source   = 'https://github.com/adrienthebo/r10k.git',
