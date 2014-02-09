@@ -32,6 +32,7 @@ class r10k (
     modulepath        => $modulepath,
     remote            => $remote,
     manage_modulepath => $manage_modulepath,
+    r10k_basedir      => $r10k_basedir,
   }
 
   if $mcollective {
