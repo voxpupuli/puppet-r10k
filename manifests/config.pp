@@ -71,7 +71,7 @@ class r10k::config (
   file { 'r10k.yaml':
     ensure  => file,
     owner   => 'root',
-    group   => 'root',
+    group   => '0',
     mode    => '0644',
     path    => $configfile,
     content => template("${module_name}/${configfile}.erb"),
