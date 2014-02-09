@@ -13,6 +13,7 @@ class r10k (
   $provider          = $r10k::params::provider,
   $gentoo_keywords   = $r10k::params::gentoo_keywords,
   $install_options   = $r10k::params::install_options,
+  $mcollective       = $r10k::params::mcollective,
 ) inherits r10k::params {
 
   class { 'r10k::install':
@@ -31,5 +32,9 @@ class r10k (
     modulepath        => $modulepath,
     remote            => $remote,
     manage_modulepath => $manage_modulepath,
+  }
+
+  if $mcollective {
+    class { 'r10k::mcollective': }
   }
 }
