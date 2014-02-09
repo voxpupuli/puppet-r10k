@@ -20,7 +20,7 @@ describe 'r10k::config' , :type => 'class' do
     it { should contain_file("r10k.yaml").with(
         'ensure' => 'file',
         'owner'  => 'root',
-        'group'  => 'root',
+        'group'  => '0',
         'mode'   => '0644',
         'path'   => '/etc/r10k.yaml'
       )
@@ -47,7 +47,7 @@ describe 'r10k::config' , :type => 'class' do
     it { should contain_file("r10k.yaml").with(
         'ensure' => 'file',
         'owner'  => 'root',
-        'group'  => 'root',
+        'group'  => '0',
         'mode'   => '0644',
         'path'   => '/etc/r10k.yaml'
       )
