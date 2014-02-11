@@ -9,6 +9,7 @@ group :development, :test do
   gem 'rspec-system-puppet',     :require => false
   gem 'rspec-system-serverspec', :require => false
   gem 'puppet-lint',             :require => false
+  gem 'puppet-syntax',           :require => false
 end
 
 if facterversion = ENV['FACTER_GEM_VERSION']

@@ -17,10 +17,10 @@ describe 'r10k::install::gem' , :type => 'class' do
         'rubygems_update'   => false
       )
     }
-    it { should include_class("ruby::dev") }
+    it { should contain_class("ruby::dev") }
 
-    it { should_not include_class("gcc") }
-    it { should_not include_class("make") }
+    it { should_not contain_class("gcc") }
+    it { should_not contain_class("make") }
   end
   context "on a RedHat 5 OS installing 1.1.0 via gem with puppet FOSS 3.2.3" do
     let :params do
@@ -39,7 +39,7 @@ describe 'r10k::install::gem' , :type => 'class' do
       'rubygems_update' => true
       )
     }
-    it { should include_class("ruby::dev") }
+    it { should contain_class("ruby::dev") }
   end
   context "on a RedHat 5 OS installing 0.0.9 via gem with puppet FOSS 2.7.19" do
     let :params do
@@ -58,7 +58,7 @@ describe 'r10k::install::gem' , :type => 'class' do
       'package { "r10k":
         ensure => present,
       }' }
-    it { should include_class("make") }
-    it { should include_class("gcc") }
+    it { should contain_class("make") }
+    it { should contain_class("gcc") }
   end
 end

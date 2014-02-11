@@ -6,10 +6,10 @@ describe 'r10k::mcollective' , :type => 'class' do
         :osfamily               => 'RedHat',
         :operatingsystemrelease => '5',
         :operatingsystem        => 'Centos',
-        :is_pe                  => 'true'
+        :is_pe                  => true
       }
     end
-    it { should include_class("r10k::params") }
+    it { should contain_class("r10k::params") }
     it { should contain_file("/opt/puppet/libexec/mcollective/mcollective/application/r10k.rb").with(
         'ensure'   => 'present',
         'owner'    => 'root',
@@ -46,7 +46,7 @@ describe 'r10k::mcollective' , :type => 'class' do
         :is_pe                  => ''
       }
     end
-    it { should include_class("r10k::params") }
+    it { should contain_class("r10k::params") }
     it { should contain_file("/usr/libexec/mcollective/mcollective/application/r10k.rb").with(
         'ensure'   => 'present',
         'owner'    => 'root',
@@ -82,7 +82,7 @@ describe 'r10k::mcollective' , :type => 'class' do
         :is_pe                  => ''
       }
     end
-    it { should include_class("r10k::params") }
+    it { should contain_class("r10k::params") }
     it { should_not contain_file("/usr/libexec/mcollective/mcollective/application/r10k.rb") }
 
     it { should contain_file("/usr/share/mcollective/plugins/mcollective/application/r10k.rb").with(
