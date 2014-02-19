@@ -6,7 +6,7 @@ describe 'r10k::mcollective::application' , :type => 'class' do
         :osfamily               => 'RedHat',
         :operatingsystemrelease => '5',
         :operatingsystem        => 'Centos',
-        :is_pe                  => true
+        :is_pe                  => 'true'
       }
     end
     it { should contain_class("r10k::params") }
