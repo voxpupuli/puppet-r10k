@@ -9,7 +9,7 @@ require 'mcollective'
 
 include MCollective::RPC
 
-GITSERVER = '<%= @git_server %>'
+GITSERVER = '<%= @git_server.first %>'
 LOGFILE   = '/var/lib/peadmin/webhook.log'
 # USER      = 'admin'
 # PASS      = 'admin'
