@@ -13,6 +13,7 @@ class r10k::webhook(
   file { 'webhook_init_script':
     content => template("${module_name}/etc/init.d/webhook.erb"),
     path    => '/etc/init.d/webhook',
+    require => Package['sinatra'],
   }
   file { 'webhook_bin':
     content => template("${module_name}/usr/local/bin/webhook.erb"),
@@ -24,5 +25,10 @@ class r10k::webhook(
     ensure    => 'running',
     pattern   => '.*ruby.*webhoo[k]',
     hasstatus => false,
+  }
+
+  package { 'sinatra':
+    ensure   => installed,
+    provider => 'pe_gem',
   }
 }
