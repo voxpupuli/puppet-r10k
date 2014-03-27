@@ -7,6 +7,7 @@ class r10k::webhook(
     ensure => file,
     owner  => $owner,
     group  => $group,
+    mode   => '0755',
   }
 
   file { 'webhook_init_script':
