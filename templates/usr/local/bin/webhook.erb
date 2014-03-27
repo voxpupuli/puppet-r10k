@@ -55,7 +55,7 @@ class Server  < Sinatra::Base
 
       def protected!
         # only allow access from the git server.
-        throw(:halt, [401, "Not authorized: #{request.host}\n"]) unless request.host == GITSERVER
+        #throw(:halt, [401, "Not authorized: #{request.host}\n"]) unless request.host == GITSERVER
       end
     end
 end
