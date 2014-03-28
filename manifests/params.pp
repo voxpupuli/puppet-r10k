@@ -5,6 +5,7 @@ class r10k::params
   $version           = '1.1.0'
   $manage_modulepath = false
   $install_options   = ''
+  $sources           = ''
 
   # r10k configuration
   $r10k_config_file = '/etc/r10k.yaml'
