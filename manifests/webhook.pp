@@ -15,6 +15,7 @@ class r10k::webhook(
     content => template("${module_name}/etc/init.d/webhook.erb"),
     path    => '/etc/init.d/webhook',
     require => Package['sinatra'],
+    before  => File['webhook_bin'],
   }
   file { 'webhook_bin':
     content => template("${module_name}/usr/local/bin/webhook.erb"),
