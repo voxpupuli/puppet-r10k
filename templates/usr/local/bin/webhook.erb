@@ -1,7 +1,7 @@
 #!/opt/puppet/bin/ruby
 
 require 'rubygems'
-require 'sinatra/base'
+require 'sinatra'
 require 'webrick'
 require 'resolv'
 require 'json'
@@ -12,7 +12,7 @@ include MCollective::RPC
 require_relative 'json_body_params'
 register Sinatra::JsonBodyParams
 
-GITSERVER = '<%= @fqdn %>' # Change to gitlab or whatever server you're using
+GITSERVER = 'master.puppetlabs.vm' # Change to gitlab or whatever server you're using
 LOGFILE   = '/var/lib/peadmin/webhook.log'
 # USER      = 'admin'
 # PASS      = 'admin'
@@ -29,22 +29,22 @@ opts = {
 
 class Server  < Sinatra::Base
 
-    set :public_dir, 'public'
+set :public_dir, 'public'
 
-    get '/' do
-      raise Sinatra::NotFound
-    end
+get '/' do
+raise Sinatra::NotFound
+end
 
-    post '/payload' do
-      #protected!
-      params[:test].tap do |test_params|
-    	p test_params
-  	puts end.join(', ') + "\n"
-      deploy()
-    end
+post '/payload' do
+#protected!
+params[:payload].tap do |test_params|
+	puts test_params
+	end #.join(', ') + "\n"
+#deploy()
+end
 
-    not_found do
-      halt 404, 'You shall not pass! (page not found) \n'
+not_found do
+halt 404, 'You shall not pass! (page not found) \n'
     end
 
     helpers do
