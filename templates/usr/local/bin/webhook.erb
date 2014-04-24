@@ -9,7 +9,10 @@ require 'mcollective'
 
 include MCollective::RPC
 
-GITSERVER = '<%= @fqdn %>'
+require_relative 'json_body_params'
+register Sinatra::JsonBodyParams
+
+GITSERVER = '<%= @fqdn %>' # Change to gitlab or whatever server you're using
 LOGFILE   = '/var/lib/peadmin/webhook.log'
 # USER      = 'admin'
 # PASS      = 'admin'
@@ -34,6 +37,9 @@ class Server  < Sinatra::Base
 
     post '/payload' do
       #protected!
+      params[:test].tap do |test_params|
+    	p test_params
+  	puts end.join(', ') + "\n"
       deploy()
     end
 
@@ -43,6 +49,8 @@ class Server  < Sinatra::Base
 
     helpers do
       def deploy()
+	
+
         options =  MCollective::Util.default_options
         options[:config] = '/var/lib/peadmin/.mcollective'
         client = rpcclient('r10k', :exit_on_failure => false,:options => options)

@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'multi_json'
+
 group :development, :test do
   gem 'rake',                    :require => false
   gem 'rspec-puppet',            :require => false
