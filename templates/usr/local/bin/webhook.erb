@@ -36,21 +36,20 @@ raise Sinatra::NotFound
 end
 
 post '/payload' do
-#protected!
-params[:payload].tap do |test_params|
-	puts test_params
-	end #.join(', ') + "\n"
-#deploy()
-end
+        #protected!
+
+    request.body.rewind  # in case someone already read it
+    data = JSON.parse request.body.read
+    "ref branch: #{data['ref']}!"
+    #deploy(refs)
+    end
 
 not_found do
 halt 404, 'You shall not pass! (page not found) \n'
     end
 
     helpers do
-      def deploy()
-	
-
+      def deploy(refs)
         options =  MCollective::Util.default_options
         options[:config] = '/var/lib/peadmin/.mcollective'
         client = rpcclient('r10k', :exit_on_failure => false,:options => options)
