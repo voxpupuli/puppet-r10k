@@ -36,14 +36,14 @@ raise Sinatra::NotFound
 end
 
 post '/payload' do
-        #protected!
-
+    #protected!
     request.body.rewind  # in case someone already read it
     data = JSON.parse request.body.read
-    "ref branch: #{data['ref']}!"
+    branch = data['ref'].split("/").last
+    "ref branch: #{branch}"
     #deploy(refs)
-    end
-
+end
+    
 not_found do
 halt 404, 'You shall not pass! (page not found) \n'
     end
