@@ -101,5 +101,156 @@ describe 'r10k::config' , :type => 'class' do
       expect { subject }.to raise_error(Puppet::Error, /is not a bool/)
     end
   end
-end
 
+  describe 'with manage_configfile_symlink' do
+    ['true',true].each do |value|
+      context "set to #{value} with configfile specified and configfile_symlink left at the default value" do
+        let :params do
+          {
+            :manage_configfile_symlink => value,
+            :configfile                => '/etc/puppet/r10k.yaml',
+            :cachedir                  => '/var/cache/r10k',
+            :manage_modulepath         => false,
+          }
+        end
+        let :facts do
+          {
+            :osfamily               => 'RedHat',
+            :operatingsystemrelease => '5',
+            :operatingsystem        => 'Centos',
+            :is_pe                  => 'true',
+          }
+        end
+
+        it { should contain_file('symlink_r10k.yaml').with({
+            'ensure' => 'link',
+            'path'   => '/etc/r10k.yaml',
+            'target' => '/etc/puppet/r10k.yaml',
+          })
+        }
+      end
+
+      context "set to #{value} with configfile specified and configfile_symlink specified" do
+        let :params do
+          {
+            :manage_configfile_symlink => value,
+            :configfile                => '/etc/puppet/r10k.yaml',
+            :configfile_symlink        => '/tmp/r10k.yaml',
+            :cachedir                  => '/var/cache/r10k',
+            :manage_modulepath         => false,
+          }
+        end
+        let :facts do
+          {
+            :osfamily               => 'RedHat',
+            :operatingsystemrelease => '5',
+            :operatingsystem        => 'Centos',
+            :is_pe                  => 'true',
+          }
+        end
+
+        it { should contain_file('symlink_r10k.yaml').with({
+            'ensure' => 'link',
+            'path'   => '/tmp/r10k.yaml',
+            'target' => '/etc/puppet/r10k.yaml',
+          })
+        }
+      end
+
+      context "set to #{value} without configfile_symlink specified" do
+        let :params do
+          {
+            :manage_configfile_symlink => value,
+            :configfile                => '/etc/puppet/r10k.yaml',
+            :cachedir                  => '/var/cache/r10k',
+            :manage_modulepath         => false,
+          }
+        end
+        let :facts do
+          {
+            :osfamily               => 'RedHat',
+            :operatingsystemrelease => '5',
+            :operatingsystem        => 'Centos',
+            :is_pe                  => 'true',
+          }
+        end
+        it { should contain_file('symlink_r10k.yaml').with({
+            'ensure' => 'link',
+            'path'   => '/etc/r10k.yaml',
+            'target' => '/etc/puppet/r10k.yaml',
+          })
+        }
+      end
+    end
+
+    ['false',false].each do |value|
+      context "set to #{value}" do
+        let :params do
+          {
+            :manage_configfile_symlink => value,
+            :configfile                => '/etc/puppet/r10k.yaml',
+            :cachedir                  => '/var/cache/r10k',
+            :manage_modulepath         => false,
+          }
+        end
+        let :facts do
+          {
+            :osfamily               => 'RedHat',
+            :operatingsystemrelease => '5',
+            :operatingsystem        => 'Centos',
+            :is_pe                  => 'true',
+          }
+        end
+
+        it { should_not contain_file('symlink_r10k.yaml') }
+      end
+    end
+
+    context 'set to a non-boolean value' do
+      let :params do
+        {
+          :manage_configfile_symlink => 'invalid',
+          :configfile                => '/etc/r10k.yaml',
+          :cachedir                  => '/var/cache/r10k',
+          :manage_modulepath         => false,
+        }
+      end
+      let :facts do
+        {
+          :osfamily               => 'RedHat',
+          :operatingsystemrelease => '5',
+          :operatingsystem        => 'Centos',
+          :is_pe                  => 'true',
+        }
+      end
+
+      it 'should fail' do
+        expect { subject }.to raise_error(Puppet::Error)
+      end
+    end
+  end
+
+  describe 'with configfile_symlink specified as a non fully qualified path' do
+    let :params do
+      {
+        :manage_configfile_symlink => true,
+        :configfile                => '/etc/r10k.yaml',
+        :configfile_symlink        => 'invalid/path',
+        :cachedir                  => '/var/cache/r10k',
+        :manage_modulepath         => false,
+      }
+    end
+    let :facts do
+      {
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '5',
+        :operatingsystem        => 'Centos',
+        :is_pe                  => 'true',
+      }
+    end
+
+    it 'should fail' do
+      expect { subject }.to raise_error(Puppet::Error)
+    end
+  end
+end
