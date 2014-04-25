@@ -23,6 +23,14 @@ The concept here is that this is declared on the puppet master(s) that have
 been configured with r10k. This will cause r10k to synchronize before each
 puppet run. Any errors synchronizing will be logged to the standard puppet run.
 
+## symlink to r10k.yaml
+These entries in Hiera will create a symlink at `/etc/r10k.yaml` that points to the config file at `/etc/puppet/r10k.yaml`
+<pre>
+r10k::configfile: /etc/puppet/r10k.yaml
+r10k::manage_configfile_symlink: true
+r10k::configfile_symlink: /etc/r10k.yaml
+</pre>
+
 ### Mcollective Support
 
 ![alt tag](https://gist.github.com/acidprime/7013041/raw/6748f6173b406c03067884199174ce1df313ad58/post_recieve_overview.png)
