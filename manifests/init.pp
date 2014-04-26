@@ -16,7 +16,19 @@ class r10k (
   $mcollective               = $r10k::params::mcollective,
   $manage_configfile_symlink = $r10k::params::manage_configfile_symlink,
   $configfile_symlink        = $r10k::params::configfile_symlink,
+  $include_prerun_command    = false,
 ) inherits r10k::params {
+
+  if type($include_prerun_command) == 'string' {
+    $include_prerun_command_real = str2bool($include_prerun_command)
+  } else {
+    $include_prerun_command_real = $include_prerun_command
+  }
+  validate_bool($include_prerun_command_real)
+
+  if $include_prerun_command_real == true {
+    include r10k::prerun_command
+  }
 
   class { 'r10k::install':
     package_name    => $package_name,
