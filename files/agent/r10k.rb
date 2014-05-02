@@ -22,14 +22,13 @@ module MCollective
         action act do
           run_cmd act
         end
-        
-        action 'deploy_only', :description => "Deploy a specific environment, and its Puppetfile specified modules" do
-          validate :r10k_env
-          r10k_env = request[:r10k_env]
-          deploy_only_cmd r10k_env
-          reply[:r10k_env] = r10k_env
-        end
-        
+      end
+      
+      action 'deploy_only', :description => "Deploy a specific environment, and its Puppetfile specified modules" do
+        validate :r10k_env, :shellsafe
+        r10k_env = request[:r10k_env]
+        deploy_only_cmd r10k_env
+        reply[:r10k_env] = r10k_env
       end
       
       private

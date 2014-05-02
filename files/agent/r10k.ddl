@@ -38,14 +38,40 @@ metadata :name        => "r10k",
    'deploy_all',
    'sync'].each do |act|
   action act, :description => "#{act.capitalize} " do
-    output :output,
-           :description => "Output from git",
-           :display_as  => "Output"
+      output :output,
+             :description => "Output from git",
+             :display_as  => "Output"
 
-    output :error,
-           :description => "Error from git",
-           :display_as  => "Errors"
-    display :always
+      output :error,
+             :description => "Error from git",
+             :display_as  => "Errors"
+             
+      display :always
+  end
+  
+  action 'deploy_only', :description => "Deploy a specific environment, and its Puppetfile specified modules" do
+      input :r10k_env,
+            :prompt => "Specific environment",
+            :description => "Operating on deploy_only",
+            :type => :string,
+            # Wanted to rubyize the following regex but didn't have time to test: ^(?!/|.*([/.]\.|//|@\{|\\\\))[^\040\177 ~^:?*\[]+(?<!\.lock|[/.])$
+            :validation => '.',
+            :optional => false,
+            :maxlength => 40
+    
+      output :r10k_env,
+             :description => "Operating on deploy_only"
+             :display_as => "Specific environment"
+      
+      output :output,
+             :description => "Output from r10k",
+             :display_as => "Output"
+      
+      output :error,
+             :description => "Error from r10k",
+             :display_as => "Errors"
+      
+      display :always
   end
 end
 # vim: set syntax=ruby:
