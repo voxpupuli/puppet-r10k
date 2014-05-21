@@ -36,7 +36,7 @@ describe 'r10k::install::gem' , :type => 'class' do
       }
     end
     it { should contain_class("ruby").with(
-      'rubygems_update' => true
+      'rubygems_update' => false
       )
     }
     it { should contain_class("ruby::dev") }
