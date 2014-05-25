@@ -41,7 +41,7 @@ post '/payload' do
     data = JSON.parse request.body.read
     branch = data['ref'].split("/").last
     "ref branch: #{branch}"
-    #deploy(refs)
+    deploy(branch)
 end
     
 not_found do
@@ -49,14 +49,14 @@ halt 404, 'You shall not pass! (page not found) \n'
     end
 
     helpers do
-      def deploy(refs)
+      def deploy(branch)
         options =  MCollective::Util.default_options
         options[:config] = '/var/lib/peadmin/.mcollective'
         client = rpcclient('r10k', :exit_on_failure => false,:options => options)
         client.discovery_timeout = 10
         client.timeout = 120
         #client.class_filter('r10k::mcollective')
-        result = client.send('sync',{})
+        result = client.send('deploy_only', branch)
         {:status => :success, :message => "r10k started"}.to_json
       end
 
