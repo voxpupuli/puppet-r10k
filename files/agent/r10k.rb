@@ -23,14 +23,14 @@ module MCollective
           run_cmd act
         end
       end
-      
+
       action 'deploy_only', :description => "Deploy a specific environment, and its Puppetfile specified modules" do
         validate :r10k_env, :shellsafe
         r10k_env = request[:r10k_env]
         deploy_only_cmd r10k_env
         reply[:r10k_env] = r10k_env
       end
-      
+
       private
 
       def run_cmd(action,path=nil)
@@ -54,8 +54,8 @@ module MCollective
           reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true)
         end
       end
-      
-      
+
+
       def deploy_only_cmd(r10k_env=nil)
         output = ''
         r10k = ['/usr/bin/env', 'r10k']
@@ -63,7 +63,7 @@ module MCollective
         cmd << 'deploy' << 'environment' << r10k_env << '-p'
         reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true)
       end
-      
+
     end
   end
 end
