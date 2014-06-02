@@ -33,7 +33,6 @@ metadata :name        => "r10k",
   end
    ['cache',
    'synchronize',
-   'deploy',
    'sync'].each do |act|
   action act, :description => "#{act.capitalize} " do
       output :output,
@@ -43,6 +42,8 @@ metadata :name        => "r10k",
       output :error,
              :description => "Error from git",
              :display_as  => "Errors"
+
+
 
       display :always
   end
@@ -54,7 +55,7 @@ metadata :name        => "r10k",
             :type => :string,
             # Wanted to rubyize the following regex but didn't have time to test: ^(?!/|.*([/.]\.|//|@\{|\\\\))[^\040\177 ~^:?*\[]+(?<!\.lock|[/.])$
             :validation => '.',
-            :optional => false,
+            :optional => true,
             :maxlength => 40
 
       output :environment,
