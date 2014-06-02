@@ -32,8 +32,6 @@ metadata :name        => "r10k",
     end
   end
    ['cache',
-   'environment',
-   'module',
    'synchronize',
    'deploy',
    'sync'].each do |act|
@@ -49,18 +47,18 @@ metadata :name        => "r10k",
       display :always
   end
 
-  action 'deploy_only', :description => "Deploy a specific environment, and its Puppetfile specified modules" do
-      input :r10k_env,
+  action 'deploy', :description => "Deploy a specific environment, and its Puppetfile specified modules" do
+      input :environment,
             :prompt => "Specific environment",
-            :description => "Operating on deploy_only",
+            :description => "Deploy a particular environment",
             :type => :string,
             # Wanted to rubyize the following regex but didn't have time to test: ^(?!/|.*([/.]\.|//|@\{|\\\\))[^\040\177 ~^:?*\[]+(?<!\.lock|[/.])$
             :validation => '.',
             :optional => false,
             :maxlength => 40
 
-      output :r10k_env,
-             :description => "Operating on deploy_only",
+      output :environment,
+             :description => "Deploy a particular environment",
              :display_as  => "Specific environment"
 
       output :output,

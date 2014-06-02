@@ -24,13 +24,6 @@ module MCollective
         end
       end
 
-      action 'deploy_only', :description => "Deploy a specific environment, and its Puppetfile specified modules" do
-        validate :r10k_env, :shellsafe
-        r10k_env = request[:r10k_env]
-        deploy_only_cmd r10k_env
-        reply[:r10k_env] = r10k_env
-      end
-
       private
 
       def run_cmd(action,path=nil)
@@ -44,26 +37,19 @@ module MCollective
           cmd << 'pull'   if action == 'pull'
           cmd << 'status' if action == 'status'
           reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true, :cwd => path )
-        when 'cache','environment','module','synchronize','sync', 'deploy'
+        when 'cache','synchronize','sync', 'deploy'
           cmd = r10k
           cmd << 'cache'       if action == 'cache'
-          cmd << 'synchronize' if action == 'synchronize' or action == 'sync'
-          cmd << 'environment' if action == 'environment'
-          cmd << 'module'      if action == 'module'
-          cmd << 'deploy' << 'environment' << '-p' if action == 'deploy'
+          cmd << 'deploy' << 'environment' << '-p' if action == 'synchronize' or action == 'sync'
+          if action == 'deploy'
+            validate :environment, :shellsafe
+            environment = request[:environment]
+            cmd << 'deploy' << 'environment' << environment << '-p'
+            reply[:environment] = environment
+          end
           reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true)
         end
       end
-
-
-      def deploy_only_cmd(r10k_env=nil)
-        output = ''
-        r10k = ['/usr/bin/env', 'r10k']
-        cmd = r10k
-        cmd << 'deploy' << 'environment' << r10k_env << '-p'
-        reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true)
-      end
-
     end
   end
 end
