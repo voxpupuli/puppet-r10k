@@ -1,6 +1,6 @@
 # This class will configure r10k to run as part of the masters agent run
-class r10k::prerun_command (
-  $command = $r10k::params::prerun_command,
+class r10k::postrun_command (
+  $command = $r10k::params::postrun_command,
   $ensure  = 'present',
 ) inherits r10k::params {
 
@@ -13,8 +13,8 @@ class r10k::prerun_command (
     section => 'agent',
   }
 
-  ini_setting { 'r10k_prerun_command':
-    setting => 'prerun_command',
+  ini_setting { 'r10k_postrun_command':
+    setting => 'postrun_command',
     value   => $command,
   }
 }
