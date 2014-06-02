@@ -61,7 +61,7 @@ module MCollective
         r10k = ['/usr/bin/env', 'r10k']
         cmd = r10k
         cmd << 'deploy' << 'environment' << r10k_env << '-p'
-        reply[:status] = run(deploy_only_cmd, :stderr => :error, :stdout => :output, :chomp => true)
+        reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true)
       end
       
     end
