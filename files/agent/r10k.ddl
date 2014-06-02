@@ -45,10 +45,10 @@ metadata :name        => "r10k",
       output :error,
              :description => "Error from git",
              :display_as  => "Errors"
-             
+
       display :always
   end
-  
+
   action 'deploy_only', :description => "Deploy a specific environment, and its Puppetfile specified modules" do
       input :r10k_env,
             :prompt => "Specific environment",
@@ -58,19 +58,19 @@ metadata :name        => "r10k",
             :validation => '.',
             :optional => false,
             :maxlength => 40
-    
+
       output :r10k_env,
              :description => "Operating on deploy_only",
-             :display_as => "Specific environment"
-      
+             :display_as  => "Specific environment"
+
       output :output,
              :description => "Output from r10k",
-             :display_as => "Output"
-      
+             :display_as  => "Output"
+
       output :error,
              :description => "Error from r10k",
-             :display_as => "Errors"
-      
+             :display_as  => "Errors"
+
       display :always
   end
 end
