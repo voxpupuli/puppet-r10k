@@ -21,7 +21,7 @@ module MCollective
           end
           action 'deploy' do
             environment = request[:environment]
-            validate :environment, :shellsafe
+            validate environment, :shellsafe
             run_cmd act,environment
           end
         end
