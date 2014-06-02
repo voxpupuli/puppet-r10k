@@ -5,15 +5,8 @@ class r10k::install::gem (
 
   require git
 
-  # Ideally we would be singleton here but due to the bug we need the param.
-  # If we are newer then the failure state, we do the right thing with include
-  if versioncmp($::puppetversion,'3.2.2') < 0 {
-    # https://projects.puppetlabs.com/issues/19663
-    class { '::ruby':
-      rubygems_update => false,
-    }
-  } else {
-    include ruby
+  class { '::ruby':
+    rubygems_update => false,
   }
 
   include ruby::dev
