@@ -16,13 +16,14 @@ module MCollective
         ['cache',
         'synchronize',
         'sync'].each do |act|
-        action act do
-          run_cmd act
-        end
-        action 'deploy' do
-          validate :environment, :shellsafe
-          environment = request[:environment]
-          run_cmd act,environment
+          action act do
+            run_cmd act
+          end
+          action 'deploy' do
+            validate :environment, :shellsafe
+            environment = request[:environment]
+            run_cmd act,environment
+          end
         end
       private
 
