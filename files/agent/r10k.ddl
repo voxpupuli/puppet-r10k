@@ -60,7 +60,7 @@ metadata :name        => "r10k",
             :maxlength => 40
     
       output :r10k_env,
-             :description => "Operating on deploy_only"
+             :description => "Operating on deploy_only",
              :display_as => "Specific environment"
       
       output :output,
