@@ -35,7 +35,7 @@ metadata :name        => "r10k",
    'environment',
    'module',
    'synchronize',
-   'deploy_all',
+   'deploy',
    'sync'].each do |act|
   action act, :description => "#{act.capitalize} " do
       output :output,
