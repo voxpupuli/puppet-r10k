@@ -61,15 +61,15 @@ metadata :name        => "r10k",
     
       output :r10k_env,
              :description => "Operating on deploy_only",
-             :display_as => "Specific environment"
+             :display_as  => "Specific environment"
       
       output :output,
              :description => "Output from r10k",
-             :display_as => "Output"
+             :display_as  => "Output"
       
       output :error,
              :description => "Error from r10k",
-             :display_as => "Errors"
+             :display_as  => "Errors"
       
       display :always
   end
