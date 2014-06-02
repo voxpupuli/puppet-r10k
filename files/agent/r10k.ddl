@@ -10,7 +10,7 @@ metadata :name        => "r10k",
    'pull',
    'status'].each do |act|
     action act, :description => "#{act.capitalize} " do
-        input :path,
+      input :path,
               :prompt      => "Module path",
               :description => "Operating on #{act}",
               :type        => :string,
@@ -18,9 +18,9 @@ metadata :name        => "r10k",
               :optional    => false,
               :maxlength   => 256
 
-        output :path,
-               :description => "Operating on #{act}",
-               :display_as  => "Path"
+      output :path,
+             :description => "Operating on #{act}",
+             :display_as  => "Path"
       output :output,
              :description => "Output from git",
              :display_as  => "Output"

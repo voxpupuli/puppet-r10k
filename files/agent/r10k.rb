@@ -4,29 +4,29 @@ module MCollective
        ['push',
         'pull',
         'status'].each do |act|
-        action act do
-          validate :path, :shellsafe
-          path = request[:path]
-          reply.fail "Path not found #{path}" unless File.exists?(path)
-          return unless reply.statuscode == 0
-          run_cmd act, path
-          reply[:path]   = path
+          action act do
+            validate :path, :shellsafe
+            path = request[:path]
+            reply.fail "Path not found #{path}" unless File.exists?(path)
+            return unless reply.statuscode == 0
+            run_cmd act, path
+            reply[:path]   = path
+          end
         end
-      end
         ['cache',
-        'environment',
-        'module',
         'synchronize',
-        'deploy',
         'sync'].each do |act|
         action act do
           run_cmd act
         end
-      end
-
+        action 'deploy' do
+          validate :environment, :shellsafe
+          environment = request[:environment]
+          run_cmd act,environment
+        end
       private
 
-      def run_cmd(action,path=nil)
+      def run_cmd(action,arg=nil)
         output = ''
         git  = ['/usr/bin/env', 'git']
         r10k = ['/usr/bin/env', 'r10k']
@@ -36,16 +36,14 @@ module MCollective
           cmd << 'push'   if action == 'push'
           cmd << 'pull'   if action == 'pull'
           cmd << 'status' if action == 'status'
-          reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true, :cwd => path )
+          reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true, :cwd => arg )
         when 'cache','synchronize','sync', 'deploy'
           cmd = r10k
           cmd << 'cache'       if action == 'cache'
           cmd << 'deploy' << 'environment' << '-p' if action == 'synchronize' or action == 'sync'
           if action == 'deploy'
-            validate :environment, :shellsafe
-            environment = request[:environment]
-            cmd << 'deploy' << 'environment' << environment << '-p'
-            reply[:environment] = environment
+            cmd << 'deploy' << 'environment' << arg << '-p'
+            reply[:environment] = arg
           end
           reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true)
         end
