@@ -17,6 +17,9 @@ require 'mcollective'
 require 'resolv'
 require 'json'
 
+include MCollective::RPC
+
+
 LOGFILE             = '/var/lib/peadmin/webhook.log'
 DEPLOYCMD           = "/opt/puppet/bin/mco r10k deploy_all --np >> %{LOGFILE} 2>&1"
 USER                = 'puppet'
