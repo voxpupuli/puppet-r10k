@@ -5,6 +5,7 @@
 # Ben Ford
 # Adam Crews
 # Zack Smith
+# Jeff Malnick
 require 'rubygems'
 
 require 'sinatra/base'
@@ -86,7 +87,7 @@ class Server  < Sinatra::Base
      client = rpcclient('r10k', :exit_on_failure => false,:options => options)
      client.discovery_timeout = DISCOVER_TIMEOUT
      client.timeout           = CLIENT_TIMEOUT
-     result = client.send('deploy',branch)
+     result = client.send('deploy',{'environment' => branch})
    end # end deploy()
 
 
