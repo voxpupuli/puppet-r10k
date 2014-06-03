@@ -90,10 +90,10 @@ class Server  < Sinatra::Base
    def mco(branch)
      options =  MCollective::Util.default_options
      options[:config] = CLIENT_CFG
-     client = rpcclient('r10k', :exit_on_failure => false,:options => options)
+     client = rpcclient('r10k',{:environment => branch}, :exit_on_failure => false,:options => options)
      client.discovery_timeout = DISCOVER_TIMEOUT
      client.timeout           = CLIENT_TIMEOUT
-     result = client.send('deploy',{'environment' => branch})
+     result = client.send('deploy',{})
    end # end deploy()
 
 
