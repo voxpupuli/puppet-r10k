@@ -64,10 +64,10 @@ class Server  < Sinatra::Base
   end
 
   helpers do
-    def deploy()
+    def deploy(branch)
       begin
         if USE_MCO
-          mco()
+          mco(branch)
         else
           Process.detach(fork{ exec "#{DEPLOYCMD} &"})
         end
@@ -77,7 +77,7 @@ class Server  < Sinatra::Base
       end
     end  #end deploy()
 
-   def mco()
+   def mco(branch)
      options =  MCollective::Util.default_options
      options[:config] = CLIENT_CFG
      client = rpcclient('r10k', :exit_on_failure => false,:options => options)
