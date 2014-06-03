@@ -1,0 +1,108 @@
+#!/bin/bash
+# webhook        Init script for running the r10k webhook daemon
+#
+# Author:       Zack Smith <zack.smith@puppetlabs.com>
+#
+# chkconfig: 2345 98 02
+#
+# description: Enables web based runs of r10k i.e. github enterprise post hooks
+# processname: webhook
+
+[ -f /etc/sysconfig/webhook ] && . /etc/sysconfig/webhook
+pidfile='/var/run/webhook.pid'
+webhook='/usr/local/bin/webhook'
+DAEMON_USER=peadmin
+RETVAL=0
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+export PATH
+
+# Determine if we can use the -p option to daemon, killproc, and status.
+# RHEL < 5 can't.
+if status | grep -q -- '-p' 2>/dev/null; then
+    daemonopts="--pidfile $pidfile"
+    pidopts="-p $pidfile"
+fi
+
+start() {
+    echo -n $"Starting webhook: "
+    daemon --user ${DAEMON_USER:?} $daemonopts $webhook
+    RETVAL=$?
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Stopping webhook: "
+    pid=`ps -ef | awk '/.*ruby.*webhoo[k]/{print $2;exit}' 2> /dev/null`
+    kill $pid
+    RETVAL=$?
+    echo
+    # wait until really stopped
+    i=0
+    if [ -n "${pid:-}" ]; then
+      while kill -0 "${pid:-}" 2> /dev/null;  do
+          # If we get here it means the process has not yet died, but
+          # potentially will. In anticipation of it actually dying we
+          # set RETVAL to 0 here. If we eventually timeout, the real
+          # exit will be the return code of `kill -9` from below.
+          RETVAL=0
+          if [ $i = '60' ]; then
+              kill -9 $pid
+              RETVAL=$?
+              break;
+          else
+              if [ $i = '0' ]; then
+                  echo -n " ... waiting "
+              else
+                  echo -n "."
+              fi
+              i=$(($i+1))
+              sleep 1
+          fi
+      done
+    fi
+    [ $RETVAL = 0 ] && rm -f ${lockfile} ${pidfile}
+    return $RETVAL
+}
+
+restart() {
+    stop
+    start
+}
+
+rh_status() {
+    if [ -f "${pidfile}" ]; then
+        status $pidopts $webhook
+        RETVAL=$?
+    else
+        RETVAL=3
+    fi
+    return $RETVAL
+}
+
+rh_status_q() {
+    rh_status >/dev/null 2>&1
+}
+
+case "$1" in
+    start)
+        start
+    ;;
+    stop)
+        stop
+    ;;
+    restart)
+        restart
+    ;;
+    status)
+        rh_status
+    ;;
+    *)
+        echo $"Usage: $0 {start|stop|status|restart}"
+        exit 1
+esac
+
+exit $RETVAL

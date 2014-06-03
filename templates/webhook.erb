@@ -1,108 +1,104 @@
-#!/bin/bash
-# webhook        Init script for running the r10k webhook daemon
-#
-# Author:       Zack Smith <zack.smith@puppetlabs.com>
-#
-# chkconfig: 2345 98 02
-#
-# description: Enables web based runs of r10k i.e. github enterprise post hooks
-# processname: webhook
+#!/opt/puppet/bin/ruby
+# This mini-webserver is meant to be run as the peadmin user
+# so that it can call mcollective from a puppetmaster
+# Authors:
+# Ben Ford
+# Adam Crews
+# Zack Smith
+require 'rubygems'
 
-[ -f /etc/sysconfig/webhook ] && . /etc/sysconfig/webhook
-pidfile='/var/run/webhook.pid'
-webhook='/usr/local/bin/webhook'
-DAEMON_USER=peadmin
-RETVAL=0
+require 'sinatra/base'
+require 'webrick'
+require 'webrick/https'
+require 'openssl'
+require 'mcollective'
 
-# Source function library.
-. /etc/rc.d/init.d/functions
 
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-export PATH
+require 'resolv'
+require 'json'
 
-# Determine if we can use the -p option to daemon, killproc, and status.
-# RHEL < 5 can't.
-if status | grep -q -- '-p' 2>/dev/null; then
-    daemonopts="--pidfile $pidfile"
-    pidopts="-p $pidfile"
-fi
+LOGFILE             = '/var/lib/peadmin/webhook.log'
+DEPLOYCMD           = "/opt/puppet/bin/mco r10k deploy_all --np >> %{LOGFILE} 2>&1"
+USER                = 'puppet'
+PASS                = 'puppet'
+PORT                = '8088'
+CERT_PATH           = '/var/lib/peadmin/.mcollective.d'
+CLIENT_CFG          = '/var/lib/peadmin/.mcollective'
+CERT_NAME           = 'peadmin'
+DISCOVER_TIMEOUT    = 10
+CLIENT_TIMEOUT      = 120
+USE_MCO             = true
 
-start() {
-    echo -n $"Starting webhook: "
-    daemon --user ${DAEMON_USER:?} $daemonopts $webhook
-    RETVAL=$?
-    return $RETVAL
+
+ENV['HOME'] = '/var/lib/peadmin'
+ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppet/bin'
+
+opts = {
+        :Port               => PORT,
+        :Logger             => WEBrick::Log::new(LOGFILE, WEBrick::Log::DEBUG),
+        :ServerType         => WEBrick::Daemon,
+        :SSLEnable          => true,
+        :SSLVerifyClient    => OpenSSL::SSL::VERIFY_NONE,
+        :SSLCertificate     => OpenSSL::X509::Certificate.new(  File.open(File.join(CERT_PATH, "#{CERT_NAME}-cert.pem")).read),
+        :SSLPrivateKey      => OpenSSL::PKey::RSA.new(          File.open(File.join(CERT_PATH, "#{CERT_NAME}-private.pem")).read),
+        :SSLCertName        => [ [ "CN",WEBrick::Utils::getservername ] ]
 }
 
-stop() {
-    echo -n $"Stopping webhook: "
-    pid=`ps -ef | awk '/.*ruby.*webhoo[k]/{print $2;exit}' 2> /dev/null`
-    kill $pid
-    RETVAL=$?
-    echo
-    # wait until really stopped
-    i=0
-    if [ -n "${pid:-}" ]; then
-      while kill -0 "${pid:-}" 2> /dev/null;  do
-          # If we get here it means the process has not yet died, but
-          # potentially will. In anticipation of it actually dying we
-          # set RETVAL to 0 here. If we eventually timeout, the real
-          # exit will be the return code of `kill -9` from below.
-          RETVAL=0
-          if [ $i = '60' ]; then
-              kill -9 $pid
-              RETVAL=$?
-              break;
-          else
-              if [ $i = '0' ]; then
-                  echo -n " ... waiting "
-              else
-                  echo -n "."
-              fi
-              i=$(($i+1))
-              sleep 1
-          fi
-      done
-    fi
-    [ $RETVAL = 0 ] && rm -f ${lockfile} ${pidfile}
-    return $RETVAL
-}
+class Server  < Sinatra::Base
+  set :static, false
 
-restart() {
-    stop
-    start
-}
+  get '/' do
+    raise Sinatra::NotFound
+  end
 
-rh_status() {
-    if [ -f "${pidfile}" ]; then
-        status $pidopts $webhook
-        RETVAL=$?
-    else
-        RETVAL=3
-    fi
-    return $RETVAL
-}
+  post '/deploy' do
+    protected!
+    deploy()
+  end
 
-rh_status_q() {
-    rh_status >/dev/null 2>&1
-}
+  not_found do
+    halt 404, 'You shall not pass! (page not found)'
+  end
 
-case "$1" in
-    start)
-        start
-    ;;
-    stop)
-        stop
-    ;;
-    restart)
-        restart
-    ;;
-    status)
-        rh_status
-    ;;
-    *)
-        echo $"Usage: $0 {start|stop|status|restart}"
-        exit 1
-esac
+  helpers do
+    def deploy()
+      begin
+        if USE_MCO
+          mco()
+        else
+          Process.detach(fork{ exec "#{DEPLOYCMD} &"}
+        end
+        {:status => :success, :message => "Deploying environments."}.to_json
+      rescue
+        {:status => :fail, :message => "Deploy failed.", :trace => e.message}.to_json
+      end
+    end  #end deploy()
 
-exit $RETVAL
+   def mco()
+     options =  MCollective::Util.default_options
+     options[:config] = CLIENT_CFG
+     client = rpcclient('r10k', :exit_on_failure => false,:options => options)
+     client.discovery_timeout = DISCOVER_TIMEOUT
+     client.timeout           = CLIENT_TIMEOUT
+     result = client.send('sync',{})
+   end # end deploy()
+
+
+    def protected!
+      unless authorized?
+        response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
+        throw(:halt, [401, "Not authorized\n"])
+      end
+    end  #end protected!
+
+    def authorized?
+      @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+      @auth.provided? && @auth.basic? && @auth.credentials && 
+      @auth.credentials == [USER, PASS]
+    end  #end authorized?
+  end  #end helpers
+end
+
+Rack::Handler::WEBrick.run(Server, opts) do |server|
+  [:INT, :TERM].each { |sig| trap(sig) { server.stop } }
+end
