@@ -55,6 +55,7 @@ class Server  < Sinatra::Base
     raise Sinatra::NotFound
   end
 
+  #curl -d '{ "ref": "refs/heads/production" }'  -H "Accept: application/json" 'https://puppet:puppet@localhost:8088/payload' -k -q
   post '/payload' do
     protected!
     request.body.rewind  # in case someone already read it
