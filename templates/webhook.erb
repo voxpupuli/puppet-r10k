@@ -71,7 +71,7 @@ class Server  < Sinatra::Base
     def deploy(branch)
       begin
         if USE_MCO
-          result = mco(branch)
+          result = mco(branch).first
           if result.results[:statuscode] == 0
             message = result.results[:statusmsg]
           else
