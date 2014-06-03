@@ -71,11 +71,12 @@ class Server  < Sinatra::Base
     def deploy(branch)
       begin
         if USE_MCO
-          mco(branch)
+          result = mco(branch)
         else
+          result = 'forked'
           Process.detach(fork{ exec "#{DEPLOYCMD} &"})
         end
-        {:status => :success, :message => "Deploying environments."}.to_json
+        {:status => :success, :message => result.to_s }.to_json
      rescue => e
         {:status => :fail, :message => "Deploy failed.", :trace => e.backtrace}.to_json
       end
