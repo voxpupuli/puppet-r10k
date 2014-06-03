@@ -78,10 +78,12 @@ class r10k::config (
         'basedir' => $r10k_basedir,
       },
     }
+    $source_keys = keys($r10k_sources)
   } else {
     validate_hash($sources)
 
     $r10k_sources = $sources
+    $source_keys = keys($r10k_sources)
   }
 
   file { 'r10k.yaml':
