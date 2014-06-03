@@ -54,7 +54,7 @@ class Server  < Sinatra::Base
   post '/payload' do
     protected!
     request.body.rewind  # in case someone already read it
-    data = JSON.parse request.body.read
+    data = JSON.parse(request.body.read, :quirks_mode => true)
     branch = data['ref'].split("/").last
     deploy(branch)
   end
