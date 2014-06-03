@@ -51,9 +51,12 @@ class Server  < Sinatra::Base
     raise Sinatra::NotFound
   end
 
-  post '/deploy' do
+  post '/payload' do
     protected!
-    deploy()
+    request.body.rewind  # in case someone already read it
+    data = JSON.parse request.body.read
+    branch = data['ref'].split("/").last
+    deploy(branch)
   end
 
   not_found do
@@ -66,7 +69,7 @@ class Server  < Sinatra::Base
         if USE_MCO
           mco()
         else
-          Process.detach(fork{ exec "#{DEPLOYCMD} &"}
+          Process.detach(fork{ exec "#{DEPLOYCMD} &"})
         end
         {:status => :success, :message => "Deploying environments."}.to_json
       rescue
@@ -80,7 +83,7 @@ class Server  < Sinatra::Base
      client = rpcclient('r10k', :exit_on_failure => false,:options => options)
      client.discovery_timeout = DISCOVER_TIMEOUT
      client.timeout           = CLIENT_TIMEOUT
-     result = client.send('sync',{})
+     result = client.send('deploy',branch)
    end # end deploy()
 
 
