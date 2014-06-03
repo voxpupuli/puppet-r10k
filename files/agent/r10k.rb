@@ -10,7 +10,7 @@ module MCollective
             reply.fail "Path not found #{path}" unless File.exists?(path)
             return unless reply.statuscode == 0
             run_cmd act, path
-            reply[:path]   = path
+            reply[:path] = path
           end
         end
         ['cache',
@@ -20,9 +20,10 @@ module MCollective
             run_cmd act
           end
           action 'deploy' do
+            validate :environment, :shellsafe
             environment = request[:environment]
-            #validate :environment, :shellsafe
-            run_cmd act,environment
+            run_cmd 'deploy', environment
+            reply[:environment] = environment
           end
         end
       private
@@ -32,21 +33,20 @@ module MCollective
         git  = ['/usr/bin/env', 'git']
         r10k = ['/usr/bin/env', 'r10k']
         case action
-        when 'push','pull','status'
-          cmd = git
-          cmd << 'push'   if action == 'push'
-          cmd << 'pull'   if action == 'pull'
-          cmd << 'status' if action == 'status'
-          reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true, :cwd => arg )
-        when 'cache','synchronize','sync', 'deploy'
-          cmd = r10k
-          cmd << 'cache'       if action == 'cache'
-          cmd << 'deploy' << 'environment' << '-p' if action == 'synchronize' or action == 'sync'
-          if action == 'deploy'
-            cmd << 'deploy' << 'environment' << arg << '-p'
-            reply[:environment] = arg
-          end
-          reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true)
+          when 'push','pull','status'
+            cmd = git
+            cmd << 'push'   if action == 'push'
+            cmd << 'pull'   if action == 'pull'
+            cmd << 'status' if action == 'status'
+            reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true, :cwd => arg )
+          when 'cache','synchronize','sync', 'deploy'
+            cmd = r10k
+            cmd << 'cache' if action == 'cache'
+            cmd << 'deploy' << 'environment' << '-p' if action == 'synchronize' or action == 'sync'
+            if action == 'deploy'
+              cmd << 'deploy' << 'environment' << arg << '-p'
+            end
+            reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true)
         end
       end
     end

@@ -34,7 +34,7 @@ metadata :name        => "r10k",
    ['cache',
    'synchronize',
    'sync'].each do |act|
-  action act, :description => "#{act.capitalize} " do
+      action act, :description => "#{act.capitalize} " do
       output :output,
              :description => "Output from git",
              :display_as  => "Output"
@@ -56,7 +56,7 @@ metadata :name        => "r10k",
             # Wanted to rubyize the following regex but didn't have time to test: ^(?!/|.*([/.]\.|//|@\{|\\\\))[^\040\177 ~^:?*\[]+(?<!\.lock|[/.])$
             :validation => '.',
             :optional => true,
-            :maxlength => 40
+            :maxlength => 256 
 
       output :environment,
              :description => "Deploy a particular environment",
