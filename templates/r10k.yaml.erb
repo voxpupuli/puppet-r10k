@@ -1,8 +1,12 @@
 :cachedir: <%= @cachedir %>
 <% unless @r10k_sources.empty? -%>
 :sources:
-<%# The splitting/joining monkeybusiness trims the YAML document header: `---` -%>
-<%= @r10k_sources.to_yaml.split("\n")[1..-1].join("\n") %>
+<% @source_keys.sort.each do |source| -%>
+  <%=source-%>:
+<% @r10k_sources[source].sort.each do |key,value| -%>
+    <%=key-%>: "<%=value%>"
+<% end -%>
+<% end -%>
 <% end %>
 <%# The Array boxing/flattening ensures we don't get bitten by bug #15813 -%>
 <% unless [@purgedirs].flatten.empty? -%>
