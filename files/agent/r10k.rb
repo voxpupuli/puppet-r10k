@@ -14,16 +14,18 @@ module MCollective
           end
         end
         ['cache',
-        'synchronize',
-        'sync'].each do |act|
+         'synchronize',
+         'deploy',
+         'sync'].each do |act|
           action act do
-            run_cmd act
-          end
-          action 'deploy' do
-            validate :environment, :shellsafe
-            environment = request[:environment]
-            run_cmd 'deploy', environment
-            reply[:environment] = environment
+            if act == 'deploy'
+              validate :environment, :shellsafe
+              environment = request[:environment]
+              run_cmd act, environment
+              reply[:environment] = environment
+            else
+              run_cmd act
+            end
           end
         end
       private

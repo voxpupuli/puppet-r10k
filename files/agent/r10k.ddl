@@ -9,43 +9,40 @@ metadata :name        => "r10k",
   ['push',
    'pull',
    'status'].each do |act|
-    action act, :description => "#{act.capitalize} " do
-      input :path,
-              :prompt      => "Module path",
-              :description => "Operating on #{act}",
-              :type        => :string,
-              :validation  => '.',
-              :optional    => false,
-              :maxlength   => 256
-
-      output :path,
+     action act, :description => "#{act.capitalize} " do
+     input :path,
+             :prompt      => "Module path",
              :description => "Operating on #{act}",
-             :display_as  => "Path"
-      output :output,
-             :description => "Output from git",
-             :display_as  => "Output"
+             :type        => :string,
+             :validation  => '.',
+             :optional    => false,
+             :maxlength   => 256
 
-      output :error,
-             :description => "Error from git",
-             :display_as  => "Errors"
-      display :always
+     output :path,
+            :description => "Operating on #{act}",
+            :display_as  => "Path"
+     output :output,
+            :description => "Output from git",
+            :display_as  => "Output"
+
+     output :error,
+            :description => "Error from git",
+            :display_as  => "Errors"
+     display :always
     end
   end
-   ['cache',
+  ['cache',
    'synchronize',
    'sync'].each do |act|
-      action act, :description => "#{act.capitalize} " do
-      output :output,
-             :description => "Output from git",
-             :display_as  => "Output"
+    action act, :description => "#{act.capitalize} " do
+    output :output,
+           :description => "Output from git",
+           :display_as  => "Output"
 
-      output :error,
-             :description => "Error from git",
-             :display_as  => "Errors"
-
-
-
-      display :always
+    output :error,
+           :description => "Error from git",
+           :display_as  => "Errors"
+    display :always
   end
 
   action 'deploy', :description => "Deploy a specific environment, and its Puppetfile specified modules" do
