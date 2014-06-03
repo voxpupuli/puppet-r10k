@@ -6,6 +6,7 @@
 # Adam Crews
 # Zack Smith
 # Jeff Malnick
+
 require 'rubygems'
 
 require 'sinatra/base'
@@ -13,8 +14,6 @@ require 'webrick'
 require 'webrick/https'
 require 'openssl'
 require 'mcollective'
-
-
 require 'resolv'
 require 'json'
 
@@ -55,7 +54,7 @@ class Server  < Sinatra::Base
     raise Sinatra::NotFound
   end
 
-  #curl -d '{ "ref": "refs/heads/production" }'  -H "Accept: application/json" 'https://puppet:puppet@localhost:8088/payload' -k -q
+  # curl -d '{ "ref": "refs/heads/production" }'  -H "Accept: application/json" 'https://puppet:puppet@localhost:8088/payload' -k -q
   post '/payload' do
     protected!
     request.body.rewind  # in case someone already read it
