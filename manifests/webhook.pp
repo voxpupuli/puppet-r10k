@@ -11,6 +11,11 @@ class r10k::webhook(
     mode   => '0755',
   }
 
+  file { '/var/log/webhook':
+      ensure => 'directory',
+      before => File['webhook_bin'],
+  }
+
   file { 'webhook_init_script':
     content => template('r10k/webhook.init.erb'),
     path    => '/etc/init.d/webhook',
