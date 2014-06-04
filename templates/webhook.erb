@@ -78,7 +78,7 @@ class Server  < Sinatra::Base
           end
         else
           message = 'forked'
-          Process.detach(fork{ exec "/opt/puppet/bin/mco r10k deploy #{branch} >> %{LOGFILE} 2>&1 &"})
+          Process.detach(fork{ exec "/opt/puppet/bin/mco r10k deploy #{branch} >> #{LOGFILE} 2>&1 &"})
         end
         {:status => :success, :message => message.to_s }.to_json
      rescue => e
