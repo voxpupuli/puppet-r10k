@@ -4,7 +4,7 @@
 <% @source_keys.sort.each do |source| -%>
   <%=source-%>:
 <% @r10k_sources[source].sort.each do |key,value| -%>
-    <%=key-%>: "<%=value%>"
+    <%=key-%>: <%=value%>
 <% end -%>
 <% end -%>
 <% end %>
