@@ -13,6 +13,8 @@ class r10k::webhook(
 
   file { '/var/log/webhook':
       ensure => 'directory',
+      owner  => 'peadmin',
+      group  => 'peadmin',
       before => File['webhook_bin'],
   }
 
