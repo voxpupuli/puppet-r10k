@@ -21,7 +21,6 @@ include MCollective::RPC
 
 
 LOGFILE             = '/var/lib/peadmin/webhook.log'
-DEPLOYCMD           = "/opt/puppet/bin/mco r10k deploy_all --np >> %{LOGFILE} 2>&1"
 USER                = 'puppet'
 PASS                = 'puppet'
 PORT                = '8088'
@@ -30,7 +29,7 @@ CLIENT_CFG          = '/var/lib/peadmin/.mcollective'
 CERT_NAME           = 'peadmin'
 DISCOVER_TIMEOUT    = 10
 CLIENT_TIMEOUT      = 120
-USE_MCO             = true
+USE_RUBY            = false
 
 
 ENV['HOME'] = '/var/lib/peadmin'
@@ -70,7 +69,7 @@ class Server  < Sinatra::Base
   helpers do
     def deploy(branch)
       begin
-        if USE_MCO
+        if USE_RUBY
           result = mco(branch).first
           if result.results[:statuscode] == 0
             message = result.results[:statusmsg]
@@ -79,7 +78,7 @@ class Server  < Sinatra::Base
           end
         else
           message = 'forked'
-          Process.detach(fork{ exec "#{DEPLOYCMD} &"})
+          Process.detach(fork{ exec "/opt/puppet/bin/mco r10k deploy #{branch} >> %{LOGFILE} 2>&1 &"})
         end
         {:status => :success, :message => message.to_s }.to_json
      rescue => e
