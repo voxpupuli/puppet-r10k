@@ -4,6 +4,8 @@ class r10k::webhook(
   $group = '0',
   $git_server = 'localhost',
 ) {
+  require r10k::webhook::config
+
   File {
     ensure => file,
     owner  => $owner,

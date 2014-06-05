@@ -16,6 +16,7 @@ require 'openssl'
 require 'mcollective'
 require 'resolv'
 require 'json'
+require 'yaml'
 
 include MCollective::RPC
 
@@ -23,7 +24,7 @@ include MCollective::RPC
 WEBHOOK_CONFIG      = '/etc/webhook.yaml'
 
 if (File.exists?(WEBHOOK_CONFIG))
-  settings = YAML.load(WEBHOOK_CONFIG)
+  settings = YAML.load_file(WEBHOOK_CONFIG)
 else
   raise "Configuration file: #{WEBHOOK_CONFIG} does not exist"
 end
@@ -37,8 +38,8 @@ opts = {
         :ServerType         => WEBrick::Daemon,
         :SSLEnable          => true,
         :SSLVerifyClient    => OpenSSL::SSL::VERIFY_NONE,
-        :SSLCertificate     => OpenSSL::X509::Certificate.new(  File.open(File.join(settings['certpath'], "#{settings['certname']}-cert.pem")).read),
-        :SSLPrivateKey      => OpenSSL::PKey::RSA.new(          File.open(File.join(settings['certpath'], "#{settings['certname']}-private.pem")).read),
+        :SSLCertificate     => OpenSSL::X509::Certificate.new(  File.open(File.join("#{settings['certpath']}", "#{settings['certname']}-cert.pem")).read),
+        :SSLPrivateKey      => OpenSSL::PKey::RSA.new(          File.open(File.join("#{settings['certpath']}", "#{settings['certname']}-private.pem")).read),
         :SSLCertName        => [ [ "CN",WEBrick::Utils::getservername ] ]
 }
 
