@@ -45,8 +45,6 @@ opts = {
 
 class Server  < Sinatra::Base
 
-  attr_accessor :settings
-
   set :static, false
 
   get '/' do
