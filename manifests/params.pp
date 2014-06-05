@@ -29,6 +29,19 @@ class r10k::params
   # Include the mcollective agent
   $mcollective = false
 
+  # Webhook configuration information
+  $webhook_user               = 'puppet'
+  $webhook_pass               = 'puppet'
+  $webhook_port               = '8088'
+  $webhook_logfile            = '/var/log/webhook/access.log'
+  $webhook_certname           = 'peadmin'
+  $webhook_certpath           = '/var/lib/peadmin/.mcollective.d'
+  $webhook_client_cfg         = '/var/lib/peadmin/.mcollective'
+  $webhook_use_mco_ruby       = false
+  $webhook_protected          = true 
+  $webhook_discovery_timeout  = 10 
+  $webhook_client_timeout     = 120 
+
   if $::is_pe =~ /true/ {
     # Puppet Enterprise specific settings
     $puppetconf_path = '/etc/puppetlabs/puppet'
