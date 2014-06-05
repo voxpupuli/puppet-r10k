@@ -34,7 +34,7 @@ ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppet/bin'
 
 opts = {
         :Port               => settings['port'],
-        :Logger             => WEBrick::Log::new(settings['logfile'], WEBrick::Log::DEBUG),
+        :Logger             => WEBrick::Log::new(settings['logfile'], WEBrick::Log::INFO),
         :ServerType         => WEBrick::Daemon,
         :SSLEnable          => true,
         :SSLVerifyClient    => OpenSSL::SSL::VERIFY_NONE,
@@ -60,7 +60,7 @@ class Server  < Sinatra::Base
   end
 
   not_found do
-    halt 404, 'You shall not pass! (page not found)'
+    halt 404, "You shall not pass! (page not found)\n"
   end
 
   helpers do
