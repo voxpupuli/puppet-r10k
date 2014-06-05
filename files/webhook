@@ -24,7 +24,7 @@ include MCollective::RPC
 WEBHOOK_CONFIG      = '/etc/webhook.yaml'
 
 if (File.exists?(WEBHOOK_CONFIG))
-  settings = YAML.load_file(WEBHOOK_CONFIG)
+  $settings = YAML.load_file(WEBHOOK_CONFIG)
 else
   raise "Configuration file: #{WEBHOOK_CONFIG} does not exist"
 end
@@ -33,13 +33,13 @@ ENV['HOME'] = '/var/lib/peadmin'
 ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppet/bin'
 
 opts = {
-        :Port               => settings['port'],
-        :Logger             => WEBrick::Log::new(settings['logfile'], WEBrick::Log::INFO),
+        :Port               => $settings['port'],
+        :Logger             => WEBrick::Log::new($settings['logfile'], WEBrick::Log::INFO),
         :ServerType         => WEBrick::Daemon,
         :SSLEnable          => true,
         :SSLVerifyClient    => OpenSSL::SSL::VERIFY_NONE,
-        :SSLCertificate     => OpenSSL::X509::Certificate.new(  File.open(File.join("#{settings['certpath']}", "#{settings['certname']}-cert.pem")).read),
-        :SSLPrivateKey      => OpenSSL::PKey::RSA.new(          File.open(File.join("#{settings['certpath']}", "#{settings['certname']}-private.pem")).read),
+        :SSLCertificate     => OpenSSL::X509::Certificate.new(  File.open(File.join("#{$settings['certpath']}", "#{$settings['certname']}-cert.pem")).read),
+        :SSLPrivateKey      => OpenSSL::PKey::RSA.new(          File.open(File.join("#{$settings['certpath']}", "#{$settings['certname']}-private.pem")).read),
         :SSLCertName        => [ [ "CN",WEBrick::Utils::getservername ] ]
 }
 
@@ -55,7 +55,7 @@ class Server  < Sinatra::Base
 
   # curl -d '{ "ref": "refs/heads/production" }'  -H "Accept: application/json" 'https://puppet:puppet@localhost:8088/payload' -k -q
   post '/payload' do
-    protected! if @settings['protected']
+    protected! if $settings['protected']
     request.body.rewind  # in case someone already read it
     data = JSON.parse(request.body.read, :quirks_mode => true)
     branch = data['ref'].split("/").last
@@ -69,7 +69,7 @@ class Server  < Sinatra::Base
   helpers do
     def deploy(branch)
       begin
-        if @settings['use_mco_ruby']
+        if $settings['use_mco_ruby']
           result = mco(branch).first
           if result.results[:statuscode] == 0
             message = result.results[:statusmsg]
@@ -88,10 +88,10 @@ class Server  < Sinatra::Base
 
    def mco(branch)
      options =  MCollective::Util.default_options
-     options[:config] = @settings['client_cfg']
+     options[:config] = $settings['client_cfg']
      client = rpcclient('r10k', :exit_on_failure => false,:options => options)
-     client.discovery_timeout = @settings['discovery_timeout']
-     client.timeout           = @settings['client_timeout']
+     client.discovery_timeout = $settings['discovery_timeout']
+     client.timeout           = $settings['client_timeout']
      result = client.send('deploy',{:environment => branch})
    end # end deploy()
 
@@ -106,12 +106,11 @@ class Server  < Sinatra::Base
     def authorized?
       @auth ||=  Rack::Auth::Basic::Request.new(request.env)
       @auth.provided? && @auth.basic? && @auth.credentials &&
-      @auth.credentials == [@settings['user'],@settings['pass']]
+      @auth.credentials == [$settings['user'],$settings['pass']]
     end  #end authorized?
   end  #end helpers
 end
 
 Rack::Handler::WEBrick.run(Server, opts) do |server|
-  server.settings = settings
   [:INT, :TERM].each { |sig| trap(sig) { server.stop } }
 end
