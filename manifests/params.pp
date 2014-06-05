@@ -38,9 +38,9 @@ class r10k::params
   $webhook_certpath           = '/var/lib/peadmin/.mcollective.d'
   $webhook_client_cfg         = '/var/lib/peadmin/.mcollective'
   $webhook_use_mco_ruby       = false
-  $webhook_protected          = true 
-  $webhook_discovery_timeout  = 10 
-  $webhook_client_timeout     = 120 
+  $webhook_protected          = true
+  $webhook_discovery_timeout  = 10
+  $webhook_client_timeout     = 120
 
   if $::is_pe =~ /true/ {
     # Puppet Enterprise specific settings
