@@ -20,6 +20,7 @@ require 'json'
 include MCollective::RPC
 
 
+WEBHOOK_CONFIG      = '/etc/webhook.yaml'
 LOGFILE             = '/var/log/webhook/access.log'
 USER                = 'puppet'
 PASS                = 'puppet'
@@ -31,6 +32,12 @@ DISCOVER_TIMEOUT    = 10
 CLIENT_TIMEOUT      = 120
 USE_RUBY            = false
 PROTECTED           = true
+
+if (File.exists?(WEBHOOK_CONFIG))
+  config = YAML.load(WEBHOOK_CONFIG)
+else
+  raise "Configuration file #{WEBHOOK_CONFIG} does not exist"
+end
 
 ENV['HOME'] = '/var/lib/peadmin'
 ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppet/bin'
