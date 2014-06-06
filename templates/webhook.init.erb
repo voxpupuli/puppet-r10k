@@ -36,7 +36,7 @@ start() {
 
 stop() {
     echo -n $"Stopping webhook: "
-    pid=`ps -ef | awk '/.*ruby.*webhoo[k]/{print $2;exit}' 2> /dev/null`
+    pid=`ps -ef | awk '/.*ruby.*webhoo[k]$/{print $2;exit}' 2> /dev/null`
     kill $pid
     RETVAL=$?
     echo
