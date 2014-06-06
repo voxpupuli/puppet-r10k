@@ -32,9 +32,11 @@ end
 ENV['HOME'] = '/var/lib/peadmin'
 ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppet/bin'
 
+$logger = WEBrick::Log::new($settings['logfile'], WEBrick::Log::INFO)
+
 opts = {
         :Port               => $settings['port'],
-        :Logger             => WEBrick::Log::new($settings['logfile'], WEBrick::Log::INFO),
+        :Logger             => $logger,
         :ServerType         => WEBrick::Daemon,
         :SSLEnable          => true,
         :SSLVerifyClient    => OpenSSL::SSL::VERIFY_NONE,
@@ -75,11 +77,13 @@ class Server  < Sinatra::Base
             raise result.results[:statusmsg]
           end
         else
-          message = 'forked'
-          Process.detach(fork{ exec "/opt/puppet/bin/mco r10k deploy #{branch} >> #{LOGFILE} 2>&1 &"})
+          message = "triggered: mco r10k deploy #{branch} -p"
+          Process.detach(fork{ exec "/opt/puppet/bin/mco r10k deploy #{branch} -p >> #{LOGFILE} 2>&1 &"})
         end
+        $logger.info("message: #{message} branch: #{branch}")
         {:status => :success, :message => message.to_s }.to_json
      rescue => e
+        $logger.error("message: #{e.message} trace: #{e.backtrace}")
         {:status => :fail, :message => e.message, :trace => e.backtrace}.to_json
       end
     end  #end deploy()
