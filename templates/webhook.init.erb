@@ -20,26 +20,18 @@ RETVAL=0
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 export PATH
 
-# Determine if we can use the -p option to daemon, killproc, and status.
-# RHEL < 5 can't.
-if status | grep -q -- '-p' 2>/dev/null; then
-    daemonopts="--pidfile $pidfile"
-    pidopts="-p $pidfile"
-fi
-
 start() {
     echo
     echo -n $"Starting webhook: "
-    daemon --user ${DAEMON_USER:?} $daemonopts $webhook
+    daemon --user ${DAEMON_USER:?} --pidfile $pidfile $webhook
     RETVAL=$?
     return $RETVAL
 }
 
 stop() {
     echo -n $"Stopping webhook: "
-    pid=`ps -ef | awk '/.*ruby.*webhoo[k]$/{print $2;exit}' 2> /dev/null`
-    kill $pid
-    RETVAL=$?
+    pid=`cat $pidfile 2> /dev/null`
+    killproc -p $pidfile $webhook
     echo
     # wait until really stopped
     i=0
