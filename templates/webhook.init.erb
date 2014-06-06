@@ -11,7 +11,7 @@
 [ -f /etc/sysconfig/webhook ] && . /etc/sysconfig/webhook
 pidfile='/var/run/webhook/webhook.pid'
 webhook='/usr/local/bin/webhook'
-DAEMON_USER=peadmin
+DAEMON_USER=<%= @user %>
 RETVAL=0
 
 # Source function library.

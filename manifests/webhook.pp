@@ -1,29 +1,29 @@
 # This class creates a github webhoook to allow curl style post-rec scripts
 class r10k::webhook(
-  $owner = 'root',
-  $group = '0',
+  $user  = 'peadmin'
+  $group = 'peadmin',
   $git_server = 'localhost',
 ) {
   require r10k::webhook::config
 
   File {
     ensure => file,
-    owner  => $owner,
-    group  => $group,
+    owner  => 'root',
+    group  => '0',
     mode   => '0755',
   }
 
   file { '/var/log/webhook':
       ensure => 'directory',
-      owner  => 'peadmin',
-      group  => 'peadmin',
+      owner  => $user,
+      group  => $group,
       before => File['webhook_bin'],
   }
 
   file { '/var/run/webhook':
       ensure => 'directory',
-      owner  => 'peadmin',
-      group  => 'peadmin',
+      owner  => $user,
+      group  => $group,
       before => File['webhook_init_script'],
   }
 
