@@ -17,14 +17,12 @@ require 'mcollective'
 require 'resolv'
 require 'json'
 require 'yaml'
-
+require 'pry'
 include MCollective::RPC
 
 
 WEBHOOK_CONFIG = '/etc/webhook.yaml'
 
-
-File.open('/var/run/webhook/webhook.pid', 'w') {|f| f.write Process.pid }
 
 if (File.exists?(WEBHOOK_CONFIG))
   $settings = YAML.load_file(WEBHOOK_CONFIG)
@@ -37,6 +35,8 @@ ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppet/bin'
 
 $logger = WEBrick::Log::new($settings['logfile'], WEBrick::Log::INFO)
 
+APP_ROOT = '/var/run/webhook'
+
 opts = {
         :Port               => $settings['port'],
         :Logger             => $logger,
@@ -48,9 +48,11 @@ opts = {
         :SSLCertName        => [ [ "CN",WEBrick::Utils::getservername ] ]
 }
 
+
 class Server  < Sinatra::Base
 
   set :static, false
+
 
   get '/' do
     raise Sinatra::NotFound
