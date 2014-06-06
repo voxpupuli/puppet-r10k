@@ -23,6 +23,9 @@ include MCollective::RPC
 
 WEBHOOK_CONFIG = '/etc/webhook.yaml'
 
+
+File.open('/var/run/webhook/webhook.pid', 'w') {|f| f.write Process.pid }
+
 if (File.exists?(WEBHOOK_CONFIG))
   $settings = YAML.load_file(WEBHOOK_CONFIG)
 else

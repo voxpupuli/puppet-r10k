@@ -11,7 +11,7 @@
 [ -f /etc/sysconfig/webhook ] && . /etc/sysconfig/webhook
 pidfile='/var/run/webhook/webhook.pid'
 webhook='/usr/local/bin/webhook'
-DAEMON_USER=<%= @user %>
+DAEMON_USER='<%= @user %>'
 RETVAL=0
 
 # Source function library.
@@ -32,33 +32,6 @@ stop() {
     echo -n $"Stopping webhook: "
     pid=`cat $pidfile 2> /dev/null`
     killproc -p $pidfile $webhook
-    echo
-    # wait until really stopped
-    i=0
-    if [ -n "${pid:-}" ]; then
-      while kill -0 "${pid:-}" 2> /dev/null;  do
-          # If we get here it means the process has not yet died, but
-          # potentially will. In anticipation of it actually dying we
-          # set RETVAL to 0 here. If we eventually timeout, the real
-          # exit will be the return code of `kill -9` from below.
-          RETVAL=0
-          if [ $i = '60' ]; then
-              kill -9 $pid
-              RETVAL=$?
-              break;
-          else
-              if [ $i = '0' ]; then
-                  echo -n " ... waiting "
-              else
-                  echo -n "."
-              fi
-              i=$(($i+1))
-              sleep 1
-          fi
-      done
-    fi
-    [ $RETVAL = 0 ] && rm -f ${lockfile} ${pidfile}
-    return $RETVAL
 }
 
 restart() {
@@ -68,7 +41,7 @@ restart() {
 
 rh_status() {
     if [ -f "${pidfile}" ]; then
-        status $pidopts $webhook
+        status -p $pidfile $webhook
         RETVAL=$?
     else
         RETVAL=3
@@ -76,9 +49,6 @@ rh_status() {
     return $RETVAL
 }
 
-rh_status_q() {
-    rh_status >/dev/null 2>&1
-}
 
 case "$1" in
     start)
