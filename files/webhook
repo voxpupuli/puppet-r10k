@@ -21,7 +21,7 @@ include MCollective::RPC
 
 
 WEBHOOK_CONFIG = '/etc/webhook.yaml'
-
+PIDFILE        = '/var/run/webhook/webhook.pid'
 
 if (File.exists?(WEBHOOK_CONFIG))
   $config = YAML.load_file(WEBHOOK_CONFIG)
@@ -119,5 +119,6 @@ class Server  < Sinatra::Base
 end
 
 Rack::Handler::WEBrick.run(Server, opts) do |server|
+   server.start { File.open("#{PIDFILE}", 'w', 0644) { |f| f.write(Process.pid.to_s) } }
   [:INT, :TERM].each { |sig| trap(sig) { server.stop } }
 end
