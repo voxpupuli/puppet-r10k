@@ -9,7 +9,7 @@
 # processname: webhook
 
 [ -f /etc/sysconfig/webhook ] && . /etc/sysconfig/webhook
-pidfile='/var/run/webhook.pid'
+pidfile='/var/run/webhook/webhook.pid'
 webhook='/usr/local/bin/webhook'
 DAEMON_USER=peadmin
 RETVAL=0
@@ -28,6 +28,7 @@ if status | grep -q -- '-p' 2>/dev/null; then
 fi
 
 start() {
+    echo
     echo -n $"Starting webhook: "
     daemon --user ${DAEMON_USER:?} $daemonopts $webhook
     RETVAL=$?

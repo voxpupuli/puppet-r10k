@@ -20,6 +20,13 @@ class r10k::webhook(
       before => File['webhook_bin'],
   }
 
+  file { '/var/run/webhook':
+      ensure => 'directory',
+      owner  => 'peadmin',
+      group  => 'peadmin',
+      before => File['webhook_init_script'],
+  }
+
   file { 'webhook_init_script':
     content => template('r10k/webhook.init.erb'),
     path    => '/etc/init.d/webhook',
