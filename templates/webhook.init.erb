@@ -32,6 +32,8 @@ stop() {
     echo -n $"Stopping webhook: "
     pid=`cat $pidfile 2> /dev/null`
     killproc -p $pidfile $webhook
+    RETVAL=$?
+    return $RETVAL
 }
 
 restart() {
