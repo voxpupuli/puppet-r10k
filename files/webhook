@@ -21,7 +21,7 @@ require 'yaml'
 include MCollective::RPC
 
 
-WEBHOOK_CONFIG      = '/etc/webhook.yaml'
+WEBHOOK_CONFIG = '/etc/webhook.yaml'
 
 if (File.exists?(WEBHOOK_CONFIG))
   $settings = YAML.load_file(WEBHOOK_CONFIG)
