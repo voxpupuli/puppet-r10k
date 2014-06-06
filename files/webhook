@@ -17,7 +17,6 @@ require 'mcollective'
 require 'resolv'
 require 'json'
 require 'yaml'
-require 'pry'
 include MCollective::RPC
 
 
