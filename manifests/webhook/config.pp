@@ -20,6 +20,7 @@ class r10k::webhook::config (
   $client_timeout     = $r10k::params::webhook_client_timeout,
   $prefix             = $r10k::params::webhook_prefix,
   $prefix_command     = $r10k::params::webhook_prefix_command,
+  $enable_ssl         = $r10k::params::webhook_enable_ssl,
   $configfile         = '/etc/webhook.yaml',
 ) inherits r10k::params {
 
@@ -39,6 +40,7 @@ class r10k::webhook::config (
       'protected'         => $protected,
       'prefix'            => $prefix,
       'prefix_command'    => $prefix_command,
+      'enable_ssl'        => $enable_ssl,
     }
   } else {
     validate_hash($hash)

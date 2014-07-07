@@ -43,6 +43,7 @@ class r10k::params
   $webhook_client_timeout     = 120
   $webhook_prefix             = false
   $webhook_prefix_command     = '/bin/echo example'
+  $webhook_enable_ssl         = true 
 
 
   if $::is_pe =~ /true/ {

@@ -11,6 +11,8 @@ file {'/usr/local/bin/prefix_command.rb':
 class {'r10k::webhook::config':
   prefix         => true,
   prefix_command => '/usr/local/bin/prefix_command.rb',
+  enable_ssl     => false,
+  protected      => false,
   notify         => Service['webhook'],
   require        => File['/usr/local/bin/prefix_command.rb'],
 }
