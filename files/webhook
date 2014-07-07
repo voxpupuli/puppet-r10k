@@ -33,7 +33,7 @@ end
 ENV['HOME'] = '/var/lib/peadmin'
 ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppet/bin'
 
-$logger = WEBrick::Log::new($config['logfile'], WEBrick::Log::INFO)
+$logger = WEBrick::Log::new($config['logfile'], WEBrick::Log::DEBUG)
 
 
 opts = {
@@ -61,6 +61,7 @@ class Server  < Sinatra::Base
   # curl -d '{ "ref": "refs/heads/production" }'  -H "Accept: application/json" 'https://puppet:puppet@localhost:8088/payload' -k -q
   post '/payload' do
     protected! if $config['protected']
+    $logger.info("authenticated: #{$config['user']}")
     request.body.rewind  # in case someone already read it
     data = JSON.parse(request.body.read, :quirks_mode => true)
     branch = data['ref'].split("/").last
@@ -119,6 +120,5 @@ class Server  < Sinatra::Base
 end
 
 Rack::Handler::WEBrick.run(Server, opts) do |server|
-   server.start { File.open("#{PIDFILE}", 'w', 0644) { |f| f.write(Process.pid.to_s) } }
   [:INT, :TERM].each { |sig| trap(sig) { server.stop } }
 end
