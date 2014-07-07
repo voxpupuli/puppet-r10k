@@ -41,6 +41,9 @@ class r10k::params
   $webhook_protected          = true
   $webhook_discovery_timeout  = 10
   $webhook_client_timeout     = 120
+  $webhook_prefix             = false
+  $webhook_prefix_command     = '/bin/echo example'
+
 
   if $::is_pe =~ /true/ {
     # Puppet Enterprise specific settings

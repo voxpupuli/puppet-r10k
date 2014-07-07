@@ -18,6 +18,8 @@ class r10k::webhook::config (
   $protected          = $r10k::params::webhook_protected,
   $discovery_timeout  = $r10k::params::webhook_discovery_timeout,
   $client_timeout     = $r10k::params::webhook_client_timeout,
+  $prefix             = $r10k::params::webhook_prefix,
+  $prefix_command     = $r10k::params::webhook_prefix_command,
   $configfile         = '/etc/webhook.yaml',
 ) inherits r10k::params {
 
@@ -35,6 +37,8 @@ class r10k::webhook::config (
       'use_mco_ruby'      => $use_mco_ruby,
       'logfile'           => $logfile,
       'protected'         => $protected,
+      'prefix'            => $prefix,
+      'prefix_command'    => $prefix_command,
     }
   } else {
     validate_hash($hash)
