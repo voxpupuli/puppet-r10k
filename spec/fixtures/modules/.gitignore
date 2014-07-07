@@ -1,0 +1,5 @@
+# This keeps the modules directory available for fixtures
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore
