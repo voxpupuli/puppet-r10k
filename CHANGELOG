@@ -1,4 +1,6 @@
 2.2.3 - Zack Smith
+ * Functional prefix support for webhook
+2.2.3 - Zack Smith
  * Remove PID file creation from webhook
 2.1.2 - Garrett Honeycutt & Zack Smith
  * Fix quoting issue created by #24 with booleans with #54
