@@ -1,6 +1,5 @@
 .swp
 pkg
-spec/fixtures/
 spec/fixtures/manifests/site.pp
 .DS_Store
 *.swp
