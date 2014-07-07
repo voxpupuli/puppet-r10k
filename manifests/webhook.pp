@@ -4,7 +4,6 @@ class r10k::webhook(
   $group = 'peadmin',
   $git_server = 'localhost',
 ) {
-  require r10k::webhook::config
 
   File {
     ensure => file,
