@@ -22,6 +22,7 @@ include MCollective::RPC
 
 WEBHOOK_CONFIG = '/etc/webhook.yaml'
 PIDFILE        = '/var/run/webhook/webhook.pid'
+APP_ROOT       = '/var/run/webhook'
 
 if (File.exists?(WEBHOOK_CONFIG))
   $config = YAML.load_file(WEBHOOK_CONFIG)
@@ -34,7 +35,6 @@ ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppet/bin'
 
 $logger = WEBrick::Log::new($config['logfile'], WEBrick::Log::INFO)
 
-APP_ROOT = '/var/run/webhook'
 
 opts = {
         :Port               => $config['port'],
