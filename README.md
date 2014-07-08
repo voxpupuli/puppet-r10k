@@ -50,6 +50,12 @@ Using mco you can then trigger mcollective to call r10k using
 mco r10k synchronize
 ```
 
+You can sync an individual environment using:
+
+```shell
+mco r10k deploy <environment>
+```
+
 An example post-recieve hook is included in the files directory.
 This hook can automatically cause code to synchronize on your
 servers at time of push in git.
@@ -83,5 +89,11 @@ and copy the certs to somewhere that is readable by the respective user.
 ~~~
 _Note: PE2 only requires the .mcollective file as the default auth was psk_
 ##Support
+
+# Webhook Support
+
+For version control systems that use web driven post-receive processes you can use the example webhook included in this module.
+This webhook currently only runs on Puppet Enterprise and uses mcollective to automatically synchronize your environment across multiple masters.
+The webhook must be configured on the respective "control" repository a master that has mco installed and can contact the other masters in your fleet.
 
 Please log tickets and issues at our [Projects site](https://github.com/acidprime/r10k/issues)
