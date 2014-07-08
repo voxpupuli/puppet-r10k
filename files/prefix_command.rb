@@ -7,7 +7,7 @@ if STDIN.tty?
 else
   data = JSON.parse(STDIN.read)
   description = data['repository']['description']
-  parsed = description.scan(/^.*\[prefix:['"]?(\S+)['"]?\].*$/)
+  parsed = description.scan(/^.*\[prefix:['"]?(\w+)['"]?\].*$/)
   prefix = parsed[0]
   puts prefix
 end
