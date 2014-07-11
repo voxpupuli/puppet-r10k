@@ -22,6 +22,7 @@ class r10k::webhook::config (
   $prefix             = $r10k::params::webhook_prefix,
   $prefix_command     = $r10k::params::webhook_prefix_command,
   $enable_ssl         = $r10k::params::webhook_enable_ssl,
+  $use_mcollective    = $r10k::params::webhook_use_mcollective,
   $configfile         = '/etc/webhook.yaml',
 ) inherits r10k::params {
 
@@ -43,6 +44,7 @@ class r10k::webhook::config (
       'prefix'            => $prefix,
       'prefix_command'    => $prefix_command,
       'enable_ssl'        => $enable_ssl,
+      'use_mcollective'   => $use_mcollective,
     }
   } else {
     validate_hash($hash)

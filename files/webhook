@@ -96,7 +96,12 @@ class Server  < Sinatra::Base
             raise result.results[:statusmsg]
           end
         else
-          message = "triggered: /opt/puppet/bin/mco r10k deploy #{branch} >> #{$config['mco_logfile']} 2>&1 &"
+          if $config['use_mcollective']
+            command = "/opt/puppet/bin/mco r10k deploy #{branch} >> #{$config['mco_logfile']} 2>&1 &"
+          else
+            command = "/opt/puppet/bin/r10k deploy environment #{branch} >> #{$config['mco_logfile']} 2>&1 &"
+          end
+          message = "triggered: #{command}"
           Process.detach(fork{ exec "/opt/puppet/bin/mco r10k deploy #{branch} >> #{$config['mco_logfile']} 2>&1 &"})
         end
         $logger.info("message: #{message} branch: #{branch}")
