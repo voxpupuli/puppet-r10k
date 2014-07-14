@@ -5,7 +5,7 @@ file {'/usr/local/bin/prefix_command.rb':
   mode   => '0755',
   owner  => 'root',
   group  => '0',
-  source => "puppet:///modules/r10k/prefix_command.rb",
+  source => 'puppet:///modules/r10k/prefix_command.rb',
 }
 
 class {'r10k::webhook::config':
