@@ -34,7 +34,6 @@ ENV['HOME'] = '/var/lib/peadmin'
 ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppet/bin'
 
 $logger = WEBrick::Log::new($config['access_logfile'], WEBrick::Log::DEBUG)
-$mco_logfile = $config['mco_logfile']
 
 opts = {
         :Port               => $config['port'],
@@ -97,8 +96,8 @@ class Server  < Sinatra::Base
             raise result.results[:statusmsg]
           end
         else
-          message = "triggered: /opt/puppet/bin/mco r10k deploy #{branch} >> #{mco_logfile} 2>&1 &"
-          Process.detach(fork{ exec "/opt/puppet/bin/mco r10k deploy #{branch} >> #{mco_logfile} 2>&1 &"})
+          message = "triggered: /opt/puppet/bin/mco r10k deploy #{branch} >> #{$config['mco_logfile']} 2>&1 &"
+          Process.detach(fork{ exec "/opt/puppet/bin/mco r10k deploy #{branch} >> #{$config['mco_logfile']} 2>&1 &"})
         end
         $logger.info("message: #{message} branch: #{branch}")
         {:status => :success, :message => message.to_s }.to_json
