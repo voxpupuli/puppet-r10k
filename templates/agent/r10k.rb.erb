@@ -1,6 +1,18 @@
 module MCollective
   module Agent
     class R10k<RPC::Agent
+       activate_when do
+         #This helper only activate this agent for discovery and execution
+         #If r10k is found on $PATH.
+         # http://docs.puppetlabs.com/mcollective/simplerpc/agents.html#agent-activation
+         r10k_binary = `which r10k 2> /dev/null`
+         if r10k_binary == ""
+           #r10k not found on path.
+           false
+         else
+           true
+         end
+       end
        ['push',
         'pull',
         'status'].each do |act|
