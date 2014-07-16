@@ -97,7 +97,7 @@ class Server  < Sinatra::Base
             raise result.results[:statusmsg]
           end
         else
-          message = "triggered: mco r10k deploy #{branch}"
+          message = "triggered: /opt/puppet/bin/mco r10k deploy #{branch} >> #{mco_logfile} 2>&1 &"
           Process.detach(fork{ exec "/opt/puppet/bin/mco r10k deploy #{branch} >> #{mco_logfile} 2>&1 &"})
         end
         $logger.info("message: #{message} branch: #{branch}")
