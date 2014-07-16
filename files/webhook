@@ -33,8 +33,8 @@ end
 ENV['HOME'] = '/var/lib/peadmin'
 ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppet/bin'
 
-$logger = WEBrick::Log::new($config['logfile'], WEBrick::Log::DEBUG)
-
+$logger = WEBrick::Log::new($config['access_logfile'], WEBrick::Log::DEBUG)
+$mco_logfile = $config['mco_logfile']
 
 opts = {
         :Port               => $config['port'],
@@ -58,13 +58,20 @@ class Server  < Sinatra::Base
     raise Sinatra::NotFound
   end
 
-  # curl -d '{ "ref": "refs/heads/production" }'  -H "Accept: application/json" 'https://puppet:puppet@localhost:8088/payload' -k -q
+  # Simulate a github post:
+  # curl -d '{ "ref": "refs/heads/production" }' -H "Accept: application/json" 'https://puppet:puppet@localhost:8088/payload' -k -q
+  #
+  # Somulate a stash post:
+  # curl -d '{ "refChanges":[ { "refId":"refs/heads/production" } ] }' -H "Accept: application/json" 'https://puppet:puppet@localhost:8088/payload' -k -q
+  #
+
   post '/payload' do
     protected! if $config['protected']
     $logger.info("authenticated: #{$config['user']}")
     request.body.rewind  # in case someone already read it
     data = JSON.parse(request.body.read, :quirks_mode => true)
-    branch = data['ref'].split("/").last
+    # github sends a 'ref', stash sends an array in 'refChanges'
+    branch = ( data['ref'] || data['refChanges'][0]['refId'] ).split("/").last
 
     # If prefix is enabled in our config file run the command to determine the prefix
     if $config['prefix']
@@ -90,8 +97,8 @@ class Server  < Sinatra::Base
             raise result.results[:statusmsg]
           end
         else
-          message = "triggered: mco r10k deploy #{branch} -p"
-          Process.detach(fork{ exec "/opt/puppet/bin/mco r10k deploy #{branch} -p >> #{LOGFILE} 2>&1 &"})
+          message = "triggered: mco r10k deploy #{branch}"
+          Process.detach(fork{ exec "/opt/puppet/bin/mco r10k deploy #{branch} >> #{mco_logfile} 2>&1 &"})
         end
         $logger.info("message: #{message} branch: #{branch}")
         {:status => :success, :message => message.to_s }.to_json
