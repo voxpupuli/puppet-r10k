@@ -128,7 +128,7 @@ class Server  < Sinatra::Base
       IO.popen($config['prefix_command'], mode='r+') do |io|
           io.write payload.to_s
           io.close_write
-          result = io.readlines.first.chomp
+          result = io.readlines.first.to_s
       end
     end #end run_prefix_command
 
