@@ -1,3 +1,5 @@
+2.2.4 - Adam Crews
+ * Fix for invalid webhook typo syntax and updates for using stash
 2.2.3 - Zack Smith
  * Functional prefix support for webhook
 2.2.3 - Zack Smith
