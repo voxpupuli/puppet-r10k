@@ -1,3 +1,5 @@
+2.2.6 - Zack Smith
+ * Fix scoping issues with new logfile 
 2.2.4 - Adam Crews
  * Fix for invalid webhook typo syntax and updates for using stash
 2.2.3 - Zack Smith
