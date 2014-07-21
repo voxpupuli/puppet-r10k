@@ -21,7 +21,7 @@ class r10k::params
   $remote     = "ssh://${git_server}${repo_path}/modules.git"
 
   # prerun_command in puppet.conf
-  $prerun_command = 'r10k deploy environment -p'
+  $pre_postrun_command = 'r10k deploy environment -p'
 
   # Gentoo specific values
   $gentoo_keywords = ''
