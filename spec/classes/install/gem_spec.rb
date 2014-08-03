@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 describe 'r10k::install::gem' , :type => 'class' do
   context "on a RedHat 5 OS installing 1.1.0 via gem with puppet FOSS 2.7.19" do
     let :params do
