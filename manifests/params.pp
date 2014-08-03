@@ -1,11 +1,12 @@
 # Reasonable defaults for all classes
 class r10k::params
 {
-  $package_name      = ''
-  $version           = '1.3.2'
-  $manage_modulepath = false
-  $install_options   = ''
-  $sources           = undef
+  $package_name           = ''
+  $version                = '1.3.2'
+  $manage_modulepath      = false
+  $manage_ruby_dependency = 'declare'
+  $install_options        = ''
+  $sources                = undef
 
   # r10k configuration
   $r10k_config_file          = '/etc/r10k.yaml'

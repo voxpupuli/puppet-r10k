@@ -1,15 +1,33 @@
 # Install the r10k gem using system ruby
 class r10k::install::gem (
+  $manage_ruby_dependency,
   $version,
 ) {
-
+  #include ::r10k
   require git
-
-  class { '::ruby':
-    rubygems_update => false,
+  anchor{'r10k::ruby_done':}
+  case $manage_ruby_dependency {
+    include: {
+      include ::ruby
+      include ::ruby::dev
+      Class['::ruby']    ->
+      Class['ruby::dev'] ->
+      Anchor['r10k::ruby_done']
+    }
+    declare: {
+      class { '::ruby':
+        rubygems_update => false,
+      }
+      include ::ruby::dev
+      Class['::ruby'] ->
+      Class['::ruby::dev'] ->
+      Anchor['r10k::ruby_done']
+    }
+    default: {
+      #This catches the 'ignore' case, and satisfies the 'default' requirement
+      #do nothing
+    }
   }
-
-  include ruby::dev
 
   # Explicit dependency chaining to make sure the system is ready to compile
   # native extentions for dependent rubygems by the time r10k installation
@@ -20,8 +38,7 @@ class r10k::install::gem (
     include make
     include gcc
 
-    Class['::ruby']    ->
-    Class['ruby::dev'] ->
+    Anchor['r10k::ruby_done'] ->
     Class['gcc']       ->
     Class['make']      ->
     Package['r10k']
