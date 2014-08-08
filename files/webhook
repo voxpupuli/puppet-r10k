@@ -71,8 +71,15 @@ class Server  < Sinatra::Base
     protected! if $config['protected']
     $logger.info("authenticated: #{$config['user']}")
     request.body.rewind  # in case someone already read it
-    decoded = CGI::unescape(request.body.read).gsub('payload=','')
+
+    # Check if content type is x-www-form-urlencoded
+    if request.content_type.to_s.downcase.eql?('application/x-www-form-urlencoded')
+      decoded = CGI::unescape(request.body.read).gsub(/^payload\=/,'')
+    else
+      decoded = request.body.read
+    end
     data = JSON.parse(decoded, :quirks_mode => true)
+
     # github sends a 'ref', stash sends an array in 'refChanges'
     branch = ( data['ref'] || data['refChanges'][0]['refId'] ).split("/").last
 
