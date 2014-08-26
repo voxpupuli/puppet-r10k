@@ -102,7 +102,7 @@ class Server  < Sinatra::Base
             command = "/opt/puppet/bin/r10k deploy environment #{branch} >> #{$config['mco_logfile']} 2>&1 &"
           end
           message = "triggered: #{command}"
-          Process.detach(fork{ exec "/opt/puppet/bin/mco r10k deploy #{branch} >> #{$config['mco_logfile']} 2>&1 &"})
+          Process.detach(fork{ exec "#{command}"})
         end
         $logger.info("message: #{message} branch: #{branch}")
         {:status => :success, :message => message.to_s }.to_json
