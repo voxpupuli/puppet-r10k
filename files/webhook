@@ -108,8 +108,9 @@ class Server  < Sinatra::Base
           end
         else
           if $config['use_mcollective']
-            command = "/opt/puppet/bin/mco r10k deploy #{branch} >> #{$config['mco_logfile']} 2>&1 &"
+              command = "/opt/puppet/bin/mco r10k deploy #{branch} >> #{$config['mco_logfile']} 2>&1 &"
           else
+            # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
             command = "/opt/puppet/bin/r10k deploy environment #{branch} >> #{$config['mco_logfile']} 2>&1 &"
           end
           message = "triggered: #{command}"
