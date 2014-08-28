@@ -12,7 +12,6 @@ class r10k::mcollective(
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    notify => Service[$mc_service],
   }
   # Install the agent and its ddl file
   file { "${app_path}/${app_name}"  :
@@ -30,6 +29,6 @@ class r10k::mcollective(
   }
 
   Service <| title == $mc_service |> {
-    subscribe +> File["${app_path}/${app_name}"],
+    subscribe +> [ File["${app_path}/${app_name}"], File["${app_path}/${agent_ddl}"] ],
   }
 }
