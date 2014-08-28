@@ -2,7 +2,7 @@
 class r10k::params
 {
   $package_name      = ''
-  $version           = '1.1.0'
+  $version           = '1.3.1'
   $manage_modulepath = false
   $install_options   = ''
   $sources           = undef
