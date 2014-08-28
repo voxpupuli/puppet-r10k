@@ -1,4 +1,6 @@
 2.2.7 - Zack Smith
+ * Bugfix for mcollective during puppet apply and webhook as non mco
+2.2.7 - Zack Smith
  * forge cut
 2.2.6 - Zack Smith
  * Fix scoping issues with new logfile
