@@ -14,14 +14,14 @@ describe 'r10k::mcollective' , :type => 'class' do
         'ensure'   => 'present',
         'owner'    => 'root',
         'group'    => 'root',
-        'mode'     => '0644',
+        'mode'     => '0644'
       )
     }
     it { should contain_file("/opt/puppet/libexec/mcollective/mcollective/agent/r10k.ddl").with(
         'ensure'   => 'present',
         'owner'    => 'root',
         'group'    => 'root',
-        'mode'     => '0644',
+        'mode'     => '0644'
       )
     }
 
@@ -29,7 +29,7 @@ describe 'r10k::mcollective' , :type => 'class' do
         'ensure'   => 'present',
         'owner'    => 'root',
         'group'    => 'root',
-        'mode'     => '0644',
+        'mode'     => '0644'
       )
     }
 
@@ -48,14 +48,14 @@ describe 'r10k::mcollective' , :type => 'class' do
         'ensure'   => 'present',
         'owner'    => 'root',
         'group'    => 'root',
-        'mode'     => '0644',
+        'mode'     => '0644'
       )
     }
     it { should contain_file("/usr/libexec/mcollective/mcollective/agent/r10k.ddl").with(
         'ensure'   => 'present',
         'owner'    => 'root',
         'group'    => 'root',
-        'mode'     => '0644',
+        'mode'     => '0644'
       )
     }
 
@@ -63,7 +63,7 @@ describe 'r10k::mcollective' , :type => 'class' do
         'ensure'   => 'present',
         'owner'    => 'root',
         'group'    => 'root',
-        'mode'     => '0644',
+        'mode'     => '0644'
       )
     }
   end
@@ -83,7 +83,7 @@ describe 'r10k::mcollective' , :type => 'class' do
         'ensure'   => 'present',
         'owner'    => 'root',
         'group'    => 'root',
-        'mode'     => '0644',
+        'mode'     => '0644'
       )
     }
 
@@ -91,7 +91,7 @@ describe 'r10k::mcollective' , :type => 'class' do
         'ensure'   => 'present',
         'owner'    => 'root',
         'group'    => 'root',
-        'mode'     => '0644',
+        'mode'     => '0644'
       )
     }
 
@@ -99,7 +99,7 @@ describe 'r10k::mcollective' , :type => 'class' do
         'ensure'   => 'present',
         'owner'    => 'root',
         'group'    => 'root',
-        'mode'     => '0644',
+        'mode'     => '0644'
       )
     }
   end
