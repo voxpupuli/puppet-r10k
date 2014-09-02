@@ -15,7 +15,6 @@ describe 'r10k::mcollective' , :type => 'class' do
         'owner'    => 'root',
         'group'    => 'root',
         'mode'     => '0644',
-        'notify'   => 'Service[pe-mcollective]'
       )
     }
     it { should contain_file("/opt/puppet/libexec/mcollective/mcollective/agent/r10k.ddl").with(
@@ -23,7 +22,6 @@ describe 'r10k::mcollective' , :type => 'class' do
         'owner'    => 'root',
         'group'    => 'root',
         'mode'     => '0644',
-        'notify'   => 'Service[pe-mcollective]'
       )
     }
 
@@ -32,7 +30,6 @@ describe 'r10k::mcollective' , :type => 'class' do
         'owner'    => 'root',
         'group'    => 'root',
         'mode'     => '0644',
-        'notify'   => 'Service[pe-mcollective]'
       )
     }
 
@@ -52,7 +49,6 @@ describe 'r10k::mcollective' , :type => 'class' do
         'owner'    => 'root',
         'group'    => 'root',
         'mode'     => '0644',
-        'notify'   => 'Service[mcollective]'
       )
     }
     it { should contain_file("/usr/libexec/mcollective/mcollective/agent/r10k.ddl").with(
@@ -60,7 +56,6 @@ describe 'r10k::mcollective' , :type => 'class' do
         'owner'    => 'root',
         'group'    => 'root',
         'mode'     => '0644',
-        'notify'   => 'Service[mcollective]'
       )
     }
 
@@ -69,7 +64,6 @@ describe 'r10k::mcollective' , :type => 'class' do
         'owner'    => 'root',
         'group'    => 'root',
         'mode'     => '0644',
-        'notify'   => 'Service[mcollective]'
       )
     }
   end
@@ -90,7 +84,6 @@ describe 'r10k::mcollective' , :type => 'class' do
         'owner'    => 'root',
         'group'    => 'root',
         'mode'     => '0644',
-        'notify'   => 'Service[mcollective]'
       )
     }
 
@@ -99,7 +92,6 @@ describe 'r10k::mcollective' , :type => 'class' do
         'owner'    => 'root',
         'group'    => 'root',
         'mode'     => '0644',
-        'notify'   => 'Service[mcollective]'
       )
     }
 
@@ -108,7 +100,6 @@ describe 'r10k::mcollective' , :type => 'class' do
         'owner'    => 'root',
         'group'    => 'root',
         'mode'     => '0644',
-        'notify'   => 'Service[mcollective]'
       )
     }
   end
