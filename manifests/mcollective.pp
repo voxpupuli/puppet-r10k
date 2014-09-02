@@ -29,6 +29,6 @@ class r10k::mcollective(
   }
 
   Service <| title == $mc_service |> {
-    subscribe +> [ File["${app_path}/${app_name}"], File["${app_path}/${agent_ddl}"] ],
+    subscribe +> [ File["${app_path}/${app_name}"], File["${agent_path}/${agent_ddl}"] ],
   }
 }
