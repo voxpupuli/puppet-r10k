@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/acidprime/r10k.png?branch=master)](https://travis-ci.org/acidprime/r10k)
 
-This is the r10k setup module. It has a base class to configure r10k to 
+This is the r10k setup module. It has a base class to configure r10k to
 synchronize dynamic environments. You can be simply used by declaring it:
 
 ```puppet
@@ -23,6 +23,23 @@ The concept here is that this is declared on the puppet master(s) that have
 been configured with r10k. This will cause r10k to synchronize before each
 puppet run. Any errors synchronizing will be logged to the standard puppet run.
 
+This module requires the [puppetlabs-ruby](https://github.com/puppetlabs/puppetlabs-ruby.git) module. In the event that your environment already includes
+the module with some customization, you can use the `manage_ruby_dependency`
+parameter to adjust how this module expresses that requirement.
+The supported values are `include`,`declare`, or `ignore`. The values' behavior
+is outlined below:
+
+  * *declare* **default** This will explicitly declare the ruby module.
+    Additional declarations of the ruby module will result in an inability to
+    compile a catalog.
+
+  * *include* This will simply include the ruby module. When combined with class
+    ordering, this will permit the user to manage the instantiation of the ruby module elsewhere, potentially with non-standard parameter values.
+
+  * *ignore* This will assume that ruby is handled via some other mechanism than
+    a puppet module named `ruby`. It is left to the user to insure the
+    requirement be met.
+
 ## symlink to r10k.yaml
 These entries in Hiera will create a symlink at `/etc/r10k.yaml` that points to the config file at `/etc/puppet/r10k.yaml`
 
@@ -36,7 +53,7 @@ r10k::configfile_symlink: /etc/r10k.yaml
 
 ![alt tag](https://gist.github.com/acidprime/7013041/raw/6748f6173b406c03067884199174ce1df313ad58/post_recieve_overview.png)
 
-An mcollective agent is included in this module which can be used to do 
+An mcollective agent is included in this module which can be used to do
 on demand synchronization. This mcollective application and agent can be
 installed on all masters using the following class
 
