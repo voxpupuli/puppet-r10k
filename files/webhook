@@ -86,7 +86,11 @@ class Server  < Sinatra::Base
     # If prefix is enabled in our config file run the command to determine the prefix
     if $config['prefix']
       prefix = run_prefix_command(data.to_json)
-      deploy("#{prefix}_#{branch}")
+      if prefix.empty?
+        deploy(branch)
+      else
+        deploy("#{prefix}_#{branch}")
+      end
     else
       deploy(branch)
     end
