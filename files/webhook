@@ -60,8 +60,8 @@ class Server  < Sinatra::Base
   # Simulate a github post:
   # curl -d '{ "ref": "refs/heads/production" }' -H "Accept: application/json" 'https://puppet:puppet@localhost:8088/payload' -k -q
   #
-  # Simulate a stash post:
-  # curl -d '{ "refChanges":[ { "refId":"refs/heads/production" } ] }' -H "Accept: application/json" 'https://puppet:puppet@localhost:8088/payload' -k -q
+  # If using stash look at the stash_mco.rb script included here.
+  # It will filter the stash post and make it look like a github post.
   #
   # Simulate a Gitorious post:
   # curl -X POST -d '%7b%22ref%22%3a%22master%22%7d' 'http://puppet:puppet@localhost:8088/payload' -q
