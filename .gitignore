@@ -4,3 +4,5 @@ spec/fixtures/manifests/site.pp
 .DS_Store
 *.swp
 .bundle
+.ruby-version
+Gemfile.lock
