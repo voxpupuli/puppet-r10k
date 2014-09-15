@@ -8,6 +8,7 @@ class r10k (
   $version                   = $r10k::params::version,
   $modulepath                = $r10k::params::modulepath,
   $manage_modulepath         = $r10k::params::manage_modulepath,
+  $manage_ruby_dependency    = $r10k::params::manage_ruby_dependency,
   $r10k_basedir              = $r10k::params::r10k_basedir,
   $package_name              = $r10k::params::package_name,
   $provider                  = $r10k::params::provider,
@@ -19,6 +20,8 @@ class r10k (
   $include_prerun_command    = false,
 ) inherits r10k::params {
 
+  $ruby_dependency_options=['include','declare','ignore']
+  validate_re($manage_ruby_dependency,$ruby_dependency_options)
   if type($include_prerun_command) == 'string' {
     $include_prerun_command_real = str2bool($include_prerun_command)
   } else {
@@ -31,11 +34,12 @@ class r10k (
   }
 
   class { 'r10k::install':
-    package_name    => $package_name,
-    version         => $version,
-    provider        => $provider,
-    keywords        => $gentoo_keywords,
-    install_options => $install_options,
+    install_options        => $install_options,
+    keywords               => $gentoo_keywords,
+    manage_ruby_dependency => $manage_ruby_dependency,
+    package_name           => $package_name,
+    provider               => $provider,
+    version                => $version,
   }
 
   class { 'r10k::config':

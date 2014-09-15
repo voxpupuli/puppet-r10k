@@ -5,6 +5,7 @@ class r10k::install (
   $provider,
   $keywords,
   $install_options,
+  $manage_ruby_dependency,
 ) {
 
   # There are currently bugs in r10k 1.x which make using 0.x desireable in
@@ -20,8 +21,8 @@ class r10k::install (
   if $package_name == '' {
     case $provider {
       'portage': { $real_package_name = 'app-admin/r10k' }
-      'yum': { $real_package_name = 'rubygem-r10k' }
-      default: { $real_package_name = 'r10k' }
+      'yum':     { $real_package_name = 'rubygem-r10k' }
+      default:   { $real_package_name = 'r10k' }
     }
   } else {
     $real_package_name = $package_name
@@ -40,7 +41,10 @@ class r10k::install (
     }
     'pe_gem', 'gem', 'yum', 'zypper': {
       if $provider == 'gem' {
-        class { 'r10k::install::gem': version => $version; }
+        class { 'r10k::install::gem':
+          manage_ruby_dependency => $manage_ruby_dependency,
+          version                => $version;
+        }
       }
       elsif $provider == 'pe_gem' {
         include r10k::install::pe_gem

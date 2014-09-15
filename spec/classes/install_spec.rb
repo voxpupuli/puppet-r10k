@@ -3,11 +3,12 @@ describe 'r10k::install' , :type => 'class' do
   context "on a RedHat 5 OS installing 1.1.0 with gem provider" do
     let :params do
       {
-        :package_name    => 'r10k',
-        :version         => '1.1.0',
-        :provider        => 'gem',
-        :keywords        => '',
-        :install_options => '',
+        :install_options        => '',
+        :keywords               => '',
+        :manage_ruby_dependency => 'declare',
+        :package_name           => 'r10k',
+        :provider               => 'gem',
+        :version                => '1.1.0',
       }
     end
     let :facts do
@@ -35,11 +36,12 @@ describe 'r10k::install' , :type => 'class' do
   context "on a RedHat 5 OS installing 0.0.9 with gem provider" do
     let :params do
       {
-        :package_name    => 'r10k',
-        :version         => '0.0.9',
-        :provider        => 'gem',
-        :keywords        => '',
-        :install_options => '',
+        :install_options        => '',
+        :keywords               => '',
+        :manage_ruby_dependency => 'declare',
+        :package_name           => 'r10k',
+        :provider               => 'gem',
+        :version                => '0.0.9',
       }
     end
     let :facts do
@@ -68,11 +70,12 @@ describe 'r10k::install' , :type => 'class' do
   context "on a RedHat 5 OS installing 1.1.0 with pe_gem provider" do
     let :params do
       {
-        :package_name    => 'r10k',
-        :version         => '1.1.0',
-        :provider        => 'pe_gem',
-        :keywords        => '',
-        :install_options => '',
+        :package_name           => 'r10k',
+        :version                => '1.1.0',
+        :provider               => 'pe_gem',
+        :keywords               => '',
+        :manage_ruby_dependency => 'declare',
+        :install_options        => '',
       }
     end
     let :facts do
@@ -92,11 +95,12 @@ describe 'r10k::install' , :type => 'class' do
   context "on a RedHat 5 OS installing 1.1.0 with bundle provider" do
     let :params do
       {
-        :package_name    => 'r10k',
-        :version         => '1.1.0',
-        :provider        => 'bundle',
-        :keywords        => '',
-        :install_options => '',
+        :package_name           => 'r10k',
+        :version                => '1.1.0',
+        :provider               => 'bundle',
+        :manage_ruby_dependency => 'declare',
+        :keywords               => '',
+        :install_options        => '',
       }
     end
     let :facts do
@@ -112,11 +116,12 @@ describe 'r10k::install' , :type => 'class' do
   context "on a RedHat 5 OS installing latest with yum provider" do
     let :params do
       {
-        :package_name    => 'rubygem-r10k',
-        :version         => 'latest',
-        :provider        => 'yum',
-        :keywords        => '',
-        :install_options => ''
+        :install_options        => '',
+        :keywords               => '',
+        :manage_ruby_dependency => 'declare',
+        :package_name           => 'rubygem-r10k',
+        :provider               => 'yum',
+        :version                => 'latest',
       }
     end
     let :facts do
@@ -131,11 +136,12 @@ describe 'r10k::install' , :type => 'class' do
   context "on a SLES 11.3 OS installing latest with zypper provider" do
     let :params do
       {
-        :package_name    => 'r10k',
-        :version         => 'latest',
-        :provider        => 'zypper',
-        :keywords        => '',
-        :install_options => ''
+        :install_options        => '',
+        :keywords               => '',
+        :manage_ruby_dependency => 'declare',
+        :package_name           => 'r10k',
+        :provider               => 'zypper',
+        :version                => 'latest',
       }
     end
     let :facts do
@@ -150,11 +156,12 @@ describe 'r10k::install' , :type => 'class' do
   context "on a Gentoo OS installing 1.1.0 with portage provider" do
     let :params do
       {
-        :package_name    => 'app-admin/r10k',
-        :version         => '1.1.0',
-        :provider        => 'portage',
-        :keywords        => ['~amd64', '~x86'],
-        :install_options => '',
+        :install_options        => '',
+        :keywords               => ['~amd64', '~x86'],
+        :manage_ruby_dependency => 'declare',
+        :package_name           => 'app-admin/r10k',
+        :provider               => 'portage',
+        :version                => '1.1.0',
       }
     end
     let :facts do

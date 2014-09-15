@@ -9,9 +9,14 @@ describe 'r10k' do
         :is_pe                  => 'true'
       }
     end
-
     it { should compile.with_all_deps }
     it { should_not contain_class('r10k::prerun_command') }
+  end
+  context 'when manage_ruby_dependency has an invalid value' do
+    let (:params) {{'manage_ruby_dependency' => 'BOGON'}}
+    it 'should fail' do
+      expect { subject }.to raise_error(Puppet::Error, /"BOGON" does not match/)
+    end
   end
 
   ['true',true].each do |value|
