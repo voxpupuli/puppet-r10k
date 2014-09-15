@@ -1,3 +1,5 @@
+2.3.0 - Zack Smith
+ * Fold in #78, #75 and #73
 2.2.7 - Zack Smith
  * Bugfix for mcollective during puppet apply and webhook as non mco
 2.2.7 - Zack Smith
