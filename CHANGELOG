@@ -14,7 +14,7 @@
  * Remove PID file creation from webhook
 2.1.2 - Garrett Honeycutt & Zack Smith
  * Fix quoting issue created by #24 with booleans with #54
- * Intial commit of fucntional tested github authenticated webhook
+ * Intial commit of functionally tested github authenticated webhook
 2.1.1 - Zack Smith
  * Add SSL and auth support to webhook
 2.1.0 - Zack Smith
