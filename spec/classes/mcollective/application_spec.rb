@@ -13,7 +13,7 @@ describe 'r10k::mcollective::application' , :type => 'class' do
     it { should contain_file("/opt/puppet/libexec/mcollective/mcollective/application/r10k.rb").with(
         'ensure' => 'present',
         'owner'  => 'root',
-        'group'  => 'root',
+        'group'  => '0',
         'mode'   => '0644',
         'source' => 'puppet:///modules/r10k/application/r10k.rb'
       )
@@ -21,7 +21,7 @@ describe 'r10k::mcollective::application' , :type => 'class' do
     it { should contain_file("/opt/puppet/libexec/mcollective/mcollective/agent/r10k.ddl").with(
         'ensure' => 'present',
         'owner'  => 'root',
-        'group'  => 'root',
+        'group'  => '0',
         'mode'   => '0644',
         'source' => 'puppet:///modules/r10k/agent/r10k.ddl'
       )
@@ -40,7 +40,7 @@ describe 'r10k::mcollective::application' , :type => 'class' do
     it { should contain_file("/usr/libexec/mcollective/mcollective/application/r10k.rb").with(
         'ensure' => 'present',
         'owner'  => 'root',
-        'group'  => 'root',
+        'group'  => '0',
         'mode'   => '0644',
         'source' => 'puppet:///modules/r10k/application/r10k.rb'
       )
@@ -48,7 +48,7 @@ describe 'r10k::mcollective::application' , :type => 'class' do
     it { should contain_file("/usr/libexec/mcollective/mcollective/agent/r10k.ddl").with(
         'ensure' => 'present',
         'owner'  => 'root',
-        'group'  => 'root',
+        'group'  => '0',
         'mode'   => '0644',
         'source' => 'puppet:///modules/r10k/agent/r10k.ddl'
       )
