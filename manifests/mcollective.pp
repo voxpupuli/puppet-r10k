@@ -10,7 +10,7 @@ class r10k::mcollective(
   File {
     ensure => present,
     owner  => 'root',
-    group  => 'root',
+    group  => '0',
     mode   => '0644',
   }
   # Install the agent and its ddl file
