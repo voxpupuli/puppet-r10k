@@ -27,7 +27,7 @@ describe 'r10k::install::gem' , :type => 'class' do
         :manage_ruby_dependency => 'include',
         :version                => '1.1.0',
       }}
-      it { should contain_class("ruby").with('rubygems_update'   => true)}
+      it { should contain_class("ruby").with('rubygems_update'   => false)}
       it { should contain_class("ruby::dev") }
     end
     context 'when manage_ruby_dependency is set to "ignore"' do
@@ -65,7 +65,7 @@ describe 'r10k::install::gem' , :type => 'class' do
         :manage_ruby_dependency => 'include',
         :version                => '1.1.0',
       }}
-      it { should contain_class("ruby").with('rubygems_update'   => true)}
+      it { should contain_class("ruby").with('rubygems_update'   => false)}
       it { should contain_class("ruby::dev") }
     end
     context 'when manage_ruby_dependency is set to "ignore"' do
@@ -104,7 +104,7 @@ describe 'r10k::install::gem' , :type => 'class' do
         :manage_ruby_dependency => 'include',
         :version                => '0.0.9',
       }}
-      it { should contain_class("ruby").with('rubygems_update'   => true)}
+      it { should contain_class("ruby").with('rubygems_update'   => false)}
       it { should contain_class("ruby::dev") }
     end
     context 'when manage_ruby_dependency is set to "ignore"' do
