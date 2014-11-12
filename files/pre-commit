@@ -1,25 +1,60 @@
-#!/usr/bin/ruby
-# Based on an example from Jakov Sosic
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'yaml'
+require 'json'
+
 def puppet_parser_validate(file)
         system('puppet parser validate ' + file)
 end
 
-def puppet_lint(file)
-        system('puppet-lint --no-80chars-check ' + file)
+def r10k_puppetfile_check(file)
+        system('r10k puppetfile check ' + file)
 end
 
-#def puppet_erb_check(file)
-#        system('erb -x -T \'-\' ' + file + ' | ruby -c')
-#end
+def bash_check(file)
+        system('bash -n ' + file)
+end
+
+def puppet_lint(file)
+        system('puppet-lint ' + file)
+end
+
+def puppet_erb_check(file)
+        system("erb -x -T '-' ' + #{file} + ' | ruby -c")
+end
+
+def yaml_check(file)
+    YAML.load_file(file)
+  rescue Exception => err
+    puts "YAML invalid: #{err}"
+    false
+end
+
+def json_check(file)
+    JSON.parse( IO.read(file) )
+  rescue Exception => err
+    puts "JSON invalid: #{err}"
+    false
+end
 
 # go through list of files, and call adequate checks
 IO.popen('git diff --cached --name-only --diff-filter=ACM').readlines.each { |file|
     file.sub!(/^\w (.*)\n/,'\1')
+    file.chomp! unless file.nil?
     puts "Processing #{file}"
     if file.match('.pp$')
         exit 1 unless puppet_parser_validate file
-        exit 1 unless puppet_lint file 
-#    elsif file.match('.erb$')
-#        exit 1 unless puppet_erb_check file
-    end
+        exit 1 unless puppet_lint file
+    elsif file.match('.erb$')
+        exit 1 unless puppet_erb_check file
+    elsif file.match('Puppetfile')
+        exit 1 unless r10k_puppetfile_check file
+    elsif file.match('.sh$')
+        exit 1 unless bash_check file
+    elsif file.match(/(.yaml$|.yml$|.eyaml$)/)
+        exit 1 unless yaml_check file
+    elsif file.match('.json$')
+        exit 1 unless json_check file
+   end
 }
