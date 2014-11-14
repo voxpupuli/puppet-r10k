@@ -58,5 +58,6 @@ class r10k::webhook::config (
     mode    => '0644',
     path    => $configfile,
     content => template('r10k/webhook.yaml.erb'),
+    notify  => Service['webhook'],
   }
 }
