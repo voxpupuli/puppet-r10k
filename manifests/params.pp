@@ -48,7 +48,7 @@ class r10k::params
   $webhook_enable_ssl         = true
   $webhook_use_mcollective    = true
 
-  if $::is_pe =~ /true/ {
+  if $::is_pe == true or $::is_pe == 'true' {
     # Puppet Enterprise specific settings
     $puppetconf_path = '/etc/puppetlabs/puppet'
 
