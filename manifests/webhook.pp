@@ -41,6 +41,7 @@ class r10k::webhook(
 
   service { 'webhook':
     ensure    => 'running',
+    enable    => true,
     pattern   => '.*ruby.*webhoo[k]$',
     hasstatus => false,
   }
