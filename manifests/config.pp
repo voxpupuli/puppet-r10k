@@ -62,7 +62,7 @@ class r10k::config (
 
   validate_bool($manage_modulepath)
 
-  if type($manage_configfile_symlink) == 'string' {
+  if is_string($manage_configfile_symlink) {
     $manage_configfile_symlink_real = str2bool($manage_configfile_symlink)
   } else {
     $manage_configfile_symlink_real = $manage_configfile_symlink

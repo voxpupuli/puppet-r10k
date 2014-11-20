@@ -22,7 +22,7 @@ class r10k (
 
   $ruby_dependency_options=['include','declare','ignore']
   validate_re($manage_ruby_dependency,$ruby_dependency_options)
-  if type($include_prerun_command) == 'string' {
+  if is_string($include_prerun_command) {
     $include_prerun_command_real = str2bool($include_prerun_command)
   } else {
     $include_prerun_command_real = $include_prerun_command
