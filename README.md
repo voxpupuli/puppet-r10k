@@ -111,7 +111,7 @@ file { '/root/.gitconfig':
 Ini_setting {
   ensure  => present,
   path    => '/root/.gitconfig',
-  value   => 'http://proxy.ops.tiaa-cref.org:8080',
+  value   => 'http://proxy.your.company.com:8080',
 }
 
 file { '/root/.gitconfig':
