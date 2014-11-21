@@ -61,7 +61,7 @@ r10k::configfile_symlink: /etc/r10k.yaml
 ```
 
 ### Mcollective Support
-![alt tag](http://imageshack.com/a/img661/6302/qQwIrw.gif)
+![alt tag](http://imageshack.com/a/img674/3070/NWvnSn.png)
 
 An mcollective agent is included in this module which can be used to do
 on demand synchronization. This mcollective application and agent can be
@@ -119,6 +119,7 @@ _Note: PE2 only requires the .mcollective file as the default auth was psk_
 
 # Webhook Support
 
+![alt tag](http://imageshack.com/a/img661/6302/qQwIrw.gif)
 For version control systems that use web driven post-receive processes you can use the example webhook included in this module.
 This webhook currently only runs on Puppet Enterprise and uses mcollective to automatically synchronize your environment across multiple masters.
 The webhook must be configured on the respective "control" repository a master that has mco installed and can contact the other masters in your fleet.
