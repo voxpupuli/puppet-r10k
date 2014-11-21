@@ -61,7 +61,7 @@ r10k::configfile_symlink: /etc/r10k.yaml
 ```
 
 ### Mcollective Support
-![alt tag](https://gist.github.com/acidprime/be25026c11a76bf3e7fb/raw/12993a7b867bba84c79067ab5c88281622f2462f/webhook.gif)
+![alt tag](http://imageshack.com/a/img661/6302/qQwIrw.gif)
 
 An mcollective agent is included in this module which can be used to do
 on demand synchronization. This mcollective application and agent can be
