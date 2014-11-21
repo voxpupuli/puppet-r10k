@@ -2,7 +2,7 @@
 class r10k::params
 {
   $package_name           = ''
-  $version                = '1.3.4'
+  $version                = '1.3.5'
   $manage_modulepath      = false
   $manage_ruby_dependency = 'declare'
   $install_options        = undef

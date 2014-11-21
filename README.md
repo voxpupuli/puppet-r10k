@@ -11,6 +11,17 @@ class { 'r10k':
 }
 ```
 
+## Version chart
+
+| Module Version | r10k Version |
+| -------------- | ------------ |
+| v2.4.0         | 1.3.5        |
+| v2.3.1         | 1.3.4        |
+| v2.3.0         | 1.3.2        |
+| v2.2.8         | 1.3.1        |
+| v2.2.x         | 1.1.0        |
+
+
 This will configure `/etc/r10k.yaml` and install the r10k gem after installing
 ruby using the [puppetlabs/ruby](http://forge.puppetlabs.com/puppetlabs/ruby) module. It also has a few helper classes that do
 some useful things. The following entry in Hiera will add a `prerun_command` to puppet.conf.
