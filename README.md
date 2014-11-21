@@ -32,10 +32,10 @@ class { 'r10k':
 
 This will configure `/etc/r10k.yaml` and install the r10k gem after installing
 ruby using the [puppetlabs/ruby](http://forge.puppetlabs.com/puppetlabs/ruby) module. It also has a few helper classes that do
-some useful things. The following entry in Hiera will add a `prerun_command` to puppet.conf.
+some useful things. The following entry in Hiera will add a `postrun_command` to puppet.conf.
 
 ```
-r10k::include_prerun_command: true
+r10k::include_postrun_command: true
 ```
 
 The concept here is that this is declared on the puppet master(s) that have
