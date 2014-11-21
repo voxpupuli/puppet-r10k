@@ -51,7 +51,7 @@ git_deploy_key { 'add_deploy_key_to_puppet_control':
   token        => hiera('gitlab_api_token'),
   project_name => 'puppet/control',
   server_url   => 'http://your.internal.gitlab.server.com',
-  provider     => 'gitlab.com',
+  provider     => 'gitlab',
 }
 ```
 
@@ -88,7 +88,8 @@ is outlined below:
 ## symlink to r10k.yaml
 These entries in Hiera will create a symlink at `/etc/r10k.yaml` that points to the config file at `/etc/puppet/r10k.yaml`
 
-```
+```yaml
+---
 r10k::configfile: /etc/puppet/r10k.yaml
 r10k::manage_configfile_symlink: true
 r10k::configfile_symlink: /etc/r10k.yaml
@@ -140,14 +141,6 @@ Ini_setting {
   path    => '/root/.gitconfig',
   value   => 'http://proxy.your.company.com:8080',
 }
-
-file { '/root/.gitconfig':
-  ensure => 'file',
-  owner  => 'root',
-  group  => '0',
-  mode   => '0600',
-}
-
 
 ini_setting { 'git http proxy setting':
   section => 'http',
@@ -284,7 +277,7 @@ git_webhook { 'web_post_receive_webhook' :
   webhook_url  => 'https://puppet:puppet@master.of.masters:8088/payload',
   token        =>  hiera('gitlab_api_token'),
   project_name => 'puppet/controle',
-  server_url   => 'http://github.com',
+  server_url   => 'http://your.internal.gitlab.com',
   provider     => 'gitlab',
 }
 
