@@ -31,7 +31,33 @@ class { 'r10k':
 
 
 This will configure `/etc/r10k.yaml` and install the r10k gem after installing
-ruby using the [puppetlabs/ruby](http://forge.puppetlabs.com/puppetlabs/ruby) module. It also has a few helper classes that do
+ruby using the [puppetlabs/ruby](http://forge.puppetlabs.com/puppetlabs/ruby) module.
+
+Here is an example of deploying the ssh keys needed for r10k to connect to a repo called puppet/control on a gitlab server.
+```puppet
+#https://docs.puppetlabs.com/references/latest/type.html#sshkey
+sshkey { "your.internal.gitlab.server.com":
+  ensure => present,
+  type   => "ssh-rsa",
+  target => "/root/.ssh/known_hosts",
+  key    => "...+dffsfHQ=="
+}
+
+# https://github.com/abrader/abrader-gms
+git_deploy_key { 'add_deploy_key_to_puppet_control':
+  ensure       => present,
+  name         => $::fqdn,
+  path         => '/root/.ssh/id_dsa.pub',
+  token        => hiera('gitlab_api_token'),
+  project_name => 'puppet/control',
+  server_url   => 'http://your.internal.gitlab.server.com',
+  provider     => 'gitlab.com',
+}
+```
+
+
+## Helper classes
+It also has a few helper classes that do
 some useful things. The following entry in Hiera will add a `postrun_command` to puppet.conf.
 
 ```
@@ -108,6 +134,7 @@ file { '/root/.gitconfig':
   mode   => '0600',
 }
 
+# https://forge.puppetlabs.com/puppetlabs/inifile
 Ini_setting {
   ensure  => present,
   path    => '/root/.gitconfig',
