@@ -119,7 +119,7 @@ _Note: PE2 only requires the .mcollective file as the default auth was psk_
 
 # Webhook Support
 
-![alt tag](http://imageshack.com/a/img661/6302/qQwIrw.gif)
+![alt tag](http://imageshack.com/a/img661/6302/qQwIrw.gif)  
 For version control systems that use web driven post-receive processes you can use the example webhook included in this module.
 This webhook currently only runs on Puppet Enterprise and uses mcollective to automatically synchronize your environment across multiple masters.
 The webhook must be configured on the respective "control" repository a master that has mco installed and can contact the other masters in your fleet.
