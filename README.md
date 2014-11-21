@@ -11,6 +11,14 @@ class { 'r10k':
 }
 ```
 
+Installing into the puppet enterprise ruby stack
+```puppet
+class { 'r10k':
+  remote   => 'git@github.com:someuser/puppet.git',
+  provider => 'pe_gem',
+}
+```
+
 ## Version chart
 
 | Module Version | r10k Version |
@@ -58,6 +66,99 @@ These entries in Hiera will create a symlink at `/etc/r10k.yaml` that points to 
 r10k::configfile: /etc/puppet/r10k.yaml
 r10k::manage_configfile_symlink: true
 r10k::configfile_symlink: /etc/r10k.yaml
+```
+
+## Alternative install
+
+
+
+Installing using a proxy server
+
+```puppet
+# Create a global gemrc for Puppet Enterprise to add the local gem source
+# See http://projects.puppetlabs.com/issues/18053#note-12 for more information.
+
+file { '/opt/puppet/etc':
+  ensure => 'directory',
+  owner  => 'root',
+  group  => '0',
+  mode   => '0755',
+}
+
+file { 'gemrc':
+  ensure  => 'file',
+  path    => '/opt/puppet/etc/gemrc',
+  owner   => 'root',
+  group   => '0',
+  mode    => '0644',
+  content => "---\ngem: --http-proxy=http://your.proxy.server:8080\n",
+}
+
+class { 'r10k':
+  remote   => 'git@github.com:someuser/puppet.git',
+  provider => 'pe_gem',
+  require  => File['gemrc'],
+}
+
+# The following will allow r10k to use Puppetfile via the proxy
+file { '/root/.gitconfig':
+  ensure => 'file',
+  owner  => 'root',
+  group  => '0',
+  mode   => '0600',
+}
+
+Ini_setting {
+  ensure  => present,
+  path    => '/root/.gitconfig',
+  value   => 'http://proxy.ops.tiaa-cref.org:8080',
+}
+
+file { '/root/.gitconfig':
+  ensure => 'file',
+  owner  => 'root',
+  group  => '0',
+  mode   => '0600',
+}
+
+
+ini_setting { 'git http proxy setting':
+  section => 'http',
+  setting => 'proxy',
+}
+
+ini_setting { 'git https proxy setting':
+  section => 'https',
+  setting => 'proxy',
+}
+```
+
+Using a internal gem server
+```puppet
+# Create a global gemrc for Puppet Enterprise to add the local gem source
+# See http://projects.puppetlabs.com/issues/18053#note-12 for more information.
+
+file { '/opt/puppet/etc':
+  ensure => 'directory',
+  owner  => 'root',
+  group  => '0',
+  mode   => '0755',
+}
+
+file { 'gemrc':
+  ensure  => 'file',
+  path    => '/opt/puppet/etc/gemrc',
+  owner   => 'root',
+  group   => '0',
+  mode    => '0644',
+  content => "---\nupdate_sources: true\n:sources:\n- http://your.internal.gem.server.com/rubygems/\n",
+}
+
+class { 'r10k':
+  remote   => 'git@github.com:someuser/puppet.git',
+  provider => 'pe_gem',
+  require  => File['gemrc'],
+}
 ```
 
 ### Mcollective Support
@@ -126,13 +227,11 @@ The webhook must be configured on the respective "control" repository a master t
 
 Currently this is a feature Puppet Enterprise only.
 
-### Prefix Example
+### Webhook Prefix Example
 
 The following is an example of declaring the webhook when r10k prefixing is enabled
 
 ```puppet
-include r10k::webhook
-
 file {'/usr/local/bin/prefix_command.rb':
   ensure => file,
   mode   => '0755',
@@ -147,6 +246,48 @@ class {'r10k::webhook::config':
   notify         => Service['webhook'],
   require        => File['/usr/local/bin/prefix_command.rb'],
 }
+
+class {'r10k::webhook':
+  require => Class['r10k::webhook::config'],
+}
+
+# https://github.com/abrader/abrader-gms
+git_webhook { 'web_post_receive_webhook' :
+  ensure       => present,
+  webhook_url  => 'https://puppet:puppet@master.of.masters:8088/payload',
+  token        =>  hiera('gitlab_api_token'),
+  project_name => 'puppet/controle',
+  server_url   => 'http://github.com',
+  provider     => 'gitlab',
+}
+
+
 ```
+
+### Webhook Non authenticated example
+```puppet
+class {'r10k::webhook::config':
+  enable_ssl     => false,
+  protected      => false,
+  notify         => Service['webhook'],
+}
+
+class {'r10k::webhook':
+  require => Class['r10k::webhook::config'],
+}
+
+# https://github.com/abrader/abrader-gms
+git_webhook { 'web_post_receive_webhook' :
+  ensure       => present,
+  webhook_url  => 'http://master.of.masters:8088/payload',
+  token        =>  hiera('github_api_token'),
+  project_name => 'puppet/controle',
+  server_url   => 'http://github.com',
+  provider     => 'github',
+}
+```
+
+
+
 
 Please log tickets and issues at our [Projects site](https://github.com/acidprime/r10k/issues)
