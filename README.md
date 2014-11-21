@@ -61,7 +61,7 @@ r10k::configfile_symlink: /etc/r10k.yaml
 ```
 
 ### Mcollective Support
-
+<script src="https://gist.github.com/acidprime/be25026c11a76bf3e7fb.js"></script>
 ![alt tag](https://gist.github.com/acidprime/be25026c11a76bf3e7fb/raw/12993a7b867bba84c79067ab5c88281622f2462f/webhook.gif)
 
 An mcollective agent is included in this module which can be used to do
