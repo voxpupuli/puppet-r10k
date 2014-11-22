@@ -253,7 +253,6 @@ and copy the certs to somewhere that is readable by the respective user.
 /home/gitolite/.mcollective.d/peadmin-public.pem
 ~~~
 _Note: PE2 only requires the .mcollective file as the default auth was psk_
-##Support
 
 # Webhook Support
 
@@ -334,7 +333,6 @@ git_webhook { 'web_post_receive_webhook' :
 }
 ```
 
-
-
+##Support
 
 Please log tickets and issues at our [Projects site](https://github.com/acidprime/r10k/issues)
