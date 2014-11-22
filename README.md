@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/acidprime/r10k.png?branch=master)](https://travis-ci.org/acidprime/r10k)
 
 This is the r10k setup module. It has a base class to configure r10k to
-synchronize dynamic environments. You can be simply used by declaring it:
+synchronize [dynamic environments](https://github.com/adrienthebo/r10k/blob/master/doc/dynamic-environments.mkd). You can be simply used by declaring it:
 
 ```puppet
 class { 'r10k':
@@ -18,12 +18,31 @@ class { 'r10k':
   provider => 'pe_gem',
 }
 ```
+### Prefixes
+Installing using prefixes for multiple control repos.
+```puppet
+class { 'r10k':
+  sources => {
+    'webteam' => {
+      'remote'  => 'ssh://git@github.com/webteam/somerepo.git',
+      'basedir' => "${::settings::confdir}/environments"
+      'prefix'  => true,
+    },
+    'secteam' => {
+      'remote'  => 'ssh://git@github.com/secteam/someotherrepo.git',
+      'basedir' => '/some/other/basedir'
+      'prefix'  => true,
+    },
+  },
+}
+```
+
 
 ## Version chart
 
 | Module Version | r10k Version |
 | -------------- | ------------ |
-| v2.4.0         | 1.3.5        |
+| v2.4.+         | 1.3.5        |
 | v2.3.1         | 1.3.4        |
 | v2.3.0         | 1.3.2        |
 | v2.2.8         | 1.3.1        |
@@ -95,9 +114,7 @@ r10k::manage_configfile_symlink: true
 r10k::configfile_symlink: /etc/r10k.yaml
 ```
 
-## Alternative install
-
-
+## Example installs
 
 Installing using a proxy server
 
@@ -206,7 +223,7 @@ mco r10k deploy <environment>
 
 An example post-recieve hook is included in the files directory.
 This hook can automatically cause code to synchronize on your
-servers at time of push in git.
+servers at time of push in git. More modern git systems use webhooks, for  those see below.
 
 ###Install mcollective support for post recieve hooks
 Install the `mco` command from the puppet enterprise installation directory i.e.
@@ -249,7 +266,14 @@ Currently this is a feature Puppet Enterprise only.
 
 ### Webhook Prefix Example
 
-The following is an example of declaring the webhook when r10k prefixing is enabled
+The following is an example of declaring the webhook when r10k [prefixing](#prefixes) are enabled.
+
+#### prefix_command.rb
+This script is fed the github/gitlab payload in via stdin. This script is meant to return the prefix as its output.
+This is needed as the payload does not contain the r10k prefix. The simplest way to determine the prefix is to
+use the remote url in the payload and find the respective key in r10k.yaml. An example prefix command is located in
+this repo [here](https://github.com/acidprime/r10k/blob/master/files/prefix_command.rb). Note that you may need to
+modify this script depending on your remote configuration to use one of the various remote styles.
 
 ```puppet
 file {'/usr/local/bin/prefix_command.rb':
@@ -270,13 +294,13 @@ class {'r10k::webhook::config':
 class {'r10k::webhook':
   require => Class['r10k::webhook::config'],
 }
-
+# Deploy this webhook to your local gitlab server for the puppet/control repo.
 # https://github.com/abrader/abrader-gms
 git_webhook { 'web_post_receive_webhook' :
   ensure       => present,
   webhook_url  => 'https://puppet:puppet@master.of.masters:8088/payload',
   token        =>  hiera('gitlab_api_token'),
-  project_name => 'puppet/controle',
+  project_name => 'puppet/control',
   server_url   => 'http://your.internal.gitlab.com',
   provider     => 'gitlab',
 }
@@ -285,6 +309,9 @@ git_webhook { 'web_post_receive_webhook' :
 ```
 
 ### Webhook Non authenticated example
+This is an example of using the webhok without authentication
+The `git_webhook` type will using the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want all automate the addtion of the webhook to the repo.
+
 ```puppet
 class {'r10k::webhook::config':
   enable_ssl     => false,
