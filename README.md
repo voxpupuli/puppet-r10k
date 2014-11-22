@@ -53,6 +53,7 @@ This will configure `/etc/r10k.yaml` and install the r10k gem after installing
 ruby using the [puppetlabs/ruby](http://forge.puppetlabs.com/puppetlabs/ruby) module.
 
 Here is an example of deploying the ssh keys needed for r10k to connect to a repo called puppet/control on a gitlab server.
+This is helpful when you need to automatically deploy new masters
 ```puppet
 #https://docs.puppetlabs.com/references/latest/type.html#sshkey
 sshkey { "your.internal.gitlab.server.com":
@@ -220,6 +221,7 @@ You can sync an individual environment using:
 ```shell
 mco r10k deploy <environment>
 ```
+Note: This implies `-p`
 
 An example post-recieve hook is included in the files directory.
 This hook can automatically cause code to synchronize on your
