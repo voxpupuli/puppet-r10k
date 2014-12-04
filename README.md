@@ -42,7 +42,7 @@ class { 'r10k':
 
 | Module Version | r10k Version |
 | -------------- | ------------ |
-| v2.4.+         | 1.3.5        |
+| v2.4.x         | 1.3.5        |
 | v2.3.1         | 1.3.4        |
 | v2.3.0         | 1.3.2        |
 | v2.2.8         | 1.3.1        |
@@ -288,7 +288,6 @@ file {'/usr/local/bin/prefix_command.rb':
 class {'r10k::webhook::config':
   prefix         => true,
   prefix_command => '/usr/local/bin/prefix_command.rb',
-  notify         => Service['webhook'],
   require        => File['/usr/local/bin/prefix_command.rb'],
 }
 
@@ -317,7 +316,6 @@ The `git_webhook` type will using the [api token](https://help.github.com/articl
 class {'r10k::webhook::config':
   enable_ssl     => false,
   protected      => false,
-  notify         => Service['webhook'],
 }
 
 class {'r10k::webhook':
