@@ -36,8 +36,7 @@ ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppet/bin'
 $logger = WEBrick::Log::new($config['access_logfile'], WEBrick::Log::DEBUG)
 
 # PE 3.7 check for renamed certificate path
-public_key_path = File.exist?(File.join("#{$config['certpath']}", "#{$config['certname']}-public.pem")) ?
-    File.join("#{$config['certpath']}", "#{$config['certname']}-public.pem") : File.join("#{$config['certpath']}", "#{$config['certname']}-cert.pem")
+public_key_path  = File.join("#{$config['certpath']}", "#{$config['certname']}-cert.pem")
 
 private_key_path = File.join("#{$config['certpath']}", "#{$config['certname']}-private.pem")
 
