@@ -1,3 +1,6 @@
+2.4.4 - Eli Young & Igor Galić
+  * prevent potential leakage Resource defaults for ini
+  *     Handle branch names containing slashes
 2.4.3 - Zack Smith
   * Documentation Updates
 2.4.1 - Zack Smith
