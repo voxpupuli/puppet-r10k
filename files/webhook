@@ -35,17 +35,22 @@ ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppet/bin'
 
 $logger = WEBrick::Log::new($config['access_logfile'], WEBrick::Log::DEBUG)
 
+# PE 3.7 check for renamed certificate path
+public_key_path = File.exist?(File.join("#{$config['certpath']}", "#{$config['certname']}-public.pem")) ?
+    File.join("#{$config['certpath']}", "#{$config['certname']}-public.pem") : File.join("#{$config['certpath']}", "#{$config['certname']}-cert.pem")
+
+private_key_path = File.join("#{$config['certpath']}", "#{$config['certname']}-private.pem")
+
 opts = {
         :Port               => $config['port'],
         :Logger             => $logger,
         :ServerType         => WEBrick::Daemon,
         :SSLEnable          => $config['enable_ssl'],
         :SSLVerifyClient    => OpenSSL::SSL::VERIFY_NONE,
-        :SSLCertificate     => OpenSSL::X509::Certificate.new(  File.open(File.join("#{$config['certpath']}", "#{$config['certname']}-cert.pem")).read),
-        :SSLPrivateKey      => OpenSSL::PKey::RSA.new(          File.open(File.join("#{$config['certpath']}", "#{$config['certname']}-private.pem")).read),
+        :SSLCertificate     => OpenSSL::X509::Certificate.new(  File.open(File.join("#{public_key_path}")).read),
+        :SSLPrivateKey      => OpenSSL::PKey::RSA.new(          File.open(File.join("#{private_key_path}")).read),
         :SSLCertName        => [ [ "CN",WEBrick::Utils::getservername ] ]
 }
-
 
 class Server  < Sinatra::Base
 
