@@ -39,6 +39,16 @@ class r10k::webhook(
     notify => Service['webhook'],
   }
 
+  # 3.7 does not place the certificate in peadmin's ~
+  # This places it there as if it was an upgrade
+  file { '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem':
+      ensure  => 'file',
+      owner   => 'peadmin',
+      group   => 'peadmin',
+      content => file('/etc/puppetlabs/puppet/ssl/certs/pe-internal-peadmin-mcollective-client.pem'),
+  }
+
+
   service { 'webhook':
     ensure    => 'running',
     enable    => true,
