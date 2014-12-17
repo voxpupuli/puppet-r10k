@@ -81,7 +81,7 @@ action 'deploy_module', :description => "Deploy a specific module" do
         :maxlength => 256
 
   output :module_name,
-         :description => "Deploy a particular module,
+         :description => "Deploy a particular module",
          :display_as  => "Specific module"
 
   output :output,
