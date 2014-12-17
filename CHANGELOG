@@ -1,3 +1,7 @@
+2.5.0 -  Zack Smith & Sean Keery
+  * Puppet Enterprise 3.7 compatibility
+  * Fixed bugs #108,#110,#110,#111
+  * Support for /module end point in webhook to run r10k module deploy foo
 2.4.4 - Eli Young & Igor Galić
   * prevent potential leakage Resource defaults for ini
   *     Handle branch names containing slashes
