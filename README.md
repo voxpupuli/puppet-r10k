@@ -223,6 +223,12 @@ mco r10k deploy <environment>
 ```
 Note: This implies `-p`
 
+You can sync an individual module using:
+
+```shell
+mco r10k deploy_module <module>
+```
+
 An example post-receive hook is included in the files directory.
 This hook can automatically cause code to synchronize on your
 servers at time of push in git. More modern git systems use webhooks, for  those see below.
