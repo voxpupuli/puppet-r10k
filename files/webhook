@@ -61,6 +61,19 @@ class Server  < Sinatra::Base
     raise Sinatra::NotFound
   end
 
+  post '/module' do
+    protected! if $config['protected']
+    $logger.info("authenticated: #{$config['user']}")
+    request.body.rewind  # in case someone already read it
+    decoded = request.body.read
+
+    data = JSON.parse(decoded, :quirks_mode => true)
+
+    module_name = ( data['repository']['name'] ).sub(/^.*-/, '')
+
+    deploy_module(module_name)
+  end
+
   # Simulate a github post:
   # curl -d '{ "ref": "refs/heads/production" }' -H "Accept: application/json" 'https://puppet:puppet@localhost:8088/payload' -k -q
   #
@@ -105,6 +118,25 @@ class Server  < Sinatra::Base
   end
 
   helpers do
+
+    def deploy_module(module_name)
+      begin
+        if $config['use_mcollective']
+          command = "/opt/puppet/bin/mco r10k deploy_module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
+        else
+          # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
+          command = "/opt/puppet/bin/r10k deploy module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
+        end
+        message = "triggered: #{command}"
+        Process.detach(fork{ exec "#{command}"})
+        $logger.info("message: #{message} branch: #{branch}")
+        {:status => :success, :message => message.to_s }.to_json
+      rescue => e
+        $logger.error("message: #{e.message} trace: #{e.backtrace}")
+        {:status => :fail, :message => e.message, :trace => e.backtrace}.to_json
+      end
+    end
+
     def deploy(branch)
       begin
         if $config['use_mco_ruby']

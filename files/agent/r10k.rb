@@ -16,6 +16,7 @@ module MCollective
         ['cache',
          'synchronize',
          'deploy',
+         'deploy_module',
          'sync'].each do |act|
           action act do
             if act == 'deploy'
@@ -23,6 +24,11 @@ module MCollective
               environment = request[:environment]
               run_cmd act, environment
               reply[:environment] = environment
+            elsif act == 'deploy_module'
+              validate :module_name, :shellsafe
+              module_name = request[:module_name]
+              run_cmd act, module_name
+              reply[:module_name] = module_name
             else
               run_cmd act
             end
@@ -41,12 +47,14 @@ module MCollective
             cmd << 'pull'   if action == 'pull'
             cmd << 'status' if action == 'status'
             reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true, :cwd => arg )
-          when 'cache','synchronize','sync', 'deploy'
+          when 'cache','synchronize','sync', 'deploy', 'deploy_module'
             cmd = r10k
             cmd << 'cache' if action == 'cache'
             cmd << 'deploy' << 'environment' << '-p' if action == 'synchronize' or action == 'sync'
             if action == 'deploy'
               cmd << 'deploy' << 'environment' << arg << '-p'
+            elsif action == 'deploy_module'
+              cmd << 'deploy' << 'module' << arg
             end
             reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true)
         end

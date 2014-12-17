@@ -54,20 +54,20 @@ action 'deploy', :description => "Deploy a specific environment, and its Puppetf
         # Wanted to rubyize the following regex but didn't have time to test: ^(?!/|.*([/.]\.|//|@\{|\\\\))[^\040\177 ~^:?*\[]+(?<!\.lock|[/.])$
         :validation => '.',
         :optional => true,
-        :maxlength => 256 
-  
+        :maxlength => 256
+
   output :environment,
          :description => "Deploy a particular environment",
          :display_as  => "Specific environment"
-  
+
   output :output,
          :description => "Output from r10k",
          :display_as  => "Output"
-  
+
   output :error,
          :description => "Error from r10k",
          :display_as  => "Errors"
-  
+
   display :always
 end
 
@@ -76,7 +76,6 @@ action 'deploy_module', :description => "Deploy a specific module" do
         :prompt => "Specific module",
         :description => "Deploy a particular module",
         :type => :string,
-        # Wanted to rubyize the following regex but didn't have time to test: ^(?!/|.*([/.]\.|//|@\{|\\\\))[^\040\177 ~^:?*\[]+(?<!\.lock|[/.])$
         :validation => '.',
         :optional => true,
         :maxlength => 256
