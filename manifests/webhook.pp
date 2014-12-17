@@ -60,4 +60,16 @@ class r10k::webhook(
     ensure   => installed,
     provider => 'pe_gem',
   }
+
+  if versioncmp($::pe_version, '3.7.0') > 0 {
+    if !defined(Package['rack']) {
+      package { 'rack':
+        ensure   => installed,
+        provider => 'pe_gem',
+      }
+    }
+  }
+
+
+
 }
