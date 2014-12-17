@@ -61,6 +61,8 @@ class Server  < Sinatra::Base
     raise Sinatra::NotFound
   end
 
+  # Simulate a github post:
+  # curl -d '{ "repository": "name" }' -H "Accept: application/json" 'https://puppet:puppet@localhost:8088/module' -k -q
   post '/module' do
     protected! if $config['protected']
     $logger.info("authenticated: #{$config['user']}")
@@ -129,7 +131,7 @@ class Server  < Sinatra::Base
         end
         message = "triggered: #{command}"
         Process.detach(fork{ exec "#{command}"})
-        $logger.info("message: #{message} branch: #{branch}")
+        $logger.info("message: #{message} module_name: #{module_name}")
         {:status => :success, :message => message.to_s }.to_json
       rescue => e
         $logger.error("message: #{e.message} trace: #{e.backtrace}")
