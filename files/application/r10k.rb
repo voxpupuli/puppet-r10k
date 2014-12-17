@@ -7,7 +7,6 @@ class MCollective::Application::R10k<MCollective::Application
         configuration[:path] = ARGV.shift || docs
       when 'deploy'
         configuration[:environment] = ARGV.shift || docs
-      end
       when 'deploy_module'
         configuration[:module_name] = ARGV.shift || docs
       end
