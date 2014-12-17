@@ -329,11 +329,26 @@ class {'r10k::webhook':
 }
 
 # https://github.com/abrader/abrader-gms
+# Add webhook to control repository ( the repo where the Puppetfile lives )
 git_webhook { 'web_post_receive_webhook' :
   ensure       => present,
   webhook_url  => 'http://master.of.masters:8088/payload',
   token        =>  hiera('github_api_token'),
-  project_name => 'puppet/controle',
+  project_name => 'organization/control',
+  server_url   => 'http://github.com',
+  provider     => 'github',
+}
+
+
+# Add webhook to module repo if we are tacking branch in Puppetfile i.e.
+# mod 'module_name',
+#  :git    => 'http://github.com/organization/puppet-module_name',
+#  :branch => 'master'
+git_webhook { 'web_post_receive_webhook_for_module' :
+  ensure       => present,
+  webhook_url  => 'http://master.of.masters:8088/module',
+  token        =>  hiera('github_api_token'),
+  project_name => 'organization/puppet-module_name',
   server_url   => 'http://github.com',
   provider     => 'github',
 }
