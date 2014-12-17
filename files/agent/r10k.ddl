@@ -1,5 +1,5 @@
 metadata :name        => "r10k",
-         :description => "Syncs modules using git ",
+         :description => "Syncs modules using git",
          :author      => "Zack Smith",
          :license     => "MIT",
          :version     => "1.0",
