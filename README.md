@@ -223,11 +223,11 @@ mco r10k deploy <environment>
 ```
 Note: This implies `-p`
 
-An example post-recieve hook is included in the files directory.
+An example post-receive hook is included in the files directory.
 This hook can automatically cause code to synchronize on your
 servers at time of push in git. More modern git systems use webhooks, for  those see below.
 
-###Install mcollective support for post recieve hooks
+###Install mcollective support for post receive hooks
 Install the `mco` command from the puppet enterprise installation directory i.e.
 ```shell
 cd ~/puppet-enterprise-3.0.1-el-6-x86_64/packages/el-6-x86_64
