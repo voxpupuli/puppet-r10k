@@ -3,6 +3,7 @@
 # and set the path to this script i.e.
 # config_version = scripts/config_version.sh $environment
 # https://docs.puppetlabs.com/puppet/latest/reference/config_file_environment.html#configversion
+# Don't forget to restart pe-puppetserver/pe-httpd to pickup on the new config_version
 # Return the latest commit with the GitHub URL for it
 # The repos are placed using r10k
 
