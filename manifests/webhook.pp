@@ -56,9 +56,11 @@ class r10k::webhook(
     hasstatus => false,
   }
 
-  package { 'sinatra':
-    ensure   => installed,
-    provider => 'pe_gem',
+  if !defined(Package['sinatra']) {
+    package { 'sinatra':
+      ensure   => installed,
+      provider => 'pe_gem',
+    }
   }
 
   if versioncmp($::pe_version, '3.7.0') > 0 {
