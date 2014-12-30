@@ -139,7 +139,7 @@ describe 'r10k::install' , :type => 'class' do
         :install_options        => '',
         :keywords               => '',
         :manage_ruby_dependency => 'declare',
-        :package_name           => 'r10k',
+        :package_name           => 'rubygem-r10k',
         :provider               => 'zypper',
         :version                => 'latest',
       }
@@ -151,7 +151,7 @@ describe 'r10k::install' , :type => 'class' do
       }
     end
     it { should_not contain_class("git") }
-    it { should contain_package("r10k")}
+    it { should contain_package("rubygem-r10k")}
   end
   context "on a Gentoo OS installing 1.1.0 with portage provider" do
     let :params do

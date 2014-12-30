@@ -20,9 +20,9 @@ class r10k::install (
 
   if $package_name == '' {
     case $provider {
-      'portage': { $real_package_name = 'app-admin/r10k' }
-      'yum':     { $real_package_name = 'rubygem-r10k' }
-      default:   { $real_package_name = 'r10k' }
+      'portage':       { $real_package_name = 'app-admin/r10k' }
+      'yum', 'zypper': { $real_package_name = 'rubygem-r10k' }
+      default:         { $real_package_name = 'r10k' }
     }
   } else {
     $real_package_name = $package_name
