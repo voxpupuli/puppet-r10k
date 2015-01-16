@@ -1,3 +1,5 @@
+2.5.2 -  Chris Roddy
+  * Fixed missing make dep, will be removed in 3.x release of module 
 2.5.1 -  Zack Smith
   * README updates
 2.5.0 -  Zack Smith & Sean Keery
