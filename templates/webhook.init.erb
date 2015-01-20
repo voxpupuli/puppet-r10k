@@ -15,7 +15,7 @@ DAEMON_USER='<%= @user %>'
 RETVAL=0
 
 # Source function library.
-. /etc/rc.d/init.d/functions
+. <%= @functions_path %>
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 export PATH
@@ -23,7 +23,7 @@ export PATH
 start() {
     echo
     echo -n $"Starting webhook: "
-    daemon --user ${DAEMON_USER:?} --pidfile $pidfile $webhook
+    daemon --user ${DAEMON_USER:?} <%= @start_pidfile_args %> $webhook
     RETVAL=$?
     return $RETVAL
 }
