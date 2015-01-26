@@ -47,7 +47,14 @@ class r10k::params
   $webhook_prefix_command     = '/bin/echo example'
   $webhook_enable_ssl         = true
   $webhook_use_mcollective    = true
-
+  if $::osfamily == Debian {
+    $functions_path     = '/lib/lsb/init-functions'
+    $start_pidfile_args = '--pidfile=$pidfile'
+  }
+  else {
+    $functions_path     = '/etc/rc.d/init.d/functions'
+    $start_pidfile_args = '--pidfile $pidfile'
+  }
   if $::is_pe == true or $::is_pe == 'true' {
     # Puppet Enterprise specific settings
     $puppetconf_path = '/etc/puppetlabs/puppet'
