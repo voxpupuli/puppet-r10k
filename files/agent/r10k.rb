@@ -40,13 +40,15 @@ module MCollective
         output = ''
         git  = ['/usr/bin/env', 'git']
         r10k = ['/usr/bin/env', 'r10k']
+        # Given most people using this are using Puppet Enterprise, add the PE Path
+        environment = {"LC_ALL" => "C","PATH" => "#{ENV['PATH']}:/opt/puppet/bin"}
         case action
           when 'push','pull','status'
             cmd = git
             cmd << 'push'   if action == 'push'
             cmd << 'pull'   if action == 'pull'
             cmd << 'status' if action == 'status'
-            reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true, :cwd => arg )
+            reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true, :cwd => arg, :environment => environment  )
           when 'cache','synchronize','sync', 'deploy', 'deploy_module'
             cmd = r10k
             cmd << 'cache' if action == 'cache'
@@ -56,7 +58,7 @@ module MCollective
             elsif action == 'deploy_module'
               cmd << 'deploy' << 'module' << arg
             end
-            reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true)
+            reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true, :environment => environment)
         end
       end
     end
