@@ -3,7 +3,7 @@ class r10k::webhook(
   $user  = 'peadmin',
   $group = 'peadmin',
   $git_server = 'localhost',
-) {
+) inherits r10k::params {
 
   File {
     ensure => file,
