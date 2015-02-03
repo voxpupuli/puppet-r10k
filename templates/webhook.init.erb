@@ -15,7 +15,7 @@ DAEMON_USER='<%= @user %>'
 RETVAL=0
 
 # Source function library.
-. <%= @functions_path %>
+. <%= scope.lookupvar('r10k::params::functions_path') %>
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 export PATH
@@ -23,7 +23,7 @@ export PATH
 start() {
     echo
     echo -n $"Starting webhook: "
-    daemon --user ${DAEMON_USER:?} <%= @start_pidfile_args %> $webhook
+    daemon --user ${DAEMON_USER:?} <%= scope.lookupvar('r10k::params::start_pidfile_args') %> $webhook
     RETVAL=$?
     return $RETVAL
 }
