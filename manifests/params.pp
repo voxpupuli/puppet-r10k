@@ -82,6 +82,10 @@ class r10k::params
         $plugins_dir = '/usr/libexec/mcollective/mcollective'
         $provider    = 'portage'
       }
+      'suse': {
+        $plugins_dir = '/usr/share/mcollective/plugins/mcollective'
+        $provider    = 'zypper'
+      }
       default: {
         $plugins_dir = '/usr/libexec/mcollective/mcollective'
         $provider    = 'gem'
