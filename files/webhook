@@ -41,6 +41,7 @@ public_key_path  = File.join("#{$config['certpath']}", "#{$config['certname']}-c
 private_key_path = File.join("#{$config['certpath']}", "#{$config['certname']}-private.pem")
 
 opts = {
+        :Host               => $config['bind_address'],
         :Port               => $config['port'],
         :Logger             => $logger,
         :ServerType         => WEBrick::Daemon,
