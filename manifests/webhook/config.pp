@@ -11,6 +11,7 @@ class r10k::webhook::config (
   $certpath           = $r10k::params::webhook_certpath,
   $user               = $r10k::params::webhook_user,
   $pass               = $r10k::params::webhook_pass,
+  $bind_address       = $r10k::params::webhook_bind_address,
   $port               = $r10k::params::webhook_port,
   $access_logfile     = $r10k::params::webhook_access_logfile,
   $mco_logfile        = $r10k::params::webhook_mco_logfile,
@@ -30,6 +31,7 @@ class r10k::webhook::config (
     $webhook_hash  = {
       'user'              => $user,
       'pass'              => $pass,
+      'bind_address'      => $bind_address,
       'port'              => $port,
       'certname'          => $certname,
       'client_timeout'    => $client_timeout,
