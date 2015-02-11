@@ -33,7 +33,7 @@ class r10k::params
   # Webhook configuration information
   $webhook_user               = 'puppet'
   $webhook_pass               = 'puppet'
-  $webhook_bind_address       = $::ipaddress
+  $webhook_bind_address       = '0.0.0.0'
   $webhook_port               = '8088'
   $webhook_access_logfile     = '/var/log/webhook/access.log'
   $webhook_mco_logfile        = '/var/log/webhook/mco_output.log'
