@@ -373,7 +373,7 @@ class {'r10k::webhook::config':
 # When git pushes happen.
 class {'r10k::webhook':
   user    => 'root',
-  group   => 'root',
+  group   => '0',
   require => Class['r10k::webhook::config'],
 }
 ```
