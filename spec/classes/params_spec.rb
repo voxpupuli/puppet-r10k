@@ -12,7 +12,7 @@ describe 'r10k::params' , :type => 'class' do
     it { should contain_r10k__params }
 
     it "Should not contain any resources" do
-      subject.resources.size.should == 4
+      expect(subject.resources.size).to eq(5) 
     end
   end
 end
