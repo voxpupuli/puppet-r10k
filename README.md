@@ -348,6 +348,8 @@ git_webhook { 'web_post_receive_webhook' :
 # mod 'module_name',
 #  :git    => 'http://github.com/organization/puppet-module_name',
 #  :branch => 'master'
+# The module name is determined from the repo name , i.e. <puppet-><module_name>
+# All characters with left and including any hyphen are removed i.e. <puppet->
 git_webhook { 'web_post_receive_webhook_for_module' :
   ensure       => present,
   webhook_url  => 'http://master.of.masters:8088/module',
