@@ -63,8 +63,8 @@ class r10k::webhook(
     # 3.7 does not place the certificate in peadmin's ~
     # This places it there as if it was an upgrade
     file { 'peadmin-cert.pem':
-        path    => '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem',
         ensure  => 'file',
+        path    => '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem',
         owner   => 'peadmin',
         group   => 'peadmin',
         mode    => '0644',
