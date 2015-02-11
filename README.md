@@ -339,7 +339,7 @@ git_webhook { 'web_post_receive_webhook' :
   webhook_url  => 'http://master.of.masters:8088/payload',
   token        =>  hiera('github_api_token'),
   project_name => 'organization/control',
-  server_url   => 'http://github.com',
+  server_url   => 'https://api.github.com',
   provider     => 'github',
 }
 
