@@ -1,3 +1,6 @@
+2.6.0 - Eli Young & Ranjit Viswakumar
+  * Add bind_address to webhook
+  * bump r10k version to 1.4.1  
 2.5.4 -  Zack Smith
   * Fix webhook init script issue
 2.5.3 -  Eli Young & te206676

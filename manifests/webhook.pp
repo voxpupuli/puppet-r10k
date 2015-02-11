@@ -38,19 +38,7 @@ class r10k::webhook(
     path   => '/usr/local/bin/webhook',
     notify => Service['webhook'],
   }
-
-  # 3.7 does not place the certificate in peadmin's ~
-  # This places it there as if it was an upgrade
-  file { 'peadmin-cert.pem':
-      path    => '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem',
-      ensure  => 'file',
-      owner   => 'peadmin',
-      group   => 'peadmin',
-      mode    => '0644',
-      content => file('/etc/puppetlabs/puppet/ssl/certs/pe-internal-peadmin-mcollective-client.pem'),
-  }
-
-
+  
   service { 'webhook':
     ensure    => 'running',
     enable    => true,
@@ -72,8 +60,15 @@ class r10k::webhook(
         provider => 'pe_gem',
       }
     }
+    # 3.7 does not place the certificate in peadmin's ~
+    # This places it there as if it was an upgrade
+    file { 'peadmin-cert.pem':
+        path    => '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem',
+        ensure  => 'file',
+        owner   => 'peadmin',
+        group   => 'peadmin',
+        mode    => '0644',
+        content => file('/etc/puppetlabs/puppet/ssl/certs/pe-internal-peadmin-mcollective-client.pem'),
+    }
   }
-
-
-
 }
