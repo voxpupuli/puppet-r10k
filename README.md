@@ -321,6 +321,8 @@ This is an example of using the webhok without authentication
 The `git_webhook` type will using the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want all automate the addtion of the webhook to the repo.
 
 ```puppet
+# Internal webhooks often don't need authentication and ssl
+# # Change the url below if this is changed
 class {'r10k::webhook::config':
   enable_ssl     => false,
   protected      => false,
@@ -351,10 +353,33 @@ git_webhook { 'web_post_receive_webhook_for_module' :
   webhook_url  => 'http://master.of.masters:8088/module',
   token        =>  hiera('github_api_token'),
   project_name => 'organization/puppet-module_name',
-  server_url   => 'http://github.com',
+  server_url   => 'https://api.github.com',
   provider     => 'github',
 }
 ```
+### Running without mcollective
+If you have only a single master, you may want to have the webhook run r10k directly rather then
+as peadmin via mcollective. This requires you to run as the user that can perform `r10k` commands
+which is typically root.
+
+```puppet
+# Instead of running via mco, run r10k directly
+class {'r10k::webhook::config':
+  use_mcollective => false,
+}
+
+# The hook needs to run as root when not running using mcollective
+# It will issue r10k deploy environment <branch_from_gitlab_payload> -p
+# When git pushes happen.
+class {'r10k::webhook':
+  user    => 'root',
+  group   => 'root',
+  require => Class['r10k::webhook::config'],
+}
+```
+
+
+
 
 ##Support
 
