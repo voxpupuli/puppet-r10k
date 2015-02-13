@@ -31,23 +31,25 @@ class r10k::params
   $mcollective = false
 
   # Webhook configuration information
-  $webhook_user               = 'puppet'
-  $webhook_pass               = 'puppet'
-  $webhook_bind_address       = '0.0.0.0'
-  $webhook_port               = '8088'
-  $webhook_access_logfile     = '/var/log/webhook/access.log'
-  $webhook_mco_logfile        = '/var/log/webhook/mco_output.log'
-  $webhook_certname           = 'peadmin'
-  $webhook_certpath           = '/var/lib/peadmin/.mcollective.d'
-  $webhook_client_cfg         = '/var/lib/peadmin/.mcollective'
-  $webhook_use_mco_ruby       = false
-  $webhook_protected          = true
-  $webhook_discovery_timeout  = 10
-  $webhook_client_timeout     = 120
-  $webhook_prefix             = false
-  $webhook_prefix_command     = '/bin/echo example'
-  $webhook_enable_ssl         = true
-  $webhook_use_mcollective    = true
+  $webhook_user                  = 'puppet'
+  $webhook_pass                  = 'puppet'
+  $webhook_bind_address          = '0.0.0.0'
+  $webhook_port                  = '8088'
+  $webhook_access_logfile        = '/var/log/webhook/access.log'
+  $webhook_mco_logfile           = '/var/log/webhook/mco_output.log'
+  $webhook_certname              = 'peadmin'
+  $webhook_certpath              = '/var/lib/peadmin/.mcollective.d'
+  $webhook_client_cfg            = '/var/lib/peadmin/.mcollective'
+  $webhook_use_mco_ruby          = false
+  $webhook_protected             = true
+  $webhook_discovery_timeout     = 10
+  $webhook_client_timeout        = 120
+  $webhook_prefix                = false
+  $webhook_prefix_command        = '/bin/echo example'
+  $webhook_enable_ssl            = true
+  $webhook_use_mcollective       = true
+  $webhook_r10k_deploy_arguments = '-pv'
+
   if $::osfamily == Debian {
     $functions_path     = '/lib/lsb/init-functions'
     $start_pidfile_args = '--pidfile=$pidfile'
