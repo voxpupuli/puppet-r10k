@@ -2,6 +2,7 @@
 class r10k::params
 {
   $package_name           = ''
+  $system_timer_package   = 'system_timer'
   $version                = '1.4.1'
   $manage_modulepath      = false
   $manage_ruby_dependency = 'declare'

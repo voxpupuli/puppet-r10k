@@ -11,6 +11,7 @@ class r10k (
   $manage_ruby_dependency    = $r10k::params::manage_ruby_dependency,
   $r10k_basedir              = $r10k::params::r10k_basedir,
   $package_name              = $r10k::params::package_name,
+  $system_timer_package      = $r10k::params::system_timer_package,
   $provider                  = $r10k::params::provider,
   $gentoo_keywords           = $r10k::params::gentoo_keywords,
   $install_options           = $r10k::params::install_options,
@@ -38,6 +39,7 @@ class r10k (
     keywords               => $gentoo_keywords,
     manage_ruby_dependency => $manage_ruby_dependency,
     package_name           => $package_name,
+    system_timer_package   => $system_timer_package,
     provider               => $provider,
     version                => $version,
   }
