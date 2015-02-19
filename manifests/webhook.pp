@@ -69,6 +69,7 @@ class r10k::webhook(
         group   => 'peadmin',
         mode    => '0644',
         content => file('/etc/puppetlabs/puppet/ssl/certs/pe-internal-peadmin-mcollective-client.pem'),
+        before  => File['webhook_init_script'],
     }
   }
 }
