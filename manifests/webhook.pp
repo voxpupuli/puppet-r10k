@@ -38,7 +38,7 @@ class r10k::webhook(
     path   => '/usr/local/bin/webhook',
     notify => Service['webhook'],
   }
-  
+
   service { 'webhook':
     ensure    => 'running',
     enable    => true,
@@ -50,6 +50,7 @@ class r10k::webhook(
     package { 'sinatra':
       ensure   => installed,
       provider => 'pe_gem',
+      before   => Service['webhook'],
     }
   }
 
@@ -58,6 +59,7 @@ class r10k::webhook(
       package { 'rack':
         ensure   => installed,
         provider => 'pe_gem',
+        before   => Service['webhook'],
       }
     }
     # 3.7 does not place the certificate in peadmin's ~
@@ -69,7 +71,7 @@ class r10k::webhook(
         group   => 'peadmin',
         mode    => '0644',
         content => file('/etc/puppetlabs/puppet/ssl/certs/pe-internal-peadmin-mcollective-client.pem'),
-        before  => File['webhook_init_script'],
+        notify  => Service['webhook'],
     }
   }
 }
