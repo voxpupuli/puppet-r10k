@@ -273,49 +273,6 @@ The webhook must be configured on the respective "control" repository a master t
 
 Currently this is a feature Puppet Enterprise only.
 
-### Webhook Prefix Example
-
-The following is an example of declaring the webhook when r10k [prefixing](#prefixes) are enabled.
-
-#### prefix_command.rb
-This script is fed the github/gitlab payload in via stdin. This script is meant to return the prefix as its output.
-This is needed as the payload does not contain the r10k prefix. The simplest way to determine the prefix is to
-use the remote url in the payload and find the respective key in r10k.yaml. An example prefix command is located in
-this repo [here](https://github.com/acidprime/r10k/blob/master/files/prefix_command.rb). Note that you may need to
-modify this script depending on your remote configuration to use one of the various remote styles.
-
-```puppet
-file {'/usr/local/bin/prefix_command.rb':
-  ensure => file,
-  mode   => '0755',
-  owner  => 'root',
-  group  => '0',
-  source => 'puppet:///modules/r10k/prefix_command.rb',
-}
-
-class {'r10k::webhook::config':
-  prefix         => true,
-  prefix_command => '/usr/local/bin/prefix_command.rb',
-  require        => File['/usr/local/bin/prefix_command.rb'],
-}
-
-class {'r10k::webhook':
-  require => Class['r10k::webhook::config'],
-}
-# Deploy this webhook to your local gitlab server for the puppet/control repo.
-# https://github.com/abrader/abrader-gms
-git_webhook { 'web_post_receive_webhook' :
-  ensure       => present,
-  webhook_url  => 'https://puppet:puppet@master.of.masters:8088/payload',
-  token        =>  hiera('gitlab_api_token'),
-  project_name => 'puppet/control',
-  server_url   => 'http://your.internal.gitlab.com',
-  provider     => 'gitlab',
-}
-
-
-```
-
 ### Webhook Non authenticated example
 This is an example of using the webhok without authentication
 The `git_webhook` type will using the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want all automate the addtion of the webhook to the repo.
@@ -380,6 +337,48 @@ class {'r10k::webhook':
 }
 ```
 
+### Webhook Prefix Example
+
+The following is an example of declaring the webhook when r10k [prefixing](#prefixes) are enabled.
+
+#### prefix_command.rb
+This script is fed the github/gitlab payload in via stdin. This script is meant to return the prefix as its output.
+This is needed as the payload does not contain the r10k prefix. The simplest way to determine the prefix is to
+use the remote url in the payload and find the respective key in r10k.yaml. An example prefix command is located in
+this repo [here](https://github.com/acidprime/r10k/blob/master/files/prefix_command.rb). Note that you may need to
+modify this script depending on your remote configuration to use one of the various remote styles.
+
+```puppet
+file {'/usr/local/bin/prefix_command.rb':
+  ensure => file,
+  mode   => '0755',
+  owner  => 'root',
+  group  => '0',
+  source => 'puppet:///modules/r10k/prefix_command.rb',
+}
+
+class {'r10k::webhook::config':
+  prefix         => true,
+  prefix_command => '/usr/local/bin/prefix_command.rb',
+  require        => File['/usr/local/bin/prefix_command.rb'],
+}
+
+class {'r10k::webhook':
+  require => Class['r10k::webhook::config'],
+}
+# Deploy this webhook to your local gitlab server for the puppet/control repo.
+# https://github.com/abrader/abrader-gms
+git_webhook { 'web_post_receive_webhook' :
+  ensure       => present,
+  webhook_url  => 'https://puppet:puppet@master.of.masters:8088/payload',
+  token        =>  hiera('gitlab_api_token'),
+  project_name => 'puppet/control',
+  server_url   => 'http://your.internal.gitlab.com',
+  provider     => 'gitlab',
+}
+
+
+```
 
 
 
