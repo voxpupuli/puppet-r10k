@@ -356,7 +356,7 @@ git_webhook { 'web_post_receive_webhook' :
 # All characters with left and including any hyphen are removed i.e. <puppet->
 git_webhook { 'web_post_receive_webhook_for_module' :
   ensure       => present,
-  webhook_url  => 'https://puppet:puppet@hole.in.firewall:8088/payload', 
+  webhook_url  => 'https://puppet:puppet@hole.in.firewall:8088/module', 
   token        =>  hiera('github_api_token'),
   project_name => 'organization/puppet-module_name',
   server_url   => 'https://api.github.com',
