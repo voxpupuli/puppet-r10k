@@ -273,13 +273,13 @@ The webhook must be configured on the respective "control" repository a master t
 
 Currently this is a feature Puppet Enterprise only.
 
-### Webhook Non authenticated example
-This is an example of using the webhok without authentication
+### Webhook Github Enterprise - Non Authenticated 
+This is an example of using the webhook without authentication
 The `git_webhook` type will using the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want all automate the addtion of the webhook to the repo.
 
 ```puppet
 # Internal webhooks often don't need authentication and ssl
-# # Change the url below if this is changed
+# Change the url below if this is changed
 class {'r10k::webhook::config':
   enable_ssl     => false,
   protected      => false,
@@ -301,7 +301,7 @@ git_webhook { 'web_post_receive_webhook' :
 }
 
 
-# Add webhook to module repo if we are tacking branch in Puppetfile i.e.
+# Add webhook to module repo if we are tracking branch in Puppetfile i.e.
 # mod 'module_name',
 #  :git    => 'http://github.com/organization/puppet-module_name',
 #  :branch => 'master'
@@ -312,10 +312,59 @@ git_webhook { 'web_post_receive_webhook_for_module' :
   webhook_url  => 'http://master.of.masters:8088/module',
   token        =>  hiera('github_api_token'),
   project_name => 'organization/puppet-module_name',
-  server_url   => 'https://api.github.com',
+  server_url   => 'https://your.github.enterprise.com/api/v3',
   provider     => 'github',
 }
 ```
+
+### Webhook Github Example - Authenticated 
+This is an example of using the webhook with authentication
+The `git_webhook` type will using the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want all automate the addtion of the webhook to the repo.
+
+```puppet
+# External webhooks often need authentication and ssl and authentication
+# Change the url below if this is changed
+class {'r10k::webhook::config':
+  enable_ssl => true,
+  protected  => true,
+  notify     => Service['webhook'],
+}
+
+class {'r10k::webhook':
+  require => Class['r10k::webhook::config'],
+}
+
+# https://github.com/abrader/abrader-gms
+# Add webhook to control repository ( the repo where the Puppetfile lives )
+# Requires gms 0.0.6+ for disable_ssl_verify param
+git_webhook { 'web_post_receive_webhook' :
+  ensure             => present,
+  webhook_url        => 'https://puppet:puppet@hole.in.firewall:8088/payload',
+  token              =>  hiera('github_api_token'),
+  project_name       => 'organization/control',
+  server_url         => 'https://api.github.com',
+  disable_ssl_verify => true,
+  provider           => 'github',
+}
+
+
+# Add webhook to module repo if we are tracking branch in Puppetfile i.e.
+# mod 'module_name',
+#  :git    => 'http://github.com/organization/puppet-module_name',
+#  :branch => 'master'
+# The module name is determined from the repo name , i.e. <puppet-><module_name>
+# All characters with left and including any hyphen are removed i.e. <puppet->
+git_webhook { 'web_post_receive_webhook_for_module' :
+  ensure       => present,
+  webhook_url  => 'https://puppet:puppet@hole.in.firewall:8088/payload', 
+  token        =>  hiera('github_api_token'),
+  project_name => 'organization/puppet-module_name',
+  server_url   => 'https://api.github.com',
+  disable_ssl_verify => true,
+  provider     => 'github',
+}
+```
+
 ### Running without mcollective
 If you have only a single master, you may want to have the webhook run r10k directly rather then
 as peadmin via mcollective. This requires you to run as the user that can perform `r10k` commands
