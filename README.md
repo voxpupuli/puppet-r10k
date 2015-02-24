@@ -296,7 +296,7 @@ git_webhook { 'web_post_receive_webhook' :
   webhook_url  => 'http://master.of.masters:8088/payload',
   token        =>  hiera('github_api_token'),
   project_name => 'organization/control',
-  server_url   => 'https://api.github.com',
+  server_url   => 'https://your.github.enterprise.com',
   provider     => 'github',
 }
 
@@ -312,7 +312,7 @@ git_webhook { 'web_post_receive_webhook_for_module' :
   webhook_url  => 'http://master.of.masters:8088/module',
   token        =>  hiera('github_api_token'),
   project_name => 'organization/puppet-module_name',
-  server_url   => 'https://your.github.enterprise.com/api/v3',
+  server_url   => 'https://your.github.enterprise.com',
   provider     => 'github',
 }
 ```
