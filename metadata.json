@@ -8,7 +8,7 @@
   "source": "https://github.com/acidprime/r10k",
   "summary": "Module for setting up dynamic environments using r10k",
   "tags": ["git", "pe", "environment", "mcollective"],
-  "version": "2.6.2",
+  "version": "2.6.3",
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
