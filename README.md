@@ -207,7 +207,8 @@ class { 'r10k':
 An mcollective agent is included in this module which can be used to do
 on demand synchronization. This mcollective application and agent can be
 installed on all masters using the following class
-
+_Note: You must have mcollective already configured for this tool to work,
+Puppet Enterprise users will automatically have mcollective configured._
 ```puppet
 include r10k::mcollective
 ```
