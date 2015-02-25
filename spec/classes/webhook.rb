@@ -29,7 +29,7 @@ describe 'r10k::webhook' , :type => 'class' do
         'ensure'   => 'present',
       )
     }
-    it { should contain_file("rack").with(
+    it { should contain_file("peadmin-cert.pem").with(
         'path'   => '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem',
         'ensure'  => 'file',
         'owner'   => 'peadmin',

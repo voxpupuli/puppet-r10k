@@ -54,7 +54,7 @@ class r10k::webhook(
     }
   }
 
-  if versioncmp($::pe_version, '3.7.0') > 0 {
+  if versioncmp($::pe_version, '3.7.0') >= 0{
     if !defined(Package['rack']) {
       package { 'rack':
         ensure   => installed,
