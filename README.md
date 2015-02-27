@@ -1,5 +1,5 @@
 # r10k Configuration Module
-
+[![Puppet Forge](http://img.shields.io/puppetforge/v/zack/r10k.svg)](https://forge.puppetlabs.com/zack/r10k)
 [![Build Status](https://travis-ci.org/acidprime/r10k.png?branch=master)](https://travis-ci.org/acidprime/r10k)
 
 This is the r10k setup module. It has a base class to configure r10k to
