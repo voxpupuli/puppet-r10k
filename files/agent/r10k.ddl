@@ -18,6 +18,14 @@ metadata :name        => "r10k",
            :optional    => false,
            :maxlength   => 256
 
+   input :user,
+           :prompt      => "User",
+           :description => "User to run as",
+           :type        => :string,
+           :validation  => '\w+',
+           :optional    => true,
+           :maxlength   => 32
+
    output :path,
           :description => "Operating on #{act}",
           :display_as  => "Path"
@@ -36,6 +44,14 @@ end
  'synchronize',
  'sync'].each do |act|
   action act, :description => "#{act.capitalize} " do
+   input :user,
+           :prompt      => "User",
+           :description => "User to run as",
+           :type        => :string,
+           :validation  => '\w+',
+           :optional    => true,
+           :maxlength   => 32
+
     output :output,
            :description => "Output from git",
            :display_as  => "Output"
@@ -55,6 +71,14 @@ action 'deploy', :description => "Deploy a specific environment, and its Puppetf
         :validation => '.',
         :optional => true,
         :maxlength => 256
+
+  input :user,
+        :prompt      => "User",
+        :description => "User to run as",
+        :type        => :string,
+        :validation  => '\w+',
+        :optional    => true,
+        :maxlength   => 32
 
   output :environment,
          :description => "Deploy a particular environment",
@@ -79,6 +103,14 @@ action 'deploy_module', :description => "Deploy a specific module" do
         :validation => '.',
         :optional => true,
         :maxlength => 256
+
+  input :user,
+        :prompt      => "User",
+        :description => "User to run as",
+        :type        => :string,
+        :validation  => '\w+',
+        :optional    => true,
+        :maxlength   => 32
 
   output :module_name,
          :description => "Deploy a particular module",
