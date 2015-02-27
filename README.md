@@ -43,6 +43,7 @@ class { 'r10k':
 
 | Module Version | r10k Version |
 | -------------- | ------------ |
+| Manual         | [![Latest Version](https://img.shields.io/gem/v/r10k.svg?style=flat-square)](https://rubygems.org/gems/r10k)        |
 | v2.6.x         | 1.4.1        |
 | v2.5.4         | 1.4.0        |
 | v2.4.4         | 1.3.5        |
@@ -50,8 +51,6 @@ class { 'r10k':
 | v2.3.0         | 1.3.2        |
 | v2.2.8         | 1.3.1        |
 | v2.2.x         | 1.1.0        |
-
-Latest Version: [![Latest Version](https://img.shields.io/gem/v/r10k.svg?style=flat-square)](https://rubygems.org/gems/r10k)
 
 This will configure `/etc/r10k.yaml` and install the r10k gem after installing
 ruby using the [puppetlabs/ruby](http://forge.puppetlabs.com/puppetlabs/ruby) module.
