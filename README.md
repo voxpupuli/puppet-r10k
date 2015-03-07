@@ -26,12 +26,12 @@ class { 'r10k':
   sources => {
     'webteam' => {
       'remote'  => 'ssh://git@github.com/webteam/somerepo.git',
-      'basedir' => "${::settings::confdir}/environments"
+      'basedir' => "${::settings::confdir}/environments",
       'prefix'  => true,
     },
     'secteam' => {
       'remote'  => 'ssh://git@github.com/secteam/someotherrepo.git',
-      'basedir' => '/some/other/basedir'
+      'basedir' => '/some/other/basedir',
       'prefix'  => true,
     },
   },
