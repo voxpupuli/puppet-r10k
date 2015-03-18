@@ -232,6 +232,19 @@ You can sync an individual module using:
 mco r10k deploy_module <module>
 ```
 
+If you are required to run `r10k` as a specific user, you can do so by passing
+the `user` parameter:
+
+```shell
+mco r10k synchronize user=r10k
+```
+
+Too obtain the output of running the shell command, run the agent like this:
+
+```shell
+mco rpc r10k synchronize -v
+```
+
 An example post-receive hook is included in the files directory.
 This hook can automatically cause code to synchronize on your
 servers at time of push in git. More modern git systems use webhooks, for  those see below.
