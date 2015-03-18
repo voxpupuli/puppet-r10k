@@ -1,3 +1,5 @@
+2.6.5 - spidersddd
+  * Fix #147 for Ubuntu 14.0.4
 2.6.4 - Zack Smith & Corey Osman
   * Fix conditional for pe 3.7 cert upgrade hack
 2.6.3 - Eli Young
