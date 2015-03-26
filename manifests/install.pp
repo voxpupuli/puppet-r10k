@@ -1,6 +1,7 @@
 # This class is used by the ruby or pe_ruby class
 class r10k::install (
   $package_name,
+  $system_timer_package,
   $version,
   $provider,
   $keywords,
@@ -16,6 +17,12 @@ class r10k::install (
   if versioncmp('1.0.0', $version) > 0 {
     require gcc
     require make
+  }
+
+  package { 'system_timer_gem':
+    ensure   => present,
+    name     => $system_timer_package,
+    provider => 'gem',
   }
 
   if $package_name == '' {
