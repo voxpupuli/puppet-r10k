@@ -40,8 +40,8 @@ $logger = WEBrick::Log::new($config['access_logfile'], WEBrick::Log::DEBUG)
 public_key_path  = File.join("#{$config['certpath']}", "#{$config['certname']}-cert.pem")
 private_key_path = File.join("#{$config['certpath']}", "#{$config['certname']}-private.pem")
 <% else %> 
-public_key_path  = "#{$config['public_key_path']}"
-private_key_path = "#{$config['private_key_path']}"
+public_key_path  = 
+private_key_path = 
 <% end %>
 
 opts = {
@@ -51,8 +51,8 @@ opts = {
         :ServerType         => WEBrick::Daemon,
         :SSLEnable          => $config['enable_ssl'],
         :SSLVerifyClient    => OpenSSL::SSL::VERIFY_NONE,
-        :SSLCertificate     => OpenSSL::X509::Certificate.new(  File.open("#{public_key_path}").read),
-        :SSLPrivateKey      => OpenSSL::PKey::RSA.new(          File.open("#{private_key_path}").read),
+        :SSLCertificate     => OpenSSL::X509::Certificate.new(File.open("#{$config['public_key_path']}").read),
+        :SSLPrivateKey      => OpenSSL::PKey::RSA.new(File.open("#{$config['private_key_path']}").read),
         :SSLCertName        => [ [ "CN",WEBrick::Utils::getservername ] ]
 }
 

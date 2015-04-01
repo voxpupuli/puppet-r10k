@@ -49,6 +49,8 @@ class r10k::params
   $webhook_enable_ssl            = true
   $webhook_use_mcollective       = true
   $webhook_r10k_deploy_arguments = '-pv'
+  $webhook_public_key_path       = undef
+  $webhook_private_key_path      = undef
 
   if $::osfamily == Debian {
     $functions_path     = '/lib/lsb/init-functions'
