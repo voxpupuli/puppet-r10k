@@ -25,6 +25,8 @@ class r10k::webhook::config (
   $enable_ssl            = $r10k::params::webhook_enable_ssl,
   $use_mcollective       = $r10k::params::webhook_use_mcollective,
   $r10k_deploy_arguments = $r10k::params::webhook_r10k_deploy_arguments,
+  $public_key_path       = $r10k::params::webhook_public_key_path,
+  $private_key_path      = $r10k::params::webhook_private_key_path,
   $configfile            = '/etc/webhook.yaml',
 ) inherits r10k::params {
 
@@ -49,6 +51,8 @@ class r10k::webhook::config (
       'enable_ssl'            => $enable_ssl,
       'use_mcollective'       => $use_mcollective,
       'r10k_deploy_arguments' => $r10k_deploy_arguments,
+      'public_key_path'       => $public_key_path,
+      'private_key_path'      => $private_key_path,
     }
   } else {
     validate_hash($hash)
