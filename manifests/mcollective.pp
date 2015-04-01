@@ -16,17 +16,17 @@ class r10k::mcollective (
     mode   => '0644',
   }
   # Install the agent and its ddl file
-  file { "${app_path}/${app_name}"  :
+  file { "${app_path}/${app_name}":
     source => "puppet:///modules/${module_name}/application/${agent_name}",
   }
 
-  file { "${agent_path}/${agent_ddl}"  :
+  file { "${agent_path}/${agent_ddl}":
     source => "puppet:///modules/${module_name}/agent/${agent_ddl}",
   }
 
   # Install the application file (all masters at the moment)
-  file { "${agent_path}/${agent_name}" :
-    content  => template("${module_name}/agent/${agent_name}.erb"),
+  file { "${agent_path}/${agent_name}":
+    content => template("${module_name}/agent/${agent_name}.erb"),
     require => File["${agent_path}/${agent_ddl}"],
   }
 

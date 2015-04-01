@@ -35,8 +35,8 @@ class r10k::webhook(
 
   file { 'webhook_bin':
     content => template('r10k/webhook.bin.erb'),
-    path   => '/usr/local/bin/webhook',
-    notify => Service['webhook'],
+    path    => '/usr/local/bin/webhook',
+    notify  => Service['webhook'],
   }
 
   service { 'webhook':
@@ -57,7 +57,7 @@ class r10k::webhook(
       }
       # 3.7 does not place the certificate in peadmin's ~
       # This places it there as if it was an upgrade
-      file { "peadmin-cert.pem":
+      file { 'peadmin-cert.pem':
           ensure  => 'file',
           path    => '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem',
           owner   => 'peadmin',
