@@ -1,4 +1,4 @@
-#!/opt/puppet/bin/ruby
+#!<%= @::is_pe == true or @::is_pe == 'true' ? '/opt/puppet/bin' : '/usr/bin' %>/ruby
 # This mini-webserver is meant to be run as the peadmin user
 # so that it can call mcollective from a puppetmaster
 # Authors:
@@ -30,15 +30,19 @@ else
   raise "Configuration file: #{WEBHOOK_CONFIG} does not exist"
 end
 
-ENV['HOME'] = '/var/lib/peadmin'
-ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppet/bin'
+ENV['HOME'] = '/var/lib/<%= @user %>'
+ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:<%= @::is_pe == true or @::is_pe == 'true' ? '/opt/puppet/bin' : '/usr/local/bin' %>'
 
 $logger = WEBrick::Log::new($config['access_logfile'], WEBrick::Log::DEBUG)
 
+<% if @::is_pe == true or @::is_pe == 'true' %>
 # PE 3.7 check for renamed certificate path
 public_key_path  = File.join("#{$config['certpath']}", "#{$config['certname']}-cert.pem")
-
 private_key_path = File.join("#{$config['certpath']}", "#{$config['certname']}-private.pem")
+<% else %> 
+public_key_path  = File.join("#{$config['certpath']}", "#{$config['certname']}")
+private_key_path = File.join("#{$config['certpath']}", "#{$config['certname']}")
+<% end %> 
 
 opts = {
         :Host               => $config['bind_address'],
@@ -52,7 +56,7 @@ opts = {
         :SSLCertName        => [ [ "CN",WEBrick::Utils::getservername ] ]
 }
 
-class Server  < Sinatra::Base
+class Server < Sinatra::Base
 
   set :static, false
 

@@ -34,7 +34,7 @@ class r10k::webhook(
   }
 
   file { 'webhook_bin':
-    source => 'puppet:///modules/r10k/webhook',
+    content => template('r10k/webhook.bin.erb'),
     path   => '/usr/local/bin/webhook',
     notify => Service['webhook'],
   }
@@ -46,32 +46,61 @@ class r10k::webhook(
     hasstatus => false,
   }
 
-  if !defined(Package['sinatra']) {
-    package { 'sinatra':
-      ensure   => installed,
-      provider => 'pe_gem',
-      before   => Service['webhook'],
+  if $::is_pe == true or $::is_pe == 'true' {
+    if versioncmp($::pe_version, '3.7.0') >= 0 {
+      if !defined(Package['rack']) {
+        package { 'rack':
+          ensure   => installed,
+          provider => 'pe_gem',
+          before   => Service['webhook'],
+        }
+      }
+      # 3.7 does not place the certificate in peadmin's ~
+      # This places it there as if it was an upgrade
+      file { "peadmin-cert.pem":
+          ensure  => 'file',
+          path    => '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem',
+          owner   => 'peadmin',
+          group   => 'peadmin',
+          mode    => '0644',
+          content => file('/etc/puppetlabs/puppet/ssl/certs/pe-internal-peadmin-mcollective-client.pem'),
+          notify  => Service['webhook'],
+      }
     }
   }
-
-  if versioncmp($::pe_version, '3.7.0') >= 0{
-    if !defined(Package['rack']) {
-      package { 'rack':
+  else {
+    if !defined(Package['webrick']) {
+      package { 'webrick':
         ensure   => installed,
-        provider => 'pe_gem',
+        provider => 'gem',
         before   => Service['webhook'],
       }
     }
-    # 3.7 does not place the certificate in peadmin's ~
-    # This places it there as if it was an upgrade
-    file { 'peadmin-cert.pem':
-        ensure  => 'file',
-        path    => '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem',
-        owner   => 'peadmin',
-        group   => 'peadmin',
-        mode    => '0644',
-        content => file('/etc/puppetlabs/puppet/ssl/certs/pe-internal-peadmin-mcollective-client.pem'),
-        notify  => Service['webhook'],
+
+    if !defined(Package['json']) {
+      package { 'json':
+        ensure   => installed,
+        provider => 'gem',
+        before   => Service['webhook'],
+      }
+    }
+
+    if !defined(Package['sinatra']) {
+      package { 'sinatra':
+        ensure   => installed,
+        provider => 'gem',
+        before   => Service['webhook'],
+      }
+    }
+
+    if versioncmp($::puppetversion, '3.7.0') >= 0 {
+      if !defined(Package['rack']) {
+        package { 'rack':
+          ensure   => installed,
+          provider => 'gem',
+          before   => Service['webhook'],
+        }
+      }
     }
   }
 }

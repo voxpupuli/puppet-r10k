@@ -1,5 +1,5 @@
 #!/bin/bash
-# webhook        Init script for running the r10k webhook daemon
+# webhook       Init script for running the r10k webhook daemon
 #
 # Author:       Zack Smith <zack.smith@puppetlabs.com>
 #
@@ -30,7 +30,7 @@ export PATH
 start() {
     echo
     echo -n $"Starting webhook: "
-    daemon --user ${DAEMON_USER:?} <%= scope.lookupvar('r10k::params::start_pidfile_args') %> $webhook
+    start-stop-daemon --start --user ${DAEMON_USER:?} <%= scope.lookupvar('r10k::params::start_pidfile_args') %> --startas=$webhook
     RETVAL=$?
     return $RETVAL
 }

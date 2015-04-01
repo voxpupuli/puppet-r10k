@@ -102,4 +102,6 @@ class r10k::params
   $mc_app_name         = "${module_name}.rb"
   $mc_agent_path       = "${plugins_dir}/agent"
   $mc_application_path = "${plugins_dir}/application"
+  $mc_http_proxy       = undef
+  $mc_git_ssl_verify   = 0
 }
