@@ -37,11 +37,8 @@ $logger = WEBrick::Log::new($config['access_logfile'], WEBrick::Log::DEBUG)
 
 <% if @is_pe == true or @is_pe == 'true' %>
 # PE 3.7 check for renamed certificate path
-public_key_path  = File.join("#{$config['certpath']}", "#{$config['certname']}-cert.pem")
-private_key_path = File.join("#{$config['certpath']}", "#{$config['certname']}-private.pem")
-<% else %> 
-public_key_path  = 
-private_key_path = 
+config['public_key_path']  = File.join("#{$config['certpath']}", "#{$config['certname']}-cert.pem")
+config['private_key_path'] = File.join("#{$config['certpath']}", "#{$config['certname']}-private.pem")
 <% end %>
 
 opts = {
@@ -129,10 +126,10 @@ class Server < Sinatra::Base
     def deploy_module(module_name)
       begin
         if $config['use_mcollective']
-          command = "/opt/puppet/bin/mco r10k deploy_module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
+          command = "mco r10k deploy_module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
         else
           # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
-          command = "/opt/puppet/bin/r10k deploy module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
+          command = "r10k deploy module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
         end
         message = "triggered: #{command}"
         Process.detach(fork{ exec "#{command}"})
@@ -155,10 +152,10 @@ class Server < Sinatra::Base
           end
         else
           if $config['use_mcollective']
-              command = "/opt/puppet/bin/mco r10k deploy #{branch} >> #{$config['mco_logfile']} 2>&1 &"
+              command = "mco r10k deploy #{branch} >> #{$config['mco_logfile']} 2>&1 &"
           else
             # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
-            command = "/opt/puppet/bin/r10k deploy environment #{branch} #{$config['r10k_deploy_arguments']} >> #{$config['mco_logfile']} 2>&1 &"
+            command = "r10k deploy environment #{branch} #{$config['r10k_deploy_arguments']} >> #{$config['mco_logfile']} 2>&1 &"
           end
           message = "triggered: #{command}"
           Process.detach(fork{ exec "#{command}"})
