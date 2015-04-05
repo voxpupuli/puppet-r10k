@@ -1,4 +1,5 @@
 ---
+sudo: false
 branches:
   only:
   - master
@@ -23,6 +24,8 @@ env:
   - PUPPET_VERSION="~> 3.4.0"
   - PUPPET_VERSION="~> 3.5.1"
   - PUPPET_VERSION="~> 3.6.0"
+  - PUPPET_VERSION="~> 3.7.0"
+
 global:
     - PUBLISHER_LOGIN=acidprime
 matrix:

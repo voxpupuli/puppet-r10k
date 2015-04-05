@@ -17,7 +17,7 @@ def bash_check(file)
 end
 
 def puppet_lint(file)
-        system('puppet-lint ' + file)
+        system('puppet-lint ' + File.absolute_path(file))
 end
 
 def puppet_erb_check(file)

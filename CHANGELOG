@@ -1,3 +1,17 @@
+2.6.5 - spidersddd
+  * Fix #147 for Ubuntu 14.0.4
+2.6.4 - Zack Smith & Corey Osman
+  * Fix conditional for pe 3.7 cert upgrade hack
+2.6.3 - Eli Young
+  * Ordering issues #134 & #138
+2.6.2 - harrytford
+  * Webhook new installs fix #132
+2.6.1 - Gary Larizza
+  * Fix "local" non mcollective hook tiggers to add '-p'
+  * See #125 , this will cause any current users to default to turning this on 
+2.6.0 - Eli Young & Ranjit Viswakumar
+  * Add bind_address to webhook
+  * bump r10k version to 1.4.1  
 2.5.4 -  Zack Smith
   * Fix webhook init script issue
 2.5.3 -  Eli Young & te206676

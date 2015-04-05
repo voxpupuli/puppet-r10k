@@ -36,6 +36,21 @@ module MCollective
         end
       private
 
+      def cmd_as_user(cmd, cwd = nil)
+        if /^\w+$/.match(request[:user])
+          cmd_as_user = ['su', '-', request[:user], '-c', '\''] 
+          if cwd
+            cmd_as_user += ['cd', cwd, '&&']
+          end
+          cmd_as_user += cmd + ["'"]
+        
+          # doesn't seem to execute when passed as an array
+          cmd_as_user.join(' ')
+        else
+          cmd
+        end
+      end 
+
       def run_cmd(action,arg=nil)
         output = ''
         git  = ['/usr/bin/env', 'git']
@@ -48,7 +63,7 @@ module MCollective
             cmd << 'push'   if action == 'push'
             cmd << 'pull'   if action == 'pull'
             cmd << 'status' if action == 'status'
-            reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true, :cwd => arg, :environment => environment  )
+            reply[:status] = run(cmd_as_user(cmd, arg), :stderr => :error, :stdout => :output, :chomp => true, :cwd => arg, :environment => environment  )
           when 'cache','synchronize','sync', 'deploy', 'deploy_module'
             cmd = r10k
             cmd << 'cache' if action == 'cache'
@@ -58,7 +73,7 @@ module MCollective
             elsif action == 'deploy_module'
               cmd << 'deploy' << 'module' << arg
             end
-            reply[:status] = run(cmd, :stderr => :error, :stdout => :output, :chomp => true, :environment => environment)
+            reply[:status] = run(cmd_as_user(cmd), :stderr => :error, :stdout => :output, :chomp => true, :environment => environment)
         end
       end
     end

@@ -41,6 +41,7 @@ public_key_path  = File.join("#{$config['certpath']}", "#{$config['certname']}-c
 private_key_path = File.join("#{$config['certpath']}", "#{$config['certname']}-private.pem")
 
 opts = {
+        :Host               => $config['bind_address'],
         :Port               => $config['port'],
         :Logger             => $logger,
         :ServerType         => WEBrick::Daemon,
@@ -153,7 +154,7 @@ class Server  < Sinatra::Base
               command = "/opt/puppet/bin/mco r10k deploy #{branch} >> #{$config['mco_logfile']} 2>&1 &"
           else
             # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
-            command = "/opt/puppet/bin/r10k deploy environment #{branch} >> #{$config['mco_logfile']} 2>&1 &"
+            command = "/opt/puppet/bin/r10k deploy environment #{branch} #{$config['r10k_deploy_arguments']} >> #{$config['mco_logfile']} 2>&1 &"
           end
           message = "triggered: #{command}"
           Process.detach(fork{ exec "#{command}"})

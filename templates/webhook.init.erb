@@ -9,6 +9,13 @@
 # processname: webhook
 
 [ -f /etc/sysconfig/webhook ] && . /etc/sysconfig/webhook
+
+# This is for ubuntu 14.04 (/var/run is mount to tmpfs)
+if [ !-d /var/run/webhook ]; then
+  mkdir -p /var/run/webhook
+  chown <%= @user %> /var/run/webhook
+fi
+
 pidfile='/var/run/webhook/webhook.pid'
 webhook='/usr/local/bin/webhook'
 DAEMON_USER='<%= @user %>'
