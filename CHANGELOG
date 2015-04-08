@@ -1,3 +1,6 @@
+2.7.0 - Zack Smith
+  * Updates for Puppet Enterprise 3.8 and its embeded r10k
+  * Update default r10k version with that which will ship in PE 3.8 
 2.6.5 - spidersddd
   * Fix #147 for Ubuntu 14.0.4
 2.6.4 - Zack Smith & Corey Osman
