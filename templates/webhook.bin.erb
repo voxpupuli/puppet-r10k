@@ -37,8 +37,8 @@ $logger = WEBrick::Log::new($config['access_logfile'], WEBrick::Log::DEBUG)
 
 <% if @is_pe == true or @is_pe == 'true' %>
 # PE 3.7 check for renamed certificate path
-config['public_key_path']  = File.join("#{$config['certpath']}", "#{$config['certname']}-cert.pem")
-config['private_key_path'] = File.join("#{$config['certpath']}", "#{$config['certname']}-private.pem")
+$config['public_key_path']  = File.join("#{$config['certpath']}", "#{$config['certname']}-cert.pem")
+$config['private_key_path'] = File.join("#{$config['certpath']}", "#{$config['certname']}-private.pem")
 <% end %>
 
 opts = {
