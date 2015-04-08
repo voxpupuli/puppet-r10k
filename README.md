@@ -47,7 +47,8 @@ class { 'r10k':
 | Module Version | r10k Version |
 | -------------- | ------------ |
 | Next Release   | [![Latest Version](https://img.shields.io/gem/v/r10k.svg?style=flat-square)](https://rubygems.org/gems/r10k)        |
-| v2.6.x         | 1.4.1        |
+| v2.7.x         | 1.5.0        |
+| v2.6.5         | 1.4.1        |
 | v2.5.4         | 1.4.0        |
 | v2.4.4         | 1.3.5        |
 | v2.3.1         | 1.3.4        |
