@@ -19,6 +19,9 @@ class { 'r10k':
   provider => 'pe_gem',
 }
 ```
+Note: On Puppet Enterprise 3.8 and higher the package is not declared as 3.8
+ships with an embdedded r10k gem installed via the PE packages
+
 ### Prefixes
 Installing using prefixes for multiple control repos.
 ```puppet
@@ -449,3 +452,35 @@ git_webhook { 'web_post_receive_webhook' :
 ##Support
 
 Please log tickets and issues at our [Projects site](https://github.com/acidprime/r10k/issues)
+
+##Development
+
+###Contributing
+
+Puppet Labs modules on the Puppet Forge are open projects, and community contributions are essential for keeping them great. We can’t access the huge number of platforms and myriad of hardware, software, and deployment configurations that Puppet is intended to serve.
+
+We want to keep it as easy as possible to contribute changes so that our modules work in your environment. There are a few guidelines that we need contributors to follow so that we can have a chance of keeping on top of things.
+
+Read the complete module [contribution guide](https://docs.puppetlabs.com/forge/contributing.html)
+
+###Running tests
+
+This project contains tests for both [rspec-puppet](http://rspec-puppet.com/) and [beaker-rspec](https://github.com/puppetlabs/beaker-rspec) to verify functionality. For in-depth information please see their respective documentation.
+
+Quickstart:
+
+####Ruby > 1.8.7
+
+```
+    gem install bundler
+    bundle install
+    bundle exec rake spec
+```
+
+####Ruby = 1.8.7
+
+```
+    gem install bundler
+    bundle install --without system_tests
+    bundle exec rake spec
+```
