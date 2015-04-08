@@ -191,4 +191,70 @@ describe 'r10k::install' , :type => 'class' do
     it { should contain_package("app-admin/r10k")}
     it { should_not contain_package("r10k")}
   end
+  context "Puppet Enterprise 3.8.x on a RedHat 5 installing via pe_gem" do
+    let :params do
+      {
+        :manage_ruby_dependency => 'declare',
+        :install_options        => '',
+        :package_name           => 'r10k',
+        :provider               => 'pe_gem',
+        :version                => '1.1.0',
+        :keywords               => '',
+      }
+    end
+    let :facts do
+      {
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '5',
+        :operatingsystem        => 'Centos',
+        :is_pe                  => '',
+        :pe_version             => '3.8.1'
+      }
+    end
+    it { should_not contain_package("r10k").with(
+        :ensure     => '1.1.0',
+        :provider   => 'pe_gem'
+      )
+    }
+
+   it { should_not contain_file("/usr/bin/r10k").with(
+        'ensure'  => 'link',
+        'target'  => '/opt/puppet/bin/r10k',
+        'require' => 'Package[r10k]'
+      )
+    }
+
+  end
+  context "Puppet Enterprise 3.7.x on a RedHat 5 installing via pe_gem" do
+    let :params do
+      {
+        :manage_ruby_dependency => 'declare',
+        :install_options        => '',
+        :package_name           => 'r10k',
+        :provider               => 'pe_gem',
+        :version                => '1.1.0',
+        :keywords               => '',
+      }
+    end
+    let :facts do
+      {
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '5',
+        :operatingsystem        => 'Centos',
+        :is_pe                  => '',
+        :pe_version             => '3.7.0'
+      }
+    end
+    it { should contain_package("r10k").with(
+        :ensure     => '1.1.0',
+        :provider   => 'pe_gem'
+      )
+    }
+    it { should contain_file("/usr/bin/r10k").with(
+        'ensure'  => 'link',
+        'target'  => '/opt/puppet/bin/r10k',
+        'require' => 'Package[r10k]'
+      )
+    }
+  end
 end

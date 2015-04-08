@@ -49,10 +49,14 @@ class r10k::install (
       elsif $provider == 'pe_gem' {
         include r10k::install::pe_gem
       }
-      package { $real_package_name:
-        ensure          => $version,
-        provider        => $provider,
-        install_options => $install_options,
+      # Puppet Enterprise 3.8 and ships an embedded r10k so thats all thats supported
+      # This conditional should not effect FOSS customers based on the fact
+      unless versioncmp($::pe_version, '3.8.0') >= 0 {
+        package { $real_package_name:
+          ensure          => $version,
+          provider        => $provider,
+          install_options => $install_options,
+        }
       }
     }
     default: { fail("${provider} is not supported. Valid values are: 'gem', 'pe_gem', 'bundle', 'portage', 'yum', 'zypper'") }
