@@ -11,7 +11,7 @@
 [ -f /etc/sysconfig/webhook ] && . /etc/sysconfig/webhook
 
 # This is for ubuntu 14.04 (/var/run is mount to tmpfs)
-if [ !-d /var/run/webhook ]; then
+if [ ! -d /var/run/webhook ]; then
   mkdir -p /var/run/webhook
   chown <%= @user %> /var/run/webhook
 fi
