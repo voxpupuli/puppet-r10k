@@ -1,4 +1,4 @@
-#!/opt/puppet/bin/ruby
+#!<%= if @is_pe == true or @is_pe == 'true' then '/opt/puppet/bin' else '/usr/bin' end %>/ruby
 # This mini-webserver is meant to be run as the peadmin user
 # so that it can call mcollective from a puppetmaster
 # Authors:
@@ -30,15 +30,16 @@ else
   raise "Configuration file: #{WEBHOOK_CONFIG} does not exist"
 end
 
-ENV['HOME'] = '/var/lib/peadmin'
-ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppet/bin'
+ENV['HOME'] = '/var/lib/<%= @user %>'
+ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:<%= if @is_pe == true or @is_pe == 'true' then '/opt/puppet/bin' else '/usr/local/bin' end %>'
 
 $logger = WEBrick::Log::new($config['access_logfile'], WEBrick::Log::DEBUG)
 
+<% if @is_pe == true or @is_pe == 'true' %>
 # PE 3.7 check for renamed certificate path
-public_key_path  = File.join("#{$config['certpath']}", "#{$config['certname']}-cert.pem")
-
-private_key_path = File.join("#{$config['certpath']}", "#{$config['certname']}-private.pem")
+$config['public_key_path']  = File.join("#{$config['certpath']}", "#{$config['certname']}-cert.pem")
+$config['private_key_path'] = File.join("#{$config['certpath']}", "#{$config['certname']}-private.pem")
+<% end %>
 
 opts = {
         :Host               => $config['bind_address'],
@@ -47,12 +48,12 @@ opts = {
         :ServerType         => WEBrick::Daemon,
         :SSLEnable          => $config['enable_ssl'],
         :SSLVerifyClient    => OpenSSL::SSL::VERIFY_NONE,
-        :SSLCertificate     => OpenSSL::X509::Certificate.new(  File.open(File.join("#{public_key_path}")).read),
-        :SSLPrivateKey      => OpenSSL::PKey::RSA.new(          File.open(File.join("#{private_key_path}")).read),
+        :SSLCertificate     => OpenSSL::X509::Certificate.new(File.open("#{$config['public_key_path']}").read),
+        :SSLPrivateKey      => OpenSSL::PKey::RSA.new(File.open("#{$config['private_key_path']}").read),
         :SSLCertName        => [ [ "CN",WEBrick::Utils::getservername ] ]
 }
 
-class Server  < Sinatra::Base
+class Server < Sinatra::Base
 
   set :static, false
 
@@ -125,10 +126,10 @@ class Server  < Sinatra::Base
     def deploy_module(module_name)
       begin
         if $config['use_mcollective']
-          command = "/opt/puppet/bin/mco r10k deploy_module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
+          command = "mco r10k deploy_module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
         else
           # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
-          command = "/opt/puppet/bin/r10k deploy module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
+          command = "r10k deploy module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
         end
         message = "triggered: #{command}"
         Process.detach(fork{ exec "#{command}"})
@@ -151,10 +152,10 @@ class Server  < Sinatra::Base
           end
         else
           if $config['use_mcollective']
-              command = "/opt/puppet/bin/mco r10k deploy #{branch} >> #{$config['mco_logfile']} 2>&1 &"
+              command = "mco r10k deploy #{branch} >> #{$config['mco_logfile']} 2>&1 &"
           else
             # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
-            command = "/opt/puppet/bin/r10k deploy environment #{branch} #{$config['r10k_deploy_arguments']} >> #{$config['mco_logfile']} 2>&1 &"
+            command = "r10k deploy environment #{branch} #{$config['r10k_deploy_arguments']} >> #{$config['mco_logfile']} 2>&1 &"
           end
           message = "triggered: #{command}"
           Process.detach(fork{ exec "#{command}"})
