@@ -137,19 +137,6 @@ ships with an embdedded r10k gem installed via the PE packages_
 
 ## Usage
 
-Aside from configuing r10k.yaml this module also has a few helper classes that do
-some useful things. The following entry in Hiera will add a `postrun_command` to puppet.conf.
-
-```
-r10k::include_postrun_command: true
-```
-
-The concept here is that this is declared on the puppet master(s) that have
-been configured with r10k. This will cause r10k to synchronize before each
-puppet run. Any errors synchronizing will be logged to the standard puppet run.
-
-## Example configurations 
-
 Installing using a proxy server
 
 ```puppet
@@ -585,6 +572,14 @@ boolean if to manage symlink
 Deprecated: Add [prerun_command](https://docs.puppetlabs.com/references/latest/configuration.html#preruncommand) to puppet.conf to run r10k when the agent on the master runs.
 Suggest instead declaring `r10k::postrun_command ` as that will run after the agent runs which prevents r10k from stopping configuration management of masters from occuring as it does with `prerun_command`s
 
+##### `include_postrun_command`
+```
+r10k::include_postrun_command: true
+```
+
+The concept here is that this is declared on the puppet master(s) that have
+been configured with r10k. This will cause r10k to synchronize after each
+puppet run. Any errors synchronizing will be logged to the standard puppet run.
 
 ## Limitations
 This module is likely going to be broken up into 2/3 modules i.e. r10k_webhook, r10k_mcollective in the future. Puppet Enterprise 4.0 will likely being shipping its own configuration module for r10k and so this module will migrate to managing FOSS installations i.e. `/etc/r10k.yaml` vs PE's configuration file `/etc/puppetlabs/puppet/r10k.yaml`. As of PE 3.8 you can still use this module to manage the `/etc/r10k.yaml` file and it will be loaded but package/version management of r10k and its symlinks has been disabled to not conflict with the pe packages ability to install and upgrade the gem as part of Puppet Enterprise.
