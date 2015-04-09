@@ -225,7 +225,7 @@ class { 'r10k':
 
 The mcollective agent can be configured to supply r10k/git environment `http_proxy`, `https_proxy` variables via the following example
 
-```
+```puppet
 class { '::r10k::mcollective':
   http_proxy     => 'http://proxy.example.lan:3128',
   git_ssl_verify => 1,
