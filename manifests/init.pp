@@ -22,6 +22,14 @@ class r10k (
   $include_postrun_command   = false,
 ) inherits r10k::params {
 
+  # Check if user is declaring both classes
+  # Other classes like r10k::webhook is supported but
+  # using both classes makes no sense unless given pe_r10k
+  # overrides this modules default config
+  if defined(Class['pe_r10k']) {
+    fail('This module does not support being declared with pe_r10k')
+  }
+
   $ruby_dependency_options=['include','declare','ignore']
   validate_re($manage_ruby_dependency,$ruby_dependency_options)
   validate_hash($git_settings)

@@ -57,7 +57,7 @@ class r10k::params
     $functions_path     = '/etc/rc.d/init.d/functions'
     $start_pidfile_args = '--pidfile $pidfile'
   }
- 
+
   # We check for the function right now instead of $::pe_server_version
   # which does not get populated on agent nodes as some users use r10k
   # with razor see https://github.com/acidprime/r10k/pull/219
@@ -171,7 +171,6 @@ class r10k::params
   $mc_agent_path       = "${plugins_dir}/agent"
   $mc_application_path = "${plugins_dir}/application"
   $mc_http_proxy       = undef
-  $mc_git_ssl_verify    = undef # Deprecated parameter - Renamed to $mc_git_ssl_no_verify for clarity
   $mc_git_ssl_no_verify = 0
 
   # Service Settings for SystemD in EL7

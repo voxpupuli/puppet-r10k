@@ -573,6 +573,22 @@ Install mcollective application and agents. This does NOT configure mcollective 
 ##### `manage_configfile_symlink`
 Manage a symlink to the configuration file, for systems installed in weird file system configurations
 
+##### `git_settings`
+This is the `git:` key in r10k, it accepts a hash that can be used to configure
+rugged support.
+
+```puppet
+    $git_settings = {
+      'provider'    => 'rugged',
+      'private_key' => '/root/.ssh/id_rsa',
+    }
+
+    class {'r10k':
+      remote       => 'git@github.com:acidprime/puppet.git',
+      git_settings => $git_settings,
+    }
+```
+
 ##### `configfile_symlink`
 boolean if to manage symlink
 
