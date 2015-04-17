@@ -10,15 +10,7 @@ class r10k::params
   $puppet_master          = true
 
   # r10k configuration
-  $r10k_config_file          = '/etc/r10k.yaml'
-
-  if versioncmp($::puppetversion, '4.0.0') >= 0 {
-    $r10k_basedir    = $::settings::environmentpath
-    $r10k_cachedir   = "${::settings::vardir}/r10k"
-  } else {
-    $r10k_basedir    = "${::settings::confdir}/environments"
-    $r10k_cache_dir  = '/var/cache/r10k'
-  }
+  $r10k_cache_dir            = '/var/cache/r10k'
   $manage_configfile_symlink = false
   $configfile_symlink        = '/etc/r10k.yaml'
   $git_settings              = {}
@@ -87,11 +79,13 @@ class r10k::params
 
     $pe_module_path  = '/opt/puppetlabs/puppet/modules'
     # Mcollective configuration dynamic
-    $mc_service_name = 'mcollective'
-    $plugins_dir     = '/opt/puppetlabs/mcollective/plugins'
-    $modulepath      = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
-    $provider        = 'puppet_gem'
-    $r10k_binary     = 'r10k'
+    $mc_service_name  = 'mcollective'
+    $plugins_dir      = '/opt/puppetlabs/mcollective/plugins'
+    $provider         = 'puppet_gem'
+    $r10k_binary      = 'r10k'
+    $r10k_basedir     = "${::settings::codedir}/environments"
+    $r10k_config_file = '/etc/puppetlabs/r10k/r10k.yaml'
+    $modulepath       = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
 
     # webhook
     $webhook_user    = 'peadmin'
@@ -104,11 +98,13 @@ class r10k::params
 
     $pe_module_path  = '/opt/puppet/share/puppet/modules'
     # Mcollective configuration dynamic
-    $mc_service_name = 'pe-mcollective'
-    $plugins_dir     = '/opt/puppet/libexec/mcollective/mcollective'
-    $modulepath      = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
-    $provider        = 'pe_gem'
-    $r10k_binary     = 'r10k'
+    $mc_service_name  = 'pe-mcollective'
+    $plugins_dir      = '/opt/puppet/libexec/mcollective/mcollective'
+    $provider         = 'pe_gem'
+    $r10k_binary      = 'r10k'
+    $r10k_basedir     = "${::settings::confdir}/environments"
+    $r10k_config_file = '/etc/r10k.yaml'
+    $modulepath       = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
 
     # webhook
     $webhook_user    = 'peadmin'
@@ -121,7 +117,9 @@ class r10k::params
     $puppetconf_path = '/etc/puppet'
 
     # Mcollective configuration dynamic
-    $modulepath = "${r10k_basedir}/\$environment/modules"
+    $r10k_basedir     = "${::settings::confdir}/environments"
+    $r10k_config_file = '/etc/r10k.yaml'
+    $modulepath       = "${r10k_basedir}/\$environment/modules"
 
     # webhook
     $webhook_user    = 'puppet'
