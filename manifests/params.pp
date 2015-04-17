@@ -107,11 +107,6 @@ class r10k::params
     $plugins_dir      = '/opt/puppet/libexec/mcollective/mcollective'
     $provider         = 'pe_gem'
     $r10k_binary      = 'r10k'
-<<<<<<< HEAD
-=======
-    $r10k_basedir     = "${::settings::confdir}/environments"
-    $r10k_config_file = '/etc/r10k.yaml'
->>>>>>> r10k_config_file and r10k_basedir moved in 2015.x
     $modulepath       = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
 
     # webhook
@@ -143,10 +138,13 @@ class r10k::params
 
     # Mcollective configuration dynamic
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     $r10k_basedir     = "${::settings::confdir}/environments"
     $r10k_config_file = '/etc/r10k.yaml'
 >>>>>>> r10k_config_file and r10k_basedir moved in 2015.x
+=======
+>>>>>>> Config file will remain at /etc/r10k.yaml to not create duplicates with pe_r10k module
     $modulepath       = "${r10k_basedir}/\$environment/modules"
 
     # webhook
