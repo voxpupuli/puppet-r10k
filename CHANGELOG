@@ -1,3 +1,7 @@
+2.7.1 - Alex Scoble & esalberg & annaken
+ * Fix webhook directory permissions #144
+ * Fix gem dep regression #154
+ * Update gem version for pulled release.
 2.7.0 - Zack Smith
   * Updates for Puppet Enterprise 3.8 and its embeded r10k
   * Update default r10k version with that which will ship in PE 3.8 
