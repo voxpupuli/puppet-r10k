@@ -16,6 +16,7 @@ class r10k::webhook(
       ensure => 'directory',
       owner  => $user,
       group  => $group,
+      recurse => true,
       before => File['webhook_bin'],
   }
 
