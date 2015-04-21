@@ -5,7 +5,7 @@ class r10k::params
   $version                = '1.5.1'
   $manage_modulepath      = false
   $manage_ruby_dependency = 'declare'
-  $install_options        = []
+  $install_options        = ['--no-ri', '--no-rdoc']
   $sources                = undef
 
   # r10k configuration
