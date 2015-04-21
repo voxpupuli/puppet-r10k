@@ -257,4 +257,107 @@ describe 'r10k::install' , :type => 'class' do
       )
     }
   end
+  context "Puppet Enterprise 3.7.x on a RedHat 5 installing via pe_gem with empty install_options" do
+    let :params do
+      {
+        :manage_ruby_dependency => 'BOGON',
+        :package_name           => 'r10k',
+        :provider               => 'pe_gem',
+        :version                => '1.5.0',
+        :keywords               => '',
+        :install_options        => [],
+      }
+    end
+    let :facts do
+      {
+        :manage_ruby_dependency => 'BOGON',
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '5',
+        :operatingsystem        => 'Centos',
+        :is_pe                  => '',
+        :pe_version             => '3.7.0'
+      }
+    end
+    it { should contain_package("r10k").with(
+        :ensure     => '1.5.0',
+        :provider   => 'pe_gem',
+        :install_options => ['--no-ri', '--no-rdoc']
+      )
+    }
+  end
+  context "On a RedHat 5 installing via gem with empty install_options" do
+    let :params do
+      {
+        :manage_ruby_dependency => 'include',
+        :package_name           => 'r10k',
+        :provider               => 'gem',
+        :version                => '1.5.0',
+        :keywords               => '',
+        :install_options        => [],
+      }
+    end
+    let :facts do
+      {
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '5',
+        :operatingsystem        => 'Centos',
+      }
+    end
+    it { should contain_package("r10k").with(
+        :ensure     => '1.5.0',
+        :provider   => 'gem',
+        :install_options => ['--no-ri', '--no-rdoc']
+      )
+    }
+  end
+  context "On a RedHat 5 installing via gem with populated install_options" do
+    let :params do
+      {
+        :manage_ruby_dependency => 'include',
+        :package_name           => 'r10k',
+        :provider               => 'gem',
+        :version                => '1.5.0',
+        :keywords               => '',
+        :install_options        => ['BOGON'],
+      }
+    end
+    let :facts do
+      {
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '5',
+        :operatingsystem        => 'Centos',
+      }
+    end
+    it { should contain_package("r10k").with(
+        :ensure     => '1.5.0',
+        :provider   => 'gem',
+        :install_options => ['BOGON']
+      )
+    }
+  end
+  context "On a RedHat 5 installing via yum with populated install_options" do
+    let :params do
+      {
+        :manage_ruby_dependency => 'include',
+        :package_name           => 'r10k',
+        :provider               => 'yum',
+        :version                => '1.5.0',
+        :keywords               => '',
+        :install_options        => ['BOGON'],
+      }
+    end
+    let :facts do
+      {
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '5',
+        :operatingsystem        => 'Centos',
+      }
+    end
+    it { should contain_package("r10k").with(
+        :ensure     => '1.5.0',
+        :provider   => 'yum',
+        :install_options => ['BOGON']
+      )
+    }
+  end
 end
