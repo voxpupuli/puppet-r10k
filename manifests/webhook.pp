@@ -13,11 +13,11 @@ class r10k::webhook(
   }
 
   file { '/var/log/webhook':
-    ensure   => 'directory',
-    owner    => $user,
-    group    => $group,
-    recurse  => true,
-    before   => File['webhook_bin'],
+    ensure  => 'directory',
+    owner   => $user,
+    group   => $group,
+    recurse => true,
+    before  => File['webhook_bin'],
   }
 
   file { '/var/run/webhook':
