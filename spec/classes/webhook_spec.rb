@@ -12,13 +12,13 @@ describe 'r10k::webhook' , :type => 'class' do
     end
     it { should contain_package('sinatra').with(
         'ensure'   => 'installed',
-        'provider' => 'pe_gem',
+        'provider' => 'pe_gem'
       )
     }
 
     it { should contain_package('sinatra').with(
         'ensure'    => 'installed',
-        'provider'  => 'pe_gem',
+        'provider'  => 'pe_gem'
       )
     }
     it { should contain_file('peadmin-cert.pem').with(
@@ -26,7 +26,7 @@ describe 'r10k::webhook' , :type => 'class' do
         'ensure'  => 'file',
         'owner'   => 'peadmin',
         'group'   => 'peadmin',
-        'mode'    => '0644',
+        'mode'    => '0644'
       )
     }
   end
@@ -36,18 +36,18 @@ describe 'r10k::webhook' , :type => 'class' do
         :osfamily               => 'RedHat',
         :operatingsystemrelease => '5',
         :operatingsystem        => 'Centos',
-        :puppetversion          => '2.7.0',
+        :puppetversion          => '2.7.0'
       }
     end
 
     it { should contain_package('sinatra').with(
         'ensure'    => 'installed',
-        'provider'  => 'gem',
+        'provider'  => 'gem'
       )
     }
 
     it { should_not contain_package('rack').with(
-        'ensure'   => 'installed',
+        'ensure'   => 'installed'
       )
     }
   end
@@ -57,42 +57,42 @@ describe 'r10k::webhook' , :type => 'class' do
         :osfamily               => 'RedHat',
         :operatingsystemrelease => '5',
         :operatingsystem        => 'Centos',
-        :puppetversion          => '3.7.1',
+        :puppetversion          => '3.7.1'
       }
     end
 
     it { should contain_package('sinatra').with(
         'ensure'    => 'installed',
-        'provider'  => 'gem',
+        'provider'  => 'gem'
       )
     }
 
     it { should contain_package('webrick').with(
         'ensure'   => 'installed',
-        'provider' => 'gem',
+        'provider' => 'gem'
       )
     }
 
     it { should contain_package('rack').with(
         'ensure'   => 'installed',
-        'provider' => 'gem',
+        'provider' => 'gem'
       )
     }
 
     it { should contain_package('sinatra').with(
         'ensure'   => 'installed',
-        'provider' => 'gem',
+        'provider' => 'gem'
       )
     }
 
     it { should contain_package('json').with(
         'ensure'   => 'installed',
-        'provider' => 'gem',
+        'provider' => 'gem'
       )
     }
 
     it { should_not contain_file('peadmin-cert.pem').with(
-        'path'   => '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem',
+        'path'   => '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem'
       )
     }
   end
@@ -102,16 +102,16 @@ describe 'r10k::webhook' , :type => 'class' do
         :osfamily               => 'RedHat',
         :operatingsystemrelease => '5',
         :operatingsystem        => 'Centos',
-        :puppetversion          => '3.2.1',
+        :puppetversion          => '3.2.1'
       }
     end
     it { should_not contain_package('rack').with(
         'ensure'   => 'installed',
-        'provider' => 'gem',
+        'provider' => 'gem'
       )
     }
     it { should_not contain_file('peadmin-cert.pem').with(
-        'path'   => '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem',
+        'path'   => '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem'
       )
     }
   end
