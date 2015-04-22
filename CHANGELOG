@@ -1,3 +1,5 @@
+2.7.3 - esalberg
+ * Regression from 2.7.1
 2.7.2 - Federico Voges & Ben ford
  * Fix #155 gem install issues with arguments
 2.7.1 - Alex Scoble & esalberg & annaken
