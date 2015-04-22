@@ -73,7 +73,7 @@ class r10k::webhook(
           owner   => 'peadmin',
           group   => 'peadmin',
           mode    => '0644',
-          content => file('/etc/puppetlabs/puppet/ssl/certs/pe-internal-peadmin-mcollective-client.pem'),
+          content => file('/etc/puppetlabs/puppet/ssl/certs/pe-internal-peadmin-mcollective-client.pem','/dev/null'),
           notify  => Service['webhook'],
       }
     }
