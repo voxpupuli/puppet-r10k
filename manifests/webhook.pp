@@ -47,14 +47,6 @@ class r10k::webhook(
     hasstatus => false,
   }
 
-  if !defined(Package['sinatra']) {
-    package { 'sinatra':
-      ensure   => installed,
-      provider => 'gem',
-      before   => Service['webhook'],
-    }
-  }
-
   if $::is_pe == true or $::is_pe == 'true' {
     if versioncmp($::pe_version, '3.7.0') >= 0 {
       if !defined(Package['rack']) {
@@ -64,6 +56,15 @@ class r10k::webhook(
           before   => Service['webhook'],
         }
       }
+
+      if !defined(Package['sinatra']) {
+        package { 'sinatra':
+          ensure   => installed,
+          provider => 'pe_gem',
+          before   => Service['webhook'],
+        }
+      }
+
       # 3.7 does not place the certificate in peadmin's ~
       # This places it there as if it was an upgrade
       file { 'peadmin-cert.pem':
@@ -88,6 +89,14 @@ class r10k::webhook(
 
     if !defined(Package['json']) {
       package { 'json':
+        ensure   => installed,
+        provider => 'gem',
+        before   => Service['webhook'],
+      }
+    }
+
+    if !defined(Package['sinatra']) {
+      package { 'sinatra':
         ensure   => installed,
         provider => 'gem',
         before   => Service['webhook'],
