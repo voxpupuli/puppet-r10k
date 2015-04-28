@@ -2,7 +2,7 @@
 class r10k::params
 {
   $package_name           = ''
-  $version                = '1.4.1'
+  $version                = '1.5.1'
   $manage_modulepath      = false
   $manage_ruby_dependency = 'declare'
   $install_options        = []
@@ -49,6 +49,8 @@ class r10k::params
   $webhook_enable_ssl            = true
   $webhook_use_mcollective       = true
   $webhook_r10k_deploy_arguments = '-pv'
+  $webhook_public_key_path       = undef
+  $webhook_private_key_path      = undef
 
   if $::osfamily == Debian {
     $functions_path     = '/lib/lsb/init-functions'
@@ -102,4 +104,6 @@ class r10k::params
   $mc_app_name         = "${module_name}.rb"
   $mc_agent_path       = "${plugins_dir}/agent"
   $mc_application_path = "${plugins_dir}/application"
+  $mc_http_proxy       = undef
+  $mc_git_ssl_verify   = 0
 }

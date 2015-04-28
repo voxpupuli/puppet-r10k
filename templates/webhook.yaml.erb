@@ -1,1 +1,1 @@
-<%= @webhook_hash.to_yaml %>
+<%= @webhook_hash.select!{ |k,v| v != :undef }.to_yaml %>

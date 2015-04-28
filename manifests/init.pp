@@ -18,20 +18,21 @@ class r10k (
   $manage_configfile_symlink = $r10k::params::manage_configfile_symlink,
   $configfile_symlink        = $r10k::params::configfile_symlink,
   $include_prerun_command    = false,
+  $include_postrun_command   = false,
 ) inherits r10k::params {
 
   $ruby_dependency_options=['include','declare','ignore']
   validate_re($manage_ruby_dependency,$ruby_dependency_options)
-  if is_string($include_prerun_command) {
-    $include_prerun_command_real = str2bool($include_prerun_command)
-  } else {
-    $include_prerun_command_real = $include_prerun_command
-  }
-  validate_bool($include_prerun_command_real)
 
-  if $include_prerun_command_real == true {
+  # TODO: Clean this up when 3.0 to require a boolean
+  if $include_prerun_command == true  or $include_prerun_command == 'true'{
     include r10k::prerun_command
   }
+
+  if $include_postrun_command == true  or $include_postrun_command == 'true'{
+    include r10k::postrun_command
+  }
+
 
   class { 'r10k::install':
     install_options        => $install_options,

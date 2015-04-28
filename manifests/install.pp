@@ -49,10 +49,27 @@ class r10k::install (
       elsif $provider == 'pe_gem' {
         include r10k::install::pe_gem
       }
-      package { $real_package_name:
-        ensure          => $version,
-        provider        => $provider,
-        install_options => $install_options,
+
+
+      # Currently we share a package resource to keep things simple
+      # Puppet seems to have a bug (see #87 ) related to passing an
+      # empty to value to the gem,pe_gem providers. This code
+      # converts an empty array to semi-standard gem options
+      # This was previously undef but that caused strict var issues
+      if $provider in ['pe_gem','gem' ] and $install_options == [] {
+        $provider_install_options = ['--no-ri', '--no-rdoc']
+      } else {
+        $provider_install_options = $install_options
+      }
+
+      # Puppet Enterprise 3.8 and ships an embedded r10k so thats all thats supported
+      # This conditional should not effect FOSS customers based on the fact
+      unless versioncmp($::pe_version, '3.8.0') >= 0 {
+        package { $real_package_name:
+          ensure          => $version,
+          provider        => $provider,
+          install_options => $provider_install_options
+        }
       }
     }
     default: { fail("${provider} is not supported. Valid values are: 'gem', 'pe_gem', 'bundle', 'portage', 'yum', 'zypper'") }
