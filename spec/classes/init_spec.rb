@@ -1,12 +1,23 @@
 require 'spec_helper'
 describe 'r10k' do
-  context 'with default values for params' do
+  context 'On RedHat with PE with default values for params' do
     let :facts do
       {
         :osfamily               => 'RedHat',
         :operatingsystemrelease => '5',
         :operatingsystem        => 'Centos',
         :is_pe                  => 'true'
+      }
+    end
+    it { should compile.with_all_deps }
+    it { should_not contain_class('r10k::prerun_command') }
+    it { should_not contain_class('r10k::postrun_command') }
+  end
+  context 'On OpenBSD with Puppet FOSS with default values for params' do
+    let :facts do
+      {
+        :osfamily               => 'OpenBSD',
+        :is_pe                  => 'false'
       }
     end
     it { should compile.with_all_deps }
@@ -21,7 +32,7 @@ describe 'r10k' do
   end
 
   ['true',true].each do |value|
-    context "with param include_prerun_command set to #{value}" do
+    context "On RedHat with PE with param include_prerun_command set to #{value}" do
       let(:params) { { :include_prerun_command => value } }
       let :facts do
         {
@@ -36,10 +47,23 @@ describe 'r10k' do
 
       it { should contain_class('r10k::prerun_command') }
     end
+    context "On OpenBSD with Puppet FOSS with param include_prerun_command set to #{value}" do
+      let(:params) { { :include_prerun_command => value } }
+      let :facts do
+        {
+          :osfamily               => 'OpenBSD',
+          :is_pe                  => 'false'
+        }
+      end
+
+      it { should compile.with_all_deps }
+
+      it { should contain_class('r10k::prerun_command') }
+    end
   end
 
   ['false',false].each do |value|
-    context "with param include_prerun_command set to #{value}" do
+    context "On RedHat with PE with param include_prerun_command set to #{value}" do
       let(:params) { { :include_prerun_command => value } }
       let :facts do
         {
@@ -54,10 +78,23 @@ describe 'r10k' do
 
       it { should_not contain_class('r10k::prerun_command') }
     end
+    context "On OpenBSD with Puppet FOSS with param include_prerun_command set to #{value}" do
+      let(:params) { { :include_prerun_command => value } }
+      let :facts do
+        {
+          :osfamily               => 'OpenBSD',
+          :is_pe                  => 'false'
+        }
+      end
+
+      it { should compile.with_all_deps }
+
+      it { should_not contain_class('r10k::prerun_command') }
+    end
   end
 
   ['true',true].each do |value|
-    context "with param include_postrun_command set to #{value}" do
+    context "On RedHat with PE with param include_postrun_command set to #{value}" do
       let(:params) { { :include_postrun_command => value } }
       let :facts do
         {
@@ -72,10 +109,23 @@ describe 'r10k' do
 
       it { should contain_class('r10k::postrun_command') }
     end
+    context "On OpenBSD with Puppet FOSS with param include_postrun_command set to #{value}" do
+      let(:params) { { :include_postrun_command => value } }
+      let :facts do
+        {
+          :osfamily               => 'OpenBSD',
+          :is_pe                  => 'false'
+        }
+      end
+
+      it { should compile.with_all_deps }
+
+      it { should contain_class('r10k::postrun_command') }
+    end
   end
 
   ['false',false].each do |value|
-    context "with param include_postrun_command set to #{value}" do
+    context "On RedHat with PE with param include_postrun_command set to #{value}" do
       let(:params) { { :include_postrun_command => value } }
       let :facts do
         {
@@ -83,6 +133,19 @@ describe 'r10k' do
           :operatingsystemrelease => '5',
           :operatingsystem        => 'Centos',
           :is_pe                  => 'true'
+        }
+      end
+
+      it { should compile.with_all_deps }
+
+      it { should_not contain_class('r10k::postrun_command') }
+    end
+    context "On OpenBSD with Puppet FOSS with param include_postrun_command set to #{value}" do
+      let(:params) { { :include_postrun_command => value } }
+      let :facts do
+        {
+          :osfamily               => 'OpenBSD',
+          :is_pe                  => 'false'
         }
       end
 
