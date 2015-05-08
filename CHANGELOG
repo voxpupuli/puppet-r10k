@@ -1,3 +1,5 @@
+2.7.4 - Rob Nelson
+  * Fix #162 for FOSS ruby 1.8.7 webhook.yaml issues
 2.7.3 - esalberg
  * Regression from 2.7.1
 2.7.2 - Federico Voges & Ben ford
