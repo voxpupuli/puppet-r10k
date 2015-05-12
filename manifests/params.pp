@@ -106,4 +106,13 @@ class r10k::params
   $mc_application_path = "${plugins_dir}/application"
   $mc_http_proxy       = undef
   $mc_git_ssl_verify   = 0
+
+  # Service Settings for SystemD in EL7
+  if $::osfamily == 'RedHat' and $::operatingsystemmajrelease == '7' {
+    $webhook_service_file     = '/usr/lib/systemd/system/webhook.service'
+    $webhook_service_template = 'webhook.service.erb'
+  } else {
+    $webhook_service_file     = '/etc/init.d/webhook'
+    $webhook_service_template = 'webhook.init.erb'
+  }
 }

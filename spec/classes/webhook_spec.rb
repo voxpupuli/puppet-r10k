@@ -115,4 +115,36 @@ describe 'r10k::webhook' , :type => 'class' do
       )
     }
   end
+  context 'Enterprise Linux 7 host with systemd' do
+    let :facts do
+      {
+        :osfamily                  => 'RedHat',
+        :operatingsystemmajrelease => '7',
+        :operatingsystem           => 'Centos',
+        :is_pe                     => 'true',
+        :pe_version                => '3.7.0'
+      }
+    end
+    it { should contain_file('webhook_init_script').with(
+         :path => '/usr/lib/systemd/system/webhook.service',
+         :content => /\[Unit\]/
+      )
+    }
+  end
+  context 'Non Enteprise Linux 7 host' do
+    let :facts do
+      {
+        :osfamily                  => 'RedHat',
+        :operatingsystemmajrelease => '6',
+        :operatingsystem           => 'Centos',
+        :is_pe                     => 'true',
+        :pe_version                => '3.7.0'
+      }
+    end
+    it { should contain_file('webhook_init_script').with(
+         :path => '/etc/init.d/webhook',
+         :content => /#!\/bin\/bash/
+      )
+    }
+  end
 end

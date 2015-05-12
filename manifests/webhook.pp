@@ -28,8 +28,8 @@ class r10k::webhook(
   }
 
   file { 'webhook_init_script':
-    content => template('r10k/webhook.init.erb'),
-    path    => '/etc/init.d/webhook',
+    content => template("r10k/${::r10k::params::webhook_service_template}"),
+    path    => $::r10k::params::webhook_service_file,
     require => Package['sinatra'],
     before  => File['webhook_bin'],
   }
