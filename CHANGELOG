@@ -1,3 +1,5 @@
+2.8.0 - Tom linkin
+  * Support for systemd on EL7 for webhook
 2.7.4 - Rob Nelson
   * Fix #162 for FOSS ruby 1.8.7 webhook.yaml issues
 2.7.3 - esalberg
