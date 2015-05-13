@@ -20,6 +20,7 @@ class r10k::install (
 
   if $package_name == '' {
     case $provider {
+      'openbsd': { $real_package_name = 'ruby21-r10k' }
       'portage': { $real_package_name = 'app-admin/r10k' }
       'yum':     { $real_package_name = 'rubygem-r10k' }
       default:   { $real_package_name = 'r10k' }
@@ -39,7 +40,7 @@ class r10k::install (
         version      => $version,
       }
     }
-    'pe_gem', 'gem', 'yum', 'zypper': {
+    'pe_gem', 'gem', 'openbsd', 'yum', 'zypper': {
       if $provider == 'gem' {
         class { 'r10k::install::gem':
           manage_ruby_dependency => $manage_ruby_dependency,
@@ -72,6 +73,6 @@ class r10k::install (
         }
       }
     }
-    default: { fail("${provider} is not supported. Valid values are: 'gem', 'pe_gem', 'bundle', 'portage', 'yum', 'zypper'") }
+    default: { fail("${module_name}: ${provider} is not supported. Valid values are: 'gem', 'pe_gem', 'bundle', 'openbsd', 'portage', 'yum', 'zypper'") }
   }
 }

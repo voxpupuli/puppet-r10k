@@ -21,9 +21,6 @@ class r10k::params
   $repo_path  = '/var/repos'
   $remote     = "ssh://${git_server}${repo_path}/modules.git"
 
-  # prerun_command in puppet.conf
-  $pre_postrun_command = 'r10k deploy environment -p'
-
   # Gentoo specific values
   $gentoo_keywords = ''
 
@@ -70,33 +67,51 @@ class r10k::params
     $plugins_dir     = '/opt/puppet/libexec/mcollective/mcollective'
     $modulepath      = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
     $provider        = 'pe_gem'
+    $r10k_binary     = 'r10k'
   } else {
     # Getting ready for FOSS support in this module
     $puppetconf_path = '/etc/puppet'
 
     # Mcollective configuration dynamic
-    $mc_service_name = 'mcollective'
     $modulepath = "${r10k_basedir}/\$environment/modules"
 
     case $::osfamily {
       'debian': {
-        $plugins_dir = '/usr/share/mcollective/plugins/mcollective'
-        $provider    = 'gem'
+        $plugins_dir     = '/usr/share/mcollective/plugins/mcollective'
+        $provider        = 'gem'
+        $r10k_binary     = 'r10k'
+        $mc_service_name = 'mcollective'
       }
       'gentoo': {
-        $plugins_dir = '/usr/libexec/mcollective/mcollective'
-        $provider    = 'portage'
+        $plugins_dir     = '/usr/libexec/mcollective/mcollective'
+        $provider        = 'portage'
+        $r10k_binary     = 'r10k'
+        $mc_service_name = 'mcollective'
       }
       'suse': {
-        $plugins_dir = '/usr/share/mcollective/plugins/mcollective'
-        $provider    = 'zypper'
+        $plugins_dir     = '/usr/share/mcollective/plugins/mcollective'
+        $provider        = 'zypper'
+        $r10k_binary     = 'r10k'
+        $mc_service_name = 'mcollective'
+      }
+      'openbsd': {
+        $plugins_dir     = '/usr/local/libexec/mcollective/mcollective'
+        $provider        = 'openbsd'
+        $r10k_binary     = 'r10k21'
+        $mc_service_name = 'mcollectived'
       }
       default: {
-        $plugins_dir = '/usr/libexec/mcollective/mcollective'
-        $provider    = 'gem'
+        $plugins_dir     = '/usr/libexec/mcollective/mcollective'
+        $provider        = 'gem'
+        $r10k_binary     = 'r10k'
+        $mc_service_name = 'mcollective'
       }
     }
   }
+
+  # prerun_command in puppet.conf
+  $pre_postrun_command = "${r10k_binary} deploy environment -p"
+
 
   # Mcollective configuration static
   $mc_agent_name       = "${module_name}.rb"
