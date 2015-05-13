@@ -55,6 +55,8 @@ if $config['enable_ssl'] then
   opts[:SSLCertName]     = [ [ "CN",WEBrick::Utils::getservername ] ]
 end
 
+$command_prefix = $config['command_prefix'] || ''
+
 class Server < Sinatra::Base
 
   set :static, false
@@ -128,10 +130,10 @@ class Server < Sinatra::Base
     def deploy_module(module_name)
       begin
         if $config['use_mcollective']
-          command = "mco r10k deploy_module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
+          command = "#{$command_prefix} mco r10k deploy_module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
         else
           # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
-          command = "r10k deploy module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
+          command = "#{$command_prefix} r10k deploy module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
         end
         message = "triggered: #{command}"
         Process.detach(fork{ exec "#{command}"})
@@ -154,10 +156,10 @@ class Server < Sinatra::Base
           end
         else
           if $config['use_mcollective']
-              command = "mco r10k deploy #{branch} >> #{$config['mco_logfile']} 2>&1 &"
+              command = "#{$command_prefix} mco r10k deploy #{branch} >> #{$config['mco_logfile']} 2>&1 &"
           else
             # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
-            command = "r10k deploy environment #{branch} #{$config['r10k_deploy_arguments']} >> #{$config['mco_logfile']} 2>&1 &"
+            command = "#{$command_prefix} r10k deploy environment #{branch} #{$config['r10k_deploy_arguments']} >> #{$config['mco_logfile']} 2>&1 &"
           end
           message = "triggered: #{command}"
           Process.detach(fork{ exec "#{command}"})

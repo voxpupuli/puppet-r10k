@@ -28,6 +28,7 @@ class r10k::webhook::config (
   $public_key_path       = $r10k::params::webhook_public_key_path,
   $private_key_path      = $r10k::params::webhook_private_key_path,
   $yaml_template         = $r10k::params::webhook_yaml_template,
+  $command_prefix        = $r10k::params::webhook_command_prefix,
   $configfile            = '/etc/webhook.yaml',
 ) inherits r10k::params {
 
@@ -54,6 +55,7 @@ class r10k::webhook::config (
       'r10k_deploy_arguments' => $r10k_deploy_arguments,
       'public_key_path'       => $public_key_path,
       'private_key_path'      => $private_key_path,
+      'command_prefix'        => $command_prefix,
     }
   } else {
     validate_hash($hash)
