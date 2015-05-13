@@ -1,4 +1,4 @@
-#!/opt/puppet/bin/ruby
+#!/usr/bin/env ruby
 #
 # This script is meant to be used with the external hooks script for Stash:
 # https://marketplace.atlassian.com/plugins/com.ngs.stash.externalhooks.external-hooks
@@ -14,7 +14,7 @@ require 'getoptlong'
 opts = GetoptLong.new(
   [ '--target',   '-t', GetoptLong::REQUIRED_ARGUMENT ],
   [ '--insecure', '-k', GetoptLong::NO_ARGUMENT ],
-  [ '--help',     '-h', GetoptLong::NO_ARGUMENT ],
+  [ '--help',     '-h', GetoptLong::NO_ARGUMENT ]
 )
 
 target = nil
