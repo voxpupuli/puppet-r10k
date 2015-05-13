@@ -3,6 +3,7 @@ class r10k::webhook(
   $user  = 'peadmin',
   $group = 'peadmin',
   $git_server = 'localhost',
+  $webhook_bin_template = $::r10k::params::webhook_bin_template,
 ) inherits r10k::params {
 
   File {
@@ -35,7 +36,7 @@ class r10k::webhook(
   }
 
   file { 'webhook_bin':
-    content => template('r10k/webhook.bin.erb'),
+    content => template($webhook_bin_template),
     path    => '/usr/local/bin/webhook',
     notify  => Service['webhook'],
   }

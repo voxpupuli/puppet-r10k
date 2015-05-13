@@ -27,6 +27,7 @@ class r10k::webhook::config (
   $r10k_deploy_arguments = $r10k::params::webhook_r10k_deploy_arguments,
   $public_key_path       = $r10k::params::webhook_public_key_path,
   $private_key_path      = $r10k::params::webhook_private_key_path,
+  $yaml_template         = $r10k::params::webhook_yaml_template,
   $configfile            = '/etc/webhook.yaml',
 ) inherits r10k::params {
 
@@ -65,7 +66,7 @@ class r10k::webhook::config (
     group   => '0',
     mode    => '0644',
     path    => $configfile,
-    content => template('r10k/webhook.yaml.erb'),
+    content => template($yaml_template),
     notify  => Service['webhook'],
   }
 }
