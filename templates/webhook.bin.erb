@@ -42,16 +42,18 @@ $config['private_key_path'] = File.join("#{$config['certpath']}", "#{$config['ce
 <% end %>
 
 opts = {
-        :Host               => $config['bind_address'],
-        :Port               => $config['port'],
-        :Logger             => $logger,
-        :ServerType         => WEBrick::Daemon,
-        :SSLEnable          => $config['enable_ssl'],
-        :SSLVerifyClient    => OpenSSL::SSL::VERIFY_NONE,
-        :SSLCertificate     => OpenSSL::X509::Certificate.new(File.open("#{$config['public_key_path']}").read),
-        :SSLPrivateKey      => OpenSSL::PKey::RSA.new(File.open("#{$config['private_key_path']}").read),
-        :SSLCertName        => [ [ "CN",WEBrick::Utils::getservername ] ]
+  :Host       => $config['bind_address'],
+  :Port       => $config['port'],
+  :Logger     => $logger,
+  :ServerType => WEBrick::Daemon,
+  :SSLEnable  => $config['enable_ssl'],
 }
+if $config['enable_ssl'] then
+  opts[:SSLVerifyClient] = OpenSSL::SSL::VERIFY_NONE,
+  opts[:SSLCertificate]  = OpenSSL::X509::Certificate.new(File.open("#{$config['public_key_path']}").read),
+  opts[:SSLPrivateKey]   = OpenSSL::PKey::RSA.new(File.open("#{$config['private_key_path']}").read),
+  opts[:SSLCertName]     = [ [ "CN",WEBrick::Utils::getservername ] ]
+end
 
 class Server < Sinatra::Base
 
