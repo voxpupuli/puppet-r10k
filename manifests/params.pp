@@ -52,7 +52,7 @@ class r10k::params
   $webhook_yaml_template         = 'r10k/webhook.yaml.erb'
   $webhook_command_prefix        = '' # 'sudo' is the canonical example for this
 
-  if $::osfamily == Debian {
+  if $::osfamily == 'Debian' {
     $functions_path     = '/lib/lsb/init-functions'
     $start_pidfile_args = '--pidfile=$pidfile'
   }
