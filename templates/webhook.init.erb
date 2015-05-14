@@ -41,7 +41,6 @@ start() {
 
 stop() {
     echo -n $"Stopping webhook: "
-    pid=`cat $pidfile 2> /dev/null`
     killproc -p $pidfile $webhook
     RETVAL=$?
     return $RETVAL
@@ -54,7 +53,11 @@ restart() {
 
 status() {
     if [ -f "${pidfile}" ]; then
+    <% if @osfamily == 'Debian' -%>
+        status_of_proc -p $pidfile $webhook
+    <% else -%>
         status -p $pidfile $webhook
+    <% end %>
         RETVAL=$?
     else
         RETVAL=3
