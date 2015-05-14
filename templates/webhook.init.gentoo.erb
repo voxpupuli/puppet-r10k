@@ -14,7 +14,7 @@ command=${WEBHOOK_BIN}
 pidfile=${WEBHOOK_PIDFILE}
 start_stop_daemon_args="--pidfile ${pidfile} \
   --user ${WEBHOOK_USER} \
-  --startas ${command}"
+  --name ${command}"
 
 depend() {
   need localmount
