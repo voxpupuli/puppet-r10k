@@ -129,7 +129,7 @@ class r10k::params
   if $::osfamily == 'RedHat' and $::operatingsystemmajrelease == '7' {
     $webhook_service_file     = '/usr/lib/systemd/system/webhook.service'
     $webhook_service_template = 'webhook.service.erb'
-  } $::osfamily == 'Gentoo' {
+  } elsif $::osfamily == 'Gentoo' {
     $webhook_service_file     = '/etc/init.d/webhook'
     $webhook_service_template = 'webhook.init.gentoo.erb'
   } else {
