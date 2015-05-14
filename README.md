@@ -112,7 +112,7 @@ A simple example of creating an ssh private key would use an exec to call `yes y
 The example above shows using `git_deploy_key` which would deploy that key to the remote git server via its api. This is often required in the programtic creation of compile masters.
 
 Given r10k will likely be downloading your modules, often on the first server
-it's run on you will have to puppet apply this module to bootstrap this
+it's run on, you will have to `puppet apply` this module to bootstrap this
 configuration and allow for ongoing management from there.
 
 ### Beginning with r10k
