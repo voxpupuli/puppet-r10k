@@ -42,22 +42,25 @@ $config['private_key_path'] = File.join("#{$config['certpath']}", "#{$config['ce
 <% end %>
 
 opts = {
-        :Host               => $config['bind_address'],
-        :Port               => $config['port'],
-        :Logger             => $logger,
-        :ServerType         => WEBrick::Daemon,
-        :SSLEnable          => $config['enable_ssl'],
-        :SSLVerifyClient    => OpenSSL::SSL::VERIFY_NONE,
-        :SSLCertificate     => OpenSSL::X509::Certificate.new(File.open("#{$config['public_key_path']}").read),
-        :SSLPrivateKey      => OpenSSL::PKey::RSA.new(File.open("#{$config['private_key_path']}").read),
-        :SSLCertName        => [ [ "CN",WEBrick::Utils::getservername ] ]
+  :Host       => $config['bind_address'],
+  :Port       => $config['port'],
+  :Logger     => $logger,
+  :ServerType => WEBrick::Daemon,
+  :SSLEnable  => $config['enable_ssl'],
+  :StartCallback => Proc.new { File.open(PIDFILE, 'w') {|f| f.write Process.pid } },
 }
+if $config['enable_ssl'] then
+  opts[:SSLVerifyClient] = OpenSSL::SSL::VERIFY_NONE
+  opts[:SSLCertificate]  = OpenSSL::X509::Certificate.new(File.open("#{$config['public_key_path']}").read)
+  opts[:SSLPrivateKey]   = OpenSSL::PKey::RSA.new(File.open("#{$config['private_key_path']}").read)
+  opts[:SSLCertName]     = [ [ "CN",WEBrick::Utils::getservername ] ]
+end
+
+$command_prefix = $config['command_prefix'] || ''
 
 class Server < Sinatra::Base
 
   set :static, false
-
-  #File.open('/var/run/webhook/webhook.pid', 'w') {|f| f.write $$ }
 
   get '/' do
     raise Sinatra::NotFound
@@ -126,10 +129,10 @@ class Server < Sinatra::Base
     def deploy_module(module_name)
       begin
         if $config['use_mcollective']
-          command = "mco r10k deploy_module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
+          command = "#{$command_prefix} mco r10k deploy_module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
         else
           # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
-          command = "r10k deploy module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
+          command = "#{$command_prefix} r10k deploy module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
         end
         message = "triggered: #{command}"
         Process.detach(fork{ exec "#{command}"})
@@ -152,10 +155,10 @@ class Server < Sinatra::Base
           end
         else
           if $config['use_mcollective']
-              command = "mco r10k deploy #{branch} >> #{$config['mco_logfile']} 2>&1 &"
+              command = "#{$command_prefix} mco r10k deploy #{branch} >> #{$config['mco_logfile']} 2>&1 &"
           else
             # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
-            command = "r10k deploy environment #{branch} #{$config['r10k_deploy_arguments']} >> #{$config['mco_logfile']} 2>&1 &"
+            command = "#{$command_prefix} r10k deploy environment #{branch} #{$config['r10k_deploy_arguments']} >> #{$config['mco_logfile']} 2>&1 &"
           end
           message = "triggered: #{command}"
           Process.detach(fork{ exec "#{command}"})

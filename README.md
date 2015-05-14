@@ -108,16 +108,16 @@ git_deploy_key { 'add_deploy_key_to_puppet_control':
   provider     => 'gitlab',
 }
 ```
-A simple example of creating a ssh private key would using an exec to call `yes y | ssh-keygen -t dsa -C "r10k" -f /root/.ssh/id_dsa -q -N ''`.
+A simple example of creating an ssh private key would use an exec to call `yes y | ssh-keygen -t dsa -C "r10k" -f /root/.ssh/id_dsa -q -N ''`.
 The example above shows using `git_deploy_key` which would deploy that key to the remote git server via its api. This is often required in the programtic creation of compile masters.
 
 Given r10k will likely be downloading your modules, often on the first server
-its ran on you will have to puppet apply this module to bootstrap this
+it's run on you will have to puppet apply this module to bootstrap this
 configuration and allow for ongoing management from there.
 
 ### Beginning with r10k
 
-The simplest example of using it would to declare a single remote that would be written to r10k.yaml.
+The simplest example of using it would be to declare a single remote that would be written to r10k.yaml.
 
 ```puppet
 class { 'r10k':
@@ -240,6 +240,9 @@ on demand synchronization. This mcollective application and agent can be
 installed on all masters using the following class
 _Note: You must have mcollective already configured for this tool to work,
 Puppet Enterprise users will automatically have mcollective configured._
+This class does not restart the mcollective or pe-mcollective server on the
+nodes to which it is applied, so you may need to restart mcollective for it
+to see the newly installed r10k agent.
 ```puppet
 include r10k::mcollective
 ```
@@ -270,7 +273,7 @@ the `user` parameter:
 mco r10k synchronize user=r10k
 ```
 
-Too obtain the output of running the shell command, run the agent like this:
+To obtain the output of running the shell command, run the agent like this:
 
 ```shell
 mco rpc r10k synchronize -v
@@ -297,7 +300,7 @@ Copy the peadmin mcollective configuration and private keys from the certificate
 ~~~
 Ensure you update the paths in _~/.mcollective_ when copying to new users whose name is not peadmin.
 Ideally mcollective will be used with more then just the peadmin user's certificate
-in the future. That said, if your git user does not have a home diretory, you can rename .mcollective as /etc/client.cfg
+in the future. That said, if your git user does not have a home directory, you can rename .mcollective as /etc/client.cfg
 and copy the certs to somewhere that is readable by the respective user.
 ~~~
 /home/gitolite/.mcollective
@@ -317,8 +320,8 @@ This webhook currently only runs on Puppet Enterprise and uses mcollective to au
 The webhook must be configured on the respective "control" repository a master that has mco installed and can contact the other masters in your fleet.
 
 ### Webhook Github Enterprise - Non Authenticated 
-This is an example of using the webhook without authentication
-The `git_webhook` type will using the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want all automate the addtion of the webhook to the repo.
+This is an example of using the webhook without authentication.
+The `git_webhook` type will use the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want to automate the addtion of the webhook to the repo.
 
 ```puppet
 # Internal webhooks often don't need authentication and ssl
@@ -362,7 +365,7 @@ git_webhook { 'web_post_receive_webhook_for_module' :
 
 ### Webhook Github Example - Authenticated 
 This is an example of using the webhook with authentication
-The `git_webhook` type will using the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want all automate the addtion of the webhook to the repo.
+The `git_webhook` type will use the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want to automate the addtion of the webhook to the repo.
 
 ```puppet
 # External webhooks often need authentication and ssl and authentication

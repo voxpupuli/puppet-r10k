@@ -41,15 +41,9 @@ start() {
 
 stop() {
     echo -n $"Stopping webhook: "
-    pid=`netstat -lnp | awk  '/.*:8088.*ruby/{sub("/.*","",$NF);print $NF}'`
-    #killproc -p $pidfile $webhook]
-    if kill -9 $pid ; then
-      success 'webhook'
-      return 0
-    else
-      failure 'webhook'
-      return 1
-    fi
+    killproc -p $pidfile $webhook
+    RETVAL=$?
+    return $RETVAL
 }
 
 restart() {
@@ -59,7 +53,11 @@ restart() {
 
 status() {
     if [ -f "${pidfile}" ]; then
+    <% if @osfamily == 'Debian' -%>
+        status_of_proc -p $pidfile $webhook
+    <% else -%>
         status -p $pidfile $webhook
+    <% end -%>
         RETVAL=$?
     else
         RETVAL=3
