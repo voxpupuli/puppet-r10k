@@ -41,15 +41,10 @@ start() {
 
 stop() {
     echo -n $"Stopping webhook: "
-    pid=`netstat -lnp | awk  '/.*:8088.*ruby/{sub("/.*","",$NF);print $NF}'`
-    #killproc -p $pidfile $webhook]
-    if kill -9 $pid ; then
-      success 'webhook'
-      return 0
-    else
-      failure 'webhook'
-      return 1
-    fi
+    pid=`cat $pidfile 2> /dev/null`
+    killproc -p $pidfile $webhook
+    RETVAL=$?
+    return $RETVAL
 }
 
 restart() {
