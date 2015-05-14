@@ -57,7 +57,7 @@ status() {
         status_of_proc -p $pidfile $webhook
     <% else -%>
         status -p $pidfile $webhook
-    <% end %>
+    <% end -%>
         RETVAL=$?
     else
         RETVAL=3
