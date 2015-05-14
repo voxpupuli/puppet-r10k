@@ -13,6 +13,7 @@ WEBHOOK_BIN=${WEBHOOK_BIN:=/usr/local/bin/webhook}
 command=${WEBHOOK_BIN}
 pidfile=${WEBHOOK_PIDFILE}
 start_stop_daemon_args="--pidfile ${pidfile} \
+  --chuid ${WEBHOOK_USER} \
   --user ${WEBHOOK_USER} \
   --name ${command}"
 

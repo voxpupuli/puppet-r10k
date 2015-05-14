@@ -31,7 +31,7 @@ start() {
     echo
     echo -n $"Starting webhook: "
     <% if @osfamily == 'Debian' -%>
-    start-stop-daemon --start --user ${DAEMON_USER:?} <%= scope.lookupvar('r10k::params::start_pidfile_args') %> --startas=$webhook
+    start-stop-daemon --start --chuid ${DAEMON_USER} --user ${DAEMON_USER:?} <%= scope.lookupvar('r10k::params::start_pidfile_args') %> --startas=$webhook
     <% else -%>
     daemon --user ${DAEMON_USER:?} <%= scope.lookupvar('r10k::params::start_pidfile_args') %> $webhook
     <% end -%>
