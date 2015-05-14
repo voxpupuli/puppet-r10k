@@ -47,11 +47,12 @@ opts = {
   :Logger     => $logger,
   :ServerType => WEBrick::Daemon,
   :SSLEnable  => $config['enable_ssl'],
+  :StartCallback => Proc.new { File.open(PIDFILE, 'w') {|f| f.write Process.pid } },
 }
 if $config['enable_ssl'] then
-  opts[:SSLVerifyClient] = OpenSSL::SSL::VERIFY_NONE,
-  opts[:SSLCertificate]  = OpenSSL::X509::Certificate.new(File.open("#{$config['public_key_path']}").read),
-  opts[:SSLPrivateKey]   = OpenSSL::PKey::RSA.new(File.open("#{$config['private_key_path']}").read),
+  opts[:SSLVerifyClient] = OpenSSL::SSL::VERIFY_NONE
+  opts[:SSLCertificate]  = OpenSSL::X509::Certificate.new(File.open("#{$config['public_key_path']}").read)
+  opts[:SSLPrivateKey]   = OpenSSL::PKey::RSA.new(File.open("#{$config['private_key_path']}").read)
   opts[:SSLCertName]     = [ [ "CN",WEBrick::Utils::getservername ] ]
 end
 
@@ -60,8 +61,6 @@ $command_prefix = $config['command_prefix'] || ''
 class Server < Sinatra::Base
 
   set :static, false
-
-  #File.open('/var/run/webhook/webhook.pid', 'w') {|f| f.write $$ }
 
   get '/' do
     raise Sinatra::NotFound

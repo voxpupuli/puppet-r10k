@@ -52,7 +52,7 @@ class r10k::params
   $webhook_yaml_template         = 'r10k/webhook.yaml.erb'
   $webhook_command_prefix        = '' # 'sudo' is the canonical example for this
 
-  if $::osfamily == Debian {
+  if $::osfamily == 'Debian' {
     $functions_path     = '/lib/lsb/init-functions'
     $start_pidfile_args = '--pidfile=$pidfile'
   }
@@ -129,6 +129,9 @@ class r10k::params
   if $::osfamily == 'RedHat' and $::operatingsystemmajrelease == '7' {
     $webhook_service_file     = '/usr/lib/systemd/system/webhook.service'
     $webhook_service_template = 'webhook.service.erb'
+  } elsif $::osfamily == 'Gentoo' {
+    $webhook_service_file     = '/etc/init.d/webhook'
+    $webhook_service_template = 'webhook.init.gentoo.erb'
   } else {
     $webhook_service_file     = '/etc/init.d/webhook'
     $webhook_service_template = 'webhook.init.erb'
