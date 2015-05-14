@@ -1,0 +1,28 @@
+#!/sbin/runscript
+# Copyright 1999-2015 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+# Author: Robin Johnson <robbat2@gentoo.org>
+# Description: Enables web based runs of r10k
+
+WEBHOOK_PIDDIR=${WEBHOOK_PIDDIR:=/var/run/webhook/}
+WEBHOOK_PIDFILE=${WEBHOOK_PIDFILE:=${WEBHOOK_PIDDIR}/webhook.pid}
+WEBHOOK_USER=${WEBHOOK_USER:=<%= @user %>}
+WEBHOOK_BIN=${WEBHOOK_BIN:=/usr/local/bin/webhook}
+
+command=${WEBHOOK_BIN}
+pidfile=${WEBHOOK_PIDFILE}
+start_stop_daemon_args="--pidfile ${pidfile} \
+  --user ${WEBHOOK_USER} \
+  --startas ${command}"
+
+depend() {
+  need localmount
+  use net logger
+}
+
+start_pre() {
+  checkpath -d -o "${WEBHOOK_USER}" "${WEBHOOK_PIDDIR}"
+}
+
+# vim: syntax=syntax=gentoo-init-d ts=2 sts et ai:
