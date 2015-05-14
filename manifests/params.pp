@@ -48,6 +48,9 @@ class r10k::params
   $webhook_r10k_deploy_arguments = '-pv'
   $webhook_public_key_path       = undef
   $webhook_private_key_path      = undef
+  $webhook_bin_template          = 'r10k/webhook.bin.erb'
+  $webhook_yaml_template         = 'r10k/webhook.yaml.erb'
+  $webhook_command_prefix        = '' # 'sudo' is the canonical example for this
 
   if $::osfamily == Debian {
     $functions_path     = '/lib/lsb/init-functions'

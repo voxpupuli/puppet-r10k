@@ -58,6 +58,7 @@ class r10k::config (
   $r10k_basedir              = $r10k::params::r10k_basedir,
   $manage_configfile_symlink = $r10k::params::manage_configfile_symlink,
   $configfile_symlink        = '/etc/r10k.yaml',
+  $r10k_yaml_template        = 'r10k/r10k.yaml.erb'
 ) inherits r10k::params {
 
   validate_bool($manage_modulepath)
@@ -92,7 +93,7 @@ class r10k::config (
     group   => '0',
     mode    => '0644',
     path    => $configfile,
-    content => template('r10k/r10k.yaml.erb'),
+    content => template($r10k_yaml_template),
   }
 
   if $manage_configfile_symlink_real == true {
