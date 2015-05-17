@@ -123,7 +123,8 @@ class r10k::params
   $mc_agent_path       = "${plugins_dir}/agent"
   $mc_application_path = "${plugins_dir}/application"
   $mc_http_proxy       = undef
-  $mc_git_ssl_verify   = 0
+  $mc_git_ssl_verify    = undef # Deprecated parameter - Renamed to $mc_git_ssl_no_verify for clarity
+  $mc_git_ssl_no_verify = 0
 
   # Service Settings for SystemD in EL7
   if $::osfamily == 'RedHat' and $::operatingsystemmajrelease == '7' {
