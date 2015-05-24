@@ -32,6 +32,8 @@ start() {
     echo -n $"Starting webhook: "
     <% if @osfamily == 'Debian' -%>
     start-stop-daemon --start --chuid ${DAEMON_USER} --user ${DAEMON_USER:?} <%= scope.lookupvar('r10k::params::start_pidfile_args') %> --startas=$webhook
+    <% elsif @osfamily == 'SUSE' -%>
+    start_daemon -u $DAEMON_USER -p $pidfile -f $webhook
     <% else -%>
     daemon --user ${DAEMON_USER:?} <%= scope.lookupvar('r10k::params::start_pidfile_args') %> $webhook
     <% end -%>
@@ -55,6 +57,8 @@ status() {
     if [ -f "${pidfile}" ]; then
     <% if @osfamily == 'Debian' -%>
         status_of_proc -p $pidfile $webhook
+    <% elsif @osfamily == 'SUSE' -%>
+        checkproc -k -p $pidfile $webhook
     <% else -%>
         status -p $pidfile $webhook
     <% end -%>
