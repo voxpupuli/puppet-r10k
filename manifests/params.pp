@@ -55,8 +55,9 @@ class r10k::params
   if $::osfamily == 'Debian' {
     $functions_path     = '/lib/lsb/init-functions'
     $start_pidfile_args = '--pidfile=$pidfile'
-  }
-  else {
+  } elsif $::osfamily == 'SUSE' {
+    $functions_path     = '/etc/rc.status'
+  } else {
     $functions_path     = '/etc/rc.d/init.d/functions'
     $start_pidfile_args = '--pidfile $pidfile'
   }
