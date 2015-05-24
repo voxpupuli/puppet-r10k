@@ -133,6 +133,9 @@ class r10k::params
   } elsif $::osfamily == 'Gentoo' {
     $webhook_service_file     = '/etc/init.d/webhook'
     $webhook_service_template = 'webhook.init.gentoo.erb'
+  } elsif $::osfamily == 'SUSE' and $::operatingsystemmajrelease >= '12' {
+    $webhook_service_file     = '/etc/systemd/system/webhook.service'
+    $webhook_service_template = 'webhook.service.erb'
   } else {
     $webhook_service_file     = '/etc/init.d/webhook'
     $webhook_service_template = 'webhook.init.erb'
