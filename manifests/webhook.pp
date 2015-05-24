@@ -1,8 +1,10 @@
 # This class creates a github webhoook to allow curl style post-rec scripts
 class r10k::webhook(
-  $user                 = $r10k::params::webhook_user,
-  $group                = $r10k::params::webhook_group,
-  $webhook_bin_template = $r10k::params::webhook_bin_template,
+  $user             = $r10k::params::webhook_user,
+  $group            = $r10k::params::webhook_group,
+  $bin_template     = $r10k::params::webhook_bin_template,
+  $service_template = $r10k::params::webhook_service_template,
+  $service_file     = $r10k::params::webhook_service_file,
 ) inherits r10k::params {
 
   File {
@@ -28,14 +30,14 @@ class r10k::webhook(
   }
 
   file { 'webhook_init_script':
-    content => template("r10k/${::r10k::params::webhook_service_template}"),
-    path    => $::r10k::params::webhook_service_file,
+    content => template("r10k/${service_template}"),
+    path    => $service_file,
     require => Package['sinatra'],
     before  => File['webhook_bin'],
   }
 
   file { 'webhook_bin':
-    content => template($webhook_bin_template),
+    content => template($bin_template),
     path    => '/usr/local/bin/webhook',
     notify  => Service['webhook'],
   }
