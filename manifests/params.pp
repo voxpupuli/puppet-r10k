@@ -28,8 +28,6 @@ class r10k::params
   $mcollective = false
 
   # Webhook configuration information
-  $webhook_user                  = 'puppet'
-  $webhook_pass                  = 'puppet'
   $webhook_bind_address          = '0.0.0.0'
   $webhook_port                  = '8088'
   $webhook_access_logfile        = '/var/log/webhook/access.log'
@@ -71,12 +69,20 @@ class r10k::params
     $modulepath      = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
     $provider        = 'pe_gem'
     $r10k_binary     = 'r10k'
+
+    # webhook
+    $webhook_user    = 'peadmin'
+    $webhook_pass    = 'peadmin'
   } else {
     # Getting ready for FOSS support in this module
     $puppetconf_path = '/etc/puppet'
 
     # Mcollective configuration dynamic
     $modulepath = "${r10k_basedir}/\$environment/modules"
+
+    # webhook
+    $webhook_user    = 'puppet'
+    $webhook_pass    = 'puppet'
 
     case $::osfamily {
       'debian': {
