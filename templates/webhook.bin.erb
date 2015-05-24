@@ -12,12 +12,10 @@ require 'sinatra/base'
 require 'webrick'
 require 'webrick/https'
 require 'openssl'
-require 'mcollective'
 require 'resolv'
 require 'json'
 require 'yaml'
 require 'cgi'
-include MCollective::RPC
 
 
 WEBHOOK_CONFIG = '/etc/webhook.yaml'
@@ -54,6 +52,11 @@ if $config['enable_ssl'] then
   opts[:SSLCertificate]  = OpenSSL::X509::Certificate.new(File.open("#{$config['public_key_path']}").read)
   opts[:SSLPrivateKey]   = OpenSSL::PKey::RSA.new(File.open("#{$config['private_key_path']}").read)
   opts[:SSLCertName]     = [ [ "CN",WEBrick::Utils::getservername ] ]
+end
+
+if $config['use_mcollective'] then
+  require 'mcollective'
+  include MCollective::RPC
 end
 
 $command_prefix = $config['command_prefix'] || ''
