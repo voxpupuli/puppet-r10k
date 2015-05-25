@@ -30,6 +30,8 @@ class r10k::webhook::config (
   $yaml_template         = $r10k::params::webhook_yaml_template,
   $command_prefix        = $r10k::params::webhook_command_prefix,
   $configfile            = '/etc/webhook.yaml',
+  $manage_symlink        = false,
+  $configfile_symlink    = '/etc/webhook.yaml',
 ) inherits r10k::params {
 
   if $hash == 'UNSET' {
@@ -70,5 +72,13 @@ class r10k::webhook::config (
     path    => $configfile,
     content => template($yaml_template),
     notify  => Service['webhook'],
+  }
+
+  if $manage_symlink {
+    file { 'symlink_webhook.yaml':
+      ensure => 'link',
+      path   => $configfile_symlink,
+      target => $configfile,
+    }
   }
 }
