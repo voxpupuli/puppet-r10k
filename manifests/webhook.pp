@@ -7,6 +7,8 @@ class r10k::webhook(
   $service_file     = $r10k::params::webhook_service_file,
 ) inherits r10k::params {
 
+  include r10k::webhook::config
+
   File {
     ensure => file,
     owner  => 'root',
