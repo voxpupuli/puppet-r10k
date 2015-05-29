@@ -30,7 +30,6 @@ class r10k::params
   $webhook_bind_address          = '0.0.0.0'
   $webhook_port                  = '8088'
   $webhook_access_logfile        = '/var/log/webhook/access.log'
-  $webhook_mco_logfile           = '/var/log/webhook/mco_output.log'
   $webhook_certname              = 'peadmin'
   $webhook_certpath              = '/var/lib/peadmin/.mcollective.d'
   $webhook_client_cfg            = '/var/lib/peadmin/.mcollective'
