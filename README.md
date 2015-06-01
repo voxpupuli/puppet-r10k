@@ -557,6 +557,7 @@ The supported installation modes for this module
 * yum
 * bundle
 * pe_gem
+* puppet_gem
 * gem
 * zypper
 
