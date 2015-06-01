@@ -73,6 +73,7 @@ class r10k::params
     # webhook
     $webhook_user    = 'peadmin'
     $webhook_pass    = 'peadmin'
+    $webhook_group   = 'peadmin'
   } else {
     # Getting ready for FOSS support in this module
     $puppetconf_path = '/etc/puppet'
@@ -83,6 +84,7 @@ class r10k::params
     # webhook
     $webhook_user    = 'puppet'
     $webhook_pass    = 'puppet'
+    $webhook_group   = 'puppet'
 
     case $::osfamily {
       'debian': {
