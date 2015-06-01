@@ -40,7 +40,7 @@ class r10k::install (
         version      => $version,
       }
     }
-    'pe_gem', 'gem', 'openbsd', 'yum', 'zypper': {
+    'pe_gem', 'puppet_gem', 'gem', 'openbsd', 'yum', 'zypper': {
       if $provider == 'gem' {
         class { 'r10k::install::gem':
           manage_ruby_dependency => $manage_ruby_dependency,
@@ -57,7 +57,7 @@ class r10k::install (
       # empty to value to the gem,pe_gem providers. This code
       # converts an empty array to semi-standard gem options
       # This was previously undef but that caused strict var issues
-      if $provider in ['pe_gem','gem' ] and $install_options == [] {
+      if $provider in ['pe_gem', 'puppet_gem', 'gem' ] and $install_options == [] {
         $provider_install_options = ['--no-ri', '--no-rdoc']
       } else {
         $provider_install_options = $install_options
@@ -73,6 +73,6 @@ class r10k::install (
         }
       }
     }
-    default: { fail("${module_name}: ${provider} is not supported. Valid values are: 'gem', 'pe_gem', 'bundle', 'openbsd', 'portage', 'yum', 'zypper'") }
+    default: { fail("${module_name}: ${provider} is not supported. Valid values are: 'gem', 'pe_gem', 'puppet_gem', 'bundle', 'openbsd', 'portage', 'yum', 'zypper'") }
   }
 }
