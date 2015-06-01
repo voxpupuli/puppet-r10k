@@ -132,13 +132,14 @@ class Server < Sinatra::Base
     def deploy_module(module_name)
       begin
         if $config['use_mcollective']
-          command = "#{$command_prefix} mco r10k deploy_module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
+          command = "#{$command_prefix} mco r10k deploy_module #{module_name}"
         else
           # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
-          command = "#{$command_prefix} r10k deploy module #{module_name} >> #{$config['mco_logfile']} 2>&1 &"
+          command = "#{$command_prefix} r10k deploy module #{module_name}"
         end
-        message = "triggered: #{command}"
-        Process.detach(fork{ exec "#{command}"})
+        stdout, stderr, exit_status = Open3.capture3(command)
+        raise "#{stdout}\n#{stderr}" if exit_status != 0
+        message = "triggered: #{command}\n#{stdout}\n#{stderr}"
         $logger.info("message: #{message} module_name: #{module_name}")
         {:status => :success, :message => message.to_s }.to_json
       rescue => e
@@ -158,13 +159,14 @@ class Server < Sinatra::Base
           end
         else
           if $config['use_mcollective']
-              command = "#{$command_prefix} mco r10k deploy #{branch} >> #{$config['mco_logfile']} 2>&1 &"
+              command = "#{$command_prefix} mco r10k deploy #{branch}"
           else
             # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
-            command = "#{$command_prefix} r10k deploy environment #{branch} #{$config['r10k_deploy_arguments']} >> #{$config['mco_logfile']} 2>&1 &"
+            command = "#{$command_prefix} r10k deploy environment #{branch} #{$config['r10k_deploy_arguments']}"
           end
-          message = "triggered: #{command}"
-          Process.detach(fork{ exec "#{command}"})
+          stdout, stderr, exit_status = Open3.capture3(command)
+          raise "#{stdout}\n#{stderr}" if exit_status != 0
+          message = "triggered: #{command}\n#{stdout}\n#{stderr}"
         end
         $logger.info("message: #{message} branch: #{branch}")
         {:status => :success, :message => message.to_s }.to_json
