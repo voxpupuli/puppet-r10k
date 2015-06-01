@@ -5,6 +5,7 @@ class r10k::webhook(
   $bin_template     = $r10k::params::webhook_bin_template,
   $service_template = $r10k::params::webhook_service_template,
   $service_file     = $r10k::params::webhook_service_file,
+  $manage_packages  = true,
 ) inherits r10k::params {
 
   File {
@@ -32,7 +33,6 @@ class r10k::webhook(
   file { 'webhook_init_script':
     content => template("r10k/${service_template}"),
     path    => $service_file,
-    require => Package['sinatra'],
     before  => File['webhook_bin'],
   }
 
@@ -48,25 +48,12 @@ class r10k::webhook(
     pattern => '.*ruby.*webhoo[k]$',
   }
 
+  if $manage_packages {
+    include webhook::package
+  }
+
   if $::is_pe == true or $::is_pe == 'true' {
-    if !defined(Package['sinatra']) {
-      package { 'sinatra':
-        ensure   => installed,
-        provider => 'pe_gem',
-        before   => Service['webhook'],
-      }
-    }
-
     if versioncmp($::pe_version, '3.7.0') >= 0 {
-
-      if !defined(Package['rack']) {
-        package { 'rack':
-          ensure   => installed,
-          provider => 'pe_gem',
-          before   => Service['webhook'],
-        }
-      }
-
       # 3.7 does not place the certificate in peadmin's ~
       # This places it there as if it was an upgrade
       file { 'peadmin-cert.pem':
@@ -77,41 +64,6 @@ class r10k::webhook(
           mode    => '0644',
           content => file('/etc/puppetlabs/puppet/ssl/certs/pe-internal-peadmin-mcollective-client.pem','/dev/null'),
           notify  => Service['webhook'],
-      }
-    }
-  }
-  else {
-    if !defined(Package['webrick']) {
-      package { 'webrick':
-        ensure   => installed,
-        provider => 'gem',
-        before   => Service['webhook'],
-      }
-    }
-
-    if !defined(Package['json']) {
-      package { 'json':
-        ensure   => installed,
-        provider => 'gem',
-        before   => Service['webhook'],
-      }
-    }
-
-    if !defined(Package['sinatra']) {
-      package { 'sinatra':
-        ensure   => installed,
-        provider => 'gem',
-        before   => Service['webhook'],
-      }
-    }
-
-    if versioncmp($::puppetversion, '3.7.0') >= 0 {
-      if !defined(Package['rack']) {
-        package { 'rack':
-          ensure   => installed,
-          provider => 'gem',
-          before   => Service['webhook'],
-        }
       }
     }
   }
