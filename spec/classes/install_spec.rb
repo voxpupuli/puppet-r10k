@@ -207,7 +207,7 @@ describe 'r10k::install' , :type => 'class' do
         :osfamily               => 'RedHat',
         :operatingsystemrelease => '5',
         :operatingsystem        => 'Centos',
-        :is_pe                  => '',
+        :is_pe                  => true,
         :pe_version             => '3.8.1'
       }
     end
