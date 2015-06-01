@@ -8,6 +8,8 @@ class r10k::webhook(
   $manage_packages  = true,
 ) inherits r10k::params {
 
+  include r10k::webhook::config
+
   File {
     ensure => file,
     owner  => 'root',
