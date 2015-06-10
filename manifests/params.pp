@@ -9,7 +9,11 @@ class r10k::params
   $sources                = undef
 
   # r10k configuration
-  $r10k_config_file          = '/etc/r10k.yaml'
+  if versioncmp($version, '1.5.0') >= 0 {
+    $r10k_config_file          = '/etc/puppetlabs/r10k/r10k.yaml'
+  } else {
+    $r10k_config_file          = '/etc/r10k.yaml'
+  }
   $r10k_cache_dir            = '/var/cache/r10k'
   $r10k_basedir              = "${::settings::confdir}/environments"
   $manage_configfile_symlink = false

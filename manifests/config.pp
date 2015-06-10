@@ -79,6 +79,17 @@ class r10k::config (
     $source_keys = keys($r10k_sources)
   }
 
+  if $configfile == '/etc/puppetlabs/r10k/r10k.yaml' {
+    file {['/etc/puppetlabs', '/etc/puppetlabs/r10k']:
+      ensure => directory,
+      before => File['r10k.yaml'],
+    }
+
+    file {'/etc/r10k.yaml':
+      ensure => absent,
+    }
+  }
+
   file { 'r10k.yaml':
     ensure  => file,
     owner   => 'root',
