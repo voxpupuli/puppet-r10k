@@ -53,14 +53,14 @@ restart() {
     start
 }
 
-status() {
+whstatus() {
     if [ -f "${pidfile}" ]; then
     <% if @osfamily == 'Debian' -%>
         status_of_proc -p $pidfile $webhook
     <% elsif @osfamily == 'SUSE' -%>
         checkproc -k -p $pidfile $webhook
     <% else -%>
-        status -p $pidfile $webhook
+        status $webhook $pidfile
     <% end -%>
         RETVAL=$?
     else
@@ -81,7 +81,7 @@ case "$1" in
         restart
     ;;
     status)
-        status
+        whstatus
     ;;
     *)
         echo $"Usage: $0 {start|stop|status|restart}"
