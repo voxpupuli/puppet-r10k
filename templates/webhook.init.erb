@@ -60,7 +60,7 @@ whstatus() {
     <% elsif @osfamily == 'SUSE' -%>
         checkproc -k -p $pidfile $webhook
     <% else -%>
-        status $webhook $pidfile
+        status -p $pidfile $webhook
     <% end -%>
         RETVAL=$?
     else
