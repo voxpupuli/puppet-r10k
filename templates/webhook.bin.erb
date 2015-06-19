@@ -82,7 +82,7 @@ class Server < Sinatra::Base
     if $config['git_provider'] == 'github'
       module_name = ( data['repository']['name'] ).sub(/^.*-/, '')
     elsif $config['git_provider'] == 'bitbucket'
-      module_name = (data['pullrequest_merged']['destination']['repository']).sub(/^.*-/, '')
+      module_name = (data['pullrequest_merged']['destination']['repository']['name']).sub(/^.*-/, '')
     else
       $logger.error("Unsupport git provider: #{$config['git_provider']}")
     end
