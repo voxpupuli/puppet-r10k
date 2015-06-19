@@ -79,7 +79,13 @@ class Server < Sinatra::Base
 
     data = JSON.parse(decoded, :quirks_mode => true)
 
-    module_name = ( data['repository']['name'] ).sub(/^.*-/, '')
+    if $config['git_provider'] == 'github'
+      module_name = ( data['repository']['name'] ).sub(/^.*-/, '')
+    elsif $config['git_provider'] == 'bitbucket'
+      module_name = (data['pullrequest_merged']['destination']['repository']).sub(/^.*-/, '')
+    else
+      $logger.error("Unsupport git provider: #{$config['git_provider']}")
+    end
 
     deploy_module(module_name)
   end
@@ -108,7 +114,13 @@ class Server < Sinatra::Base
     data = JSON.parse(decoded, :quirks_mode => true)
 
     # github sends a 'ref', stash sends an array in 'refChanges'
-    branch = ( data['ref'] || data['refChanges'][0]['refId'] ).sub('refs/heads/', '')
+    if $config['git_provider'] == 'github'
+      branch = ( data['ref'] || data['refChanges'][0]['refId'] ).sub('refs/heads/', '')
+    elsif $config['git_provider'] == 'bitbucket'
+      branch = data['pullrequest_merged']['destination']['branch']['name']
+    else
+      $logger.error("Unsupport git provider: #{$config['git_provider']}")
+    end
 
     # If prefix is enabled in our config file run the command to determine the prefix
     if $config['prefix']
