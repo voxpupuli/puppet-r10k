@@ -53,7 +53,7 @@ restart() {
     start
 }
 
-status() {
+whstatus() {
     if [ -f "${pidfile}" ]; then
     <% if @osfamily == 'Debian' -%>
         status_of_proc -p $pidfile $webhook
@@ -81,7 +81,7 @@ case "$1" in
         restart
     ;;
     status)
-        status
+        whstatus
     ;;
     *)
         echo $"Usage: $0 {start|stop|status|restart}"
