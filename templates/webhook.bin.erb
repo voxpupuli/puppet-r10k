@@ -147,6 +147,7 @@ class Server < Sinatra::Base
         {:status => :success, :message => message.to_s }.to_json
       rescue => e
         $logger.error("message: #{e.message} trace: #{e.backtrace}")
+        status 500
         {:status => :fail, :message => e.message, :trace => e.backtrace}.to_json
       end
     end
@@ -175,6 +176,7 @@ class Server < Sinatra::Base
         {:status => :success, :message => message.to_s }.to_json
      rescue => e
         $logger.error("message: #{e.message} trace: #{e.backtrace}")
+        status 500
         {:status => :fail, :message => e.message, :trace => e.backtrace}.to_json
       end
     end  #end deploy()
