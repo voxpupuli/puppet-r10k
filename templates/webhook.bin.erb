@@ -99,6 +99,9 @@ class Server < Sinatra::Base
     $logger.info("authenticated: #{$config['user']}")
     request.body.rewind  # in case someone already read it
 
+    # Return success without deploying if this is a GitHub ping event
+    return 200 if request.env['HTTP_X_GITHUB_EVENT'] == 'ping'
+
     # Check if content type is x-www-form-urlencoded
     if request.content_type.to_s.downcase.eql?('application/x-www-form-urlencoded')
       decoded = CGI::unescape(request.body.read).gsub(/^payload\=/,'')
