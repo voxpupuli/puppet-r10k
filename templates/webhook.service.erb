@@ -3,11 +3,16 @@ Description=R10K Webhook Service
 After=syslog.target network.target
 
 [Service]
-Type=forking
-EnvironmentFile=-/etc/sysconfig/webhook
+Type=simple
 User=<%= @user %>
+TimeoutStartSec=90
+TimeoutStopSec=30
+
 ExecStart=/usr/local/bin/webhook
-PIDFile=/var/run/webhook/webhook.pid
+
+KillMode=process
+
+StandardOutput=syslog
 
 [Install]
 WantedBy=multi-user.target
