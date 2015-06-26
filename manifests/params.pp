@@ -136,13 +136,13 @@ class r10k::params
   # Service Settings for SystemD in EL7
   if $::osfamily == 'RedHat' and $::operatingsystemmajrelease == '7' {
     $webhook_service_file     = '/usr/lib/systemd/system/webhook.service'
-    $webhook_service_template = 'webhook.service.erb'
+    $webhook_service_template = 'webhook.rehat.service.erb'
   } elsif $::osfamily == 'Gentoo' {
     $webhook_service_file     = '/etc/init.d/webhook'
     $webhook_service_template = 'webhook.init.gentoo.erb'
   } elsif $::osfamily == 'SUSE' and $::operatingsystemmajrelease >= '12' {
     $webhook_service_file     = '/etc/systemd/system/webhook.service'
-    $webhook_service_template = 'webhook.service.erb'
+    $webhook_service_template = 'webhook.suse.service.erb'
   } else {
     $webhook_service_file     = '/etc/init.d/webhook'
     $webhook_service_template = 'webhook.init.erb'

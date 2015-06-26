@@ -1,0 +1,18 @@
+[Unit]
+Description=R10K Webhook Service
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=<%= @user %>
+TimeoutStartSec=90
+TimeoutStopSec=30
+
+ExecStart=/usr/local/bin/webhook
+
+KillMode=process
+
+StandardOutput=syslog
+
+[Install]
+WantedBy=multi-user.target
