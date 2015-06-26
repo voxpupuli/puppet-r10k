@@ -56,7 +56,6 @@ class r10k::webhook::config (
       'public_key_path'       => $public_key_path,
       'private_key_path'      => $private_key_path,
       'command_prefix'        => $command_prefix,
-      'git_provider'          => $git_provider,
     }
   } else {
     validate_hash($hash)
