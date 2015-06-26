@@ -28,18 +28,10 @@ class r10k::webhook::config (
   $private_key_path      = $r10k::params::webhook_private_key_path,
   $yaml_template         = $r10k::params::webhook_yaml_template,
   $command_prefix        = $r10k::params::webhook_command_prefix,
-  $git_provider          = $r10k::params::webhook_git_provider,
   $configfile            = '/etc/webhook.yaml',
   $manage_symlink        = false,
   $configfile_symlink    = '/etc/webhook.yaml',
 ) inherits r10k::params {
-  $valid_git_providers = [
-    'github',
-    'bitbucket'
-  ]
-  if ! member($valid_git_providers, $git_provider) {
-    fail("Webhook does not support git provider: ${git_provider}. Currently only support: ${valid_git_providers}")
-  }
 
   if $hash == 'UNSET' {
     $webhook_hash  = {

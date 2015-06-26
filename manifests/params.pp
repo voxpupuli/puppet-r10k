@@ -47,7 +47,6 @@ class r10k::params
   $webhook_bin_template          = 'r10k/webhook.bin.erb'
   $webhook_yaml_template         = 'r10k/webhook.yaml.erb'
   $webhook_command_prefix        = '' # 'sudo' is the canonical example for this
-  $webhook_git_provider          = 'github'
 
   if $::osfamily == 'Debian' {
     $functions_path     = '/lib/lsb/init-functions'
