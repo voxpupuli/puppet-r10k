@@ -4,6 +4,7 @@ After=syslog.target network.target
 
 [Service]
 Type=simple
+EnvironmentFile=-/etc/sysconfig/webhook
 User=<%= @user %>
 TimeoutStartSec=90
 TimeoutStopSec=30
