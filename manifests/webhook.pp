@@ -49,7 +49,7 @@ class r10k::webhook(
   }
 
   if $manage_packages {
-    include webhook::package
+    include r10k::webhook::package
   }
 
   if $::is_pe == true or $::is_pe == 'true' {
