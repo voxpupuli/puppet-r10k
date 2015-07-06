@@ -479,4 +479,46 @@ describe 'r10k::config' , :type => 'class' do
       end
     end
   end
+
+  describe 'with optional parameter postrun specified' do
+    context 'with array of system call "/usr/bin/curl -F deploy=done http://my-app.site/endpoint"' do
+      let :params do
+        {
+          :configfile        => '/etc/r10k.yaml',
+          :cachedir          => '/var/cache/r10k',
+          :manage_modulepath => false,
+          :postrun           => ['/usr/bin/curl', '-F', 'deploy=done', 'http://my-app.site/endpoint'],
+        }
+      end
+      it { should contain_file('r10k.yaml').with_content(/^:postrun: \[\"\/usr\/bin\/curl\", \"-F\", \"deploy=done\", \"http:\/\/my-app\.site\/endpoint\"\]$/) }
+    end
+
+    context 'with postrun left undefined' do
+      let :params do
+        {
+          :configfile        => '/etc/r10k.yaml',
+          :cachedir          => '/var/cache/r10k',
+          :manage_modulepath => false,
+        }
+      end
+      it { should contain_file('r10k.yaml').without_content(/^:postrun: .*$/) }
+    end
+
+    ['string', true, 1, 1.0, {}].each do |value|
+      context "with #{value}" do
+        let :params do
+          {
+            :configfile        => '/etc/r10k.yaml',
+            :cachedir          => '/var/cache/r10k',
+            :manage_modulepath => false,
+            :postrun           => value,
+          }
+        end
+        
+        it 'should fail when sources is not an Array' do
+          expect { subject }.to raise_error(Puppet::Error, /is not an Array/)
+        end
+      end
+    end
+  end
 end
