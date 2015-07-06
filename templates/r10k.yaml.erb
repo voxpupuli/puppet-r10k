@@ -1,3 +1,7 @@
+---
+<% if @postrun and @postrun.is_a?(Array) -%>
+:postrun: <%= @postrun %>
+<% end -%>
 :cachedir: <%= @cachedir %>
 <% unless @r10k_sources.empty? -%>
 :sources:
