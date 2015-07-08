@@ -28,7 +28,6 @@ else
   raise "Configuration file: #{WEBHOOK_CONFIG} does not exist"
 end
 
-ENV['HOME'] = '/var/lib/<%= @user %>'
 ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:<%= if @is_pe == true or @is_pe == 'true' then '/opt/puppet/bin' else '/usr/local/bin' end %>'
 
 $logger = WEBrick::Log::new($config['access_logfile'], WEBrick::Log::DEBUG)
