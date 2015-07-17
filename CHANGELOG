@@ -1,3 +1,5 @@
+2.8.2 - Jordan Olshevski
+  * Fix for RHEL 7 webhook
 2.8.2 - Jerald Sheets 
   * Troubleshooting RHEL 7 issues with systemd
 2.8.1 - See Commit History
