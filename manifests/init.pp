@@ -5,6 +5,7 @@ class r10k (
   $cachedir                  = $r10k::params::r10k_cache_dir,
   $configfile                = $r10k::params::r10k_config_file,
   $version                   = $r10k::params::version,
+  $puppet_master             = $r10k::params::puppet_master,
   $modulepath                = $r10k::params::modulepath,
   $manage_modulepath         = $r10k::params::manage_modulepath,
   $manage_ruby_dependency    = $r10k::params::manage_ruby_dependency,
@@ -40,6 +41,7 @@ class r10k (
     package_name           => $package_name,
     provider               => $provider,
     version                => $version,
+    puppet_master          => $puppet_master,
   }
 
   class { 'r10k::config':

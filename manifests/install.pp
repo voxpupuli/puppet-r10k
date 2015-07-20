@@ -6,6 +6,7 @@ class r10k::install (
   $keywords,
   $install_options,
   $manage_ruby_dependency,
+  $puppet_master,
 ) {
 
   # There are currently bugs in r10k 1.x which make using 0.x desireable in
@@ -48,9 +49,10 @@ class r10k::install (
         }
       }
       elsif $provider == 'pe_gem' {
-        include r10k::install::pe_gem
+        class { 'r10k::install::pe_gem':
+          puppet_master => $puppet_master,
+        }
       }
-
 
       # Currently we share a package resource to keep things simple
       # Puppet seems to have a bug (see #87 ) related to passing an
@@ -64,8 +66,8 @@ class r10k::install (
       }
 
       # Puppet Enterprise 3.8 and ships an embedded r10k so thats all thats supported
-      # This conditional should not effect FOSS customers based on the fact 
-      unless ($::is_pe == 'true' or $::is_pe == true) and versioncmp($::pe_version, '3.8.0') >= 0 {
+      # This conditional should not effect FOSS customers based on the fact
+      unless ($::is_pe == 'true' or $::is_pe == true) and versioncmp($::pe_version, '3.8.0') >= 0 and $puppet_master {
         package { $real_package_name:
           ensure          => $version,
           provider        => $provider,

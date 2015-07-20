@@ -7,6 +7,7 @@ class r10k::params
   $manage_ruby_dependency = 'declare'
   $install_options        = []
   $sources                = undef
+  $puppet_master          = true
 
   # r10k configuration
   $r10k_config_file          = '/etc/r10k.yaml'

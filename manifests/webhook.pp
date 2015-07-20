@@ -5,6 +5,7 @@ class r10k::webhook(
   $bin_template     = $r10k::params::webhook_bin_template,
   $service_template = $r10k::params::webhook_service_template,
   $service_file     = $r10k::params::webhook_service_file,
+  $use_mcollective  = $r10k::params::webhook_use_mcollective,
   $manage_packages  = true,
 ) inherits r10k::params {
 
@@ -52,11 +53,12 @@ class r10k::webhook(
     include r10k::webhook::package
   }
 
-  if $::is_pe == true or $::is_pe == 'true' {
-    if versioncmp($::pe_version, '3.7.0') >= 0 {
-      # 3.7 does not place the certificate in peadmin's ~
-      # This places it there as if it was an upgrade
-      file { 'peadmin-cert.pem':
+  if $use_mcollective == true {
+    if $::is_pe == true or $::is_pe == 'true' {
+      if versioncmp($::pe_version, '3.7.0') >= 0 {
+        # 3.7 does not place the certificate in peadmin's ~
+        # This places it there as if it was an upgrade
+        file { 'peadmin-cert.pem':
           ensure  => 'file',
           path    => '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem',
           owner   => 'peadmin',
@@ -64,6 +66,7 @@ class r10k::webhook(
           mode    => '0644',
           content => file('/etc/puppetlabs/puppet/ssl/certs/pe-internal-peadmin-mcollective-client.pem','/dev/null'),
           notify  => Service['webhook'],
+        }
       }
     }
   }
