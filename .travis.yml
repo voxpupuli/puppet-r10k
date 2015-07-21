@@ -3,6 +3,7 @@ sudo: false
 branches:
   only:
   - master
+  - sg_future_proof
 language: ruby
 bundler_args: --without development
 script:
