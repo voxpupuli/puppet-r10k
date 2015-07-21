@@ -8,7 +8,7 @@ class r10k::install (
   $manage_ruby_dependency,
 ) {
 
-  $pe_server_version = $r10k::params::pe_server_version
+  $is_pe_server = $r10k::params::is_pe_server
 
   # There are currently bugs in r10k 1.x which make using 0.x desireable in
   # certain circumstances. However, 0.x requires make and gcc. Conditionally
@@ -67,7 +67,7 @@ class r10k::install (
 
       # Puppet Enterprise 3.8 and ships an embedded r10k so thats all thats supported
       # This conditional should not effect FOSS customers based on the fact 
-      unless $pe_server_version and versioncmp($pe_server_version, '3.8.0') >= 0 {
+      unless $is_pe_server and versioncmp($::puppetversion, '3.8.0') >= 0 {
         package { $real_package_name:
           ensure          => $version,
           provider        => $provider,
