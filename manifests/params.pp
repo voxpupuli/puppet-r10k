@@ -57,7 +57,15 @@ class r10k::params
     $functions_path     = '/etc/rc.d/init.d/functions'
     $start_pidfile_args = '--pidfile $pidfile'
   }
+
   if $::is_pe == true or $::is_pe == 'true' {
+    $pe_server_version = $::pe_version
+  }
+  elsif is_function_available('pe_compiling_server_version') {
+    $pe_server_version = pe_compiling_server_version()
+  }
+
+  if $pe_server_version {
     # Puppet Enterprise specific settings
     $puppetconf_path = '/etc/puppetlabs/puppet'
 
