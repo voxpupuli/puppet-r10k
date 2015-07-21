@@ -32,6 +32,8 @@ global:
     - PUBLISHER_LOGIN=abrader
 matrix:
   exclude:
+    - rvm: 1.8.7
+      env: PUPPET_VERSION="~> 3.8.0"
     - rvm: 1.9.3
       env: PUPPET_VERSION="~> 2.7.0"
     - rvm: 2.0.0
