@@ -3,8 +3,6 @@ sudo: false
 branches:
   only:
   - master
-  - sg_future_proof
-  - fix/master/deterministic_webhook_config_creation
 language: ruby
 bundler_args: --without development
 script:
