@@ -26,10 +26,11 @@ env:
   - PUPPET_VERSION="~> 3.5.1"
   - PUPPET_VERSION="~> 3.6.0"
   - PUPPET_VERSION="~> 3.7.0"
+  - PUPPET_VERSION="~> 3.8.0"
   - PUPPET_VERSION="~> 3.8.1"
 
 global:
-    - PUBLISHER_LOGIN=acidprime
+    - PUBLISHER_LOGIN=abrader
 matrix:
   exclude:
     - rvm: 1.9.3
