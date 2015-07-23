@@ -211,6 +211,7 @@ describe 'r10k::install' , :type => 'class' do
         :pe_version             => '3.8.1'
       }
     end
+    it { is_expected.to contain_class("r10k::params") }
     it { should_not contain_package("r10k").with(
         :ensure     => '1.1.0',
         :provider   => 'pe_gem'
@@ -245,6 +246,7 @@ describe 'r10k::install' , :type => 'class' do
         :pe_version             => '3.7.0'
       }
     end
+    it { is_expected.to contain_class("r10k::params") }
     it { should contain_package("r10k").with(
         :ensure     => '1.1.0',
         :provider   => 'pe_gem'
