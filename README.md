@@ -138,7 +138,7 @@ class { 'r10k':
 }
 ```
 _Note: On Puppet Enterprise 3.8 and higher the package is not declared as 3.8
-ships with an embdedded r10k gem installed via the PE packages_
+ships with an embdedded r10k gem installed via the PE packages. To install r10k on a PE 3.8+ non-master, set puppet_master to false for the main r10k class (e.g. to use r10k with Razor)_
 
 ## Usage
 
@@ -415,7 +415,8 @@ git_webhook { 'web_post_receive_webhook_for_module' :
 ### Running without mcollective
 If you have only a single master, you may want to have the webhook run r10k directly rather then
 as peadmin via mcollective. This requires you to run as the user that can perform `r10k` commands
-which is typically root.
+which is typically root. The peadmin certificate no longer is managed or required.
+
 
 ```puppet
 # Instead of running via mco, run r10k directly
@@ -427,9 +428,10 @@ class {'r10k::webhook::config':
 # It will issue r10k deploy environment <branch_from_gitlab_payload> -p
 # When git pushes happen.
 class {'r10k::webhook':
-  user    => 'root',
-  group   => '0',
-  require => Class['r10k::webhook::config'],
+  use_mcollective => false,
+  user            => 'root',
+  group           => '0',
+  require         => Class['r10k::webhook::config'],
 }
 ```
 

@@ -9,6 +9,7 @@ describe 'r10k::install' , :type => 'class' do
         :package_name           => 'r10k',
         :provider               => 'gem',
         :version                => '1.1.0',
+        :puppet_master          => true,
       }
     end
     let :facts do
@@ -42,6 +43,7 @@ describe 'r10k::install' , :type => 'class' do
         :package_name           => 'r10k',
         :provider               => 'gem',
         :version                => '0.0.9',
+        :puppet_master          => true,
       }
     end
     let :facts do
@@ -76,6 +78,7 @@ describe 'r10k::install' , :type => 'class' do
         :keywords               => '',
         :manage_ruby_dependency => 'declare',
         :install_options        => '',
+        :puppet_master          => true,
       }
     end
     let :facts do
@@ -101,6 +104,7 @@ describe 'r10k::install' , :type => 'class' do
         :manage_ruby_dependency => 'declare',
         :keywords               => '',
         :install_options        => '',
+        :puppet_master          => true,
       }
     end
     let :facts do
@@ -122,6 +126,7 @@ describe 'r10k::install' , :type => 'class' do
         :package_name           => 'rubygem-r10k',
         :provider               => 'yum',
         :version                => 'latest',
+        :puppet_master          => true,
       }
     end
     let :facts do
@@ -142,6 +147,7 @@ describe 'r10k::install' , :type => 'class' do
         :package_name           => 'r10k',
         :provider               => 'zypper',
         :version                => 'latest',
+        :puppet_master          => true,
       }
     end
     let :facts do
@@ -162,6 +168,7 @@ describe 'r10k::install' , :type => 'class' do
         :package_name           => 'app-admin/r10k',
         :provider               => 'portage',
         :version                => '1.1.0',
+        :puppet_master          => true,
       }
     end
     let :facts do
@@ -200,6 +207,7 @@ describe 'r10k::install' , :type => 'class' do
         :provider               => 'pe_gem',
         :version                => '1.1.0',
         :keywords               => '',
+        :puppet_master          => true,
       }
     end
     let :facts do
@@ -225,6 +233,39 @@ describe 'r10k::install' , :type => 'class' do
     }
 
   end
+  context "Puppet Enterprise 3.8.x on a RedHat 5 installing via pe_gem not a master" do
+    let :params do
+      {
+        :manage_ruby_dependency => 'declare',
+        :install_options        => '',
+        :package_name           => 'r10k',
+        :provider               => 'pe_gem',
+        :version                => '1.1.0',
+        :keywords               => '',
+        :puppet_master          => false,
+      }
+    end
+    let :facts do
+      {
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '5',
+        :operatingsystem        => 'Centos',
+        :is_pe                  => true,
+        :pe_version             => '3.8.1'
+      }
+    end
+    it { should contain_package("r10k").with(
+        :ensure     => '1.1.0',
+        :provider   => 'pe_gem'
+      )
+    }
+    it { should contain_file("/usr/bin/r10k").with(
+        'ensure'  => 'link',
+        'target'  => '/opt/puppet/bin/r10k',
+        'require' => 'Package[r10k]'
+      )
+    }
+  end
   context "Puppet Enterprise 3.7.x on a RedHat 5 installing via pe_gem" do
     let :params do
       {
@@ -234,6 +275,7 @@ describe 'r10k::install' , :type => 'class' do
         :provider               => 'pe_gem',
         :version                => '1.1.0',
         :keywords               => '',
+        :puppet_master          => true,
       }
     end
     let :facts do
@@ -266,6 +308,7 @@ describe 'r10k::install' , :type => 'class' do
         :version                => '1.5.0',
         :keywords               => '',
         :install_options        => [],
+        :puppet_master          => true,
       }
     end
     let :facts do
@@ -294,6 +337,7 @@ describe 'r10k::install' , :type => 'class' do
         :version                => '1.5.0',
         :keywords               => '',
         :install_options        => [],
+        :puppet_master          => true,
       }
     end
     let :facts do
@@ -319,6 +363,7 @@ describe 'r10k::install' , :type => 'class' do
         :version                => '1.5.0',
         :keywords               => '',
         :install_options        => ['BOGON'],
+        :puppet_master          => true,
       }
     end
     let :facts do
@@ -344,6 +389,7 @@ describe 'r10k::install' , :type => 'class' do
         :version                => '1.5.0',
         :keywords               => '',
         :install_options        => ['BOGON'],
+        :puppet_master          => true,
       }
     end
     let :facts do
@@ -369,6 +415,7 @@ describe 'r10k::install' , :type => 'class' do
         :package_name           => 'ruby21-r10k',
         :provider               => 'openbsd',
         :version                => 'latest',
+        :puppet_master          => true,
       }
     end
     let :facts do
