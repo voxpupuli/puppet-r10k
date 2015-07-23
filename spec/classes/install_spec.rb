@@ -243,7 +243,7 @@ describe 'r10k::install' , :type => 'class' do
         :operatingsystemrelease => '5',
         :operatingsystem        => 'Centos',
         :is_pe                  => true,
-        :pe_version             => '3.7.0'
+        :pe_version             => '3.7.0',
         :puppetversion          => '3.7.0 (Puppet Enterprise 3.7.0)',
       }
     end
