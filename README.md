@@ -510,9 +510,6 @@ A string to be passed in as the source with a hardcode prefix of `puppet`
 ##### `sources`
 A hash of all sources, this gets read out into the file as yaml. Must not be declared with `remote`
 
-##### `purgedirs`
-A single string setting the `r10k.yaml` configuration value of the same name 
-
 ##### `cachedir`
 A single string setting the `r10k.yaml` configuration value of the same name 
 
