@@ -207,9 +207,9 @@ describe 'r10k::install' , :type => 'class' do
         :osfamily               => 'RedHat',
         :operatingsystemrelease => '5',
         :operatingsystem        => 'CentOS',
-        :is_pe                  => '',
+        :is_pe                  => true,
         :pe_version             => '3.8.1',
-        :puppetversion          => '3.8.1',
+        :puppetversion          => '3.8.1 (Puppet Enterprise 3.8.1)',
       }
     end
     it { should_not contain_package("r10k").with(
@@ -242,8 +242,9 @@ describe 'r10k::install' , :type => 'class' do
         :osfamily               => 'RedHat',
         :operatingsystemrelease => '5',
         :operatingsystem        => 'Centos',
-        :is_pe                  => '',
+        :is_pe                  => true,
         :pe_version             => '3.7.0'
+        :puppetversion          => '3.7.0 (Puppet Enterprise 3.7.0)',
       }
     end
     it { should contain_package("r10k").with(
