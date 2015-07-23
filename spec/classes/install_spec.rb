@@ -209,6 +209,7 @@ describe 'r10k::install' , :type => 'class' do
         :operatingsystem        => 'Centos',
         :is_pe                  => true,
         :pe_version             => '3.8.1'
+        :puppetversion          => '3.8.1'
       }
     end
     it { should_not contain_package("r10k").with(
