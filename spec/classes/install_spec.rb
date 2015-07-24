@@ -278,7 +278,7 @@ describe 'r10k::install' , :type => 'class' do
 
    it { should_not contain_file("/usr/bin/r10k").with(
         'ensure'  => 'link',
-        'target'  => '/opt/puppetlabs/bin/r10k',
+        'target'  => '/opt/puppetlabs/puppet/bin/r10k',
         'require' => 'Package[r10k]'
       )
     }

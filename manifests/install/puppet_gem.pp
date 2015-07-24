@@ -6,7 +6,7 @@ class r10k::install::puppet_gem {
   unless versioncmp($::puppetversion, '4.2.0') >= 0 {
     file { '/usr/bin/r10k':
       ensure  => link,
-      target  => '/opt/puppetlabs/bin/r10k',
+      target  => '/opt/puppetlabs/puppet/bin/r10k',
       require => Package['r10k'],
     }
   }
