@@ -1,9 +1,9 @@
 # Private class, do not include it directly.
 # Installs the webhook packages
-class r10k::webhook::package {
-  $is_pe_server = $r10k::params::is_pe_server
+class r10k::webhook::package (
+) inherits r10k::params {
   
-  if $::is_pe_server {
+  if $is_pe_server {
     if !defined(Package['sinatra']) {
       package { 'sinatra':
         ensure   => installed,
