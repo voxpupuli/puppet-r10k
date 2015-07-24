@@ -7,6 +7,8 @@ class r10k::install (
   $install_options,
   $manage_ruby_dependency,
 ) inherits r10k::params {
+  
+  $is_pe_server = $r10k::params::is_pe_server
 
   # There are currently bugs in r10k 1.x which make using 0.x desireable in
   # certain circumstances. However, 0.x requires make and gcc. Conditionally

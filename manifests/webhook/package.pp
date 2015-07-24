@@ -3,6 +3,8 @@
 class r10k::webhook::package (
 ) inherits r10k::params {
   
+  $is_pe_server = $r10k::params::is_pe_server
+  
   if $is_pe_server {
     if !defined(Package['sinatra']) {
       package { 'sinatra':
