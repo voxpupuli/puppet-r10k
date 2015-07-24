@@ -8,8 +8,8 @@ class r10k::webhook(
   $manage_packages  = true,
 ) inherits r10k::params {
   
-  $is_pe_server = $r10k::params::is_pe_server
-
+  $is_pe_server = $r10k::params::is_pe_server 
+  
   File {
     ensure => file,
     owner  => 'root',
