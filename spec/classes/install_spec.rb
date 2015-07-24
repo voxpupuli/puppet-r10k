@@ -146,11 +146,10 @@ describe 'r10k::install' , :type => 'class' do
     end
     let :facts do
       {
-        :osfamily               => 'SUSE',
+        :osfamily               => 'Suse',
         :operatingsystemrelease => '11.3',
       }
     end
-    it { is_expected.to contain_class("r10k::params") }
     it { should_not contain_class("git") }
     it { should contain_package("r10k")}
   end
