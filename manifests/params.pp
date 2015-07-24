@@ -165,7 +165,7 @@ class r10k::params
   $mc_git_ssl_no_verify = 0
 
   # Service Settings for SystemD in EL7
-  if $::osfamily == 'RedHat' and $::operatingsystemrelease =~ /7/ {
+  if $::osfamily == 'RedHat' and $::operatingsystemmajrelease == '7' {
     $webhook_service_file     = '/usr/lib/systemd/system/webhook.service'
     $webhook_service_template = 'webhook.rehat.service.erb'
   } elsif $::osfamily == 'Gentoo' {
