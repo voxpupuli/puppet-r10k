@@ -66,7 +66,7 @@ class r10k::webhook(
         owner   => 'peadmin',
         group   => 'peadmin',
         mode    => '0644',
-        content => file("${puppetconf_path}/certs/pe-internal-peadmin-mcollective-client.pem",'/dev/null'),
+        content => file("${r10k::params::puppetconf_path}/certs/pe-internal-peadmin-mcollective-client.pem",'/dev/null'),
         notify  => Service['webhook'],
       }
     }
