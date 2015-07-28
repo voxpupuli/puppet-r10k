@@ -105,6 +105,7 @@ class r10k::params
     $webhook_group   = 'peadmin'
   }
   else {
+    # Versions of FOSS prior to Puppet 4 (all in one)
     # FOSS specific settings
     $puppetconf_path = '/etc/puppet'
 
