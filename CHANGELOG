@@ -1,3 +1,5 @@
+3.0.0 - Esalberg
+  * Webhook compatibility on non masters servers (razor) #219
 2.8.2 - Jordan Olshevski
   * Fix for RHEL 7 webhook
 2.8.2 - Jerald Sheets 
