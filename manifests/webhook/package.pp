@@ -24,10 +24,19 @@ class r10k::webhook::package (
       }
     }
   } else {
+
+    # Puppet FOSS 4.2 and up ships a vendor provided ruby.
+    # Using puppet_gem uses that instead of the system ruby.
+    if (versioncmp($::puppetversion, '4.2.0') >= 0) {
+      $provider = 'puppet_gem'
+    } else {
+      $provider = 'gem'
+    }
+
     if !defined(Package['webrick']) {
       package { 'webrick':
         ensure   => installed,
-        provider => 'gem',
+        provider => $provider,
         before   => Service['webhook'],
       }
     }
@@ -35,7 +44,7 @@ class r10k::webhook::package (
     if !defined(Package['json']) {
       package { 'json':
         ensure   => installed,
-        provider => 'gem',
+        provider => $provider,
         before   => Service['webhook'],
       }
     }
@@ -43,7 +52,7 @@ class r10k::webhook::package (
     if !defined(Package['sinatra']) {
       package { 'sinatra':
         ensure   => installed,
-        provider => 'gem',
+        provider => $provider,
         before   => [
           Service['webhook'],
           File['webhook_init_script'],
@@ -55,7 +64,7 @@ class r10k::webhook::package (
       if !defined(Package['rack']) {
         package { 'rack':
           ensure   => installed,
-          provider => 'gem',
+          provider => $provider,
           before   => Service['webhook'],
         }
       }

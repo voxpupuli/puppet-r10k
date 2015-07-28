@@ -92,6 +92,31 @@ describe 'r10k::install' , :type => 'class' do
       )
     }
   end
+  context "on a RedHat 6 OS installing 1.5.1 with puppet_gem provider" do
+    let :params do
+      {
+        :package_name           => 'r10k',
+        :version                => '1.5.1',
+        :provider               => 'puppet_gem',
+        :keywords               => '',
+        :manage_ruby_dependency => 'declare',
+        :install_options        => '',
+      }
+    end
+    let :facts do
+      {
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '6',
+      }
+    end
+    it { should contain_class("git") }
+    it { should contain_class("r10k::install::puppet_gem") }
+    it { should contain_package("r10k").with(
+      'ensure'   => '1.5.1',
+      'provider' => 'puppet_gem'
+      )
+    }
+  end
   context "on a RedHat 5 OS installing 1.1.0 with bundle provider" do
     let :params do
       {
@@ -227,6 +252,40 @@ describe 'r10k::install' , :type => 'class' do
     }
 
   end
+  context "Puppet FOSS 4.2.x on a RedHat 6 installing via puppet_gem" do
+    let :params do
+      {
+        :manage_ruby_dependency => 'declare',
+        :install_options        => '',
+        :package_name           => 'r10k',
+        :provider               => 'puppet_gem',
+        :version                => '1.5.1',
+        :keywords               => '',
+      }
+    end
+    let :facts do
+      {
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '6',
+        :operatingsystem        => 'Centos',
+        :is_pe                  => false,
+        :puppetversion          => '4.2.1'
+      }
+    end
+    it { should_not contain_package("r10k").with(
+        :ensure     => '1.5.1',
+        :provider   => 'puppet_gem'
+      )
+    }
+
+   it { should_not contain_file("/usr/bin/r10k").with(
+        'ensure'  => 'link',
+        'target'  => '/opt/puppetlabs/puppet/bin/r10k',
+        'require' => 'Package[r10k]'
+      )
+    }
+
+  end
   context "Puppet Enterprise 3.7.x on a RedHat 5 installing via pe_gem" do
     let :params do
       {
@@ -285,6 +344,34 @@ describe 'r10k::install' , :type => 'class' do
     it { should contain_package("r10k").with(
         :ensure     => '1.5.0',
         :provider   => 'pe_gem',
+        :install_options => ['--no-ri', '--no-rdoc']
+      )
+    }
+  end
+  context "Puppet FOSS 4.2.x on a RedHat 6 installing via puppet_gem with empty install_options" do
+    let :params do
+      {
+        :manage_ruby_dependency => 'BOGON',
+        :package_name           => 'r10k',
+        :provider               => 'puppet_gem',
+        :version                => '1.5.1',
+        :keywords               => '',
+        :install_options        => [],
+      }
+    end
+    let :facts do
+      {
+        :manage_ruby_dependency => 'BOGON',
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '6',
+        :operatingsystem        => 'Centos',
+        :is_pe                  => '',
+        :puppet_version             => '4.2.1'
+      }
+    end
+    it { should contain_package("r10k").with(
+        :ensure     => '1.5.1',
+        :provider   => 'puppet_gem',
         :install_options => ['--no-ri', '--no-rdoc']
       )
     }

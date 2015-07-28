@@ -49,6 +49,11 @@ class r10k::install (
           version                => $version;
         }
       }
+      elsif $provider == 'puppet_gem' {
+        # Puppet FOSS 4.2 and up ships a vendor provided ruby.
+        # Using puppet_gem uses that instead of the system ruby.
+        include r10k::install::puppet_gem
+      }
       elsif $provider == 'pe_gem' {
         include r10k::install::pe_gem
       }
@@ -74,6 +79,7 @@ class r10k::install (
           install_options => $provider_install_options
         }
       }
+
     }
     default: { fail("${module_name}: ${provider} is not supported. Valid values are: 'gem', 'pe_gem', 'puppet_gem', 'bundle', 'openbsd', 'portage', 'yum', 'zypper'") }
   }
