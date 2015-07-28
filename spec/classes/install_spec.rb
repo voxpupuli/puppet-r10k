@@ -475,13 +475,13 @@ describe 'r10k::install' , :type => 'class' do
         :puppetversion          => '4.2.1'
       }
     end
-    it { should_not contain_package("r10k").with(
+    it { should contain_package("r10k").with(
         :ensure     => '1.5.1',
         :provider   => 'puppet_gem'
       )
     }
 
-   it { should_not contain_file("/usr/bin/r10k").with(
+   it { should contain_file("/usr/bin/r10k").with(
         'ensure'  => 'link',
         'target'  => '/opt/puppetlabs/puppet/bin/r10k',
         'require' => 'Package[r10k]'
