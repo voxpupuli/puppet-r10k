@@ -6,7 +6,7 @@ class r10k::install (
   $keywords,
   $install_options,
   $manage_ruby_dependency,
-  $puppet_master,
+  $puppet_master true,
   $is_pe_server = $r10k::params::is_pe_server,
 ) inherits r10k::params {
 
