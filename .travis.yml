@@ -30,7 +30,7 @@ env:
   - PUPPET_VERSION="~> 3.8.1"
 
 global:
-    - PUBLISHER_LOGIN=abrader
+    - PUBLISHER_LOGIN=acidprime
 matrix:
   exclude:
     - rvm: 1.9.3
