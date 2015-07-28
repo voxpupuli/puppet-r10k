@@ -57,8 +57,38 @@ class r10k::params
     $functions_path     = '/etc/rc.d/init.d/functions'
     $start_pidfile_args = '--pidfile $pidfile'
   }
+  
   if $::is_pe == true or $::is_pe == 'true' {
-    # Puppet Enterprise specific settings
+    # < PE 4
+    $is_pe_server      = true
+  }elsif is_function_available('pe_compiling_server_version') {
+    # >= PE 4
+    $is_pe_server      = true
+  }
+  else {
+    # FOSS
+    $is_pe_server      = false
+  }
+
+  if $is_pe_server and versioncmp($::puppetversion, '4.0.0') >= 0 {
+    # PE 4 or greater specific settings
+    $puppetconf_path = '/etc/puppetlabs/puppet'
+
+    $pe_module_path  = '/opt/puppetlabs/puppet/modules'
+    # Mcollective configuration dynamic
+    $mc_service_name = 'mcollective'
+    $plugins_dir     = '/opt/puppetlabs/mcollective/plugins'
+    $modulepath      = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
+    $provider        = 'pe_gem'
+    $r10k_binary     = 'r10k'
+
+    # webhook
+    $webhook_user    = 'peadmin'
+    $webhook_pass    = 'peadmin'
+    $webhook_group   = 'peadmin'
+  }
+  elsif $is_pe_server and versioncmp($::puppetversion, '4.0.0') == -1 {
+    # PE 3.x.x specific settings
     $puppetconf_path = '/etc/puppetlabs/puppet'
 
     $pe_module_path  = '/opt/puppet/share/puppet/modules'
@@ -73,8 +103,9 @@ class r10k::params
     $webhook_user    = 'peadmin'
     $webhook_pass    = 'peadmin'
     $webhook_group   = 'peadmin'
-  } else {
-    # Getting ready for FOSS support in this module
+  }
+  else {
+    # FOSS specific settings
     $puppetconf_path = '/etc/puppet'
 
     # Mcollective configuration dynamic
@@ -140,7 +171,7 @@ class r10k::params
   } elsif $::osfamily == 'Gentoo' {
     $webhook_service_file     = '/etc/init.d/webhook'
     $webhook_service_template = 'webhook.init.gentoo.erb'
-  } elsif $::osfamily == 'SUSE' and $::operatingsystemmajrelease >= '12' {
+  } elsif $::osfamily == 'Suse' and $::operatingsystemrelease >= '12' {
     $webhook_service_file     = '/etc/systemd/system/webhook.service'
     $webhook_service_template = 'webhook.suse.service.erb'
   } else {

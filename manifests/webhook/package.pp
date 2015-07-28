@@ -1,7 +1,11 @@
 # Private class, do not include it directly.
 # Installs the webhook packages
-class r10k::webhook::package {
-  if $::is_pe == true or $::is_pe == 'true' {
+class r10k::webhook::package (
+) inherits r10k::params {
+  
+  $is_pe_server = $r10k::params::is_pe_server
+  
+  if $is_pe_server {
     if !defined(Package['sinatra']) {
       package { 'sinatra':
         ensure   => installed,
@@ -10,7 +14,7 @@ class r10k::webhook::package {
       }
     }
 
-    if versioncmp($::pe_version, '3.7.0') >= 0 {
+    if versioncmp($::puppetversion, '3.7.0') >= 0 {
       if !defined(Package['rack']) {
         package { 'rack':
           ensure   => installed,

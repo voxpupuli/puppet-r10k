@@ -146,7 +146,7 @@ describe 'r10k::install' , :type => 'class' do
     end
     let :facts do
       {
-        :osfamily               => 'SUSE',
+        :osfamily               => 'Suse',
         :operatingsystemrelease => '11.3',
       }
     end
@@ -206,11 +206,13 @@ describe 'r10k::install' , :type => 'class' do
       {
         :osfamily               => 'RedHat',
         :operatingsystemrelease => '5',
-        :operatingsystem        => 'Centos',
+        :operatingsystem        => 'CentOS',
         :is_pe                  => true,
-        :pe_version             => '3.8.1'
+        :pe_version             => '3.8.1',
+        :puppetversion          => '3.8.1 (Puppet Enterprise 3.8.1)',
       }
     end
+    it { is_expected.to contain_class("r10k::params") }
     it { should_not contain_package("r10k").with(
         :ensure     => '1.1.0',
         :provider   => 'pe_gem'
@@ -242,9 +244,11 @@ describe 'r10k::install' , :type => 'class' do
         :operatingsystemrelease => '5',
         :operatingsystem        => 'Centos',
         :is_pe                  => '',
-        :pe_version             => '3.7.0'
+        :pe_version             => '3.7.0',
+        :puppetversion          => '3.7.0 (Puppet Enterprise 3.7.0)',
       }
     end
+    it { is_expected.to contain_class("r10k::params") }
     it { should contain_package("r10k").with(
         :ensure     => '1.1.0',
         :provider   => 'pe_gem'
