@@ -27,13 +27,13 @@ describe 'r10k::webhook::config' , :type => 'class' do
   certpath: \"/var/lib/peadmin/.mcollective.d\"
   client_cfg: \"/var/lib/peadmin/.mcollective\"
   client_timeout: \"120\"
-  command_prefix: \"\"
+  command_prefix: \"umask 0022;\"
   discovery_timeout: \"10\"
   enable_ssl: true
   pass: \"peadmin\"
   port: \"8088\"
   prefix: false
-  prefix_command: \"umask 0022;\"
+  prefix_command: \"/bin/echo example\"
   protected: true
   r10k_deploy_arguments: \"-pv\"
   use_mco_ruby: false
