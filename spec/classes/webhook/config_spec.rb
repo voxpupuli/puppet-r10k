@@ -33,7 +33,7 @@ describe 'r10k::webhook::config' , :type => 'class' do
   pass: \"peadmin\"
   port: \"8088\"
   prefix: false
-  prefix_command: \"/bin/echo example\"
+  prefix_command: \"umask 0022;\"
   protected: true
   r10k_deploy_arguments: \"-pv\"
   use_mco_ruby: false
