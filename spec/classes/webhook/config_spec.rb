@@ -20,27 +20,25 @@ describe 'r10k::webhook::config' , :type => 'class' do
       )
     }
 
-    content = """--- 
-  user: peadmin
-  pass: peadmin
+    content = """---
+  access_logfile: \"/var/log/webhook/access.log\"
   bind_address: \"0.0.0.0\"
-  port: \"8088\"
-  certname: peadmin
+  certname: \"peadmin\"
+  certpath: \"/var/lib/peadmin/.mcollective.d\"
+  client_cfg: \"/var/lib/peadmin/.mcollective\"
   client_timeout: \"120\"
+  command_prefix: \"\"
   discovery_timeout: \"10\"
-  certpath: /var/lib/peadmin/.mcollective.d
-  client_cfg: /var/lib/peadmin/.mcollective
-  use_mco_ruby: false
-  access_logfile: /var/log/webhook/access.log
-  protected: true
+  enable_ssl: true
+  pass: \"peadmin\"
+  port: \"8088\"
   prefix: false
   prefix_command: \"/bin/echo example\"
-  enable_ssl: true
-  use_mcollective: true
+  protected: true
   r10k_deploy_arguments: \"-pv\"
-  public_key_path: !ruby/sym undef
-  private_key_path: !ruby/sym undef
-  command_prefix: \"\"
+  use_mco_ruby: false
+  use_mcollective: true
+  user: \"peadmin\"
 """
     it { should contain_file('webhook.yaml').with_content(content) }
   end
