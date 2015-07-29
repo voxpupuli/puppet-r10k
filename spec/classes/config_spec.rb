@@ -490,7 +490,7 @@ describe 'r10k::config' , :type => 'class' do
           :postrun           => ['/usr/bin/curl', '-F', 'deploy=done', 'http://my-app.site/endpoint'],
         }
       end
-      it { should contain_file('r10k.yaml').with_content(/^:postrun: \[\"\/usr\/bin\/curl\", \"-F\", \"deploy=done\", \"http:\/\/my-app\.site\/endpoint\"\]$/) }
+      it { should contain_file('r10k.yaml').with_content(%r{^---\n:postrun: \["/usr/bin/curl\", "-F", "deploy=done", "http://my-app\.site/endpoint"\]\n:cachedir: /var/cache/r10k\n:sources:\n  puppet:\n    basedir: /etc/puppet/environments\n    remote: \n\n}) }
     end
 
     context 'with postrun left undefined' do
