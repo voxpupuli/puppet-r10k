@@ -1,1 +1,3 @@
-<%= @webhook_hash.to_yaml %>
+<% @webhook_hash.sort.each do |key,value| -%>
+    <%=key-%>: <%=value%>
+<% end -%>
