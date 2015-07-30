@@ -8,7 +8,7 @@
   "source": "https://github.com/acidprime/r10k",
   "summary": "Module for setting up dynamic environments using r10k",
   "tags": ["git", "pe", "environment", "mcollective"],
-  "version": "2.8.3",
+  "version": "3.0.0",
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",

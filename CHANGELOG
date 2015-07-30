@@ -1,5 +1,14 @@
-3.0.0 - Esalberg
+3.0.0 - Lots o Folks' see linked tickets 
   * Webhook compatibility on non masters servers (razor) #219
+  * Webhook YAML recreated on every run on ruby 1.8.7 #209
+  * Add postrun command support #211
+  * Add r10k_path fact #222
+  * Remove depricated params git_ssl_verify
+  * add git_settings param for rugged support
+  * Fix webhook issue when running as root #217
+  * Added support for Bitbucket merge hooks #193
+  * Add ability to be installed on non-masters i.e. razor #219
+  * Updated for PE 2015.2 and Puppet 4 ( which are pretty much the same thing now)
 2.8.2 - Jordan Olshevski
   * Fix for RHEL 7 webhook
 2.8.2 - Jerald Sheets 
