@@ -2,7 +2,6 @@
 [![Puppet Forge](http://img.shields.io/puppetforge/v/zack/r10k.svg)](https://forge.puppetlabs.com/zack/r10k)
 [![Build Status](https://travis-ci.org/acidprime/r10k.png?branch=master)](https://travis-ci.org/acidprime/r10k)
 [![Github Tag](https://img.shields.io/github/tag/acidprime/r10k.svg)](https://github.com/acidprime/r10k)
-[![Build Status](https://travis-ci.org/acidprime/r10k.png?branch=master)](https://travis-ci.org/acidprime/r10k)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/acidprime/r10k?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 #### Table of Contents
