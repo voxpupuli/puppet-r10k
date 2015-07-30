@@ -90,7 +90,7 @@ class r10k::params
     $mc_service_name = 'mcollective'
     $plugins_dir     = '/opt/puppetlabs/mcollective/plugins'
     $modulepath      = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
-    $provider        = 'pe_gem'
+    $provider        = 'puppet_gem'
     $r10k_binary     = 'r10k'
 
     # webhook
