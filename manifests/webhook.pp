@@ -48,7 +48,6 @@ class r10k::webhook(
   service { 'webhook':
     ensure  => 'running',
     enable  => true,
-    pattern => '.*ruby.*webhoo[k]$',
   }
 
   if $manage_packages {
