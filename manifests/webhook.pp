@@ -46,8 +46,8 @@ class r10k::webhook(
   }
 
   service { 'webhook':
-    ensure  => 'running',
-    enable  => true,
+    ensure => 'running',
+    enable => true,
   }
 
   if $manage_packages {
