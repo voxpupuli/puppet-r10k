@@ -1,9 +1,8 @@
 # Private class, do not include it directly.
 # Installs the webhook packages
 class r10k::webhook::package (
+  $is_pe_server = $r10k::params::is_pe_server,
 ) inherits r10k::params {
-  
-  $is_pe_server = $r10k::params::is_pe_server
   
   if $is_pe_server {
     # PE 4.2 and up ships a vendor provided ruby.

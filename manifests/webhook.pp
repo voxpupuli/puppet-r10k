@@ -6,10 +6,10 @@ class r10k::webhook(
   $service_template = $r10k::params::webhook_service_template,
   $service_file     = $r10k::params::webhook_service_file,
   $use_mcollective  = $r10k::params::webhook_use_mcollective,
+  $is_pe_server     = $r10k::params::is_pe_server,
   $manage_packages  = true,
 ) inherits r10k::params {
   
-  $is_pe_server = $r10k::params::is_pe_server
 
   File {
     ensure => file,
