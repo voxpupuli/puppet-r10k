@@ -81,7 +81,7 @@ class Server < Sinatra::Base
 
     data = JSON.parse(decoded, :quirks_mode => true)
 
-    module_name = ( data['repository']['name'] ).sub(/^.*-/, '')
+    module_name = ( data['repository']['name'] rescue nil || data['pullrequest_merged']['destination']['repository']['name'] ).sub(/^.*-/, '')
 
     deploy_module(module_name)
   end
@@ -113,7 +113,7 @@ class Server < Sinatra::Base
     data = JSON.parse(decoded, :quirks_mode => true)
 
     # github sends a 'ref', stash sends an array in 'refChanges'
-    branch = ( data['ref'] || data['refChanges'][0]['refId'] ).sub('refs/heads/', '')
+    branch = ( data['ref'] || data['refChanges'][0]['refId'] rescue nil || data['pullrequest_merged']['destination']['branch']['name'] ).sub('refs/heads/', '')
 
     # If prefix is enabled in our config file run the command to determine the prefix
     if $config['prefix']
