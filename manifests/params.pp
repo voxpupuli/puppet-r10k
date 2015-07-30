@@ -59,7 +59,10 @@ class r10k::params
     $functions_path     = '/etc/rc.d/init.d/functions'
     $start_pidfile_args = '--pidfile $pidfile'
   }
-  
+ 
+  # We check for the function right now instead of $::pe_server_version
+  # which does not get populated on agent nodes as some users use r10k
+  # with razor see https://github.com/acidprime/r10k/pull/219
   if $::is_pe == true or $::is_pe == 'true' {
     # < PE 4
     $is_pe_server      = true
