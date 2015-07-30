@@ -62,6 +62,36 @@ describe 'r10k::webhook' , :type => 'class' do
       )
     }
   end
+  context 'Puppet FOSS 4.2.1 a RedHat 6 installing webhook' do
+    let :params do
+      {
+        :use_mcollective => true,
+      }
+    end
+    let :facts do
+      {
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '6',
+        :operatingsystem        => 'Centos',
+        :puppetversion          => '4.2.1'
+      }
+    end
+    it { should contain_package('sinatra').with(
+        'ensure'   => 'installed',
+        'provider' => 'puppet_gem'
+      )
+    }
+
+    it { should contain_package('sinatra').with(
+        'ensure'    => 'installed',
+        'provider'  => 'puppet_gem'
+      )
+    }
+    it { should_not contain_file('peadmin-cert.pem').with(
+        'path'   => '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem'
+      )
+    }
+  end
   context 'Puppet FOSS 4.2.x on a RedHat 6 installing webhook' do
     let :facts do
       {
