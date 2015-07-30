@@ -75,7 +75,7 @@ describe 'r10k::mcollective' , :type => 'class' do
 
     let :params do
       {
-        :git_ssl_verify => 1,
+        :git_ssl_no_verify => 1,
       }
     end
 

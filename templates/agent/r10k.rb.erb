@@ -68,7 +68,7 @@ module MCollective
         git  = ['/usr/bin/env', 'git']
         r10k = ['/usr/bin/env', 'r10k']
         # Given most people using this are using Puppet Enterprise, add the PE Path
-        environment = {"LC_ALL" => "C","PATH" => "#{ENV['PATH']}:<%= if @is_pe == true or @is_pe == 'true' then '/opt/puppet/bin' else '/usr/local/bin' end %>", "http_proxy" => "<%= @http_proxy %>", "https_proxy" => "<%= @http_proxy %>", "GIT_SSL_NO_VERIFY" => "<%= @agent_no_verify %>" }
+        environment = {"LC_ALL" => "C","PATH" => "#{ENV['PATH']}:<%= if @is_pe == true or @is_pe == 'true' then '/opt/puppet/bin' else '/usr/local/bin' end %>", "http_proxy" => "<%= @http_proxy %>", "https_proxy" => "<%= @http_proxy %>", "GIT_SSL_NO_VERIFY" => "<%= @git_ssl_no_verify %>" }
         case action
           when 'push','pull','status'
             cmd = git
