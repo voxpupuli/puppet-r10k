@@ -73,6 +73,12 @@ class Server < Sinatra::Base
 
   # Simulate a github post:
   # curl -d '{ "repository": { "name": "puppetlabs-stdlib" } }' -H "Accept: application/json" 'https://puppet:487156B2-7E67-4E1C-B447-001603C6B8B2@localhost:8088/module' -k -q
+  #
+  # Simulate a BitBucket post:
+  # curl -X POST -d '{ "repository": { "full_name": "puppetlabs/puppetlabs-stdlib", "name": "PuppetLabs : StdLib" } }' 'https://puppet:puppet@localhost:8088/module' -k -q
+  # This example shows that, unlike github, BitBucket allows special characters
+  # in repository names but translates it to generate a full_name which
+  # is used in the repository URL and is most useful for this webhook handler.
   post '/module' do
     protected! if $config['protected']
     $logger.info("authenticated: #{$config['user']}")
@@ -81,7 +87,12 @@ class Server < Sinatra::Base
 
     data = JSON.parse(decoded, :quirks_mode => true)
 
-    module_name = ( data['repository']['name'] rescue nil || data['pullrequest_merged']['destination']['repository']['name'] ).sub(/^.*-/, '')
+    if data['repository']['full_name']
+      # handle BitBucket webhook...
+      module_name = ( data['repository']['full_name'] ).sub(/^.*\/.*-/, '')
+    else
+      module_name = ( data['repository']['name'] ).sub(/^.*-/, '')
+    end
 
     deploy_module(module_name)
   end
@@ -95,6 +106,9 @@ class Server < Sinatra::Base
   # Simulate a Gitorious post:
   # curl -X POST -d '%7b%22ref%22%3a%22master%22%7d' 'http://puppet:puppet@localhost:8088/payload' -q
   # Yes, Gitorious does not support https...
+  #
+  # Simulate a BitBucket post:
+  # curl -X POST -d '{ "push": { "changes": [ { "new": { "name": "production" } } ] } }' 'https://puppet:puppet@localhost:8088/payload' -k -q
 
   post '/payload' do
     protected! if $config['protected']
@@ -113,7 +127,7 @@ class Server < Sinatra::Base
     data = JSON.parse(decoded, :quirks_mode => true)
 
     # github sends a 'ref', stash sends an array in 'refChanges'
-    branch = ( data['ref'] || data['refChanges'][0]['refId'] rescue nil || data['pullrequest_merged']['destination']['branch']['name'] ).sub('refs/heads/', '')
+    branch = ( data['ref'] || data['refChanges'][0]['refId'] rescue nil || data['push']['changes'][0]['new']['name'] ).sub('refs/heads/', '')
 
     # If prefix is enabled in our config file run the command to determine the prefix
     if $config['prefix']
