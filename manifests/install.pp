@@ -8,6 +8,7 @@ class r10k::install (
   $manage_ruby_dependency,
   $puppet_master = true,
   $is_pe_server = $r10k::params::is_pe_server,
+  $install_gcc = false,
 ) inherits r10k::params {
 
   # There are currently bugs in r10k 1.x which make using 0.x desireable in
@@ -15,7 +16,7 @@ class r10k::install (
   # include those classes if necessary due to 0.x r10k version usage. When
   # 1.x is just as good or better than 0.x, we can stop supporting 0.x and
   # remove this block.
-  if versioncmp('1.0.0', $version) > 0 {
+  if versioncmp('1.0.0', $version) > 0 or $install_gcc {
     require gcc
     require make
   }
@@ -73,7 +74,6 @@ class r10k::install (
 
       # Puppet Enterprise 3.8 and ships an embedded r10k so thats all thats supported
       # This conditional should not effect FOSS customers based on the fact 
-      # This conditional should not effect FOSS customers based on the fact
       unless ($::is_pe == 'true' or $::is_pe == true) and versioncmp($::pe_version, '3.8.0') >= 0 and $puppet_master {
         package { $real_package_name:
           ensure          => $version,

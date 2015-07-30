@@ -20,6 +20,7 @@ class r10k (
   $git_settings              = $r10k::params::git_settings,
   $include_prerun_command    = false,
   $include_postrun_command   = false,
+  $install_gcc               = false,
 ) inherits r10k::params {
 
   # Check if user is declaring both classes
@@ -52,6 +53,7 @@ class r10k (
     provider               => $provider,
     version                => $version,
     puppet_master          => $puppet_master,
+    install_gcc            => $install_gcc,
   }
 
   class { 'r10k::config':
