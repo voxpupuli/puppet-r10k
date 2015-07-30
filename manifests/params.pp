@@ -15,6 +15,7 @@ class r10k::params
   $r10k_basedir              = "${::settings::confdir}/environments"
   $manage_configfile_symlink = false
   $configfile_symlink        = '/etc/r10k.yaml'
+  $git_settings              = {}
 
   # Git configuration
   $git_server = $::settings::ca_server

@@ -480,6 +480,18 @@ describe 'r10k::config' , :type => 'class' do
     end
   end
 
+  context 'Managing r10k with rugged turned on via git_settings' do
+    let :params do
+      {
+        :configfile        => '/etc/r10k.yaml',
+        :cachedir          => '/var/cache/r10k',
+        :manage_modulepath => false,
+        :git_settings      => {'provider' => 'rugged','private_key' => '/root/.ssh/id_dsa'},
+      }
+    end
+    it { should contain_file('r10k.yaml').with_content(%r{git:\n.*private_key: /root/\.ssh/id_dsa\n.*provider: rugged\n}) }
+  end
+
   describe 'with optional parameter postrun specified' do
     context 'with array of system call "/usr/bin/curl -F deploy=done http://my-app.site/endpoint"' do
       let :params do
