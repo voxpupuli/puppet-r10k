@@ -11,8 +11,14 @@ class r10k::params
 
   # r10k configuration
   $r10k_config_file          = '/etc/r10k.yaml'
-  $r10k_cache_dir            = '/var/cache/r10k'
-  $r10k_basedir              = "${::settings::confdir}/environments"
+
+  if versioncmp($::puppetversion, '4.0.0') >= 0 {
+    $r10k_basedir    = $::settings::environmentpath
+    $r10k_cachedir   = "${::settings::vardir}/r10k"
+  } else {
+    $r10k_basedir    = "${::settings::confdir}/environments"
+    $r10k_cache_dir  = '/var/cache/r10k'
+  }
   $manage_configfile_symlink = false
   $configfile_symlink        = '/etc/r10k.yaml'
   $git_settings              = {}
