@@ -44,11 +44,23 @@ describe 'r10k::prerun_command' , :type => 'class' do
       }
     end
   end
-  context 'Puppet FOSS on OpenBSD' do
+  context 'Puppet FOSS on OpenBSD 5.7' do
     let :facts do
       {
         :osfamily               => 'OpenBSD',
+        :kernelversion          => '5.7',
         :is_pe                  => 'false'
+      }
+    end
+    context "default prerun_command" do
+      it { should contain_class("r10k::params") }
+      it { should contain_ini_setting("r10k_prerun_command").with(
+        'ensure'  => 'present',
+        'section' => 'agent',
+        'setting' => 'prerun_command',
+        'value'   => 'r10k21 deploy environment -p',
+        'path'    => '/etc/puppet/puppet.conf'
+      )
       }
     end
     context "adding custom prerun_command" do
@@ -81,6 +93,60 @@ describe 'r10k::prerun_command' , :type => 'class' do
         'section' => 'agent',
         'setting' => 'prerun_command',
         'value'   => 'r10k21 synchronize',
+        'path'    => '/etc/puppet/puppet.conf'
+      )
+      }
+    end
+  end
+  context 'Puppet FOSS on OpenBSD 5.8' do
+    let :facts do
+      {
+        :osfamily               => 'OpenBSD',
+        :kernelversion          => '5.8',
+        :is_pe                  => 'false'
+      }
+    end
+    context "default prerun_command" do
+      it { should contain_class("r10k::params") }
+      it { should contain_ini_setting("r10k_prerun_command").with(
+        'ensure'  => 'present',
+        'section' => 'agent',
+        'setting' => 'prerun_command',
+        'value'   => 'r10k22 deploy environment -p',
+        'path'    => '/etc/puppet/puppet.conf'
+      )
+      }
+    end
+    context "adding custom prerun_command" do
+      let :params do
+        {
+          :command               => 'r10k22 synchronize',
+          :ensure                => 'present',
+        }
+      end
+      it { should contain_class("r10k::params") }
+      it { should contain_ini_setting("r10k_prerun_command").with(
+        'ensure'  => 'present',
+        'section' => 'agent',
+        'setting' => 'prerun_command',
+        'value'   => 'r10k22 synchronize',
+        'path'    => '/etc/puppet/puppet.conf'
+      )
+      }
+    end
+    context "removing custom prerun_command" do
+      let :params do
+        {
+          :command               => 'r10k22 synchronize',
+          :ensure                => 'absent',
+        }
+      end
+      it { should contain_class("r10k::params") }
+      it { should contain_ini_setting("r10k_prerun_command").with(
+        'ensure'  => 'absent',
+        'section' => 'agent',
+        'setting' => 'prerun_command',
+        'value'   => 'r10k22 synchronize',
         'path'    => '/etc/puppet/puppet.conf'
       )
       }

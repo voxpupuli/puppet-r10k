@@ -410,7 +410,7 @@ describe 'r10k::install' , :type => 'class' do
       )
     }
   end
-  context "On OpenBSD installing via packages" do
+  context "On OpenBSD 5.7 installing via packages" do
     let :params do
       {
         :install_options        => '',
@@ -425,10 +425,32 @@ describe 'r10k::install' , :type => 'class' do
     let :facts do
       {
         :osfamily               => 'OpenBSD',
+        :kernelversion          => '5.7',
       }
     end
     it { should_not contain_class("git") }
     it { should contain_package("ruby21-r10k")}
+  end
+  context "On OpenBSD 5.8 installing via packages" do
+    let :params do
+      {
+        :install_options        => '',
+        :keywords               => '',
+        :manage_ruby_dependency => 'declare',
+        :package_name           => 'ruby22-r10k',
+        :provider               => 'openbsd',
+        :version                => 'latest',
+        :puppet_master          => true,
+      }
+    end
+    let :facts do
+      {
+        :osfamily               => 'OpenBSD',
+        :kernelversion          => '5.8',
+      }
+    end
+    it { should_not contain_class("git") }
+    it { should contain_package("ruby22-r10k")}
   end
   context "on a RedHat 6 OS installing 1.5.1 with puppet_gem provider" do
     let :params do

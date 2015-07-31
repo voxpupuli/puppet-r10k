@@ -23,7 +23,13 @@ class r10k::install (
 
   if $package_name == '' {
     case $provider {
-      'openbsd': { $real_package_name = 'ruby21-r10k' }
+      'openbsd': {
+                    if (versioncmp($::kernelversion, '5.8') < 0) {
+                      $real_package_name = 'ruby21-r10k'
+                    } else {
+                      $real_package_name = 'ruby22-r10k'
+                    }
+                  }
       'portage': { $real_package_name = 'app-admin/r10k' }
       'yum':     { $real_package_name = 'rubygem-r10k' }
       default:   { $real_package_name = 'r10k' }
