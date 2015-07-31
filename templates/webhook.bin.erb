@@ -87,7 +87,7 @@ class Server < Sinatra::Base
 
     data = JSON.parse(decoded, :quirks_mode => true)
 
-    if data['repository'].hasKey?('full_name')
+    if data['repository'].has_key?('full_name')
       # handle BitBucket webhook...
       module_name = ( data['repository']['full_name'] ).sub(/^.*\/.*-/, '')
     else
