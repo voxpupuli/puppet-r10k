@@ -54,7 +54,6 @@ class r10k (
     version                => $version,
     puppet_master          => $puppet_master,
     install_gcc            => $install_gcc,
-    git_settings           => $git_settings,
   }
 
   class { 'r10k::config':
