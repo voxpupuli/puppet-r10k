@@ -141,11 +141,13 @@ _Note: On Puppet Enterprise 3.8 and higher the package is not declared as 3.8
 ships with an embdedded r10k gem installed via the PE packages. To install r10k on a PE 3.8+ non-master, set puppet_master to false for the main r10k class (e.g. to use r10k with Razor)_
 
 Installing into the Puppet Enterprise ruby stack in PE 2015.x
+
 ```puppet
 class { 'r10k':
   remote   => 'git@github.com:someuser/puppet.git',
   provider => 'puppet_gem',
 }
+```
 
 _Note: It is recommended you migrate to using the `pe_r10k` module which is basically
 a clone of this modules features and file tickets for anything missing._
