@@ -87,7 +87,7 @@ class r10k::params
     $pe_module_path  = '/opt/puppetlabs/puppet/modules'
     # Mcollective configuration dynamic
     $mc_service_name  = 'mcollective'
-    $plugins_dir      = '/opt/puppetlabs/mcollective/plugins'
+    $plugins_dir      = '/opt/puppetlabs/mcollective/plugins/mcollective'
     $provider         = 'puppet_gem'
     $r10k_binary      = 'r10k'
     $modulepath       = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
