@@ -114,6 +114,23 @@ class r10k::params
     $webhook_pass    = 'peadmin'
     $webhook_group   = 'peadmin'
   }
+  elsif versioncmp($::puppetversion, '4.0.0') >= 0 {
+    # PE 4 or greater specific settings
+    $puppetconf_path = '/etc/puppetlabs/puppet'
+    $module_path     = '/opt/puppetlabs/puppet/code/modules'
+
+    # Mcollective configuration dynamic
+    $mc_service_name = 'mcollective'
+    $plugins_dir     = '/opt/puppetlabs/mcollective/plugins'
+    $modulepath      = undef
+    $provider        = 'puppet_gem'
+    $r10k_binary     = 'r10k'
+
+    # webhook
+    $webhook_user    = 'puppet'
+    $webhook_pass    = 'puppet'
+    $webhook_group   = 'puppet'
+  }
   else {
     # Versions of FOSS prior to Puppet 4 (all in one)
     # FOSS specific settings
