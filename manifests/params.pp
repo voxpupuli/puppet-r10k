@@ -9,9 +9,6 @@ class r10k::params
   $sources                = undef
   $puppet_master          = true
 
-  # r10k configuration
-  $r10k_config_file          = '/etc/r10k.yaml'
-
   if versioncmp($::puppetversion, '4.0.0') >= 0 {
     $r10k_basedir    = $::settings::environmentpath
     $r10k_cachedir   = "${::settings::vardir}/r10k"
@@ -82,6 +79,9 @@ class r10k::params
 
   if $is_pe_server and versioncmp($::puppetversion, '4.0.0') >= 0 {
     # PE 4 or greater specific settings
+    # r10k configuration
+    $r10k_config_file          = '/etc/r10k.yaml'
+
     $puppetconf_path = '/etc/puppetlabs/puppet'
 
     $pe_module_path  = '/opt/puppetlabs/puppet/modules'
@@ -99,6 +99,9 @@ class r10k::params
   }
   elsif $is_pe_server and versioncmp($::puppetversion, '4.0.0') == -1 {
     # PE 3.x.x specific settings
+    # r10k configuration
+    $r10k_config_file          = '/etc/r10k.yaml'
+
     $puppetconf_path = '/etc/puppetlabs/puppet'
 
     $pe_module_path  = '/opt/puppet/share/puppet/modules'
@@ -115,7 +118,10 @@ class r10k::params
     $webhook_group   = 'peadmin'
   }
   elsif versioncmp($::puppetversion, '4.0.0') >= 0 {
-    # PE 4 or greater specific settings
+    #FOSS 4 or greater specific settings
+    # r10k configuration
+    $r10k_config_file          = '/etc/puppetlabs/r10k/r10k.yaml'
+
     $puppetconf_path = '/etc/puppetlabs/puppet'
     $module_path     = '/opt/puppetlabs/puppet/code/modules'
 
@@ -133,7 +139,10 @@ class r10k::params
   }
   else {
     # Versions of FOSS prior to Puppet 4 (all in one)
-    # FOSS specific settings
+    # FOSS 2.x and 3.x specific settings
+    # r10k configuration
+    $r10k_config_file          = '/etc/r10k.yaml'
+
     $puppetconf_path = '/etc/puppet'
 
     # Mcollective configuration dynamic
