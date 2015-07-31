@@ -22,7 +22,6 @@ class r10k::params
   $manage_configfile_symlink = false
   $configfile_symlink        = '/etc/r10k.yaml'
   $git_settings              = {}
-
   # Git configuration
   $git_server = $::settings::ca_server
   $repo_path  = '/var/repos'
@@ -87,11 +86,11 @@ class r10k::params
 
     $pe_module_path  = '/opt/puppetlabs/puppet/modules'
     # Mcollective configuration dynamic
-    $mc_service_name = 'mcollective'
-    $plugins_dir     = '/opt/puppetlabs/mcollective/plugins'
-    $modulepath      = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
-    $provider        = 'puppet_gem'
-    $r10k_binary     = 'r10k'
+    $mc_service_name  = 'mcollective'
+    $plugins_dir      = '/opt/puppetlabs/mcollective/plugins'
+    $provider         = 'puppet_gem'
+    $r10k_binary      = 'r10k'
+    $modulepath       = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
 
     # webhook
     $webhook_user    = 'peadmin'
@@ -104,11 +103,11 @@ class r10k::params
 
     $pe_module_path  = '/opt/puppet/share/puppet/modules'
     # Mcollective configuration dynamic
-    $mc_service_name = 'pe-mcollective'
-    $plugins_dir     = '/opt/puppet/libexec/mcollective/mcollective'
-    $modulepath      = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
-    $provider        = 'pe_gem'
-    $r10k_binary     = 'r10k'
+    $mc_service_name  = 'pe-mcollective'
+    $plugins_dir      = '/opt/puppet/libexec/mcollective/mcollective'
+    $provider         = 'pe_gem'
+    $r10k_binary      = 'r10k'
+    $modulepath       = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
 
     # webhook
     $webhook_user    = 'peadmin'
@@ -121,7 +120,7 @@ class r10k::params
     $puppetconf_path = '/etc/puppet'
 
     # Mcollective configuration dynamic
-    $modulepath = "${r10k_basedir}/\$environment/modules"
+    $modulepath       = "${r10k_basedir}/\$environment/modules"
 
     # webhook
     $webhook_user    = 'puppet'
