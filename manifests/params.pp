@@ -34,8 +34,6 @@ class r10k::params
   $webhook_bind_address          = '0.0.0.0'
   $webhook_port                  = '8088'
   $webhook_access_logfile        = '/var/log/webhook/access.log'
-  $webhook_certname              = 'peadmin'
-  $webhook_certpath              = '/var/lib/peadmin/.mcollective.d'
   $webhook_client_cfg            = '/var/lib/peadmin/.mcollective'
   $webhook_use_mco_ruby          = false
   $webhook_protected             = true
@@ -46,8 +44,6 @@ class r10k::params
   $webhook_enable_ssl            = true
   $webhook_use_mcollective       = true
   $webhook_r10k_deploy_arguments = '-pv'
-  $webhook_public_key_path       = undef
-  $webhook_private_key_path      = undef
   $webhook_bin_template          = 'r10k/webhook.bin.erb'
   $webhook_yaml_template         = 'r10k/webhook.yaml.erb'
   $webhook_r10k_command_prefix        = 'umask 0022;' # 'sudo' is the canonical example for this
@@ -96,6 +92,10 @@ class r10k::params
     $webhook_user    = 'peadmin'
     $webhook_pass    = 'peadmin'
     $webhook_group   = 'peadmin'
+    $webhook_public_key_path       = '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem'
+    $webhook_private_key_path      = '/var/lib/peadmin/.mcollective.d/peadmin-private.pem'
+    $webhook_certname              = 'peadmin'
+    $webhook_certpath              = '/var/lib/peadmin/.mcollective.d'
   }
   elsif $is_pe_server and versioncmp($::puppetversion, '4.0.0') == -1 {
     # PE 3.x.x specific settings
@@ -116,6 +116,10 @@ class r10k::params
     $webhook_user    = 'peadmin'
     $webhook_pass    = 'peadmin'
     $webhook_group   = 'peadmin'
+    $webhook_public_key_path       = '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem'
+    $webhook_private_key_path      = '/var/lib/peadmin/.mcollective.d/peadmin-private.pem'
+    $webhook_certname              = 'peadmin'
+    $webhook_certpath              = '/var/lib/peadmin/.mcollective.d'
   }
   elsif versioncmp($::puppetversion, '4.0.0') >= 0 {
     #FOSS 4 or greater specific settings
@@ -136,6 +140,10 @@ class r10k::params
     $webhook_user    = 'puppet'
     $webhook_pass    = 'puppet'
     $webhook_group   = 'puppet'
+    $webhook_public_key_path       = undef
+    $webhook_private_key_path      = undef
+    $webhook_certname              = undef
+    $webhook_certpath              = undef
   }
   else {
     # Versions of FOSS prior to Puppet 4 (all in one)
@@ -152,6 +160,10 @@ class r10k::params
     $webhook_user    = 'puppet'
     $webhook_pass    = 'puppet'
     $webhook_group   = 'puppet'
+    $webhook_public_key_path       = undef
+    $webhook_private_key_path      = undef
+    $webhook_certname              = undef
+    $webhook_certpath              = undef
 
     case $::osfamily {
       'debian': {
