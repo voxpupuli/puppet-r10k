@@ -50,7 +50,7 @@ describe 'r10k::webhook::package' , :type => 'class' do
     end
     it { should contain_package('sinatra').with(
         'ensure'   => 'installed',
-        'provider' => 'pe_gem',
+        'provider' => 'pe_gem'
       )
     }
     it { should contain_package('rack').with(
