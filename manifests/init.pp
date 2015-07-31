@@ -67,6 +67,7 @@ class r10k (
     r10k_basedir              => $r10k_basedir,
     manage_configfile_symlink => $manage_configfile_symlink,
     configfile_symlink        => $configfile_symlink,
+    git_settings              => $git_settings,
   }
 
   if $mcollective {
