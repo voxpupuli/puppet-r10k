@@ -18,6 +18,7 @@ class r10k (
   $manage_configfile_symlink = $r10k::params::manage_configfile_symlink,
   $configfile_symlink        = $r10k::params::configfile_symlink,
   $git_settings              = $r10k::params::git_settings,
+  $postrun                   = undef,
   $include_prerun_command    = false,
   $include_postrun_command   = false,
   $install_gcc               = false,
@@ -67,6 +68,7 @@ class r10k (
     manage_configfile_symlink => $manage_configfile_symlink,
     configfile_symlink        => $configfile_symlink,
     git_settings              => $git_settings,
+    postrun                   => $postrun,
   }
 
   if $mcollective {
