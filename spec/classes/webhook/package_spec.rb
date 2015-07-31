@@ -17,19 +17,19 @@ describe 'r10k::webhook::package' , :type => 'class' do
     end
     it { should contain_package('sinatra').with(
         'ensure'   => 'installed',
-        'provider' => 'puppet_gem',
+        'provider' => 'puppet_gem'
       )
     }
     it { should contain_package('rack').with(
-        'ensure' => 'installed',
+        'ensure' => 'installed'
       )
     }
     it { should_not contain_package('webrick').with(
-        'ensure' => 'installed',
+        'ensure' => 'installed'
       )
     }
     it { should_not contain_package('json').with(
-        'ensure' => 'installed',
+        'ensure' => 'installed'
       )
     }
   end
@@ -54,15 +54,15 @@ describe 'r10k::webhook::package' , :type => 'class' do
       )
     }
     it { should contain_package('rack').with(
-        'ensure' => 'installed',
+        'ensure' => 'installed'
       )
     }
     it { should_not contain_package('webrick').with(
-        'ensure' => 'installed',
+        'ensure' => 'installed'
       )
     }
     it { should_not contain_package('json').with(
-        'ensure' => 'installed',
+        'ensure' => 'installed'
       )
     }
   end
@@ -82,19 +82,19 @@ describe 'r10k::webhook::package' , :type => 'class' do
     end
     it { should contain_package('sinatra').with(
         'ensure'   => 'installed',
-        'provider' => 'pe_gem',
+        'provider' => 'pe_gem'
       )
     }
     it { should_not contain_package('rack').with(
-        'ensure' => 'installed',
+        'ensure' => 'installed'
       )
     }
     it { should_not contain_package('webrick').with(
-        'ensure' => 'installed',
+        'ensure' => 'installed'
       )
     }
     it { should_not contain_package('json').with(
-        'ensure' => 'installed',
+        'ensure' => 'installed'
       )
     }
   end
@@ -110,26 +110,26 @@ describe 'r10k::webhook::package' , :type => 'class' do
     end
     it { should_not contain_package('webrick').with(
         'ensure'   => 'installed',
-        'provider' => 'puppet_gem',
+        'provider' => 'puppet_gem'
       )
     }
     it { should_not contain_package('json').with(
         'ensure'   => 'installed',
-        'provider' => 'puppet_gem',
+        'provider' => 'puppet_gem'
       )
     }
     it { should contain_package('sinatra').with(
         'ensure'   => 'installed',
         'provider' => 'puppet_gem',
-        'before' => 'Service[webhook]',
+        'before' => 'Service[webhook]'
       )
     }
     it { should contain_package('rack').with(
-        'ensure' => 'installed',
+        'ensure' => 'installed'
       )
     }
     it { should_not contain_package('webrick').with(
-        'ensure' => 'installed',
+        'ensure' => 'installed'
       )
     }
   end
@@ -144,22 +144,22 @@ describe 'r10k::webhook::package' , :type => 'class' do
     end
     it { should contain_package('sinatra').with(
         'ensure'   => 'installed',
-        'provider' => 'gem',
+        'provider' => 'gem'
       )
     }
     it { should contain_package('webrick').with(
         'ensure'   => 'installed',
-        'provider' => 'gem',
+        'provider' => 'gem'
       )
     }
     it { should contain_package('json').with(
         'ensure'   => 'installed',
-        'provider' => 'gem',
+        'provider' => 'gem'
       )
     }
     it { should_not contain_package('rack').with(
         'ensure'   => 'installed',
-        'provider' => 'gem',
+        'provider' => 'gem'
       )
     }
   end
