@@ -150,7 +150,11 @@ class r10k::params
       'openbsd': {
         $plugins_dir     = '/usr/local/libexec/mcollective/mcollective'
         $provider        = 'openbsd'
-        $r10k_binary     = 'r10k21'
+        if (versioncmp($::kernelversion, '5.8') < 0) {
+          $r10k_binary     = 'r10k21'
+        } else {
+          $r10k_binary     = 'r10k22'
+        }
         $mc_service_name = 'mcollectived'
       }
       default: {
