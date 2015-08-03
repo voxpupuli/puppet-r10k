@@ -10,6 +10,9 @@
 # * [*sources*]
 #   Hash containing data sources to be used by r10k to create dynamic Puppet
 #   environments. Default: {}
+# * [*purgedirs*]
+#   An Array of directory paths to purge of any subdirectories that do not
+#   correspond to a dynamic environment managed by r10k. Default: []
 # * [*manage_configfile_symlink*]
 #   Boolean to determine if a symlink to the r10k config file is to be managed.
 #   Default: false
@@ -29,6 +32,10 @@
 #        'basedir' => '/some/other/basedir'
 #      },
 #    },
+#    purgedirs => [
+#      "${::settings::confdir}/environments",
+#      '/some/other/basedir',
+#    ],
 #  }
 #
 # == Documentation
@@ -46,6 +53,7 @@ class r10k::config (
   $modulepath                = undef,
   $remote                    = '',
   $sources                   = 'UNSET',
+  $purgedirs                 = [],
   $puppetconf_path           = $r10k::params::puppetconf_path,
   $r10k_basedir              = $r10k::params::r10k_basedir,
   $manage_configfile_symlink = $r10k::params::manage_configfile_symlink,
