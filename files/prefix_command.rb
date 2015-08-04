@@ -1,4 +1,4 @@
-#!/opt/puppet/bin/ruby
+#!/usr/bin/env ruby
 require 'json'
 require 'yaml'
 
