@@ -4,7 +4,7 @@ branches:
   only:
   - master
 language: ruby
-bundler_args: --without development
+bundler_args: --without acceptance 
 script:
   - "bundle exec rake lint"
   - "bundle exec rake syntax"
