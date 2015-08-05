@@ -28,6 +28,7 @@ class r10k::webhook::config (
   $private_key_path      = $r10k::params::webhook_private_key_path,
   $yaml_template         = $r10k::params::webhook_yaml_template,
   $command_prefix        = $r10k::params::webhook_r10k_command_prefix,
+  $repository_events     = $r10k::params::webhook_repository_events,
   $configfile            = '/etc/webhook.yaml',
   $manage_symlink        = false,
   $configfile_symlink    = '/etc/webhook.yaml',
@@ -56,6 +57,7 @@ class r10k::webhook::config (
       'public_key_path'       => $public_key_path,
       'private_key_path'      => $private_key_path,
       'command_prefix'        => $command_prefix,
+      'repository_events'     => $repository_events,
     }
   } else {
     validate_hash($hash)
