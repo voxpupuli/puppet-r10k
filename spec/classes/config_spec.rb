@@ -134,7 +134,7 @@ describe 'r10k::config' , :type => 'class' do
       }
     end
     it 'should fail when sources is not a hash' do
-      expect { subject }.to raise_error(Puppet::Error, /is not a Hash/)
+      expect { catalogue }.to raise_error(Puppet::Error, /is not a Hash/)
     end
   end
   context "On OpenBSD configuring r10k and forgetting to pass a hash" do
@@ -153,7 +153,7 @@ describe 'r10k::config' , :type => 'class' do
       }
     end
     it 'should fail when sources is not a hash' do
-      expect { subject }.to raise_error(Puppet::Error, /is not a Hash/)
+      expect { catalogue }.to raise_error(Puppet::Error, /is not a Hash/)
     end
   end
   context "Puppet Enterprise on a RedHat 5 OS configuring r10k and forgetting to pass a bool" do
@@ -173,7 +173,7 @@ describe 'r10k::config' , :type => 'class' do
       }
     end
     it 'should fail when sources is not a boolean' do
-      expect { subject }.to raise_error(Puppet::Error, /is not a bool/)
+      expect { catalogue }.to raise_error(Puppet::Error, /is not a bool/)
     end
   end
   context "On OpenBSD configuring r10k and forgetting to pass a bool" do
@@ -191,7 +191,7 @@ describe 'r10k::config' , :type => 'class' do
       }
     end
     it 'should fail when sources is not a boolean' do
-      expect { subject }.to raise_error(Puppet::Error, /is not a bool/)
+      expect { catalogue }.to raise_error(Puppet::Error, /is not a bool/)
     end
   end
 
@@ -408,7 +408,7 @@ describe 'r10k::config' , :type => 'class' do
       end
 
       it 'should fail' do
-        expect { subject }.to raise_error(Puppet::Error)
+        expect { catalogue }.to raise_error(Puppet::Error)
       end
     end
     context 'On OpenBSD with Puppet FOSS set to a non-boolean value' do
@@ -428,7 +428,7 @@ describe 'r10k::config' , :type => 'class' do
       end
 
       it 'should fail' do
-        expect { subject }.to raise_error(Puppet::Error)
+        expect { catalogue }.to raise_error(Puppet::Error)
       end
     end
   end
@@ -454,7 +454,7 @@ describe 'r10k::config' , :type => 'class' do
       end
 
       it 'should fail' do
-        expect { subject }.to raise_error(Puppet::Error)
+        expect { catalogue }.to raise_error(Puppet::Error)
       end
     end
     context 'On OpenBSD with Puppet FOSS' do
@@ -475,7 +475,7 @@ describe 'r10k::config' , :type => 'class' do
       end
 
       it 'should fail' do
-        expect { subject }.to raise_error(Puppet::Error)
+        expect { catalogue }.to raise_error(Puppet::Error)
       end
     end
   end
@@ -528,7 +528,7 @@ describe 'r10k::config' , :type => 'class' do
         end
         
         it 'should fail when sources is not an Array' do
-          expect { subject }.to raise_error(Puppet::Error, /is not an Array/)
+          expect { catalogue }.to raise_error(Puppet::Error, /is not an Array/)
         end
       end
     end

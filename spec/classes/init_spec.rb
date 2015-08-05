@@ -27,7 +27,7 @@ describe 'r10k' do
   context 'when manage_ruby_dependency has an invalid value' do
     let (:params) {{'manage_ruby_dependency' => 'BOGON'}}
     it 'should fail' do
-      expect { subject }.to raise_error(Puppet::Error, /"BOGON" does not match/)
+      expect { catalogue }.to raise_error(Puppet::Error, /"BOGON" does not match/)
     end
   end
 

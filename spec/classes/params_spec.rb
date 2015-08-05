@@ -12,7 +12,7 @@ describe 'r10k::params' , :type => 'class' do
     it { should contain_r10k__params }
 
     it "Should not contain any resources" do
-      expect(subject.resources.size).to eq(4) 
+      expect(catalogue.resources.size).to eq(4) 
     end
   end
   context "Puppet FOSS on OpenBSD" do
@@ -25,7 +25,7 @@ describe 'r10k::params' , :type => 'class' do
     it { should contain_r10k__params }
 
     it "Should not contain any resources" do
-      expect(subject.resources.size).to eq(4) 
+      expect(catalogue.resources.size).to eq(4) 
     end
   end
 end
