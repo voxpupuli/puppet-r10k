@@ -19,11 +19,11 @@ class r10k::webhook(
   }
 
   file { '/var/log/webhook/access.log':
-    ensure  => 'file',
-    owner   => $user,
-    group   => $group,
-    mode    => '0644',
-    before  => File['webhook_bin'],
+    ensure => 'file',
+    owner  => $user,
+    group  => $group,
+    mode   => '0644',
+    before => File['webhook_bin'],
   }
 
   file { '/var/log/webhook':
