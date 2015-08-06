@@ -157,6 +157,20 @@ class Server < Sinatra::Base
       ! (list.nil? or list == event or list.include?(event))
     end
 
+    def run_command(command)
+      if Open3.respond_to?('capture3')
+        stdout, stderr, exit_status = Open3.capture3(command)
+        message = "triggered: #{command}\n#{stdout}\n#{stderr}"
+      else
+        message = 'forked'
+        Process.detach(fork{ exec "#{command} &"})
+        exit_status = 0
+      end
+      raise "#{stdout}\n#{stderr}" if exit_status != 0
+      message
+    end
+
+
     def deploy_module(module_name)
       begin
         if $config['use_mcollective']
@@ -165,9 +179,7 @@ class Server < Sinatra::Base
           # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
           command = "#{$command_prefix} r10k deploy module #{module_name}"
         end
-        stdout, stderr, exit_status = Open3.capture3(command)
-        raise "#{stdout}\n#{stderr}" if exit_status != 0
-        message = "triggered: #{command}\n#{stdout}\n#{stderr}"
+        message = run_command(command)
         $logger.info("message: #{message} module_name: #{module_name}")
         {:status => :success, :message => message.to_s }.to_json
       rescue => e
@@ -193,9 +205,7 @@ class Server < Sinatra::Base
             # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
             command = "#{$command_prefix} r10k deploy environment #{branch} #{$config['r10k_deploy_arguments']}"
           end
-          stdout, stderr, exit_status = Open3.capture3(command)
-          raise "#{stdout}\n#{stderr}" if exit_status != 0
-          message = "triggered: #{command}\n#{stdout}\n#{stderr}"
+          message = run_command(command)
         end
         $logger.info("message: #{message} branch: #{branch}")
         {:status => :success, :message => message.to_s }.to_json
