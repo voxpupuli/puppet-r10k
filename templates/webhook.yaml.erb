@@ -1,6 +1,16 @@
 ---
 <% @webhook_hash.sort.each do |key,value| -%>
-<% if value != :undef -%>
-  <%=key-%>: <%= (value.class == TrueClass  || value.class == FalseClass ) ? value : "\"#{value}\"" %>
+<% if value != :undef and ! value.nil? -%>
+<%
+  value = case value
+  when TrueClass, FalseClass
+    value
+  when Array
+    value.sort.to_s
+  else
+    "\"#{value}\""
+  end
+-%>
+<%=key-%>: <%= value %>
 <% end -%>
 <% end -%>

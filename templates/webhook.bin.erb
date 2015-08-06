@@ -77,9 +77,12 @@ class Server < Sinatra::Base
     protected! if $config['protected']
     $logger.info("authenticated: #{$config['user']}")
     request.body.rewind  # in case someone already read it
-    decoded = request.body.read
 
-    data = JSON.parse(decoded, :quirks_mode => true)
+    # Short circuit if we're ignoring this event
+    return 200 if ignore_event?
+
+    decoded = request.body.read
+    data    = JSON.parse(decoded, :quirks_mode => true)
 
     if data['repository'].has_key?('full_name')
       # handle BitBucket webhook...
@@ -109,8 +112,8 @@ class Server < Sinatra::Base
     $logger.info("authenticated: #{$config['user']}")
     request.body.rewind  # in case someone already read it
 
-    # Return success without deploying if this is a GitHub ping event
-    return 200 if request.env['HTTP_X_GITHUB_EVENT'] == 'ping'
+    # Short circuit if we're ignoring this event
+    return 200 if ignore_event?
 
     # Check if content type is x-www-form-urlencoded
     if request.content_type.to_s.downcase.eql?('application/x-www-form-urlencoded')
@@ -141,6 +144,18 @@ class Server < Sinatra::Base
   end
 
   helpers do
+
+    # Check to see if this is an event we care about. Default to responding to all events
+    def ignore_event?
+      # Explicitly ignore GitHub ping events
+      return true if request.env['HTTP_X_GITHUB_EVENT'] == 'ping'
+
+      list  = $config['repository_events']
+      event = request.env['HTTP_X_GITHUB_EVENT']
+
+      # negate this, because we should respond if any of these conditions are true
+      ! (list.nil? or list == event or list.include?(event))
+    end
 
     def deploy_module(module_name)
       begin
