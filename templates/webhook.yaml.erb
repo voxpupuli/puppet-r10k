@@ -6,7 +6,7 @@
   when TrueClass, FalseClass
     value
   when Array
-    value.sort.to_s
+    value.sort.inspect.to_s
   else
     "\"#{value}\""
   end
