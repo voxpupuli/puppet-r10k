@@ -39,7 +39,7 @@ class r10k::params
   $webhook_protected             = true
   $webhook_discovery_timeout     = 10
   $webhook_client_timeout        = 120
-  $webhook_prefix                = false         # :repo | :user | :command (or true for backwards compatibility) | 'string' | false
+  $webhook_prefix                = false         # ':repo' | ':user' | ':command' (or true for backwards compatibility) | 'string' | false
   $webhook_prefix_command        = '/bin/echo example'
   $webhook_enable_ssl            = true
   $webhook_use_mcollective       = true
