@@ -3,7 +3,7 @@
 <% if value != :undef and ! value.nil? -%>
 <%
   value = case value
-  when TrueClass, FalseClass
+  when TrueClass, FalseClass, Symbol
     value
   when Array
     value.sort.inspect.to_s
