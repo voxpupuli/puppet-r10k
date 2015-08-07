@@ -3,10 +3,12 @@
 <% if value != :undef and ! value.nil? -%>
 <%
   value = case value
-  when TrueClass, FalseClass, Symbol
+  when TrueClass, FalseClass
     value
   when Array
     value.sort.inspect.to_s
+  when /^:/
+    value.to_sym
   else
     "\"#{value}\""
   end
