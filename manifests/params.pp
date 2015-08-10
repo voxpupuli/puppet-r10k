@@ -11,7 +11,7 @@ class r10k::params
 
   if versioncmp($::puppetversion, '4.0.0') >= 0 {
     $r10k_basedir    = $::settings::environmentpath
-    $r10k_cachedir   = "${::settings::vardir}/r10k"
+    $r10k_cache_dir  = "${::settings::vardir}/r10k"
   } else {
     $r10k_basedir    = "${::settings::confdir}/environments"
     $r10k_cache_dir  = '/var/cache/r10k'
