@@ -20,13 +20,13 @@ HOSTS:
     box: puppetlabs/centos-6.6-64-nocm
     box_url: https://vagrantcloud.com/puppetlabs/boxes/centos-6.6-64-nocm
     hypervisor: vagrant
-  ubuntu-server-1404-x64:
-    roles:
-      - agent
-    platform: ubuntu-server-14.04-amd64
-    box: puppetlabs/ubuntu-14.04-64-nocm
-    box_url: https://vagrantcloud.com/puppetlabs/ubuntu-14.04-64-nocm
-    hypervisor: vagrant
+#  ubuntu-server-1404-x64:
+#    roles:
+#      - agent
+#    platform: ubuntu-server-14.04-amd64
+#    box: puppetlabs/ubuntu-14.04-64-nocm
+#    box_url: https://vagrantcloud.com/puppetlabs/ubuntu-14.04-64-nocm
+#    hypervisor: vagrant
   debian-78-x64:
     roles:
       - agent 
