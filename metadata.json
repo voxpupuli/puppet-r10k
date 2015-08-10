@@ -94,7 +94,7 @@
     },
     {
       "name": "puppet",
-      "version_requirement": 2.7.0"
+      "version_requirement": "2.7.0"
     }
   ]
 }
