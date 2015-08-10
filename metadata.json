@@ -8,7 +8,7 @@
   "source": "https://github.com/acidprime/r10k",
   "summary": "Module for setting up dynamic environments using r10k",
   "tags": ["git", "pe", "environment", "mcollective"],
-  "version": "3.0.0",
+  "version": "3.1.0",
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
@@ -94,7 +94,7 @@
     },
     {
       "name": "puppet",
-      "version_requirement": "3.x"
+      "version_requirement": 2.7.0"
     }
   ]
 }

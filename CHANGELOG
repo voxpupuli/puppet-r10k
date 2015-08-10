@@ -1,3 +1,7 @@
+3.1.0 - Mickaël Canévet & Ben Ford
+  * Fix typo related to cachedir
+  * Add support for automatically calculated prefixes from github ( backwarda compatible)
+  * Add some new prefix acceptance tests ( WIP )
 3.0.0 - Lots o Folks' see linked tickets 
   * Webhook compatibility on non masters servers (razor) #219
   * Webhook YAML recreated on every run on ruby 1.8.7 #209
