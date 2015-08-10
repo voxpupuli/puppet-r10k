@@ -52,9 +52,6 @@ Checklist (and a short version for the impatient)
         repository. (the format ticket/1234-short_description_of_change is
         usually preferred for this project).
 
-      - Submit a pull request to the repository in the puppetlabs
-        organization.
-
       - Update the ticket with a link to the pull request.
 
 The long version
