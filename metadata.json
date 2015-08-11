@@ -7,8 +7,8 @@
   "issues_url": "https://github.com/acidprime/r10k/issues",
   "source": "https://github.com/acidprime/r10k",
   "summary": "Module for setting up dynamic environments using r10k",
-  "tags": ["git", "pe", "environment", "mcollective"],
-  "version": "3.1.0",
+  "tags": ["git", "pe", "environment", "mcollective","r10k"],
+  "version": "3.1.1",
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",

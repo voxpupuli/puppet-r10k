@@ -1,3 +1,5 @@
+3.1.1 - Corey Osman & Nate McCurdy
+  * r10k_path fact throwing error on agents
 3.1.0 - Mickaël Canévet & Ben Ford
   * Fix typo related to cachedir
   * Add support for automatically calculated prefixes from github ( backwarda compatible)
