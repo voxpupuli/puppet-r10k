@@ -36,7 +36,7 @@ class r10k (
   validate_re($manage_ruby_dependency,$ruby_dependency_options)
   validate_hash($git_settings)
 
-  # TODO: Clean this up when 3.0 to require a boolean
+  # TODO: Clean this up when 4.0 to require a boolean
   if $include_prerun_command == true  or $include_prerun_command == 'true'{
     include r10k::prerun_command
   }
