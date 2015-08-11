@@ -48,6 +48,7 @@ class r10k::params
   $webhook_yaml_template         = 'r10k/webhook.yaml.erb'
   $webhook_r10k_command_prefix   = 'umask 0022;' # 'sudo' is the canonical example for this
   $webhook_repository_events     = undef
+  $webhook_enable_mutex_lock     = false
 
   if $::osfamily == 'Debian' {
     $functions_path     = '/lib/lsb/init-functions'

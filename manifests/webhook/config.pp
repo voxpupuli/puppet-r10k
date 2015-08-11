@@ -32,6 +32,7 @@ class r10k::webhook::config (
   $configfile            = '/etc/webhook.yaml',
   $manage_symlink        = false,
   $configfile_symlink    = '/etc/webhook.yaml',
+  $enable_mutex_lock     = $r10k::params::webhook_enable_mutex_lock,
 ) inherits r10k::params {
 
   if $hash == 'UNSET' {
@@ -58,6 +59,7 @@ class r10k::webhook::config (
       'private_key_path'      => $private_key_path,
       'command_prefix'        => $command_prefix,
       'repository_events'     => $repository_events,
+      'enable_mutex_lock'     => $enable_mutex_lock,
     }
   } else {
     validate_hash($hash)
