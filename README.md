@@ -580,4 +580,6 @@ Check the .travis.yml for supported Operating System Versions
 
 [Puppetconf](http://puppetconf.com) beer fund for all those that submit pull
 requests: 
+  
+  
 [![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.svg)](https://gratipay.com/acidprime/)
