@@ -60,6 +60,10 @@ $command_prefix = $config['command_prefix'] || ''
 class Server < Sinatra::Base
 
   set :static, false
+if $config['enable_mutex_lock'] then
+  set :lock,   true
+end
+
 
   get '/' do
     raise Sinatra::NotFound

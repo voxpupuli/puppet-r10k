@@ -29,6 +29,7 @@ client_cfg: \"/var/lib/peadmin/.mcollective\"
 client_timeout: \"120\"
 command_prefix: \"umask 0022;\"
 discovery_timeout: \"10\"
+enable_mutex_lock: false
 enable_ssl: true
 pass: \"peadmin\"
 port: \"8088\"
@@ -70,6 +71,100 @@ client_cfg: \"/var/lib/peadmin/.mcollective\"
 client_timeout: \"120\"
 command_prefix: \"umask 0022;\"
 discovery_timeout: \"10\"
+enable_mutex_lock: false
+enable_ssl: true
+pass: \"puppet\"
+port: \"8088\"
+prefix: false
+prefix_command: \"/bin/echo example\"
+protected: true
+r10k_deploy_arguments: \"-pv\"
+use_mco_ruby: false
+use_mcollective: true
+user: \"puppet\"
+"""
+    it { should contain_file('webhook.yaml').with_content(content) }
+  end
+
+    context 'FOSS 4.0 on a RedHat 6 installing webhook with mutex lock enabled' do
+    let :facts do
+      {
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '6',
+        :operatingsystem        => 'Centos',
+        :pe_version             => '4.2.0'
+      }
+    end
+    let(:params) do
+      {
+        :enable_mutex_lock => true,
+      }
+    end
+    it { should contain_file('webhook.yaml').with(
+        'path'   => '/etc/webhook.yaml',
+        'ensure' => 'file',
+        'owner'  => 'root',
+        'group'  => '0',
+        'mode'   => '0644',
+        'notify' => 'Service[webhook]'
+      )
+    }
+
+    content = """---
+access_logfile: \"/var/log/webhook/access.log\"
+bind_address: \"0.0.0.0\"
+client_cfg: \"/var/lib/peadmin/.mcollective\"
+client_timeout: \"120\"
+command_prefix: \"umask 0022;\"
+discovery_timeout: \"10\"
+enable_mutex_lock: true
+enable_ssl: true
+pass: \"puppet\"
+port: \"8088\"
+prefix: false
+prefix_command: \"/bin/echo example\"
+protected: true
+r10k_deploy_arguments: \"-pv\"
+use_mco_ruby: false
+use_mcollective: true
+user: \"puppet\"
+"""
+    it { should contain_file('webhook.yaml').with_content(content) }
+  end
+
+
+    context 'FOSS 4.0 on a RedHat 7 installing webhook with mutex lock enabled' do
+    let :facts do
+      {
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '7',
+        :operatingsystem        => 'Centos',
+        :pe_version             => '4.2.0'
+      }
+    end
+    let(:params) do
+      {
+        :enable_mutex_lock => true,
+      }
+    end
+    it { should contain_file('webhook.yaml').with(
+        'path'   => '/etc/webhook.yaml',
+        'ensure' => 'file',
+        'owner'  => 'root',
+        'group'  => '0',
+        'mode'   => '0644',
+        'notify' => 'Service[webhook]'
+      )
+    }
+
+    content = """---
+access_logfile: \"/var/log/webhook/access.log\"
+bind_address: \"0.0.0.0\"
+client_cfg: \"/var/lib/peadmin/.mcollective\"
+client_timeout: \"120\"
+command_prefix: \"umask 0022;\"
+discovery_timeout: \"10\"
+enable_mutex_lock: true
 enable_ssl: true
 pass: \"puppet\"
 port: \"8088\"
@@ -118,6 +213,7 @@ client_cfg: \"/var/lib/peadmin/.mcollective\"
 client_timeout: \"120\"
 command_prefix: \"umask 0022;\"
 discovery_timeout: \"10\"
+enable_mutex_lock: false
 enable_ssl: true
 pass: \"peadmin\"
 port: \"8088\"
