@@ -29,6 +29,7 @@ client_cfg: \"/var/lib/peadmin/.mcollective\"
 client_timeout: \"120\"
 command_prefix: \"umask 0022;\"
 discovery_timeout: \"10\"
+enable_mutex_lock: false
 enable_ssl: true
 pass: \"peadmin\"
 port: \"8088\"
@@ -41,7 +42,6 @@ r10k_deploy_arguments: \"-pv\"
 use_mco_ruby: false
 use_mcollective: true
 user: \"peadmin\"
-enable_mutex_lock: false
 """
     it { should contain_file('webhook.yaml').with_content(content) }
   end
@@ -71,6 +71,7 @@ client_cfg: \"/var/lib/peadmin/.mcollective\"
 client_timeout: \"120\"
 command_prefix: \"umask 0022;\"
 discovery_timeout: \"10\"
+enable_mutex_lock: false
 enable_ssl: true
 pass: \"puppet\"
 port: \"8088\"
@@ -81,7 +82,6 @@ r10k_deploy_arguments: \"-pv\"
 use_mco_ruby: false
 use_mcollective: true
 user: \"puppet\"
-enable_mutex_lock: false
 """
     it { should contain_file('webhook.yaml').with_content(content) }
   end
@@ -117,6 +117,7 @@ client_cfg: \"/var/lib/peadmin/.mcollective\"
 client_timeout: \"120\"
 command_prefix: \"umask 0022;\"
 discovery_timeout: \"10\"
+enable_mutex_lock: true
 enable_ssl: true
 pass: \"puppet\"
 port: \"8088\"
@@ -127,7 +128,6 @@ r10k_deploy_arguments: \"-pv\"
 use_mco_ruby: false
 use_mcollective: true
 user: \"puppet\"
-enable_mutex_lock: true
 """
     it { should contain_file('webhook.yaml').with_content(content) }
   end
@@ -164,6 +164,7 @@ client_cfg: \"/var/lib/peadmin/.mcollective\"
 client_timeout: \"120\"
 command_prefix: \"umask 0022;\"
 discovery_timeout: \"10\"
+enable_mutex_lock: true
 enable_ssl: true
 pass: \"puppet\"
 port: \"8088\"
@@ -174,7 +175,6 @@ r10k_deploy_arguments: \"-pv\"
 use_mco_ruby: false
 use_mcollective: true
 user: \"puppet\"
-enable_mutex_lock: true
 """
     it { should contain_file('webhook.yaml').with_content(content) }
   end
@@ -213,6 +213,7 @@ client_cfg: \"/var/lib/peadmin/.mcollective\"
 client_timeout: \"120\"
 command_prefix: \"umask 0022;\"
 discovery_timeout: \"10\"
+enable_mutex_lock: false
 enable_ssl: true
 pass: \"peadmin\"
 port: \"8088\"
@@ -226,7 +227,6 @@ repository_events: [\"merge\", \"release\"]
 use_mco_ruby: false
 use_mcollective: true
 user: \"peadmin\"
-enable_mutex_lock: false
 """
     it { should contain_file('webhook.yaml').with_content(content) }
   end
