@@ -254,6 +254,8 @@ This is an example of using the webhook without authentication.
 The `git_webhook` type will use the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want to automate the addtion of the webhook to the repo.
 
 ```puppet
+# Required unless you disable mcollective
+include r10k::mcollective
 # Internal webhooks often don't need authentication and ssl
 # Change the url below if this is changed
 class {'r10k::webhook::config':
@@ -298,8 +300,12 @@ This is an example of using the webhook with authentication
 The `git_webhook` type will use the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want to automate the addtion of the webhook to the repo.
 
 ```puppet
+# Required unless you disable mcollective
+include r10k::mcollective
+
 # External webhooks often need authentication and ssl and authentication
 # Change the url below if this is changed
+
 class {'r10k::webhook::config':
   enable_ssl => true,
   protected  => true,
@@ -383,6 +389,9 @@ file {'/usr/local/bin/prefix_command.rb':
   group  => '0',
   source => 'puppet:///modules/r10k/prefix_command.rb',
 }
+
+# Required unless you disable mcollective
+include r10k::mcollective
 
 class {'r10k::webhook::config':
   prefix         => true,
