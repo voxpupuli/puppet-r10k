@@ -89,6 +89,15 @@ class r10k::config (
     validate_array($postrun)
   }
 
+  if $configfile == '/etc/puppetlabs/r10k/r10k.yaml' {
+    file {'/etc/puppetlabs/r10k':
+      ensure => 'directory',
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0755',
+    }
+  }
+
   file { 'r10k.yaml':
     ensure  => file,
     owner   => 'root',
