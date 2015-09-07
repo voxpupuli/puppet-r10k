@@ -133,7 +133,7 @@ class r10k::params
 
     # Mcollective configuration dynamic
     $mc_service_name = 'mcollective'
-    $plugins_dir     = '/opt/puppetlabs/mcollective/plugins'
+    $plugins_dir     = '/opt/puppetlabs/mcollective/plugins/mcollective'
     $modulepath      = undef
     $provider        = 'puppet_gem'
     $r10k_binary     = 'r10k'
