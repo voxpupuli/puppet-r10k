@@ -23,6 +23,15 @@ describe 'Prefix Enabled,System Ruby with No SSL, Not protected, No mcollective'
             'basedir' => '${::settings::confdir}/environments',
             'prefix'  => true,
           },
+          'noprefix' => {
+            'remote'  => 'https://github.com/noprefix/repo.git',
+            'basedir' => '${::settings::confdir}/environments'
+          },
+          'customprefix' => {
+            'remote'  => 'https://github.com/customprefix/repo.git',
+            'basedir' => '${::settings::confdir}/environments',
+            'prefix'  => 'custom'
+          }
         },
       }
       class {'r10k::webhook::config':
@@ -58,6 +67,19 @@ describe 'Prefix Enabled,System Ruby with No SSL, Not protected, No mcollective'
     it 'should calculate secteam prefix with Github payloads via payload end point' do
       shell('/usr/bin/curl -d \'{ "ref": "refs/heads/production", "repository": { "name": "puppet-control" , "url": "https://github.com/secteam/someotherrepo.git"} }\' -H "Accept: application/json" "http://localhost:8088/payload" -k -q') do |r|
         expect(r.stdout).to match(/^.*secteam_production.*$/)
+        expect(r.exit_code).to eq(0)
+      end
+    end
+    it 'should calculate custom prefix with Github payloads via payload end point' do
+      shell('/usr/bin/curl -d \'{ "ref": "refs/heads/production", "repository": { "name": "puppet-control" , "url": "https://github.com/customprefix/repo.git"} }\' -H "Accept: application/json" "http://localhost:8088/payload" -k -q') do |r|
+        expect(r.stdout).to match(/^.*custom_production.*$/)
+        expect(r.exit_code).to eq(0)
+      end
+    end
+
+    it 'should calculate no prefix Github payloads via payload end point' do
+      shell('/usr/bin/curl -d \'{ "ref": "refs/heads/production", "repository": { "name": "puppet-control" , "url": "https://github.com/noprefix/repo.git"} }\' -H "Accept: application/json" "http://localhost:8088/payload" -k -q') do |r|
+        expect(r.stdout).to match(/^.* production.*$/)
         expect(r.exit_code).to eq(0)
       end
     end
