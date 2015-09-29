@@ -8,6 +8,7 @@ module MCollective
          r10k_binary = `which r10k 2> /dev/null`
          if r10k_binary == ""
            #r10k not found on path.
+           Log.error('r10k binary not found in PATH')
            false
          else
            true
