@@ -19,6 +19,7 @@ class r10k::params
   $manage_configfile_symlink = false
   $configfile_symlink        = '/etc/r10k.yaml'
   $git_settings              = {}
+  $forge_settings            = {}
   # Git configuration
   $git_server = $::settings::ca_server
   $repo_path  = '/var/repos'

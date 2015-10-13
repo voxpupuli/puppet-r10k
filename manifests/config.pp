@@ -11,7 +11,7 @@
 #   Hash containing data sources to be used by r10k to create dynamic Puppet
 #   environments. Default: {}
 # * [*postrun*]
-#   **Optional:** Array containing the parts of a system call. 
+#   **Optional:** Array containing the parts of a system call.
 #   Example: ['/usr/bin/curl', '-F', 'deploy=done', 'http://my-app.site/endpoint']
 #   Default: undef
 # * [*manage_configfile_symlink*]
@@ -19,6 +19,8 @@
 #   Default: false
 # * [*configfile_symlink*]
 #   Location of symlink that points to configfile. Default: /etc/r10k.yaml
+# * [*forge_settings*]
+#   Hash containing settings for downloading modules from the Puppet Forge.
 #
 # === Examples
 #
@@ -57,6 +59,7 @@ class r10k::config (
   $configfile_symlink        = '/etc/r10k.yaml',
   $r10k_yaml_template        = 'r10k/r10k.yaml.erb',
   $git_settings              = {},
+  $forge_settings            = {},
 ) inherits r10k::params {
 
   validate_bool($manage_modulepath)

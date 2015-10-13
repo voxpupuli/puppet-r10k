@@ -59,10 +59,10 @@ class { 'r10k':
 
 * Installation of the r10k `gem`
 * Installation of git
-* Installation of ruby when not using an existing ruby stack i.e. when using `pe_gem` or `puppet_gem` 
+* Installation of ruby when not using an existing ruby stack i.e. when using `pe_gem` or `puppet_gem`
 * Installation of ruby if not using an existing ruby stack i.e. when using  `pe_gem` or `puppet_gem`.
 * Management of the `r10k.yaml` in /etc
-* Instllation and configuration of a sinatra app when using the [webhook](#webhook-support). 
+* Installation and configuration of a sinatra app when using the [webhook](#webhook-support).
 
 
 #### Version chart
@@ -249,7 +249,7 @@ For version control systems that use web driven post-receive processes you can u
 This webhook currently only runs on Puppet Enterprise and uses mcollective to automatically synchronize your environment across multiple masters.
 The webhook must be configured on the respective "control" repository a master that has mco installed and can contact the other masters in your fleet.
 
-### Webhook Github Enterprise - Non Authenticated 
+### Webhook Github Enterprise - Non Authenticated
 This is an example of using the webhook without authentication.
 The `git_webhook` type will use the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want to automate the addtion of the webhook to the repo.
 
@@ -295,7 +295,7 @@ git_webhook { 'web_post_receive_webhook_for_module' :
 }
 ```
 
-### Webhook Github Example - Authenticated 
+### Webhook Github Example - Authenticated
 This is an example of using the webhook with authentication
 The `git_webhook` type will use the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want to automate the addtion of the webhook to the repo.
 
@@ -338,7 +338,7 @@ git_webhook { 'web_post_receive_webhook' :
 # All characters with left and including any hyphen are removed i.e. <puppet->
 git_webhook { 'web_post_receive_webhook_for_module' :
   ensure       => present,
-  webhook_url  => 'https://puppet:puppet@hole.in.firewall:8088/module', 
+  webhook_url  => 'https://puppet:puppet@hole.in.firewall:8088/module',
   token        =>  hiera('github_api_token'),
   project_name => 'organization/puppet-module_name',
   server_url   => 'https://api.github.com',
@@ -451,22 +451,22 @@ A string to be passed in as the source with a hardcode prefix of `puppet`
 A hash of all sources, this gets read out into the file as yaml. Must not be declared with `remote`
 
 ##### `cachedir`
-A single string setting the `r10k.yaml` configuration value of the same name 
+A single string setting the `r10k.yaml` configuration value of the same name
 
 ##### `configfile`
 A path to the configuration file to manage. Be aware Puppet Enterprise 4.0 and higher may conflict if you manage `/etc/puppetlabs/puppet/r10k.yaml`
 
 ##### `version`
-A value passed to the package resource for managing the gem version 
+A value passed to the package resource for managing the gem version
 
 ##### `modulepath`
-Deprecated: for older [configfile](https://docs.puppetlabs.com/puppet/latest/reference/environments_classic.html) environments configuration of modulepath in puppet.conf 
+Deprecated: for older [configfile](https://docs.puppetlabs.com/puppet/latest/reference/environments_classic.html) environments configuration of modulepath in puppet.conf
 
 ##### `manage_modulepath`
-Deprecated: declare a resource for managing `modulepath` in Puppet.conf 
+Deprecated: declare a resource for managing `modulepath` in Puppet.conf
 
 ##### `manage_ruby_dependency`
-When using system ruby , options on how to declare 
+When using system ruby , options on how to declare
 
 ##### `r10k_basedir`
 This module requires the [puppetlabs-ruby](https://github.com/puppetlabs/puppetlabs-ruby.git) module. In the event that your environment already includes
@@ -484,7 +484,7 @@ is outlined below:
 
   * *ignore* This will assume that ruby is handled via some other mechanism than
     a puppet module named `ruby`. It is left to the user to insure the
-    requirement be met. 
+    requirement be met.
 ##### `package_name`
 The name of the package to be installed via the provider
 
@@ -506,7 +506,7 @@ See `r10k::install::portage` class for more information
 Options to pass to the `provider` declaration
 
 ##### `mcollective`
-Install mcollective application and agents. This does NOT configure mcollective automatically 
+Install mcollective application and agents. This does NOT configure mcollective automatically
 
 ##### `manage_configfile_symlink`
 Manage a symlink to the configuration file, for systems installed in weird file system configurations
@@ -524,6 +524,21 @@ rugged support.
     class {'r10k':
       remote       => 'git@github.com:acidprime/puppet.git',
       git_settings => $git_settings,
+    }
+```
+
+##### `forge_settings`
+This is the `forge:` key in r10k, it accepts a hash that contains settings for downloading modules from the Puppet Forge.
+
+```puppet
+    $forge_settings = {
+      'proxy'   => 'https://proxy.example.com:3128',
+      'baseurl' => 'https://forgeapi.puppetlabs.com',
+    }
+
+    class {'r10k':
+      remote         => 'git@github.com:acidprime/puppet.git',
+      forge_settings => $forge_settings,
     }
 ```
 
@@ -573,7 +588,7 @@ Quickstart:
     gem install bundler
     bundle install
     bundle exec rake spec
-    bundle exec rake lint 
+    bundle exec rake lint
 ```
 
 ####Ruby = 1.8.7
@@ -582,13 +597,13 @@ Quickstart:
     gem install bundler
     bundle install --without system_tests
     bundle exec rake spec
-    bundle exec rake lint 
+    bundle exec rake lint
 ```
 
 Check the .travis.yml for supported Operating System Versions
 
 [Puppetconf](http://puppetconf.com) beer fund for all those that submit pull
-requests: 
-  
-  
+requests:
+
+
 [![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.svg)](https://gratipay.com/acidprime/)
