@@ -18,6 +18,7 @@ class r10k (
   $manage_configfile_symlink = $r10k::params::manage_configfile_symlink,
   $configfile_symlink        = $r10k::params::configfile_symlink,
   $git_settings              = $r10k::params::git_settings,
+  $forge_settings            = $r10k::params::forge_settings,
   $postrun                   = undef,
   $include_prerun_command    = false,
   $include_postrun_command   = false,
@@ -34,7 +35,7 @@ class r10k (
 
   $ruby_dependency_options=['include','declare','ignore']
   validate_re($manage_ruby_dependency,$ruby_dependency_options)
-  validate_hash($git_settings)
+  validate_hash($git_settings, $forge_settings)
 
   # TODO: Clean this up when 4.0 to require a boolean
   if $include_prerun_command == true  or $include_prerun_command == 'true'{
@@ -68,6 +69,7 @@ class r10k (
     manage_configfile_symlink => $manage_configfile_symlink,
     configfile_symlink        => $configfile_symlink,
     git_settings              => $git_settings,
+    forge_settings            => $forge_settings,
     postrun                   => $postrun,
   }
 

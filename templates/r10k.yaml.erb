@@ -18,3 +18,9 @@ git:
     <%=key-%>: <%=value%>
 <% end -%>
 <% end -%>
+<% if !@forge_settings.empty? -%>
+forge:
+<% @forge_settings.sort.each do |key, value| -%>
+    <%=key-%>: <%=value%>
+<% end -%>
+<% end -%>

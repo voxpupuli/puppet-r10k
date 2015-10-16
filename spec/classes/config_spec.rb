@@ -492,6 +492,18 @@ describe 'r10k::config' , :type => 'class' do
     it { should contain_file('r10k.yaml').with_content(%r{git:\n.*private_key: /root/\.ssh/id_dsa\n.*provider: rugged\n}) }
   end
 
+  context 'Manage forge settings of r10k via forge_settings' do
+    let :params do
+      {
+        :configfile        => '/etc/r10k.yaml',
+        :cachedir          => '/var/cache/r10k',
+        :manage_modulepath => false,
+        :forge_settings    => { 'proxy' => 'https://proxy.example.com:3128', 'baseurl' => 'https://forgeapi.puppetlabs.com' },
+      }
+    end
+    it { should contain_file('r10k.yaml').with_content(%r{forge:\n.*baseurl: https:\/\/forgeapi\.puppetlabs\.com\n.*proxy: https:\/\/proxy\.example\.com:3128\n}) }
+  end
+
   describe 'with optional parameter postrun specified' do
     context 'with array of system call "/usr/bin/curl -F deploy=done http://my-app.site/endpoint"' do
       let :params do
@@ -526,7 +538,7 @@ describe 'r10k::config' , :type => 'class' do
             :postrun           => value,
           }
         end
-        
+
         it 'should fail when sources is not an Array' do
           expect { catalogue }.to raise_error(Puppet::Error, /is not an Array/)
         end
