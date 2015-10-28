@@ -514,7 +514,7 @@ describe 'r10k::config' , :type => 'class' do
           :postrun           => ['/usr/bin/curl', '-F', 'deploy=done', 'http://my-app.site/endpoint'],
         }
       end
-      it { should contain_file('r10k.yaml').with_content(%r{^.*:postrun: \[\"/usr/bin/curl\",\"-F\",\"deploy=done\",\"http://my-app\.site/endpoint\"\]\n.*$}) }
+      it { should contain_file('r10k.yaml').with_content(%r{^.*:postrun: \[\"/usr/bin/curl\", \"-F\", \"deploy=done\", \"http://my-app\.site/endpoint\"\]\n.*$}) }
     end
 
     context 'with postrun left undefined' do
