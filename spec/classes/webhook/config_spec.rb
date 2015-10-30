@@ -80,6 +80,7 @@ prefix: false
 prefix_command: \"/bin/echo example\"
 protected: true
 r10k_deploy_arguments: \"-pv\"
+server_software: \"WebHook\"
 use_mco_ruby: false
 use_mcollective: true
 user: \"puppet\"
@@ -126,6 +127,7 @@ prefix: false
 prefix_command: \"/bin/echo example\"
 protected: true
 r10k_deploy_arguments: \"-pv\"
+server_software: \"WebHook\"
 use_mco_ruby: false
 use_mcollective: true
 user: \"puppet\"
@@ -173,6 +175,7 @@ prefix: false
 prefix_command: \"/bin/echo example\"
 protected: true
 r10k_deploy_arguments: \"-pv\"
+server_software: \"WebHook\"
 use_mco_ruby: false
 use_mcollective: true
 user: \"puppet\"
@@ -225,6 +228,7 @@ protected: true
 public_key_path: \"/var/lib/peadmin/.mcollective.d/peadmin-cert.pem\"
 r10k_deploy_arguments: \"-pv\"
 repository_events: [\"merge\", \"release\"]
+server_software: \"WebHook\"
 use_mco_ruby: false
 use_mcollective: true
 user: \"peadmin\"
