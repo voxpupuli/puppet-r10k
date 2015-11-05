@@ -36,12 +36,13 @@ ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:<%= if @is_pe == true or @is_pe == 
 $logger = WEBrick::Log::new($config['access_logfile'], WEBrick::Log::DEBUG)
 
 opts = {
-  :Host       => $config['bind_address'],
-  :Port       => $config['port'],
-  :Logger     => $logger,
-  :ServerType => WEBrick::Daemon,
-  :SSLEnable  => $config['enable_ssl'],
-  :StartCallback => Proc.new { File.open(PIDFILE, 'w') {|f| f.write Process.pid } },
+  :Host           => $config['bind_address'],
+  :Port           => $config['port'],
+  :Logger         => $logger,
+  :ServerType     => WEBrick::Daemon,
+  :ServerSoftware => $config['server_software'],
+  :SSLEnable      => $config['enable_ssl'],
+  :StartCallback  => Proc.new { File.open(PIDFILE, 'w') {|f| f.write Process.pid } },
 }
 if $config['enable_ssl'] then
   opts[:SSLVerifyClient] = OpenSSL::SSL::VERIFY_NONE
