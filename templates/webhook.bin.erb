@@ -127,8 +127,13 @@ end
     end
     data = JSON.parse(decoded, :quirks_mode => true)
 
-    # github sends a 'ref', stash sends an array in 'refChanges'
-    branch = ( data['ref'] || data['refChanges'][0]['refId'] rescue nil || data['push']['changes'][0]['new']['name'] ).sub('refs/heads/', '')
+    # Iterate the data structure to determine what's should be deployed
+    branch = (
+        data['ref']                                          ||  # github & gitlab
+        data['refChanges'][0]['refId']            rescue nil ||  # stash
+        data['push']['changes'][0]['new']['name'] rescue nil ||  # bitbucket
+        data['repository']['default_branch']                     # github tagged release; no ref.
+      ).sub('refs/heads/', '') rescue nil
 
     # If prefix is enabled in our config file, determine what the prefix should be
     prefix = case $config['prefix']
@@ -142,7 +147,10 @@ end
       $config['prefix']
     end
 
-    if prefix.nil? or prefix.empty?
+    # r10k doesn't yet know how to deploy all branches from a single source.
+    # The best we can do is just deploy all environments by passing nil to
+    # deploy() if we don't know the correct branch.
+    if prefix.nil? or prefix.empty? or branch.nil? or branch.empty?
       deploy(branch)
     else
       deploy("#{prefix}_#{branch}")
