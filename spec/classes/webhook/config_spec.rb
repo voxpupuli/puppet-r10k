@@ -22,6 +22,7 @@ describe 'r10k::webhook::config' , :type => 'class' do
 
     content = """---
 access_logfile: \"/var/log/webhook/access.log\"
+allow_uppercase: true
 bind_address: \"0.0.0.0\"
 certname: \"peadmin\"
 certpath: \"/var/lib/peadmin/.mcollective.d\"
@@ -67,6 +68,7 @@ user: \"peadmin\"
 
     content = """---
 access_logfile: \"/var/log/webhook/access.log\"
+allow_uppercase: true
 bind_address: \"0.0.0.0\"
 client_cfg: \"/var/lib/peadmin/.mcollective\"
 client_timeout: \"120\"
@@ -114,6 +116,7 @@ user: \"puppet\"
 
     content = """---
 access_logfile: \"/var/log/webhook/access.log\"
+allow_uppercase: true
 bind_address: \"0.0.0.0\"
 client_cfg: \"/var/lib/peadmin/.mcollective\"
 client_timeout: \"120\"
@@ -162,6 +165,7 @@ user: \"puppet\"
 
     content = """---
 access_logfile: \"/var/log/webhook/access.log\"
+allow_uppercase: true
 bind_address: \"0.0.0.0\"
 client_cfg: \"/var/lib/peadmin/.mcollective\"
 client_timeout: \"120\"
@@ -210,6 +214,7 @@ user: \"puppet\"
 
     content = """---
 access_logfile: \"/var/log/webhook/access.log\"
+allow_uppercase: true
 bind_address: \"0.0.0.0\"
 certname: \"peadmin\"
 certpath: \"/var/lib/peadmin/.mcollective.d\"
