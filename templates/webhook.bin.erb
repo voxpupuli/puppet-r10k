@@ -152,9 +152,9 @@ end
     # The best we can do is just deploy all environments by passing nil to
     # deploy() if we don't know the correct branch.
     if prefix.nil? or prefix.empty? or branch.nil? or branch.empty?
-      deploy(branch)
+      deploy(normalize(branch))
     else
-      deploy("#{prefix}_#{branch}")
+      deploy(normalize("#{prefix}_#{branch}"))
     end
 
   end
@@ -267,6 +267,11 @@ end
     def repo_user(data)
       # Tested with GitHub only
       data['repository']['owner']['login'] rescue nil
+    end
+
+    def normalize(str)
+      # one could argue that r10k should do this along with the other normalization it does...
+      $config['allow_uppercase'] ? str : str.downcase
     end
 
     def run_prefix_command(payload)

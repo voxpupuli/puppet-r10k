@@ -51,6 +51,7 @@ class r10k::params
   $webhook_r10k_command_prefix   = 'umask 0022;' # 'sudo' is the canonical example for this
   $webhook_repository_events     = undef
   $webhook_enable_mutex_lock     = false
+  $webhook_allow_uppercase       = true          # for backwards compatibility. Default to off on a major semver update.
 
   if $::osfamily == 'Debian' {
     $functions_path     = '/lib/lsb/init-functions'
