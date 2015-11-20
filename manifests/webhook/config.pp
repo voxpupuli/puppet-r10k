@@ -30,6 +30,7 @@ class r10k::webhook::config (
   $yaml_template         = $r10k::params::webhook_yaml_template,
   $command_prefix        = $r10k::params::webhook_r10k_command_prefix,
   $repository_events     = $r10k::params::webhook_repository_events,
+  $allow_uppercase       = $r10k::params::webhook_allow_uppercase,
   $configfile            = '/etc/webhook.yaml',
   $manage_symlink        = false,
   $configfile_symlink    = '/etc/webhook.yaml',
@@ -62,6 +63,7 @@ class r10k::webhook::config (
       'command_prefix'        => $command_prefix,
       'repository_events'     => $repository_events,
       'enable_mutex_lock'     => $enable_mutex_lock,
+      'allow_uppercase'       => $allow_uppercase,
     }
   } else {
     validate_hash($hash)
