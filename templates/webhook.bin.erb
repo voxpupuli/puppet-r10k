@@ -133,6 +133,7 @@ end
         data['ref']                                          ||  # github & gitlab
         data['refChanges'][0]['refId']            rescue nil ||  # stash
         data['push']['changes'][0]['new']['name'] rescue nil ||  # bitbucket
+        data['resource']['refUpdates'][0]['name'] rescue nil ||  # TFS/VisualStudio-Git
         data['repository']['default_branch']                     # github tagged release; no ref.
       ).sub('refs/heads/', '') rescue nil
 
