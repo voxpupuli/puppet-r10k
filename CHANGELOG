@@ -1,3 +1,9 @@
+3.2.0 - Multiple Authors
+  * Support for TFS/Visual Studio Git #259
+  * Lowercase Environment names #256
+  * Obsure Software version #253
+  * Fix Postrun command spaces #252
+  * Tagged Release events #251
 3.1.1 - Corey Osman & Nate McCurdy
   * r10k_path fact throwing error on agents
 3.1.0 - Mickaël Canévet & Ben Ford
