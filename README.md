@@ -347,6 +347,22 @@ git_webhook { 'web_post_receive_webhook_for_module' :
 }
 ```
 
+### GitHub Secret Support
+GitHub webhooks allow the use of a secret value that gets hashed against the payload to pass a
+signature in the request X-Hub-Signature header. To support the secret with the webhook do the
+following type of configuration.
+
+```puppet
+class { 'r10k::webhook::config':
+  protected     => false,
+  github_secret => 'THISISTHEGITHUBWEBHOOKSECRET',
+}
+
+class { 'r10k::webhook':
+  require => Class['r10k::webhook::config'],
+}
+```
+
 ### Running without mcollective
 If you have only a single master, you may want to have the webhook run r10k directly rather then
 as peadmin via mcollective. This requires you to run as the user that can perform `r10k` commands
