@@ -316,17 +316,6 @@ class {'r10k::webhook':
   require => Class['r10k::webhook::config'],
 }
 
-# Webhook - remove webhook init script and config file.
-# Moving to Code manager, and removing webhook
-
-class {'r10k::webhook::config':
-  ensure => false,
-}
-
-class {'r10k::webhook':
-  ensure => false,
-}
-
 # https://github.com/abrader/abrader-gms
 # Add webhook to control repository ( the repo where the Puppetfile lives )
 # Requires gms 0.0.6+ for disable_ssl_verify param
@@ -357,6 +346,24 @@ git_webhook { 'web_post_receive_webhook_for_module' :
   provider     => 'github',
 }
 ```
+
+### Webhook - remove webhook init script and config file.
+Moving to Code manager, and removing webhook
+```puppet
+class {'r10k::webhook::config':
+  ensure => false,
+}
+
+class {'r10k::webhook':
+  ensure => false,
+}
+```
+
+
+
+
+
+
 
 ### Running without mcollective
 If you have only a single master, you may want to have the webhook run r10k directly rather then
