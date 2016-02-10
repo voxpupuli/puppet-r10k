@@ -31,6 +31,44 @@ describe 'r10k::webhook' , :type => 'class' do
       )
     }
   end
+
+  context 'Puppet Enterprise 2015.3.1 on a RedHat 6 Removing Webhook' do
+    let :params do
+      {
+        :ensure => false,
+      }
+    end
+    let :facts do
+      {
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '6',
+        :operatingsystem        => 'Centos',
+        :is_pe                  => 'true',
+        :pe_server_build        => '2015.3.1'
+      }
+    end
+    it { should contain_file('/var/log/webhook/access.log').with(
+        'ensure' => 'absent',
+        'path'   => '/var/log/webhook/access.log'
+      )
+    }
+    it { should contain_file('/var/log/webhook').with(
+        'ensure' => 'absent',
+        'path'   => '/var/log/webhook'
+      )
+    }
+    it { should contain_file('/var/run/webhook').with(
+        'ensure' => 'absent',
+        'path'   => '/var/run/webhook'
+      )
+    }
+    it { should contain_file('webhook_init_script').with(
+        'ensure' => 'absent',
+        'path'   => '/etc/init.d/webhook'
+      )
+    }
+  end
+
   context 'Puppet Enterprise 3.7.0 on a RedHat 5 installing webhook no mco' do
     let :params do
       {

@@ -316,6 +316,17 @@ class {'r10k::webhook':
   require => Class['r10k::webhook::config'],
 }
 
+# Webhook - remove webhook init script and config file.
+# Moving to Code manager, and removing webhook
+
+class {'r10k::webhook::config':
+  ensure => false,
+}
+
+class {'r10k::webhook':
+  ensure => false,
+}
+
 # https://github.com/abrader/abrader-gms
 # Add webhook to control repository ( the repo where the Puppetfile lives )
 # Requires gms 0.0.6+ for disable_ssl_verify param

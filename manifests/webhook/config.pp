@@ -6,6 +6,7 @@
 #
 # Zack Smith <zack@puppetlabs.com>
 class r10k::webhook::config (
+  $ensure                = true,
   $hash                  = 'UNSET',
   $certname              = $r10k::params::webhook_certname,
   $certpath              = $r10k::params::webhook_certpath,
@@ -70,8 +71,17 @@ class r10k::webhook::config (
     $webhook_hash = $hash
   }
 
+  $ensure_file = $ensure ? {
+    true  => 'file',
+    false => 'absent',
+  }
+  $ensure_link = $ensure ? {
+    true  => 'link',
+    false => 'absent',
+  }
+
   file { 'webhook.yaml':
-    ensure  => file,
+    ensure  => $ensure_file,
     owner   => 'root',
     group   => '0',
     mode    => '0644',
@@ -82,7 +92,7 @@ class r10k::webhook::config (
 
   if $manage_symlink {
     file { 'symlink_webhook.yaml':
-      ensure => 'link',
+      ensure => $ensure_link,
       path   => $configfile_symlink,
       target => $configfile,
     }
