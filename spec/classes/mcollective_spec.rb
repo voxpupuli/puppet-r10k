@@ -11,14 +11,14 @@ describe 'r10k::mcollective' , :type => 'class' do
     end
     it { should contain_class("r10k::params") }
     it { should contain_file("/opt/puppet/libexec/mcollective/mcollective/application/r10k.rb").with(
-        'ensure'   => 'present',
+        'ensure'   => 'file',
         'owner'    => 'root',
         'group'    => '0',
         'mode'     => '0644'
       )
     }
     it { should contain_file("/opt/puppet/libexec/mcollective/mcollective/agent/r10k.ddl").with(
-        'ensure'   => 'present',
+        'ensure'   => 'file',
         'owner'    => 'root',
         'group'    => '0',
         'mode'     => '0644'
@@ -26,7 +26,7 @@ describe 'r10k::mcollective' , :type => 'class' do
     }
 
     it { should contain_file("/opt/puppet/libexec/mcollective/mcollective/agent/r10k.rb").with(
-        'ensure'   => 'present',
+        'ensure'   => 'file',
         'owner'    => 'root',
         'group'    => '0',
         'mode'     => '0644'
@@ -38,6 +38,35 @@ describe 'r10k::mcollective' , :type => 'class' do
         with_content(/\"GIT_SSL_NO_VERIFY\" => \"0\"/)
     }
 
+  end
+
+  context "Puppet Enterprise on a RedHat 6 OS removing the mcollective agent & application" do
+    let :params do
+      {
+        :ensure => false,
+      }
+    end
+    let :facts do
+      {
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '6',
+        :operatingsystem        => 'Centos',
+        :is_pe                  => 'true'
+      }
+    end
+    it { should contain_file("/opt/puppet/libexec/mcollective/mcollective/application/r10k.rb").with(
+        'ensure'   => 'absent',
+      )
+    }
+    it { should contain_file("/opt/puppet/libexec/mcollective/mcollective/agent/r10k.ddl").with(
+        'ensure'   => 'absent',
+      )
+    }
+
+    it { should contain_file("/opt/puppet/libexec/mcollective/mcollective/agent/r10k.rb").with(
+        'ensure'   => 'absent',
+      )
+    }
   end
 
   context "Allows you to set git_ssl_no_verify for r10k file" do
@@ -97,14 +126,14 @@ describe 'r10k::mcollective' , :type => 'class' do
     end
     it { should contain_class("r10k::params") }
     it { should contain_file("/usr/libexec/mcollective/mcollective/application/r10k.rb").with(
-        'ensure'   => 'present',
+        'ensure'   => 'file',
         'owner'    => 'root',
         'group'    => '0',
         'mode'     => '0644'
       )
     }
     it { should contain_file("/usr/libexec/mcollective/mcollective/agent/r10k.ddl").with(
-        'ensure'   => 'present',
+        'ensure'   => 'file',
         'owner'    => 'root',
         'group'    => '0',
         'mode'     => '0644'
@@ -112,7 +141,7 @@ describe 'r10k::mcollective' , :type => 'class' do
     }
 
     it { should contain_file("/usr/libexec/mcollective/mcollective/agent/r10k.rb").with(
-        'ensure'   => 'present',
+        'ensure'   => 'file',
         'owner'    => 'root',
         'group'    => '0',
         'mode'     => '0644'
@@ -132,7 +161,7 @@ describe 'r10k::mcollective' , :type => 'class' do
     it { should_not contain_file("/usr/libexec/mcollective/mcollective/application/r10k.rb") }
 
     it { should contain_file("/usr/share/mcollective/plugins/mcollective/application/r10k.rb").with(
-        'ensure'   => 'present',
+        'ensure'   => 'file',
         'owner'    => 'root',
         'group'    => '0',
         'mode'     => '0644'
@@ -140,7 +169,7 @@ describe 'r10k::mcollective' , :type => 'class' do
     }
 
     it { should contain_file("/usr/share/mcollective/plugins/mcollective/agent/r10k.ddl").with(
-        'ensure'   => 'present',
+        'ensure'   => 'file',
         'owner'    => 'root',
         'group'    => '0',
         'mode'     => '0644'
@@ -148,7 +177,7 @@ describe 'r10k::mcollective' , :type => 'class' do
     }
 
     it { should contain_file("/usr/share/mcollective/plugins/mcollective/agent/r10k.rb").with(
-        'ensure'   => 'present',
+        'ensure'   => 'file',
         'owner'    => 'root',
         'group'    => '0',
         'mode'     => '0644'

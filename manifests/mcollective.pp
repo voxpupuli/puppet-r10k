@@ -1,5 +1,6 @@
 # Install the r10k mcollective agent
 class r10k::mcollective (
+  $ensure            = true,
   $agent_name        = $r10k::params::mc_agent_name,
   $app_name          = $r10k::params::mc_app_name,
   $agent_ddl         = $r10k::params::mc_agent_ddl_name,
@@ -9,8 +10,14 @@ class r10k::mcollective (
   $http_proxy        = $r10k::params::mc_http_proxy,
   $git_ssl_no_verify = $r10k::params::mc_git_ssl_no_verify,
 ) inherits r10k::params {
+
+  $ensure_file = $ensure ? {
+    true  => 'file',
+    false => 'absent',
+  }
+
   File {
-    ensure => present,
+    ensure => $ensure_file,
     owner  => 'root',
     group  => '0',
     mode   => '0644',

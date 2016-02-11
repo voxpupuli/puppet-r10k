@@ -242,6 +242,14 @@ and copy the certs to somewhere that is readable by the respective user.
 ~~~
 _Note: PE2 only requires the .mcollective file as the default auth was psk_
 
+### Removing the mcollective agent
+
+```puppet
+class { 'r10k::mcollective':
+  ensure => false,
+}
+```
+This will remove the mcollective agent/application and ddl files from disk. This likely would be if you are migrating to Code managerin Puppet Enterprise.
 # Webhook Support
 
 ![alt tag](http://imageshack.com/a/img661/6302/qQwIrw.gif)  
