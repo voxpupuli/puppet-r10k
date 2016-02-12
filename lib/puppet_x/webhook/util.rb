@@ -10,7 +10,7 @@ module PuppetX
       # Read puppet.conf as Puppet[:node_terminus] will read from [main]
       def self.read_node_terminus()
         path = Puppet::FileSystem.pathname(Puppet.settings.which_configuration_file)
-        Puppet::Settings::IniFile.parse(path).setting('master','node_termius').value
+        Puppet::Settings::IniFile.parse(path).setting('master','node_terminus').value
       end
 
       # Read the local classes file
