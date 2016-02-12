@@ -76,7 +76,7 @@ module PuppetX
         # https://docs.puppetlabs.com/pe/latest/code_mgr_config.html
         Puppet.info "Copying #{old_key_path} to /etc/puppetlabs/puppetserver/ssh/id-control_repo.#{key_type.to_s}"
         FileUtils.mkdir '/etc/puppetlabs/puppetserver/ssh' if ! File.directory?('/etc/puppetlabs/puppetserver/ssh')
-        FileUtils.cp old_key_path, "/etc/puppetlabs/puppetserver/ssh/id-control_repo.#{key_type.to_s}"
+        FileUtils.cp old_key_path, "/etc/puppetlabs/puppetserver/ssh/id-control_repo.#{key_type.to_s}" unless old_key_path == "/etc/puppetlabs/puppetserver/ssh/id-control_repo.#{key_type.to_s}"
 
         # Fix the ownership so that code manager can read it via puppetserver
         # user ( which should be the same as the current puppet.conf user )
