@@ -144,9 +144,10 @@ Puppet::Face.define(:webhook, '1.0.0') do
       raise 'This face must be ran as root' unless Process.uid == 0
 
       # Load FOSS r10k.yaml for data in the classifier
-      PuppetX::Webhook::Util.load_r10k_yaml(options[:r10k_yaml])
+      r10k_yaml = PuppetX::Webhook::Util.load_r10k_yaml(options[:r10k_yaml])
 
       Dir.mkdir('/etc/puppetlabs/puppetserver/.puppetlabs') unless File.directory?('/etc/puppetlabs/puppetserver/.puppetlabs')
+
       PuppetX::Webhook::Util.update_master_profile(
         r10k_private_key: r10k_yaml['git']['private_key'],
         r10k_remote: r10k_yaml['sources']['puppet']['remote'],

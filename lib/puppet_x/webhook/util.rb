@@ -14,10 +14,17 @@ module PuppetX
         else
           raise "Unable to file r10k.yaml at path #{yaml_path}, use --r10k_yaml for custom location"
         end
-        # Not checking private key here as technically it optional
+        # Make sure they read the docs and are using the rugged provider already
         unless r10k_yaml.has_key?('git') && r10k_yaml['git']['provider'] == 'rugged'
           Puppet.err "Specified #{yaml_path} is not using rugged provider, you must migrate to rugged before using code manager"
           raise "Missing key ['git']['provider']['rugged'] in r10k.yaml see: https://github.com/puppetlabs/r10k/blob/master/doc/git/providers.mkd"
+        end
+
+        # If your control repo is public , you don't need a key,and apparently
+        # don't care security in your environment...
+        if ! r10k_yaml['git']['private_key']
+          Puppet.warning "No private_key configured for rugged, assuming you have a public control repo"
+          r10k_yaml['git']['private_key'] = ''
         end
         r10k_yaml
       rescue Exception => e
