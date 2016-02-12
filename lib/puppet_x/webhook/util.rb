@@ -1,5 +1,7 @@
 require 'puppetclassify' if Puppet.features.puppetclassify?
 require 'puppet/network/http_pool'
+require 'puppet/application/apply'
+
 module PuppetX
   module Webhook
     module Util
@@ -85,9 +87,6 @@ module PuppetX
         self.service(service,'stopped')
         self.service(service,'running')
       end
-
-
-     
     end
   end
 end

@@ -3,7 +3,7 @@ require 'json'
 require 'puppet/face'
 require 'puppet_x/webhook/util'
 
-Puppet::Face.define(:webhook, '0.0.1') do
+Puppet::Face.define(:webhook, '1.0.0') do
   action :migrate do
     summary "Remove zack/r10k webhook from machine, setup code manager"
     arguments "<none>"
@@ -39,11 +39,6 @@ Puppet::Face.define(:webhook, '0.0.1') do
     option "--cm_port" do
       summary "Code Manager port - defaults to <8170>"
       default_to { 8170 }
-    end
-
-    option "--cm_server" do
-      summary "Code Manager Server - defaults to <ca_server>"
-      default_to { Puppet[:ca_server] }
     end
 
     option "--cm_api_version" do
