@@ -159,7 +159,7 @@ module PuppetX
       end
 
       def self.run_puppet()
-        command_line = Puppet::Util::CommandLine.new('puppet',['agent','-t'])
+        command_line = Puppet::Util::CommandLine.new('puppet',['--test'])
         apply = Puppet::Application::Agent.new(command_line)
         apply.parse_options
         apply.run_command
