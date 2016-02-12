@@ -178,7 +178,7 @@ Puppet::Face.define(:webhook, '1.0.0') do
         # Include our token once we have it in the loop
         headers.merge!({'X-Authentication' => @token}) if @token
 
-        connection = self.http_instance(curl[:api_host], curl[:api_port])
+        connection = PuppetX::Webhook::Util.http_instance(curl[:api_host], curl[:api_port])
 
         # Log our current status description
         Puppet.notice(curl[:description])
