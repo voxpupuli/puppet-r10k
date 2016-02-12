@@ -137,6 +137,9 @@ Puppet::Face.define(:webhook, '1.0.0') do
         },
       ]
 
+      # Check we are running this as root
+      raise 'This face must be ran as root' unless Process.uid == 0
+
       # Load FOSS r10k.yaml for data in the classifier
       PuppetX::Webhook::Util.load_r10k_yaml(options[:r10k_yaml])
 
