@@ -6,6 +6,16 @@ module PuppetX
   module Webhook
     module Util
 
+      # Read the local classes file
+      def self.read_classfile()
+        if File.exist? Puppet[:classfile]
+           classes = IO.readlines Puppet[:classfile]
+         else
+           raise "Unable to find the local classfile #{Puppet[:classfile]}"
+         end
+         classes.map!{|x| x.chomp }
+      end
+
       # return current r10k config
       def self.load_r10k_yaml(yaml_path)
         # Load the existing r10k yaml file, if it exists

@@ -2,6 +2,8 @@ require 'uri'
 require 'json'
 require 'puppet/face'
 require 'puppet_x/webhook/util'
+require 'puppet/util/package'
+require 'facter'
 
 Puppet::Face.define(:webhook, '1.0.0') do
   action :migrate do
@@ -140,8 +142,14 @@ Puppet::Face.define(:webhook, '1.0.0') do
         },
       ]
 
-      # Check we are running this as root
+      # Sanity Checks
       raise 'This face must be ran as root' unless Process.uid == 0
+
+      raise "This face only works with 2015.3.x not #{Facter.value(:pe_server_version)}" unless Puppet::Util::Package.versioncmp(Facter.value(:pe_server_version), '2015.3.0') >= 0
+
+      @classfile = PuppetX::Webhook::Util.read_classfile()
+
+      raise 'This face must be run from master of masters,  missing class: puppet_enterprise::profile::certificate_authority' unless @classfile.include?('puppet_enterprise::profile::certificate_authority')
 
       # Load FOSS r10k.yaml for data in the classifier
       r10k_yaml = PuppetX::Webhook::Util.load_r10k_yaml(options[:r10k_yaml])
