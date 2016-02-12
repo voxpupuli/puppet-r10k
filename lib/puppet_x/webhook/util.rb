@@ -71,16 +71,16 @@ module PuppetX
           finger_print = ''
         end
 
-        Puppet.notice "Validated Private key of type #{key_type.to_s} #{finger_print}"
+        Puppet.info "Validated Private key of type #{key_type.to_s} #{finger_print}"
         # Update the paths to the new code manager private_key file path
         # https://docs.puppetlabs.com/pe/latest/code_mgr_config.html
-        Puppet.notice "Copying #{old_key_path} to /etc/puppetlabs/puppetserver/ssh/id-control_repo.#{key_type.to_s}"
+        Puppet.info "Copying #{old_key_path} to /etc/puppetlabs/puppetserver/ssh/id-control_repo.#{key_type.to_s}"
         FileUtils.mkdir '/etc/puppetlabs/puppetserver/ssh' if ! File.directory?('/etc/puppetlabs/puppetserver/ssh')
         FileUtils.cp old_key_path, "/etc/puppetlabs/puppetserver/ssh/id-control_repo.#{key_type.to_s}"
 
         # Fix the ownership so that code manager can read it via puppetserver
         # user ( which should be the same as the current puppet.conf user )
-        Puppet.notice "Updating ownership to #{Puppet[:user]}:#{Puppet[:group]} /etc/puppetlabs/puppetserver/ssh/id-control_repo.#{key_type.to_s}"
+        Puppet.info "Updating ownership to #{Puppet[:user]}:#{Puppet[:group]} /etc/puppetlabs/puppetserver/ssh/id-control_repo.#{key_type.to_s}"
         FileUtils.chown Puppet[:user], Puppet[:group], '/etc/puppetlabs/puppetserver/ssh'
         FileUtils.chown Puppet[:user], Puppet[:group], "/etc/puppetlabs/puppetserver/ssh/id-control_repo.#{key_type.to_s}"
 
@@ -131,7 +131,7 @@ module PuppetX
       end
 
       def self.update_master_profile(r10k_private_key: '/etc/puppetlabs/puppetserver/ssh/id-control_repo.rsa',r10k_remote: '')
-        Puppet.notice("Adding code manager params to master profile in classifier")
+        Puppet.info("Adding code manager params to master profile in classifier")
         load_classifier
         groups = @classifier.groups
         pe_master = groups.get_groups.select { |group| group['name'] == 'PE Master'}
@@ -159,7 +159,7 @@ module PuppetX
       end
 
       def self.service(service,action)
-        Puppet.notice "Attempting to ensure=>#{action} #{service}"
+        Puppet.info "Attempting to ensure=>#{action} #{service}"
         start_service = Puppet::Resource.new('service',service, :parameters => {
           :ensure => action,
         })

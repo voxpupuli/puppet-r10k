@@ -168,7 +168,7 @@ Puppet::Face.define(:webhook, '1.0.0') do
       )
       
       # Run puppet agent to apply new classification
-      Puppet.notice "Triggering a puppet run..."
+      Puppet.info "Triggering a puppet run..."
       PuppetX::Webhook::Util.run_puppet(['agent','--test'])
 
       # Stop PuppetServer
@@ -181,11 +181,11 @@ Puppet::Face.define(:webhook, '1.0.0') do
       @current_code_dir = Puppet[:codedir]
       FileUtils.mv @current_code_dir,'/etc/puppetlabs/code-staging'
       FileUtils.rm_rf '/etc/puppetlabs/code-staging/.gitmodules' if File.exists('/etc/puppetlabs/code-staging/.gitmodules')
-      Puppet.notice "Updating ownership on /etc/puppetlabs/code-staging to #{Puppet[:user]}:#{Puppet[:group]}"
+      Puppet.info "Updating ownership on /etc/puppetlabs/code-staging to #{Puppet[:user]}:#{Puppet[:group]}"
       FileUtils.chown_R Puppet[:user], Puppet[:group], '/etc/puppetlabs/code-staging'
 
       # Change code dir to staging so puppet runs work
-      Puppet.notice("Rewriting codedir to be staging directory during migration")
+      Puppet.info("Rewriting codedir to be staging directory during migration")
       Puppet::Face[:config, '0.0.1'].set(['codedir','/etc/puppetlabs/code-staging'],{:section => 'main'})
 
       # Start PuppetServer (as code manager runs under it)
@@ -201,7 +201,7 @@ Puppet::Face.define(:webhook, '1.0.0') do
         connection = PuppetX::Webhook::Util.http_instance(curl[:api_host], curl[:api_port])
 
         # Log our current status description
-        Puppet.notice(curl[:description])
+        Puppet.info(curl[:description])
 
         unless response = PSON.load(connection.post(
           "#{curl[:api_version]}/#{curl[:api_endpoint]}",
@@ -212,7 +212,7 @@ Puppet::Face.define(:webhook, '1.0.0') do
         end
         @token = response['token'] if curl[:returns_token]
       end
-      Puppet.notice "Resetting codedir back to #{@current_code_dir}"
+      Puppet.info "Resetting codedir back to #{@current_code_dir}"
       Puppet::Face[:config, '0.0.1'].set(['codedir',@current_code_dir],{:section => 'main'})
 
       PuppetX::Webhook::Util.service_restart('pe-puppetserver')
@@ -220,9 +220,9 @@ Puppet::Face.define(:webhook, '1.0.0') do
 
     when_rendering :console do |output,options|
       if output.empty?
-        Puppet.notice("No output recorded")
+        Puppet.info("No output recorded")
       end
-      Puppet.notice("Make sure to update your Github/Gitlab/Stash server with the new post url for code manager")
+      Puppet.info("Make sure to update your Github/Gitlab/Stash server with the new post url for code manager")
     end
   end
 end
