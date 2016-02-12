@@ -10,8 +10,6 @@ Puppet::Face.define(:webhook, '1.0.0') do
     summary "Remove zack/r10k webhook from machine, setup code manager"
     arguments "<none>"
 
-    copyright "Zack Smith", 2015
-    license   "http://www.apache.org/licenses/LICENSE-2.0"
 
     # R10k 
     option "--r10k_yaml" do
