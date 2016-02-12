@@ -1,6 +1,6 @@
 require 'puppetclassify' if Puppet.features.puppetclassify?
 require 'puppet/network/http_pool'
-require 'puppet/application/apply'
+require 'puppet/application/agent'
 require 'puppet/settings/ini_file'
 
 module PuppetX
