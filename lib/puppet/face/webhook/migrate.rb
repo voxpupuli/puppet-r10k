@@ -137,9 +137,8 @@ Puppet::Face.define(:webhook, '1.0.0') do
         },
       ]
 
-      # Load the existing r10k yaml file
-      r10k_yaml = YAML.load_file(options[:r10k_yaml])
-      # TODO: sanity check for the rugged keys and such
+      # Load FOSS r10k.yaml for data in the classifier
+      PuppetX::Webhook::Util.load_r10k_yaml(options[:r10k_yaml])
 
       Dir.mkdir('/etc/puppetlabs/puppetserver/.puppetlabs') unless File.directory?('/etc/puppetlabs/puppetserver/.puppetlabs')
       PuppetX::Webhook::Util.update_master_profile(

@@ -5,6 +5,25 @@ require 'puppet/application/apply'
 module PuppetX
   module Webhook
     module Util
+
+      # return current r10k config
+      def self.load_r10k_yaml(yaml_path)
+        # Load the existing r10k yaml file, if it exists
+        if File.exist?(yaml_path)
+          r10k_yaml = YAML.load_file(yaml_path)
+        else
+          raise "Unable to file r10k.yaml at path #{yaml_path}, use --r10k_yaml for custom location"
+        end
+        # Not checking private key here as technically it optional
+        unless r10k_yaml.has_key?('git') && r10k_yaml['git']['provider'] == 'rugged'
+          Puppet.err "Specified #{yaml_path} is not using rugged provider, you must migrate to rugged before using code manager"
+          raise "Missing key ['git']['provider']['rugged'] in r10k.yaml see: https://github.com/puppetlabs/r10k/blob/master/doc/git/providers.mkd"
+        end
+        r10k_yaml
+      rescue Exception => e
+        raise "Unable to load r10k.yaml file: #{e.message}"
+      end
+
       # Read classifier.yaml for split installation compatibility
       def self.load_classifier_config
         configfile = File.join Puppet.settings[:confdir], 'classifier.yaml'
