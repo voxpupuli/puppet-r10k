@@ -162,6 +162,8 @@ module PuppetX
         command_line = Puppet::Util::CommandLine.new('puppet',['--onetime','--verbose','--no-daemonize'])
         apply = Puppet::Application::Agent.new(command_line)
         apply.parse_options
+        Puppet[:daemonize] = false
+        Puppet[:onetime]   = true
         apply.run_command
       end
 
