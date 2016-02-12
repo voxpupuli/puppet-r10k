@@ -151,9 +151,16 @@ module PuppetX
         groups.update_group(group_hash)
       end
 
-      def self.run_puppet(argv)
+      def self.puppet_apply(argv)
         command_line = Puppet::Util::CommandLine.new('puppet', argv)
         apply = Puppet::Application::Apply.new(command_line)
+        apply.parse_options
+        apply.run_command
+      end
+
+      def self.run_puppet()
+        command_line = Puppet::Util::CommandLine.new('puppet',['agent','-t'])
+        apply = Puppet::Application::Agent.new(command_line)
         apply.parse_options
         apply.run_command
       end

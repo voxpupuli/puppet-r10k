@@ -169,7 +169,7 @@ Puppet::Face.define(:webhook, '1.0.0') do
       
       # Run puppet agent to apply new classification
       Puppet.info "Triggering a puppet run..."
-      PuppetX::Webhook::Util.run_puppet(['agent','--test'])
+      PuppetX::Webhook::Util.run_puppet()
 
       # Stop PuppetServer
       PuppetX::Webhook::Util.service('pe-puppetserver','stopped')
