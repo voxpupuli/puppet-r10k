@@ -159,10 +159,9 @@ module PuppetX
       end
 
       def self.run_puppet()
-        command_line = Puppet::Util::CommandLine.new('puppet',['--test'])
+        command_line = Puppet::Util::CommandLine.new('puppet',['--onetime','--verbose','--no-daemonize'])
         apply = Puppet::Application::Agent.new(command_line)
         apply.parse_options
-        Puppet[:test] = true
         apply.run_command
       end
 
