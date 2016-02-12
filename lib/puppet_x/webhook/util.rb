@@ -31,6 +31,47 @@ module PuppetX
         raise "Unable to load r10k.yaml file: #{e.message}"
       end
 
+      def self.migrate_ssh_key(old_key_path)
+        # Check if key is owned by root and produce a warning
+        if File.stat(old_key_path).owned?
+          Puppet.warning "Current ssh key #{old_key_path} is owned by root"
+        end
+
+        # We don't know what type of key the user has so we check
+        # https://stelfox.net/blog/2014/04/calculating-rsa-key-fingerprints-in-ruby/
+        begin
+          key = OpenSSL::PKey::RSA.new File.read(old_key_path)
+          key_type = :rsa
+          if key.private?
+            data_string = [7].pack('N') + 'ssh-rsa' + key.public_key.e.to_s(0) + key.public_key.n.to_s(0)
+            finger_print = OpenSSL::Digest::MD5.hexdigest(data_string).scan(/../).join(':')
+          else
+            raise "File #{old_key_path} does not contain a #{key_type.to_s} private key"
+          end
+        rescue OpenSSL::PKey::RSAError
+          key = OpenSSL::PKey::DSA.new File.read(old_key_path)
+          key_type = :dsa
+          finger_print = ''
+        end
+
+        Puppet.notice "Validated Private key of type #{key_type.to_s} #{finger_print}"
+        # Update the paths to the new code manager private_key file path
+        # https://docs.puppetlabs.com/pe/latest/code_mgr_config.html
+        Puppet.notice "Copying #{old_key_path} to /etc/puppetlabs/puppetserver/ssh/id-control_repo.#{key_type.to_s}"
+        FileUtils.mkdir '/etc/puppetlabs/puppetserver/ssh' if ! File.directory?('/etc/puppetlabs/puppetserver/ssh')
+        FileUtils.cp old_key_path "/etc/puppetlabs/puppetserver/ssh/id-control_repo.#{key_type.to_s}"
+
+        # Fix the ownership so that code manager can read it via puppetserver
+        # user ( which should be the same as the current puppet.conf user )
+        Puppet.notice "Updating ownership to #{Puppet[:user]}:#{Puppet[:group]} /etc/puppetlabs/puppetserver/ssh/id-control_repo.#{key_type.to_s}"
+        FileUtils.chown Puppet[:user], Puppet[:group], '/etc/puppetlabs/puppetserver/ssh'
+        FileUtils.chown Puppet[:user], Puppet[:group], "/etc/puppetlabs/puppetserver/ssh/id-control_repo.#{key_type.to_s}"
+
+
+      rescue Exception => e
+        raise "Unable to migrate ssh key: #{e.message}"
+      end
+
       # Read classifier.yaml for split installation compatibility
       def self.load_classifier_config
         configfile = File.join Puppet.settings[:confdir], 'classifier.yaml'

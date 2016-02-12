@@ -148,8 +148,12 @@ Puppet::Face.define(:webhook, '1.0.0') do
 
       Dir.mkdir('/etc/puppetlabs/puppetserver/.puppetlabs') unless File.directory?('/etc/puppetlabs/puppetserver/.puppetlabs')
 
+      # Migrate existing ssh key to code manger user and path
+      code_manager_ssh_key = PuppetX::Webhook::Util.migrate_ssh_key(r10k_yaml['git']['private_key'])
+
+      # Update classification to reflect change to path above
       PuppetX::Webhook::Util.update_master_profile(
-        r10k_private_key: r10k_yaml['git']['private_key'],
+        r10k_private_key: code_manager_ssh_key,
         r10k_remote: r10k_yaml['sources']['puppet']['remote'],
       )
       
