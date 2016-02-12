@@ -12,49 +12,49 @@ Puppet::Face.define(:webhook, '1.0.0') do
 
 
     # R10k 
-    option "--r10k_yaml" do
+    option "--r10k_yaml=" do
       summary "Opensource r10k.yaml Path - defaults to </etc/r10k.yaml>"
       default_to { '/etc/r10k.yaml'}
     end
 
     # RBAC Services
-    option "--rbac_server" do
+    option "--rbac_server=" do
       summary "Console Server - defaults to <certname>"
       default_to { Puppet[:certname] }
     end
 
-    option "--rbac_port" do
+    option "--rbac_port=" do
       summary "RBAC Server port - defaults to <4433>"
       default_to { 4433 }
     end
 
-    option "--rbac_api_version" do
+    option "--rbac_api_version=" do
       summary "RBAC API version string - <rbac-api/v1>"
       default_to { 'rbac-api/v1' }
     end
 
     # Code Manager
-    option "--cm_server" do
+    option "--cm_server=" do
       summary "Code Manager Server - defaults to <ca_server>"
       default_to { Puppet[:ca_server] }
     end
 
-    option "--cm_port" do
+    option "--cm_port=" do
       summary "Code Manager port - defaults to <8170>"
       default_to { 8170 }
     end
 
-    option "--cm_api_version" do
+    option "--cm_api_version=" do
       summary "Code Manager API version string - <code-manager/v1>"
       default_to { 'code-manager/v1' }
     end
 
-    option "--deploy_user" do
+    option "--deploy_user=" do
       summary "Deploy user password - defaults to <deploy>"
       default_to { 'deploy' }
     end
 
-    option "--deploy_password" do
+    option "--deploy_password=" do
       summary "Deploy user password - defaults to <puppetlabs>"
       default_to { 'puppetlabs' }
     end
