@@ -162,6 +162,7 @@ module PuppetX
         command_line = Puppet::Util::CommandLine.new('puppet',['--test'])
         apply = Puppet::Application::Agent.new(command_line)
         apply.parse_options
+        Puppet[:test] = true
         apply.run_command
       end
 
