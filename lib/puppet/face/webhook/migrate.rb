@@ -190,7 +190,7 @@ Puppet::Face.define(:webhook, '1.0.0') do
         )
           raise "Error parsing (j/p)son output of response from: https://#{curl[:api_host]}:#{curl[:api_port]}/#{curl[:api_version]}/#{curl[:api_endpoint]}"
         end
-        @token = response[:token] if curl[:returns_token]
+        @token = response['token'] if curl[:returns_token]
       end
       Puppet.notice "Resetting codedir back to #{@current_code_dir}"
       Puppet::Face[:config, '0.0.1'].set(['codedir',@current_code_dir],{:section => 'main'})

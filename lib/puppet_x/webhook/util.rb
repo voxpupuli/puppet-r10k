@@ -13,8 +13,7 @@ module PuppetX
           @classifier_url = "https://#{classifier_yaml['server']}:#{classifier_yaml['port']}/classifier-api"
         else
           Puppet.debug "Config file #{configfile} not found"
-          puts "no config file! - wanted #{configfile}"
-          exit 2
+          raise "no classifier config file! - wanted #{configfile}"
         end
       end
 
