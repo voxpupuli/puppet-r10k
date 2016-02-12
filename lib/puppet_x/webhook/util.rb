@@ -1,10 +1,17 @@
 require 'puppetclassify' if Puppet.features.puppetclassify?
 require 'puppet/network/http_pool'
 require 'puppet/application/apply'
+require 'puppet/settings/ini_file'
 
 module PuppetX
   module Webhook
     module Util
+
+      # Read puppet.conf as Puppet[:node_terminus] will read from [main]
+      def self.read_node_terminus()
+        path = Puppet::FileSystem.pathname(Puppet.settings.which_configuration_file)
+        Puppet::Settings::IniFile.parse(path).setting('master','node_termius').value
+      end
 
       # Read the local classes file
       def self.read_classfile()

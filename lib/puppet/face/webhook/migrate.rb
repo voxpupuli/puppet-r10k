@@ -149,7 +149,7 @@ Puppet::Face.define(:webhook, '1.0.0') do
 
       raise 'This face must be run from master of masters,  missing class: puppet_enterprise::profile::certificate_authority' unless @classfile.include?('puppet_enterprise::profile::certificate_authority')
 
-      raise "This face requires use of the PE node classifier not node_terminus=#{Puppet[:node_terminus]}" unless Puppet[:node_terminus] == 'classifier'
+      raise "This face requires use of the PE node classifier not node_terminus=#{Puppet[:node_terminus]}" unless PuppetX::Webhook::Util.read_node_terminus == 'classifier'
 
       raise "This face requires the puppetclassify gem to be installed" unless Puppet.features.puppetclassify?
 
