@@ -159,12 +159,12 @@ module PuppetX
       end
 
       def self.run_puppet()
-        command_line = Puppet::Util::CommandLine.new('puppet',['--onetime','--verbose','--no-daemonize'])
-        apply = Puppet::Application::Agent.new(command_line)
-        apply.parse_options
+        agent = Puppet::Application::Agent.new()
+        agent.parse_options
+        agent.preinit
+        agent.setup
         Puppet[:daemonize] = false
-        Puppet[:onetime]   = true
-        apply.run_command
+        agent.run_command
       end
 
       def self.service(service,action)
