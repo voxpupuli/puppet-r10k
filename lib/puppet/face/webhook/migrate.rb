@@ -203,7 +203,7 @@ Puppet::Face.define(:webhook, '1.0.0') do
         # Log our current status description
         Puppet.info(curl[:description])
 
-        unless body = connection.post(
+        body = connection.post(
           "#{curl[:api_version]}/#{curl[:api_endpoint]}",
           curl[:payload].to_json,
           headers).body
