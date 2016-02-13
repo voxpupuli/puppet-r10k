@@ -160,8 +160,8 @@ module PuppetX
 
       def self.run_puppet()
         self.override do
-          command_line = Puppet::Util::CommandLine.new('puppet',['--test'])
-          agent = Puppet::Application::Agent.new(command_line)
+          agent = Puppet::Application::Agent.new()
+          agent.setup_test
           agent.run_command
         end
       end
@@ -180,7 +180,13 @@ module PuppetX
       end
 
       def self.override(&block)
-         Puppet.override() do
+        Puppet[:onetime]   = true
+        Puppet[:daemonize] = false 
+        loader = Puppet::Environments::Directories.new(
+           Puppet[:environmentpath],
+           Puppet[:basemodulepath].split(':')
+         )
+         Puppet.override(:environments => loader) do
            block.call
          end
       end
