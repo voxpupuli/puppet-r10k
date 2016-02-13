@@ -203,12 +203,17 @@ Puppet::Face.define(:webhook, '1.0.0') do
         # Log our current status description
         Puppet.info(curl[:description])
 
-        unless response = PSON.load(connection.post(
+        unless body = connection.post(
           "#{curl[:api_version]}/#{curl[:api_endpoint]}",
           curl[:payload].to_json,
           headers).body
         )
-          raise "Error parsing (j/p)son output of response from: https://#{curl[:api_host]}:#{curl[:api_port]}/#{curl[:api_version]}/#{curl[:api_endpoint]}"
+        begin
+          response = JSON.load(body)
+        rescue
+          response = body
+        end
+        #raise "Error parsing (j/p)son output of response from: https://#{curl[:api_host]}:#{curl[:api_port]}/#{curl[:api_version]}/#{curl[:api_endpoint]}"
         end
         @token = response['token'] if curl[:returns_token]
       end
