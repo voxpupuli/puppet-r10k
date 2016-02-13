@@ -179,7 +179,7 @@ Puppet::Face.define(:webhook, '1.0.0') do
 
       # Perform code migration
       @current_code_dir = Puppet[:codedir]
-      FileUtils.mv @current_code_dir,'/etc/puppetlabs/code-staging'
+      FileUtils.mv "#{@current_code_dir}/",'/etc/puppetlabs/code-staging'
       FileUtils.rm_rf '/etc/puppetlabs/code-staging/.gitmodules' if File.exists?('/etc/puppetlabs/code-staging/.gitmodules')
       Puppet.info "Updating ownership on /etc/puppetlabs/code-staging to #{Puppet[:user]}:#{Puppet[:group]}"
       FileUtils.chown_R Puppet[:user], Puppet[:group], '/etc/puppetlabs/code-staging'
