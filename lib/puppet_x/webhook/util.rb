@@ -159,10 +159,8 @@ module PuppetX
       end
 
       def self.run_puppet()
-        agent = Puppet::Application::Agent.new()
-        agent.parse_options
-        agent.preinit
-        agent.setup
+        command_line = Puppet::Util::CommandLine.new('puppet',['--test'])
+        agent = Puppet::Application::Agent.new(command_line)
         Puppet[:daemonize] = false
         agent.run_command
       end
