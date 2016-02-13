@@ -159,10 +159,11 @@ module PuppetX
       end
 
       def self.run_puppet()
-        command_line = Puppet::Util::CommandLine.new('puppet',['--test'])
-        agent = Puppet::Application::Agent.new(command_line)
-        Puppet[:daemonize] = false
-        agent.run_command
+        self.override do
+          command_line = Puppet::Util::CommandLine.new('puppet',['--test'])
+          agent = Puppet::Application::Agent.new(command_line)
+          agent.run_command
+        end
       end
 
       def self.service(service,action)
@@ -177,6 +178,13 @@ module PuppetX
         self.service(service,'stopped')
         self.service(service,'running')
       end
+
+      def self.context(&block)
+         Puppet[:onetime] = true
+         Puppet.override() do
+           block.call
+         end
+       end
     end
   end
 end
