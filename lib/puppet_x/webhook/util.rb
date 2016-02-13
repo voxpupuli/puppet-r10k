@@ -159,11 +159,12 @@ module PuppetX
       end
 
       def self.run_puppet()
-        self.override do
-          agent = Puppet::Application::Agent.new()
-          agent.setup_test
-          agent.run_command
-        end
+        #self.override do
+        #  agent = Puppet::Application::Agent.new()
+        #  agent.setup_test
+        #  agent.run_command
+        #end
+        system('puppet agent -t')
       end
 
       def self.service(service,action)
