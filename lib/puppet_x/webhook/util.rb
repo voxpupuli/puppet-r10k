@@ -179,12 +179,11 @@ module PuppetX
         self.service(service,'running')
       end
 
-      def self.context(&block)
-         Puppet[:onetime] = true
+      def self.override(&block)
          Puppet.override() do
            block.call
          end
-       end
+      end
     end
   end
 end
