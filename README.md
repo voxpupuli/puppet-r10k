@@ -163,7 +163,7 @@ a clone of this modules features and file tickets for anything missing._
 Installing using a proxy server
 
 ### Mcollective Support
-![alt tag](http://imageshack.com/a/img674/3070/NWvnSn.png)
+![alt tag](https://gist.githubusercontent.com/acidprime/7013041/raw/1a99e0a8d28b13bc20b74d2dc4ab60c7e752088c/post_recieve_overview.png)
 
 An mcollective agent is included in this module which can be used to do
 on demand synchronization. This mcollective application and agent can be
