@@ -242,6 +242,14 @@ and copy the certs to somewhere that is readable by the respective user.
 ~~~
 _Note: PE2 only requires the .mcollective file as the default auth was psk_
 
+### Removing the mcollective agent
+
+```puppet
+class { 'r10k::mcollective':
+  ensure => false,
+}
+```
+This will remove the mcollective agent/application and ddl files from disk. This likely would be if you are migrating to Code managerin Puppet Enterprise.
 # Webhook Support
 
 ![alt tag](http://imageshack.com/a/img661/6302/qQwIrw.gif)  
@@ -329,7 +337,6 @@ git_webhook { 'web_post_receive_webhook' :
   provider           => 'github',
 }
 
-
 # Add webhook to module repo if we are tracking branch in Puppetfile i.e.
 # mod 'module_name',
 #  :git    => 'http://github.com/organization/puppet-module_name',
@@ -360,6 +367,18 @@ class { 'r10k::webhook::config':
 
 class { 'r10k::webhook':
   require => Class['r10k::webhook::config'],
+}
+```
+
+### Webhook - remove webhook init script and config file.
+Moving to Code manager, and removing webhook
+```puppet
+class {'r10k::webhook::config':
+  ensure => false,
+}
+
+class {'r10k::webhook':
+  ensure => false,
 }
 ```
 

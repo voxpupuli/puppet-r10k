@@ -1,5 +1,6 @@
 # This class creates a github webhoook to allow curl style post-rec scripts
 class r10k::webhook(
+  $ensure           = true,
   $user             = $r10k::params::webhook_user,
   $group            = $r10k::params::webhook_group,
   $bin_template     = $r10k::params::webhook_bin_template,
@@ -10,16 +11,32 @@ class r10k::webhook(
   $manage_packages  = true,
 ) inherits r10k::params {
   
-
   File {
-    ensure => file,
+    ensure => $ensure,
     owner  => 'root',
     group  => '0',
     mode   => '0755',
   }
 
+  # Rewrite the params to style guide in lieu of
+  # using the boolean directly...for clarity?
+  $ensure_directory = $ensure ? {
+    true  => 'directory',
+    false => 'absent',
+  }
+
+  $ensure_file = $ensure ? {
+    true  => 'file',
+    false => 'absent',
+  }
+
+  $ensure_service = $ensure ? {
+    true  => 'running',
+    false => 'stopped',
+  }
+
   file { '/var/log/webhook/access.log':
-    ensure => 'file',
+    ensure => $ensure_file,
     owner  => $user,
     group  => $group,
     mode   => '0644',
@@ -27,42 +44,48 @@ class r10k::webhook(
   }
 
   file { '/var/log/webhook':
-    ensure  => 'directory',
+    ensure  => $ensure_directory,
     owner   => $user,
     group   => $group,
-    recurse => true,
+    recurse => $ensure,
+    force   => $ensure,
     before  => File['webhook_bin'],
   }
 
   file { '/var/run/webhook':
-    ensure => 'directory',
+    ensure => $ensure_directory,
     owner  => $user,
     group  => $group,
     before => File['webhook_init_script'],
   }
 
   file { 'webhook_init_script':
+    ensure  => $ensure_file,
     content => template("r10k/${service_template}"),
     path    => $service_file,
     before  => File['webhook_bin'],
   }
 
   file { 'webhook_bin':
+    ensure  => $ensure_file,
     content => template($bin_template),
     path    => '/usr/local/bin/webhook',
     notify  => Service['webhook'],
   }
 
   service { 'webhook':
-    ensure => 'running',
-    enable => true,
+    ensure => $ensure_service,
+    enable => $ensure,
   }
 
+  # We don't remove the packages/ gem as
+  # They might be shared dependencies
   if $manage_packages {
     include r10k::webhook::package
   }
 
   # Only managed this file if you are using mcollective mode
+  # We don't remove it as its part of PE and this is legacy
   if $use_mcollective {
     if $is_pe_server and versioncmp($::puppetversion, '3.7.0') >= 0 {
       # 3.7 does not place the certificate in peadmin's ~

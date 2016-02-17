@@ -290,4 +290,25 @@ user: \"puppet\"
     it { should contain_file('webhook.yaml').with_content(content) }
   end
 
+  context 'Puppet Enterprise 2015.3.1 on a RedHat 6 Removing Webhook Config' do
+    let :params do
+      {
+        :ensure => false,
+      }
+    end
+    let :facts do
+      {
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '6',
+        :operatingsystem        => 'Centos',
+        :is_pe                  => 'true',
+        :pe_server_build        => '2015.3.1'
+      }
+    end
+    it { should contain_file('webhook.yaml').with(
+        'ensure' => 'absent',
+        'path'   => '/etc/webhook.yaml'
+      )
+    }
+  end
 end
