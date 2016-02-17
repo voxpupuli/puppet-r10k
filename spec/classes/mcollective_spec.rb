@@ -55,16 +55,16 @@ describe 'r10k::mcollective' , :type => 'class' do
       }
     end
     it { should contain_file("/opt/puppet/libexec/mcollective/mcollective/application/r10k.rb").with(
-        'ensure'   => 'absent',
+        'ensure'   => 'absent'
       )
     }
     it { should contain_file("/opt/puppet/libexec/mcollective/mcollective/agent/r10k.ddl").with(
-        'ensure'   => 'absent',
+        'ensure'   => 'absent'
       )
     }
 
     it { should contain_file("/opt/puppet/libexec/mcollective/mcollective/agent/r10k.rb").with(
-        'ensure'   => 'absent',
+        'ensure'   => 'absent'
       )
     }
   end
