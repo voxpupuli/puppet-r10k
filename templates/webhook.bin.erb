@@ -87,6 +87,7 @@ end
     return 200 if ignore_event?
 
     decoded = request.body.read
+    verify_signature(decoded) if $config['github_secret']
     data    = JSON.parse(decoded, :quirks_mode => true)
 
     if data['repository'].has_key?('full_name')
@@ -126,6 +127,7 @@ end
     else
       decoded = request.body.read
     end
+    verify_signature(decoded) if $config['github_secret']
     data = JSON.parse(decoded, :quirks_mode => true)
 
     # Iterate the data structure to determine what's should be deployed
@@ -259,6 +261,11 @@ end
       @auth.provided? && @auth.basic? && @auth.credentials &&
       @auth.credentials == [$config['user'],$config['pass']]
     end  #end authorized?
+
+    def verify_signature(payload_body)
+      signature = 'sha1=' + OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha1'), $config['github_secret'], payload_body)
+      throw(:halt, [500, "Signatures didn't match!\n"]) unless Rack::Utils.secure_compare(signature, request.env['HTTP_X_HUB_SIGNATURE'])
+    end
 
     def repo_name(data)
       # Tested with GitHub only
