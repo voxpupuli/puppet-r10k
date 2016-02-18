@@ -252,7 +252,7 @@ class { 'r10k::mcollective':
 This will remove the mcollective agent/application and ddl files from disk. This likely would be if you are migrating to Code managerin Puppet Enterprise.
 # Webhook Support
 
-![alt tag](http://imageshack.com/a/img661/6302/qQwIrw.gif)  
+![alt tag](https://gist.githubusercontent.com/acidprime/be25026c11a76bf3e7fb/raw/44df86181c3e5d14242a1b1f4281bf24e9c48509/webhook.gif)  
 For version control systems that use web driven post-receive processes you can use the example webhook included in this module.
 This webhook currently only runs on Puppet Enterprise and uses mcollective to automatically synchronize your environment across multiple masters.
 The webhook must be configured on the respective "control" repository a master that has mco installed and can contact the other masters in your fleet.
