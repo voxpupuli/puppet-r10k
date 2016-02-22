@@ -40,7 +40,13 @@ module MCollective
             elsif act == 'deploy_module'
               validate :module_name, :shellsafe
               module_name = request[:module_name]
-              run_cmd act, module_name
+              environment = request[:environment] || ''
+              if environment.empty?
+                extra = []
+              else
+                extra = ['-e', environment]
+              end
+              run_cmd act, module_name, extra
               reply[:module_name] = module_name
             else
               run_cmd act
@@ -64,7 +70,7 @@ module MCollective
         end
       end 
 
-      def run_cmd(action,arg=nil)
+      def run_cmd(action,arg=nil,extra=[])
         output = ''
         git  = ['/usr/bin/env', 'git']
         r10k = ['/usr/bin/env', 'r10k']
@@ -86,6 +92,7 @@ module MCollective
             elsif action == 'deploy_module'
               cmd << 'deploy' << 'module' << arg
             end
+            cmd += extra
             reply[:status] = run(cmd_as_user(cmd), :stderr => :error, :stdout => :output, :chomp => true, :environment => environment)
         end
       end
