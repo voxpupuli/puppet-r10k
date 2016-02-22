@@ -112,6 +112,15 @@ action 'deploy_module', :description => "Deploy a specific module" do
         :optional    => true,
         :maxlength   => 32
 
+  input :environment,
+        :prompt => "Specific environment",
+        :description => "Deploy module only to particular environment",
+        :type => :string,
+        # Wanted to rubyize the following regex but didn't have time to test: ^(?!/|.*([/.]\.|//|@\{|\\\\))[^\040\177 ~^:?*\[]+(?<!\.lock|[/.])$
+        :validation => '.',
+        :optional => true,
+        :maxlength => 256
+
   output :module_name,
          :description => "Deploy a particular module",
          :display_as  => "Specific module"
