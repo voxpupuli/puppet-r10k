@@ -80,6 +80,22 @@ action 'deploy', :description => "Deploy a specific environment, and its Puppetf
         :optional    => true,
         :maxlength   => 32
 
+  input :config,
+        :prompt      => "Config file",
+        :description => "Specify config file",
+        :type        => :string,
+        :validation  => '.',
+        :optional    => true,
+        :maxlength   => 256
+
+  input :skip_modules,
+        :prompt      => "Skip modules",
+        :description => "Skip deploy of modules, just do base repo",
+        :type        => :string,
+        :validation  => '.',
+        :optional    => true,
+        :maxlength   => 32
+
   output :environment,
          :description => "Deploy a particular environment",
          :display_as  => "Specific environment"
@@ -104,14 +120,6 @@ action 'deploy_module', :description => "Deploy a specific module" do
         :optional => true,
         :maxlength => 256
 
-  input :user,
-        :prompt      => "User",
-        :description => "User to run as",
-        :type        => :string,
-        :validation  => '\w+',
-        :optional    => true,
-        :maxlength   => 32
-
   input :environment,
         :prompt => "Specific environment",
         :description => "Deploy module only to particular environment",
@@ -121,9 +129,29 @@ action 'deploy_module', :description => "Deploy a specific module" do
         :optional => true,
         :maxlength => 256
 
+  input :user,
+        :prompt      => "User",
+        :description => "User to run as",
+        :type        => :string,
+        :validation  => '\w+',
+        :optional    => true,
+        :maxlength   => 32
+
+  input :config,
+        :prompt      => "Config file",
+        :description => "Specify config file",
+        :type        => :string,
+        :validation  => '.',
+        :optional    => true,
+        :maxlength   => 256
+
   output :module_name,
          :description => "Deploy a particular module",
          :display_as  => "Specific module"
+
+  output :environment,
+         :description => "Deploy a particular environment",
+         :display_as  => "Specific environment"
 
   output :output,
          :description => "Output from r10k",
