@@ -31,23 +31,31 @@ module MCollective
          'deploy',
          'deploy_module',
          'sync'].each do |act|
+          extra = []
           action act do
+            config = request[:config] || ''
+            if !config.empty?
+              extra += ['-c', config]
+            end
             if act == 'deploy'
               validate :environment, :shellsafe
               environment = request[:environment]
-              run_cmd act, environment
+              skipmodules = request[:skip_modules] || ''
+              if skipmodules.empty?
+                extra += ['-p']
+              end
+              run_cmd act, environment, extra
               reply[:environment] = environment
             elsif act == 'deploy_module'
               validate :module_name, :shellsafe
               module_name = request[:module_name]
               environment = request[:environment] || ''
-              if environment.empty?
-                extra = []
-              else
-                extra = ['-e', environment]
+              if !environment.empty?
+                extra += ['-e', environment]
               end
               run_cmd act, module_name, extra
               reply[:module_name] = module_name
+              reply[:environment] = environment
             else
               run_cmd act
             end
@@ -57,18 +65,18 @@ module MCollective
 
       def cmd_as_user(cmd, cwd = nil)
         if /^\w+$/.match(request[:user])
-          cmd_as_user = ['su', '-', request[:user], '-c', '\''] 
+          cmd_as_user = ['su', '-', request[:user], '-c', '\'']
           if cwd
             cmd_as_user += ['cd', cwd, '&&']
           end
           cmd_as_user += cmd + ["'"]
-        
+
           # doesn't seem to execute when passed as an array
           cmd_as_user.join(' ')
         else
           cmd
         end
-      end 
+      end
 
       def run_cmd(action,arg=nil,extra=[])
         output = ''
@@ -88,7 +96,7 @@ module MCollective
             cmd << 'cache' if action == 'cache'
             cmd << 'deploy' << 'environment' << '-p' if action == 'synchronize' or action == 'sync'
             if action == 'deploy'
-              cmd << 'deploy' << 'environment' << arg << '-p'
+              cmd << 'deploy' << 'environment' << arg
             elsif action == 'deploy_module'
               cmd << 'deploy' << 'module' << arg
             end
