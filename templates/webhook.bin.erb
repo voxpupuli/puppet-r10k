@@ -70,6 +70,10 @@ end
     raise Sinatra::NotFound
   end
 
+  get '/heartbeat' do
+    return 200,  {:status => :success, :message => 'running' }.to_json
+  end
+
   # Simulate a github post:
   # curl -d '{ "repository": { "name": "puppetlabs-stdlib" } }' -H "Accept: application/json" 'https://puppet:487156B2-7E67-4E1C-B447-001603C6B8B2@localhost:8088/module' -k -q
   #
