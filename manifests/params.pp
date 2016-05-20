@@ -52,6 +52,9 @@ class r10k::params
   $webhook_repository_events     = undef
   $webhook_enable_mutex_lock     = false
   $webhook_allow_uppercase       = true          # for backwards compatibility. Default to off on a major semver update.
+  $webhook_configfile_owner      = 'root'
+  $webhook_configfile_group      = '0'
+  $webhook_configfile_mode       = '0644'
 
   if $::osfamily == 'Debian' {
     $functions_path     = '/lib/lsb/init-functions'
