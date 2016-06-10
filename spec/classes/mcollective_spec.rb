@@ -13,14 +13,14 @@ describe 'r10k::mcollective' , :type => 'class' do
     it { should contain_file("/opt/puppet/libexec/mcollective/mcollective/application/r10k.rb").with(
         'ensure'   => 'file',
         'owner'    => 'root',
-        'group'    => '0',
+        'group'    => 'root',
         'mode'     => '0644'
       )
     }
     it { should contain_file("/opt/puppet/libexec/mcollective/mcollective/agent/r10k.ddl").with(
         'ensure'   => 'file',
         'owner'    => 'root',
-        'group'    => '0',
+        'group'    => 'root',
         'mode'     => '0644'
       )
     }
@@ -28,7 +28,7 @@ describe 'r10k::mcollective' , :type => 'class' do
     it { should contain_file("/opt/puppet/libexec/mcollective/mcollective/agent/r10k.rb").with(
         'ensure'   => 'file',
         'owner'    => 'root',
-        'group'    => '0',
+        'group'    => 'root',
         'mode'     => '0644'
       )
     }
@@ -128,14 +128,14 @@ describe 'r10k::mcollective' , :type => 'class' do
     it { should contain_file("/usr/libexec/mcollective/mcollective/application/r10k.rb").with(
         'ensure'   => 'file',
         'owner'    => 'root',
-        'group'    => '0',
+        'group'    => 'root',
         'mode'     => '0644'
       )
     }
     it { should contain_file("/usr/libexec/mcollective/mcollective/agent/r10k.ddl").with(
         'ensure'   => 'file',
         'owner'    => 'root',
-        'group'    => '0',
+        'group'    => 'root',
         'mode'     => '0644'
       )
     }
@@ -143,7 +143,7 @@ describe 'r10k::mcollective' , :type => 'class' do
     it { should contain_file("/usr/libexec/mcollective/mcollective/agent/r10k.rb").with(
         'ensure'   => 'file',
         'owner'    => 'root',
-        'group'    => '0',
+        'group'    => 'root',
         'mode'     => '0644'
       )
     }
@@ -163,7 +163,7 @@ describe 'r10k::mcollective' , :type => 'class' do
     it { should contain_file("/usr/share/mcollective/plugins/mcollective/application/r10k.rb").with(
         'ensure'   => 'file',
         'owner'    => 'root',
-        'group'    => '0',
+        'group'    => 'root',
         'mode'     => '0644'
       )
     }
@@ -171,7 +171,7 @@ describe 'r10k::mcollective' , :type => 'class' do
     it { should contain_file("/usr/share/mcollective/plugins/mcollective/agent/r10k.ddl").with(
         'ensure'   => 'file',
         'owner'    => 'root',
-        'group'    => '0',
+        'group'    => 'root',
         'mode'     => '0644'
       )
     }
@@ -179,7 +179,7 @@ describe 'r10k::mcollective' , :type => 'class' do
     it { should contain_file("/usr/share/mcollective/plugins/mcollective/agent/r10k.rb").with(
         'ensure'   => 'file',
         'owner'    => 'root',
-        'group'    => '0',
+        'group'    => 'root',
         'mode'     => '0644'
       )
     }

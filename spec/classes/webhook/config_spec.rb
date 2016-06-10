@@ -14,7 +14,7 @@ describe 'r10k::webhook::config' , :type => 'class' do
         'path'   => '/etc/webhook.yaml',
         'ensure' => 'file',
         'owner'  => 'root',
-        'group'  => '0',
+        'group'  => 'root',
         'mode'   => '0644',
         'notify' => 'Service[webhook]'
       )
@@ -60,7 +60,7 @@ user: \"peadmin\"
         'path'   => '/etc/webhook.yaml',
         'ensure' => 'file',
         'owner'  => 'root',
-        'group'  => '0',
+        'group'  => 'root',
         'mode'   => '0644',
         'notify' => 'Service[webhook]'
       )
@@ -108,7 +108,7 @@ user: \"puppet\"
         'path'   => '/etc/webhook.yaml',
         'ensure' => 'file',
         'owner'  => 'root',
-        'group'  => '0',
+        'group'  => 'root',
         'mode'   => '0644',
         'notify' => 'Service[webhook]'
       )
@@ -157,7 +157,7 @@ user: \"puppet\"
         'path'   => '/etc/webhook.yaml',
         'ensure' => 'file',
         'owner'  => 'root',
-        'group'  => '0',
+        'group'  => 'root',
         'mode'   => '0644',
         'notify' => 'Service[webhook]'
       )
@@ -206,7 +206,7 @@ user: \"puppet\"
         'path'   => '/etc/webhook.yaml',
         'ensure' => 'file',
         'owner'  => 'root',
-        'group'  => '0',
+        'group'  => 'root',
         'mode'   => '0644',
         'notify' => 'Service[webhook]'
       )
@@ -259,7 +259,7 @@ user: \"peadmin\"
         'path'   => '/etc/webhook.yaml',
         'ensure' => 'file',
         'owner'  => 'root',
-        'group'  => '0',
+        'group'  => 'root',
         'mode'   => '0644',
         'notify' => 'Service[webhook]'
       )

@@ -6,6 +6,8 @@ describe 'r10k::config' , :type => 'class' do
         :configfile        => '/etc/r10k.yaml',
         :cachedir          => '/var/cache/r10k',
         :manage_modulepath => false,
+        :root_user         => 'root',
+        :root_group        => 'root',
       }
     end
     let :facts do
@@ -20,7 +22,7 @@ describe 'r10k::config' , :type => 'class' do
     it { should contain_file("r10k.yaml").with(
         'ensure' => 'file',
         'owner'  => 'root',
-        'group'  => '0',
+        'group'  => 'root',
         'mode'   => '0644',
         'path'   => '/etc/r10k.yaml'
       )
@@ -33,6 +35,8 @@ describe 'r10k::config' , :type => 'class' do
         :configfile        => '/etc/r10k.yaml',
         :cachedir          => '/var/cache/r10k',
         :manage_modulepath => false,
+        :root_user         => 'root',
+        :root_group        => 'wheel',
       }
     end
     let :facts do
@@ -45,7 +49,7 @@ describe 'r10k::config' , :type => 'class' do
     it { should contain_file("r10k.yaml").with(
         'ensure' => 'file',
         'owner'  => 'root',
-        'group'  => '0',
+        'group'  => 'wheel',
         'mode'   => '0644',
         'path'   => '/etc/r10k.yaml'
       )
@@ -58,6 +62,8 @@ describe 'r10k::config' , :type => 'class' do
         :configfile        => '/etc/r10k.yaml',
         :cachedir          => '/var/cache/r10k',
         :manage_modulepath => true,
+        :root_user         => 'root',
+        :root_group        => 'root',
       }
     end
     let :facts do
@@ -72,7 +78,7 @@ describe 'r10k::config' , :type => 'class' do
     it { should contain_file("r10k.yaml").with(
         'ensure' => 'file',
         'owner'  => 'root',
-        'group'  => '0',
+        'group'  => 'root',
         'mode'   => '0644',
         'path'   => '/etc/r10k.yaml'
       )
@@ -91,6 +97,8 @@ describe 'r10k::config' , :type => 'class' do
         :configfile        => '/etc/r10k.yaml',
         :cachedir          => '/var/cache/r10k',
         :manage_modulepath => true,
+        :root_user         => 'root',
+        :root_group        => 'wheel',
       }
     end
     let :facts do
@@ -103,7 +111,7 @@ describe 'r10k::config' , :type => 'class' do
     it { should contain_file("r10k.yaml").with(
         'ensure' => 'file',
         'owner'  => 'root',
-        'group'  => '0',
+        'group'  => 'wheel',
         'mode'   => '0644',
         'path'   => '/etc/r10k.yaml'
       )
@@ -123,6 +131,8 @@ describe 'r10k::config' , :type => 'class' do
         :cachedir          => '/var/cache/r10k',
         :manage_modulepath => true,
         :sources           => 'i-am-not-a-hash',
+        :root_user         => 'root',
+        :root_group        => 'root',
       }
     end
     let :facts do
@@ -144,6 +154,8 @@ describe 'r10k::config' , :type => 'class' do
         :cachedir          => '/var/cache/r10k',
         :manage_modulepath => true,
         :sources           => 'i-am-not-a-hash',
+        :root_user         => 'root',
+        :root_group        => 'wheel',
       }
     end
     let :facts do
@@ -162,6 +174,8 @@ describe 'r10k::config' , :type => 'class' do
         :configfile        => '/etc/r10k.yaml',
         :cachedir          => '/var/cache/r10k',
         :manage_modulepath => 'false-i-am-not-a-bool',
+        :root_user         => 'root',
+        :root_group        => 'root',
       }
     end
     let :facts do
@@ -182,6 +196,8 @@ describe 'r10k::config' , :type => 'class' do
         :configfile        => '/etc/r10k.yaml',
         :cachedir          => '/var/cache/r10k',
         :manage_modulepath => 'false-i-am-not-a-bool',
+        :root_user         => 'root',
+        :root_group        => 'wheel',
       }
     end
     let :facts do
@@ -204,6 +220,8 @@ describe 'r10k::config' , :type => 'class' do
             :configfile                => '/etc/puppet/r10k.yaml',
             :cachedir                  => '/var/cache/r10k',
             :manage_modulepath         => false,
+            :root_user                 => 'root',
+            :root_group                => 'root',
           }
         end
         let :facts do
@@ -230,6 +248,8 @@ describe 'r10k::config' , :type => 'class' do
             :configfile                => '/etc/puppet/r10k.yaml',
             :cachedir                  => '/var/cache/r10k',
             :manage_modulepath         => false,
+            :root_user                 => 'root',
+            :root_group                => 'wheel',
           }
         end
         let :facts do
@@ -255,6 +275,8 @@ describe 'r10k::config' , :type => 'class' do
             :configfile_symlink        => '/tmp/r10k.yaml',
             :cachedir                  => '/var/cache/r10k',
             :manage_modulepath         => false,
+            :root_user                 => 'root',
+            :root_group                => 'root',
           }
         end
         let :facts do
@@ -282,6 +304,8 @@ describe 'r10k::config' , :type => 'class' do
             :configfile_symlink        => '/tmp/r10k.yaml',
             :cachedir                  => '/var/cache/r10k',
             :manage_modulepath         => false,
+            :root_user                 => 'root',
+            :root_group                => 'wheel',
           }
         end
         let :facts do
@@ -306,6 +330,8 @@ describe 'r10k::config' , :type => 'class' do
             :configfile                => '/etc/puppet/r10k.yaml',
             :cachedir                  => '/var/cache/r10k',
             :manage_modulepath         => false,
+            :root_user                 => 'root',
+            :root_group                => 'root',
           }
         end
         let :facts do
@@ -331,6 +357,8 @@ describe 'r10k::config' , :type => 'class' do
             :configfile                => '/etc/puppet/r10k.yaml',
             :cachedir                  => '/var/cache/r10k',
             :manage_modulepath         => false,
+            :root_user                 => 'root',
+            :root_group                => 'wheel',
           }
         end
         let :facts do
@@ -356,6 +384,8 @@ describe 'r10k::config' , :type => 'class' do
             :configfile                => '/etc/puppet/r10k.yaml',
             :cachedir                  => '/var/cache/r10k',
             :manage_modulepath         => false,
+            :root_user                 => 'root',
+            :root_group                => 'root',
           }
         end
         let :facts do
@@ -376,6 +406,8 @@ describe 'r10k::config' , :type => 'class' do
             :configfile                => '/etc/puppet/r10k.yaml',
             :cachedir                  => '/var/cache/r10k',
             :manage_modulepath         => false,
+            :root_user                 => 'root',
+            :root_group                => 'wheel',
           }
         end
         let :facts do
@@ -396,6 +428,8 @@ describe 'r10k::config' , :type => 'class' do
           :configfile                => '/etc/r10k.yaml',
           :cachedir                  => '/var/cache/r10k',
           :manage_modulepath         => false,
+          :root_user                 => 'root',
+          :root_group                => 'root',
         }
       end
       let :facts do
@@ -418,6 +452,8 @@ describe 'r10k::config' , :type => 'class' do
           :configfile                => '/etc/r10k.yaml',
           :cachedir                  => '/var/cache/r10k',
           :manage_modulepath         => false,
+          :root_user                 => 'root',
+          :root_group                => 'wheel',
         }
       end
       let :facts do
@@ -442,6 +478,8 @@ describe 'r10k::config' , :type => 'class' do
           :configfile_symlink        => 'invalid/path',
           :cachedir                  => '/var/cache/r10k',
           :manage_modulepath         => false,
+          :root_user                 => 'root',
+          :root_group                => 'root',
         }
       end
       let :facts do
@@ -465,6 +503,8 @@ describe 'r10k::config' , :type => 'class' do
           :configfile_symlink        => 'invalid/path',
           :cachedir                  => '/var/cache/r10k',
           :manage_modulepath         => false,
+          :root_user                 => 'root',
+          :root_group                => 'wheel',
         }
       end
       let :facts do
@@ -487,6 +527,8 @@ describe 'r10k::config' , :type => 'class' do
         :cachedir          => '/var/cache/r10k',
         :manage_modulepath => false,
         :git_settings      => {'provider' => 'rugged','private_key' => '/root/.ssh/id_dsa'},
+        :root_user         => 'root',
+        :root_group        => 'root',
       }
     end
     it { should contain_file('r10k.yaml').with_content(%r{git:\n.*private_key: /root/\.ssh/id_dsa\n.*provider: rugged\n}) }
@@ -499,6 +541,8 @@ describe 'r10k::config' , :type => 'class' do
         :cachedir          => '/var/cache/r10k',
         :manage_modulepath => false,
         :forge_settings    => { 'proxy' => 'https://proxy.example.com:3128', 'baseurl' => 'https://forgeapi.puppetlabs.com' },
+        :root_user         => 'root',
+        :root_group        => 'root',
       }
     end
     it { should contain_file('r10k.yaml').with_content(%r{forge:\n.*baseurl: https:\/\/forgeapi\.puppetlabs\.com\n.*proxy: https:\/\/proxy\.example\.com:3128\n}) }
@@ -512,6 +556,8 @@ describe 'r10k::config' , :type => 'class' do
           :cachedir          => '/var/cache/r10k',
           :manage_modulepath => false,
           :postrun           => ['/usr/bin/curl', '-F', 'deploy=done', 'http://my-app.site/endpoint'],
+          :root_user         => 'root',
+          :root_group        => 'root',
         }
       end
       it { should contain_file('r10k.yaml').with_content(%r{^.*:postrun: \[\"/usr/bin/curl\", \"-F\", \"deploy=done\", \"http://my-app\.site/endpoint\"\]\n.*$}) }
@@ -523,6 +569,8 @@ describe 'r10k::config' , :type => 'class' do
           :configfile        => '/etc/r10k.yaml',
           :cachedir          => '/var/cache/r10k',
           :manage_modulepath => false,
+          :root_user         => 'root',
+          :root_group        => 'root',
         }
       end
       it { should contain_file('r10k.yaml').without_content(/^:postrun: .*$/) }
@@ -536,6 +584,8 @@ describe 'r10k::config' , :type => 'class' do
             :cachedir          => '/var/cache/r10k',
             :manage_modulepath => false,
             :postrun           => value,
+            :root_user         => 'root',
+            :root_group        => 'root',
           }
         end
 

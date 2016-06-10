@@ -7,10 +7,13 @@ class r10k::mcollective::application(
   $app_path          = $r10k::params::mc_application_path,
   $mc_service        = $r10k::params::mc_service_name,
 ) inherits r10k::params {
+
+  require r10k
+
   File {
     ensure => present,
-    owner  => 'root',
-    group  => '0',
+    owner  => $::r10k::root_user,
+    group  => $::r10k::root_group,
     mode   => '0644',
   }
   # Install the agent and its ddl file

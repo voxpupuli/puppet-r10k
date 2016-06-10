@@ -49,6 +49,8 @@ class r10k::config (
   $configfile,
   $cachedir,
   $manage_modulepath,
+  $root_user,
+  $root_group,
   $modulepath                = undef,
   $remote                    = '',
   $sources                   = 'UNSET',
@@ -95,16 +97,16 @@ class r10k::config (
   if $configfile == '/etc/puppetlabs/r10k/r10k.yaml' {
     file {'/etc/puppetlabs/r10k':
       ensure => 'directory',
-      owner  => 'root',
-      group  => 'root',
+      owner  => $root_user,
+      group  => $root_group,
       mode   => '0755',
     }
   }
 
   file { 'r10k.yaml':
     ensure  => file,
-    owner   => 'root',
-    group   => '0',
+    owner   => $root_user,
+    group   => $root_group,
     mode    => '0644',
     path    => $configfile,
     content => template($r10k_yaml_template),
