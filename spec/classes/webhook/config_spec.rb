@@ -311,4 +311,31 @@ user: \"puppet\"
       )
     }
   end
+
+  context 'FOSS on RedHat 7 installing with custom permissions for webhook.yaml' do
+    let :facts do
+      {
+        :osfamily               => 'RedHat',
+        :operatingsystemrelease => '7',
+        :operatingsystem        => 'Centos',
+      }
+    end
+    let(:params) do
+      {
+        :configfile_owner => 'r10k',
+        :configfile_group => 'r10k',
+        :configfile_mode  => '0600',
+      }
+    end
+    it { should contain_file('webhook.yaml').with(
+        'path'   => '/etc/webhook.yaml',
+        'ensure' => 'file',
+        'owner'  => 'r10k',
+        'group'  => 'r10k',
+        'mode'   => '0600',
+        'notify' => 'Service[webhook]'
+      )
+    }
+  end
+ 
 end
