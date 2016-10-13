@@ -90,11 +90,11 @@
   "requirements": [
     {
       "name": "pe",
-      "version_requirement": "3.x"
+      "version_requirement": ">= 3.1.0 < 4.0.0"
     },
     {
       "name": "puppet",
-      "version_requirement": "2.7.0"
+      "version_requirement": ">= 3.1.0 < 4.0.0"
     }
   ]
 }
