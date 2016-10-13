@@ -3,7 +3,7 @@
 class r10k::webhook::package (
   $is_pe_server = $r10k::params::is_pe_server,
 ) inherits r10k::params {
-  
+
   if $is_pe_server {
     # PE 4.2 and up ships a vendor provided ruby.
     # Using puppet_gem uses that instead of the PE's ruby.
