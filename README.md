@@ -617,17 +617,6 @@ This project contains tests for [rspec-puppet](http://rspec-puppet.com/) to veri
 
 Quickstart:
 
-####Ruby > 1.8.7
-
-```
-    gem install bundler
-    bundle install
-    bundle exec rake spec
-    bundle exec rake lint
-```
-
-####Ruby = 1.8.7
-
 ```
     gem install bundler
     bundle install --without system_tests

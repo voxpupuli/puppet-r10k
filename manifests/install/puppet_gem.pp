@@ -3,7 +3,7 @@ class r10k::install::puppet_gem {
 
   require git
 
-  if versioncmp($::puppetversion, '4.2.0') >= 0 {
+  if versioncmp("${::puppetversion}", '4.2.0') >= 0 { #lint:ignore:only_variable_string
     file { '/usr/bin/r10k':
       ensure  => link,
       target  => '/opt/puppetlabs/puppet/bin/r10k',
