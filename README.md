@@ -250,6 +250,7 @@ class { 'r10k::mcollective':
 }
 ```
 This will remove the mcollective agent/application and ddl files from disk. This likely would be if you are migrating to Code managerin Puppet Enterprise.
+
 # Webhook Support
 
 ![alt tag](https://gist.githubusercontent.com/acidprime/be25026c11a76bf3e7fb/raw/44df86181c3e5d14242a1b1f4281bf24e9c48509/webhook.gif)  
@@ -472,6 +473,21 @@ class { '::r10k::webhook':
   require => Class['::r10k::webhook::config'],
 }
 ```
+
+### Triggering the webhook from curl
+
+To aid in debugging, or to give you some hints as to how to trigger the webhook by unsupported systems, here's a curl command to trigger the webhook to deploy the 'production' environment:
+
+```bash
+curl -d '
+  {
+    "repository": {"name": "foo", "owner": {"login": "foo"}}, 
+    "ref": "production"
+  }' http://puppet-master.example:8088/payload
+```
+
+
+
 ## Reference
 
 ####Class: `r10k`
