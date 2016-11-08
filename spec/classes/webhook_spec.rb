@@ -146,27 +146,6 @@ describe 'r10k::webhook' , :type => 'class' do
       )
     }
   end
-  context 'Puppet 2.7.0 FOSS on a RedHat 5 installing webhook' do
-    let :facts do
-      {
-        :osfamily               => 'RedHat',
-        :operatingsystemrelease => '5',
-        :operatingsystem        => 'Centos',
-        :puppetversion          => '2.7.0'
-      }
-    end
-
-    it { should contain_package('sinatra').with(
-        'ensure'    => 'installed',
-        'provider'  => 'gem'
-      )
-    }
-
-    it { should_not contain_package('rack').with(
-        'ensure'   => 'installed'
-      )
-    }
-  end
   context 'Puppet FOSS 3.7.1  on a RedHat 5 installing webhook' do
     let :facts do
       {

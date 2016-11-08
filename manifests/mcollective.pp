@@ -22,7 +22,7 @@ class r10k::mcollective (
     group  => '0',
     mode   => '0644',
   }
-  
+
   # Install the agent and its ddl file
   file { "${app_path}/${app_name}":
     source => "puppet:///modules/${module_name}/application/${agent_name}",

@@ -24,7 +24,7 @@ class r10k::install (
   if $package_name == '' {
     case $provider {
       'openbsd': {
-                    if (versioncmp($::kernelversion, '5.8') < 0) {
+                    if (versioncmp("${::kernelversion}", '5.8') < 0) { #lint:ignore:only_variable_string
                       $real_package_name = 'ruby21-r10k'
                     } else {
                       $real_package_name = 'ruby22-r10k'
@@ -79,8 +79,8 @@ class r10k::install (
       }
 
       # Puppet Enterprise 3.8 and ships an embedded r10k so thats all thats supported
-      # This conditional should not effect FOSS customers based on the fact 
-      unless ($::is_pe == 'true' or $::is_pe == true) and versioncmp($::pe_version, '3.8.0') >= 0 and $puppet_master {
+      # This conditional should not effect FOSS customers based on the fact
+      unless ($::is_pe == 'true' or $::is_pe == true) and versioncmp("${::pe_version}", '3.8.0') >= 0 and $puppet_master { #lint:ignore:only_variable_string
         package { $real_package_name:
           ensure          => $version,
           provider        => $provider,

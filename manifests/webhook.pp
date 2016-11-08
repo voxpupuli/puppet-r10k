@@ -10,7 +10,7 @@ class r10k::webhook(
   $is_pe_server     = $r10k::params::is_pe_server,
   $manage_packages  = true,
 ) inherits r10k::params {
-  
+
   File {
     ensure => $ensure,
     owner  => 'root',
@@ -87,7 +87,7 @@ class r10k::webhook(
   # Only managed this file if you are using mcollective mode
   # We don't remove it as its part of PE and this is legacy
   if $use_mcollective {
-    if $is_pe_server and versioncmp($::puppetversion, '3.7.0') >= 0 {
+    if $is_pe_server and versioncmp("${::puppetversion}", '3.7.0') >= 0 { #lint:ignore:only_variable_string
       # 3.7 does not place the certificate in peadmin's ~
       # This places it there as if it was an upgrade
       file { 'peadmin-cert.pem':

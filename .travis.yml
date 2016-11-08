@@ -1,24 +1,27 @@
 ---
-sudo: false
-branches:
-  only:
-  - master
+
 language: ruby
-bundler_args: --without acceptance 
-script:
-  - "bundle exec rake lint"
-  - "bundle exec rake syntax"
-  - "bundle exec rake spec SPEC_OPTS='--format documentation'"
+
+sudo: false
+
+before_install:
+  - 'gem update --system'
+  - 'gem update bundler'
+
+bundler_args: --without acceptance
+
+script: "SPEC_OPTS='--format documentation' bundle exec rake lint syntax spec"
+
 after_success:
   - git clone -q git://github.com/puppetlabs/ghpublisher.git .forge-releng
   - .forge-releng/publish
+
 rvm:
-  - 1.8.7
   - 1.9.3
   - 2.0.0
   - jruby-19mode
+
 env:
-  - PUPPET_VERSION="~> 2.7.0"
   - PUPPET_VERSION="~> 3.1.0"
   - PUPPET_VERSION="~> 3.2.0"
   - PUPPET_VERSION="~> 3.3.0"
@@ -31,16 +34,11 @@ env:
 
 global:
     - PUBLISHER_LOGIN=acidprime
+
 matrix:
   exclude:
-    - rvm: 1.9.3
-      env: PUPPET_VERSION="~> 2.7.0"
-    - rvm: 2.0.0
-      env: PUPPET_VERSION="~> 2.7.0"
     - rvm: 2.0.0
       env: PUPPET_VERSION="~> 3.1.0"
-    - rvm: jruby-19mode
-      env: PUPPET_VERSION="~> 2.7.0"
     - rvm: jruby-19mode
       env: PUPPET_VERSION="~> 3.1.0"
     - rvm: jruby-19mode
@@ -56,13 +54,12 @@ matrix:
   include:
     - rvm: 2.1.5
       env: PUPPET_GEM_VERSION="~> 3.0" FUTURE_PARSER="yes"
-#    - rvm: 2.1.6
-#      env: PUPPET_GEM_VERSION="~> 4.0" STRICT_VARIABLES="yes"
+
 notifications:
   email: false
   webhooks:
     urls:
-      - 'https://webhooks.gitter.im/e/8936500cc6a369ff46ee' 
+      - 'https://webhooks.gitter.im/e/8936500cc6a369ff46ee'
     on_success: change
     on_failure: always
     on_start: false

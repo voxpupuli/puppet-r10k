@@ -3,11 +3,11 @@
 class r10k::webhook::package (
   $is_pe_server = $r10k::params::is_pe_server,
 ) inherits r10k::params {
-  
+
   if $is_pe_server {
     # PE 4.2 and up ships a vendor provided ruby.
     # Using puppet_gem uses that instead of the PE's ruby.
-    if (versioncmp($::puppetversion, '4.2.0') >= 0) {
+    if (versioncmp("${::puppetversion}", '4.2.0') >= 0) { #lint:ignore:only_variable_string
       $provider = 'puppet_gem'
     } else {
       $provider = 'pe_gem'
@@ -21,7 +21,7 @@ class r10k::webhook::package (
       }
     }
 
-    if versioncmp($::puppetversion, '3.7.0') >= 0 {
+    if versioncmp("${::puppetversion}", '3.7.0') >= 0 { #lint:ignore:only_variable_string
       if !defined(Package['rack']) {
         package { 'rack':
           ensure   => installed,
@@ -34,7 +34,7 @@ class r10k::webhook::package (
 
     # Puppet FOSS 4.2 and up ships a vendor provided ruby.
     # Using puppet_gem uses that instead of the system ruby.
-    if (versioncmp($::puppetversion, '4.2.0') >= 0) {
+    if (versioncmp("${::puppetversion}", '4.2.0') >= 0) { #lint:ignore:only_variable_string
       $provider = 'puppet_gem'
     } else {
       $provider = 'gem'
@@ -67,7 +67,7 @@ class r10k::webhook::package (
       }
     }
 
-    if versioncmp($::puppetversion, '3.7.0') >= 0 {
+    if versioncmp("${::puppetversion}", '3.7.0') >= 0 { #lint:ignore:only_variable_string
       if !defined(Package['rack']) {
         package { 'rack':
           ensure   => installed,

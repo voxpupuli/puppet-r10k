@@ -9,7 +9,7 @@ class r10k::params
   $sources                = undef
   $puppet_master          = true
 
-  if versioncmp($::puppetversion, '4.0.0') >= 0 {
+  if versioncmp("${::puppetversion}", '4.0.0') >= 0 { #lint:ignore:only_variable_string
     $r10k_basedir    = $::settings::environmentpath
     $r10k_cache_dir  = "${::settings::vardir}/r10k"
   } else {
@@ -82,7 +82,7 @@ class r10k::params
     $is_pe_server      = false
   }
 
-  if $is_pe_server and versioncmp($::puppetversion, '4.0.0') >= 0 {
+  if $is_pe_server and versioncmp("${::puppetversion}", '4.0.0') >= 0 { #lint:ignore:only_variable_string
     # PE 4 or greater specific settings
     # r10k configuration
     $r10k_config_file          = '/etc/r10k.yaml'
@@ -106,7 +106,7 @@ class r10k::params
     $webhook_certname              = 'peadmin'
     $webhook_certpath              = '/var/lib/peadmin/.mcollective.d'
   }
-  elsif $is_pe_server and versioncmp($::puppetversion, '4.0.0') == -1 {
+  elsif $is_pe_server and versioncmp("${::puppetversion}", '4.0.0') == -1 { #lint:ignore:only_variable_string
     # PE 3.x.x specific settings
     # r10k configuration
     $r10k_config_file          = '/etc/r10k.yaml'
@@ -130,7 +130,7 @@ class r10k::params
     $webhook_certname              = 'peadmin'
     $webhook_certpath              = '/var/lib/peadmin/.mcollective.d'
   }
-  elsif versioncmp($::puppetversion, '4.0.0') >= 0 {
+  elsif versioncmp("${::puppetversion}", '4.0.0') >= 0 { #lint:ignore:only_variable_string
     #FOSS 4 or greater specific settings
     # r10k configuration
     $r10k_config_file          = '/etc/puppetlabs/r10k/r10k.yaml'
@@ -196,7 +196,7 @@ class r10k::params
       'openbsd': {
         $plugins_dir     = '/usr/local/libexec/mcollective/mcollective'
         $provider        = 'openbsd'
-        if (versioncmp($::kernelversion, '5.8') < 0) {
+        if (versioncmp("${::kernelversion}", '5.8') < 0) { #lint:ignore:only_variable_string
           $r10k_binary     = 'r10k21'
         } else {
           $r10k_binary     = 'r10k22'
