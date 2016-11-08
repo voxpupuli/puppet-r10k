@@ -53,7 +53,6 @@ class r10k::webhook::config (
       'discovery_timeout'     => $discovery_timeout,
       'certpath'              => $certpath,
       'client_cfg'            => $client_cfg,
-      'certpath'              => $certpath,
       'use_mco_ruby'          => $use_mco_ruby,
       'access_logfile'        => $access_logfile,
       'protected'             => $protected,
