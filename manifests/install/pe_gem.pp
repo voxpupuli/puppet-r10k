@@ -2,8 +2,7 @@
 class r10k::install::pe_gem (
   $puppet_master,
 ) {
-
-  require git
+  require ::git
 
   # Puppet Enterprise 3.8 ships code to manage this symlink on install
   # This conditional should not effect FOSS customers based on the fact

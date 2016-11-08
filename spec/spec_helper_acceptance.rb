@@ -23,15 +23,11 @@ RSpec.configure do |c|
   # Configure all nodes in nodeset
   c.before :suite do
     # Install module and dependencies
-    puppet_module_install(:source => proj_root, :module_name => 'r10k')
+    puppet_module_install(source: proj_root, module_name: 'r10k')
     hosts.each do |host|
       JSON.parse(File.read('metadata.json'))['dependencies'].each do |dependency|
-        on host, puppet('module',
-                        'install',
-                        dependency['name'].to_s
-                       ), { :acceptable_exit_codes => [0,1] }
+        on host, puppet('module', 'install', dependency['name'].to_s), acceptable_exit_codes: [0, 1]
       end
     end
   end
 end
-

@@ -10,6 +10,7 @@ class r10k::webhook(
   $is_pe_server     = $r10k::params::is_pe_server,
   $manage_packages  = true,
 ) inherits r10k::params {
+  require ::r10k
 
   File {
     ensure => $ensure,
@@ -81,7 +82,7 @@ class r10k::webhook(
   # We don't remove the packages/ gem as
   # They might be shared dependencies
   if $manage_packages {
-    include r10k::webhook::package
+    include ::r10k::webhook::package
   }
 
   # Only managed this file if you are using mcollective mode

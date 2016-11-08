@@ -17,8 +17,8 @@ class r10k::install (
   # 1.x is just as good or better than 0.x, we can stop supporting 0.x and
   # remove this block.
   if versioncmp('1.0.0', $version) > 0 or $install_gcc {
-    require gcc
-    require make
+    require ::gcc
+    require ::make
   }
 
   if $package_name == '' {
@@ -40,10 +40,10 @@ class r10k::install (
 
   case $provider {
     'bundle': {
-      include r10k::install::bundle
+      include ::r10k::install::bundle
     }
     'portage': {
-      class { 'r10k::install::portage':
+      class { '::r10k::install::portage':
         package_name => $real_package_name,
         keywords     => $keywords,
         version      => $version,
@@ -51,7 +51,7 @@ class r10k::install (
     }
     'pe_gem', 'puppet_gem', 'gem', 'openbsd', 'yum', 'zypper': {
       if $provider == 'gem' {
-        class { 'r10k::install::gem':
+        class { '::r10k::install::gem':
           manage_ruby_dependency => $manage_ruby_dependency,
           version                => $version;
         }
@@ -59,10 +59,10 @@ class r10k::install (
       elsif $provider == 'puppet_gem' {
         # Puppet FOSS 4.2 and up ships a vendor provided ruby.
         # Using puppet_gem uses that instead of the system ruby.
-        include r10k::install::puppet_gem
+        include ::r10k::install::puppet_gem
       }
       elsif $provider == 'pe_gem' {
-        class { 'r10k::install::pe_gem':
+        class { '::r10k::install::pe_gem':
           puppet_master => $puppet_master,
         }
       }
@@ -80,12 +80,10 @@ class r10k::install (
 
       # Puppet Enterprise 3.8 and ships an embedded r10k so thats all thats supported
       # This conditional should not effect FOSS customers based on the fact
-      unless ($::is_pe == 'true' or $::is_pe == true) and versioncmp("${::pe_version}", '3.8.0') >= 0 and $puppet_master { #lint:ignore:only_variable_string
-        package { $real_package_name:
-          ensure          => $version,
-          provider        => $provider,
-          install_options => $provider_install_options
-        }
+      package { $real_package_name:
+        ensure          => $version,
+        provider        => $provider,
+        install_options => $provider_install_options,
       }
 
     }

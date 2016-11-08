@@ -41,15 +41,15 @@ class r10k (
 
   # TODO: Clean this up when 4.0 to require a boolean
   if $include_prerun_command == true  or $include_prerun_command == 'true'{
-    include r10k::prerun_command
+    include ::r10k::prerun_command
   }
 
   if $include_postrun_command == true  or $include_postrun_command == 'true'{
-    include r10k::postrun_command
+    include ::r10k::postrun_command
   }
 
 
-  class { 'r10k::install':
+  class { '::r10k::install':
     install_options        => $install_options,
     keywords               => $gentoo_keywords,
     manage_ruby_dependency => $manage_ruby_dependency,
@@ -60,7 +60,7 @@ class r10k (
     install_gcc            => $install_gcc,
   }
 
-  class { 'r10k::config':
+  class { '::r10k::config':
     cachedir                  => $cachedir,
     configfile                => $configfile,
     sources                   => $sources,
@@ -78,6 +78,6 @@ class r10k (
   }
 
   if $mcollective {
-    class { 'r10k::mcollective': }
+    class { '::r10k::mcollective': }
   }
 }
