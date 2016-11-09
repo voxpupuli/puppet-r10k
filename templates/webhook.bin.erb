@@ -31,7 +31,7 @@ end
 <% if @user == 'peadmin' -%>
 ENV['HOME'] = '/var/lib/<%= @user %>'
 <% end -%>
-ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppetlabs/bin:<%= if @is_pe == true or @is_pe == 'true' then '/opt/puppet/bin' else '/usr/local/bin' end %>'
+ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppetlabs/puppet/bin:<%= if @is_pe == true or @is_pe == 'true' then '/opt/puppet/bin' else '/usr/local/bin' end %>'
 
 $logger = WEBrick::Log::new($config['access_logfile'], WEBrick::Log::DEBUG)
 
