@@ -1,65 +1,52 @@
 ---
-
-language: ruby
-
 sudo: false
-
+language: ruby
+cache: bundler
+bundler_args: --without system_tests development
 before_install:
-  - 'gem update --system'
-  - 'gem update bundler'
-
-bundler_args: --without acceptance
-
-script: "SPEC_OPTS='--format documentation' bundle exec rake lint syntax spec"
-
-after_success:
-  - git clone -q git://github.com/puppetlabs/ghpublisher.git .forge-releng
-  - .forge-releng/publish
-
-rvm:
-  - 1.9.3
-  - 2.0.0
-  - jruby-19mode
-
-env:
-  - PUPPET_VERSION="~> 3.1.0"
-  - PUPPET_VERSION="~> 3.2.0"
-  - PUPPET_VERSION="~> 3.3.0"
-  - PUPPET_VERSION="~> 3.4.0"
-  - PUPPET_VERSION="~> 3.5.1"
-  - PUPPET_VERSION="~> 3.6.0"
-  - PUPPET_VERSION="~> 3.7.0"
-  - PUPPET_VERSION="~> 3.8.0"
-  - PUPPET_VERSION="~> 3.8.1"
-
-global:
-    - PUBLISHER_LOGIN=acidprime
-
+  - bundle -v
+  - rm Gemfile.lock || true
+  - gem update --system
+  - gem update bundler
+  - gem --version
+  - bundle -v
+script:
+  - 'bundle exec rake $CHECK'
 matrix:
-  exclude:
-    - rvm: 2.0.0
-      env: PUPPET_VERSION="~> 3.1.0"
-    - rvm: jruby-19mode
-      env: PUPPET_VERSION="~> 3.1.0"
-    - rvm: jruby-19mode
-      env: PUPPET_VERSION="~> 3.2.0"
-    - rvm: jruby-19mode
-      env: PUPPET_VERSION="~> 3.3.0"
-    - rvm: jruby-19mode
-      env: PUPPET_VERSION="~> 3.4.0"
-    - rvm: jruby-19mode
-      env: PUPPET_VERSION="~> 3.5.1"
-    - rvm: jruby-19mode
-      env: PUPPET_VERSION="~> 3.6.0"
+  fast_finish: true
   include:
-    - rvm: 2.1.5
-      env: PUPPET_GEM_VERSION="~> 3.0" FUTURE_PARSER="yes"
-
+  - rvm: 1.9.3
+    env: PUPPET_VERSION="~> 3.0" STRICT_VARIABLES="yes" CHECK=test
+  - rvm: 1.9.3
+    env: PUPPET_VERSION="~> 3.0" STRICT_VARIABLES="yes" FUTURE_PARSER="yes" CHECK=test
+  - rvm: 2.1.9
+    env: PUPPET_VERSION="~> 3.0" STRICT_VARIABLES="yes" CHECK=test
+  - rvm: 2.1.9
+    env: PUPPET_VERSION="~> 4.0" CHECK=test
+  - rvm: 2.2.5
+    env: PUPPET_VERSION="~> 4.0" CHECK=test
+  - rvm: 2.3.1
+    env: PUPPET_VERSION="~> 4.0" CHECK=build DEPLOY_TO_FORGE=yes
+  - rvm: 2.3.1
+    env: PUPPET_VERSION="~> 4.0" CHECK=rubocop
+  - rvm: 2.3.1
+    env: PUPPET_VERSION="~> 4.0" CHECK=test
+  - rvm: 2.4.0-preview1
+    env: PUPPET_VERSION="~> 4.0" CHECK=test
+  allow_failures:
+    - rvm: 2.4.0-preview1
 notifications:
   email: false
-  webhooks:
-    urls:
-      - 'https://webhooks.gitter.im/e/8936500cc6a369ff46ee'
-    on_success: change
-    on_failure: always
-    on_start: false
+deploy:
+  provider: puppetforge
+  deploy:
+    branch: ha-bug-puppet-forge
+  user: puppet
+  password:
+    secure: "ZKiuoKHwvOV4NP0D1iZfxQ2WKQs2QRkoaKviIoT96AjaTuqdYQ7JKr7YNr/AP+V7HeIpwubKbxzJjRpRDLWAB+pOEM7Uguz3hX+KuHjGBlRcfeOfamWj3SFFZomf2LiCXWME1Rv/6qmpCqr49ZZk9ANkSDIvkhuSc/uj0/Tf8o4="
+  on:
+    tags: true
+    # all_branches is required to use tags
+    all_branches: true
+    # Only publish the build marked with "DEPLOY_TO_FORGE"
+    condition: "$DEPLOY_TO_FORGE = yes"
