@@ -1,7 +1,7 @@
 # Reasonable defaults for all classes
 class r10k::params
 {
-  $package_name           = ''
+  $package_name           = undef
   $version                = '1.5.1'
   $manage_modulepath      = false
   $manage_ruby_dependency = 'declare'
@@ -26,7 +26,7 @@ class r10k::params
   $remote     = "ssh://${git_server}${repo_path}/modules.git"
 
   # Gentoo specific values
-  $gentoo_keywords = ''
+  $gentoo_keywords = undef
 
   # Include the mcollective agent
   $mcollective = false
@@ -232,7 +232,7 @@ class r10k::params
   } elsif $::osfamily == 'Gentoo' {
     $webhook_service_file     = '/etc/init.d/webhook'
     $webhook_service_template = 'webhook.init.gentoo.erb'
-  } elsif $::osfamily == 'Suse' and $::operatingsystemrelease >= '12' {
+  } elsif $::osfamily == 'Suse' and versioncmp($::operatingsystemrelease, '12') >= 0 {
     $webhook_service_file     = '/etc/systemd/system/webhook.service'
     $webhook_service_template = 'webhook.suse.service.erb'
   } else {

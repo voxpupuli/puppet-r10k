@@ -1,1 +1,1 @@
-include r10k::webhook
+include ::r10k::webhook

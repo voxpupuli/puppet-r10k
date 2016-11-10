@@ -50,7 +50,7 @@ class r10k::config (
   $cachedir,
   $manage_modulepath,
   $modulepath                = undef,
-  $remote                    = '',
+  $remote                    = undef,
   $sources                   = 'UNSET',
   $postrun                   = undef,
   $puppetconf_path           = $r10k::params::puppetconf_path,

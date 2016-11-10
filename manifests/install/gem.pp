@@ -4,17 +4,17 @@ class r10k::install::gem (
   $version,
 ) {
   #include ::r10k
-  require git
+  require ::git
   anchor{'r10k::ruby_done':}
   case $manage_ruby_dependency {
-    include: {
+    'include': {
       include ::ruby
       include ::ruby::dev
       Class['::ruby']    ->
       Class['ruby::dev'] ->
       Anchor['r10k::ruby_done']
     }
-    declare: {
+    'declare': {
       class { '::ruby':
         rubygems_update => false,
       }
@@ -35,8 +35,8 @@ class r10k::install::gem (
   if versioncmp('1.0.0', $version) > 0 {
     # I am not sure all of this is required as I assumed the
     # ruby::dev class would have taken care of some of it
-    include make
-    include gcc
+    include ::make
+    include ::gcc
 
     Anchor['r10k::ruby_done'] ->
     Class['gcc']       ->

@@ -4,7 +4,7 @@ class r10k::install::bundle(
   $source   = 'https://github.com/adrienthebo/r10k.git',
 ){
 
-  require git
+  require ::git
 
   # The bundle install has prefix support as of writing this, I want bleeding edge.
   package { "${module_name}-bundle":
