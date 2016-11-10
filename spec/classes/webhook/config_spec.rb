@@ -4,7 +4,7 @@ describe 'r10k::webhook::config', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'Centos',
         is_pe: 'true',
         pe_version: '3.7.0'
@@ -52,7 +52,7 @@ user: "peadmin"
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '6',
+        operatingsystemmajrelease: '6',
         operatingsystem: 'Centos',
         pe_version: '4.2.0'
       }
@@ -96,7 +96,7 @@ user: "puppet"
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '6',
+        operatingsystemmajrelease: '6',
         operatingsystem: 'Centos',
         pe_version: '4.2.0'
       }
@@ -145,7 +145,7 @@ user: "puppet"
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '7',
+        operatingsystemmajrelease: '7',
         operatingsystem: 'Centos',
         pe_version: '4.2.0'
       }
@@ -194,7 +194,7 @@ user: "puppet"
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'Centos',
         is_pe: 'true',
         pe_version: '3.7.0'
@@ -249,7 +249,7 @@ user: "peadmin"
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '7',
+        operatingsystemmajrelease: '7',
         operatingsystem: 'Centos',
         pe_version: '4.2.0'
       }
@@ -304,7 +304,7 @@ user: "puppet"
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '6',
+        operatingsystemmajrelease: '6',
         operatingsystem: 'Centos',
         is_pe: 'true',
         pe_server_build: '2015.3.1'
@@ -322,7 +322,7 @@ user: "puppet"
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '7',
+        operatingsystemmajrelease: '7',
         operatingsystem: 'Centos'
       }
     end

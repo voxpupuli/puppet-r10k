@@ -10,7 +10,7 @@ describe 'r10k::install::pe_gem', type: 'class' do
       {
         osfamily: 'RedHat',
         puppetversion: '3.7.1',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         is_pe: 'true',
         pe_version: '3.7.1'
       }
@@ -33,7 +33,7 @@ describe 'r10k::install::pe_gem', type: 'class' do
       {
         osfamily: 'RedHat',
         puppetversion: '3.8.1',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         is_pe: 'true',
         pe_version: '3.8.1'
       }
@@ -56,7 +56,7 @@ describe 'r10k::install::pe_gem', type: 'class' do
       {
         osfamily: 'RedHat',
         puppetversion: '3.8.1',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         is_pe: 'true',
         pe_version: '3.8.1'
       }

@@ -15,7 +15,7 @@ describe 'r10k::install', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5'
+        operatingsystemmajrelease: '5'
       }
     end
     it { is_expected.to contain_class('git') }
@@ -52,7 +52,7 @@ describe 'r10k::install', type: 'class' do
       {
         osfamily: 'RedHat',
         operatingsystem: 'Centos',
-        operatingsystemrelease: '5'
+        operatingsystemmajrelease: '5'
       }
     end
     it { is_expected.to contain_class('git') }
@@ -88,7 +88,7 @@ describe 'r10k::install', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5'
+        operatingsystemmajrelease: '5'
       }
     end
     it { is_expected.to contain_class('git') }
@@ -115,7 +115,7 @@ describe 'r10k::install', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5'
+        operatingsystemmajrelease: '5'
       }
     end
     it { is_expected.to contain_class('git') }
@@ -137,7 +137,7 @@ describe 'r10k::install', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5'
+        operatingsystemmajrelease: '5'
       }
     end
     it { is_expected.not_to contain_class('git') }
@@ -221,7 +221,7 @@ describe 'r10k::install', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'CentOS',
         is_pe: true,
         pe_version: '3.8.1',
@@ -259,7 +259,7 @@ describe 'r10k::install', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'Centos',
         is_pe: true,
         pe_version: '3.8.1'
@@ -294,7 +294,7 @@ describe 'r10k::install', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'Centos',
         is_pe: '',
         pe_version: '3.7.0',
@@ -332,7 +332,7 @@ describe 'r10k::install', type: 'class' do
       {
         manage_ruby_dependency: 'BOGON',
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'Centos',
         is_pe: '',
         pe_version: '3.7.0'
@@ -361,7 +361,7 @@ describe 'r10k::install', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'Centos'
       }
     end
@@ -388,7 +388,7 @@ describe 'r10k::install', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'Centos'
       }
     end
@@ -415,7 +415,7 @@ describe 'r10k::install', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'Centos'
       }
     end
@@ -483,7 +483,7 @@ describe 'r10k::install', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '6'
+        operatingsystemmajrelease: '6'
       }
     end
     it { is_expected.to contain_class('git') }
@@ -509,7 +509,7 @@ describe 'r10k::install', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '6',
+        operatingsystemmajrelease: '6',
         operatingsystem: 'Centos',
         is_pe: false,
         puppetversion: '4.2.1'
@@ -545,7 +545,7 @@ describe 'r10k::install', type: 'class' do
       {
         manage_ruby_dependency: 'BOGON',
         osfamily: 'RedHat',
-        operatingsystemrelease: '6',
+        operatingsystemmajrelease: '6',
         operatingsystem: 'Centos',
         is_pe: '',
         puppet_version: '4.2.1'

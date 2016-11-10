@@ -7,7 +7,7 @@ describe 'r10k', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5'
+        operatingsystemmajrelease: '5'
       }
     end
     it { is_expected.to contain_class('r10k::params') }
@@ -23,7 +23,7 @@ describe 'r10k', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5'
+        operatingsystemmajrelease: '5'
       }
     end
     it { is_expected.to contain_class('r10k::mcollective') }

@@ -4,7 +4,7 @@ describe 'r10k::install::bundle', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'Centos',
         is_pe: 'true',
         path: '/usr/bin/usr/local/bin:/usr/sbin'
@@ -45,7 +45,7 @@ describe 'r10k::install::bundle', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'Centos',
         is_pe: 'true',
         path: '/usr/bin/usr/local/bin:/usr/sbin'

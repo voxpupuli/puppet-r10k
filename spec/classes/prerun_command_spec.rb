@@ -4,7 +4,7 @@ describe 'r10k::prerun_command', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'Centos',
         is_pe: 'true'
       }

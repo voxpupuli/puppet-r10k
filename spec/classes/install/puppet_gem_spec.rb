@@ -5,7 +5,7 @@ describe 'r10k::install::puppet_gem', type: 'class' do
       {
         osfamily: 'RedHat',
         puppetversion: '4.2.1',
-        operatingsystemrelease: '6',
+        operatingsystemmajrelease: '6',
         is_pe: 'false'
       }
     end

@@ -4,7 +4,7 @@ describe 'r10k::mcollective', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'Centos',
         is_pe: 'true'
       }
@@ -51,7 +51,7 @@ describe 'r10k::mcollective', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '6',
+        operatingsystemmajrelease: '6',
         operatingsystem: 'Centos',
         is_pe: 'true'
       }
@@ -78,7 +78,7 @@ describe 'r10k::mcollective', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'Centos',
         is_pe: 'true'
       }
@@ -100,7 +100,7 @@ describe 'r10k::mcollective', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'Centos',
         is_pe: 'true'
       }
@@ -122,7 +122,7 @@ describe 'r10k::mcollective', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'Centos',
         is_pe: ''
       }
@@ -157,7 +157,7 @@ describe 'r10k::mcollective', type: 'class' do
   context 'Puppet FOSS on a Debian 6 OS installing mcollective agent & application' do
     let(:facts) do
       {
-        operatingsystemrelease: '6',
+        operatingsystemmajrelease: '6',
         operatingsystem: 'Ubuntu',
         osfamily: 'Debian',
         is_pe: ''

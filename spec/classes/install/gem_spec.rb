@@ -11,7 +11,7 @@ describe 'r10k::install::gem', type: 'class' do
       {
         osfamily: 'RedHat',
         puppetversion: '3.2.3',
-        operatingsystemrelease: '5'
+        operatingsystemmajrelease: '5'
       }
     end
     it do

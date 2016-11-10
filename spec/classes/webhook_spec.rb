@@ -9,7 +9,7 @@ describe 'r10k::webhook', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'CentOS',
         is_pe: true,
         pe_version: '3.7.0',
@@ -43,7 +43,7 @@ describe 'r10k::webhook', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '6',
+        operatingsystemmajrelease: '6',
         operatingsystem: 'Centos',
         is_pe: 'true',
         pe_server_build: '2015.3.1'
@@ -84,7 +84,7 @@ describe 'r10k::webhook', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'Centos',
         is_pe: 'true',
         pe_version: '3.7.0'
@@ -118,7 +118,7 @@ describe 'r10k::webhook', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '6',
+        operatingsystemmajrelease: '6',
         operatingsystem: 'Centos',
         puppetversion: '4.2.1'
       }
@@ -146,7 +146,7 @@ describe 'r10k::webhook', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '6',
+        operatingsystemmajrelease: '6',
         operatingsystem: 'Centos',
         is_pe: 'false',
         puppetversion: '4.2.1'
@@ -163,7 +163,7 @@ describe 'r10k::webhook', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'Centos',
         puppetversion: '3.7.1'
       }
@@ -214,7 +214,7 @@ describe 'r10k::webhook', type: 'class' do
     let(:facts) do
       {
         osfamily: 'RedHat',
-        operatingsystemrelease: '5',
+        operatingsystemmajrelease: '5',
         operatingsystem: 'Centos',
         puppetversion: '3.2.1'
       }
