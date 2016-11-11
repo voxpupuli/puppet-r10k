@@ -1,58 +1,57 @@
 require 'spec_helper'
-describe 'r10k' , :type => 'class' do
-  context "on a RedHat 5 OS" do
-    let :params do
-      { :remote => 'git@github.com:someuser/puppet.git' }
+describe 'r10k', type: 'class' do
+  context 'on a RedHat 5 OS' do
+    let(:params) do
+      { remote: 'git@github.com:someuser/puppet.git' }
     end
-    let :facts do
+    let(:facts) do
       {
-        :osfamily               => 'RedHat',
-        :operatingsystemrelease => '5',
+        osfamily: 'RedHat',
+        operatingsystemmajrelease: '5'
       }
     end
-    it { should contain_class('r10k::params') }
-    it { should contain_class('r10k::install') }
-    it { should contain_class('r10k::config') }
-    it { should_not contain_class('r10k::mcollective') }
+    it { is_expected.to contain_class('r10k::params') }
+    it { is_expected.to contain_class('r10k::install') }
+    it { is_expected.to contain_class('r10k::config') }
+    it { is_expected.not_to contain_class('r10k::mcollective') }
   end
 
   context 'with mcollective' do
     let(:params) do
-      { :mcollective => true }
+      { mcollective: true }
     end
-    let :facts do
+    let(:facts) do
       {
-        :osfamily               => 'RedHat',
-        :operatingsystemrelease => '5',
+        osfamily: 'RedHat',
+        operatingsystemmajrelease: '5'
       }
     end
-    it { should contain_class('r10k::mcollective') }
+    it { is_expected.to contain_class('r10k::mcollective') }
   end
-  context "on OpenBSD" do
-    let :params do
-      { :remote => 'git@github.com:someuser/puppet.git' }
+  context 'on OpenBSD' do
+    let(:params) do
+      { remote: 'git@github.com:someuser/puppet.git' }
     end
-    let :facts do
+    let(:facts) do
       {
-        :osfamily               => 'OpenBSD',
+        osfamily: 'OpenBSD'
       }
     end
-    it { should contain_class('r10k::params') }
-    it { should contain_class('r10k::install') }
-    it { should contain_class('r10k::config') }
-    it { should_not contain_class('r10k::mcollective') }
+    it { is_expected.to contain_class('r10k::params') }
+    it { is_expected.to contain_class('r10k::install') }
+    it { is_expected.to contain_class('r10k::config') }
+    it { is_expected.not_to contain_class('r10k::mcollective') }
   end
 
   context 'with mcollective' do
     let(:params) do
-      { :mcollective => true }
+      { mcollective: true }
     end
-    let :facts do
+    let(:facts) do
       {
-        :osfamily               => 'OpenBSD',
+        osfamily: 'OpenBSD'
       }
     end
-    it { should contain_class('r10k::mcollective') }
+    it { is_expected.to contain_class('r10k::mcollective') }
   end
 end
-

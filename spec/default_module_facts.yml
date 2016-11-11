@@ -1,0 +1,5 @@
+---
+kernelversion: '5.8'
+osfamily: 'RedHat'
+pe_version: '3.8.1'
+puppetversion: '3.8.1'
