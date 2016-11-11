@@ -26,6 +26,14 @@ describe 'r10k' do
   end
   context 'when manage_ruby_dependency has an invalid value' do
     let(:params) { { 'manage_ruby_dependency' => 'BOGON' } }
+    let(:facts) do
+      {
+        osfamily: 'RedHat',
+        operatingsystemmajrelease: '5',
+        operatingsystem: 'Centos',
+        is_pe: 'true'
+      }
+    end
     it 'fails' do
       expect { catalogue }.to raise_error(Puppet::Error, %r{"BOGON" does not match})
     end

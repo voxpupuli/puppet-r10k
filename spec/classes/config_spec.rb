@@ -489,6 +489,14 @@ describe 'r10k::config', type: 'class' do
         git_settings: { 'provider' => 'rugged', 'private_key' => '/root/.ssh/id_dsa' }
       }
     end
+    let(:facts) do
+      {
+        osfamily: 'RedHat',
+        operatingsystemmajrelease: '5',
+        operatingsystem: 'Centos',
+        is_pe: 'true'
+      }
+    end
     it { is_expected.to contain_file('r10k.yaml').with_content(%r{git:\n.*private_key: /root/\.ssh/id_dsa\n.*provider: rugged\n}) }
   end
 
@@ -499,6 +507,14 @@ describe 'r10k::config', type: 'class' do
         cachedir: '/var/cache/r10k',
         manage_modulepath: false,
         forge_settings: { 'proxy' => 'https://proxy.example.com:3128', 'baseurl' => 'https://forgeapi.puppetlabs.com' }
+      }
+    end
+    let(:facts) do
+      {
+        osfamily: 'RedHat',
+        operatingsystemmajrelease: '5',
+        operatingsystem: 'Centos',
+        is_pe: 'true'
       }
     end
     it { is_expected.to contain_file('r10k.yaml').with_content(%r{forge:\n.*baseurl: https:\/\/forgeapi\.puppetlabs\.com\n.*proxy: https:\/\/proxy\.example\.com:3128\n}) }
@@ -514,6 +530,14 @@ describe 'r10k::config', type: 'class' do
           postrun: ['/usr/bin/curl', '-F', 'deploy=done', 'http://my-app.site/endpoint']
         }
       end
+      let(:facts) do
+        {
+          osfamily: 'RedHat',
+          operatingsystemmajrelease: '5',
+          operatingsystem: 'Centos',
+          is_pe: 'true'
+        }
+      end
       it { is_expected.to contain_file('r10k.yaml').with_content(%r{^.*:postrun: \[\"/usr/bin/curl\", \"-F\", \"deploy=done\", \"http://my-app\.site/endpoint\"\]\n.*$}) }
     end
 
@@ -523,6 +547,14 @@ describe 'r10k::config', type: 'class' do
           configfile: '/etc/r10k.yaml',
           cachedir: '/var/cache/r10k',
           manage_modulepath: false
+        }
+      end
+      let(:facts) do
+        {
+          osfamily: 'RedHat',
+          operatingsystemmajrelease: '5',
+          operatingsystem: 'Centos',
+          is_pe: 'true'
         }
       end
       it { is_expected.to contain_file('r10k.yaml').without_content(%r{^:postrun: .*$}) }
@@ -538,7 +570,14 @@ describe 'r10k::config', type: 'class' do
             postrun: value
           }
         end
-
+        let(:facts) do
+          {
+            osfamily: 'RedHat',
+            operatingsystemmajrelease: '5',
+            operatingsystem: 'Centos',
+            is_pe: 'true'
+          }
+        end
         it 'fails when sources is not an Array' do
           expect { catalogue }.to raise_error(Puppet::Error, %r{is not an Array})
         end
