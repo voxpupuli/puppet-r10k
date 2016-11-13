@@ -19,6 +19,8 @@ class r10k (
   $configfile_symlink        = $r10k::params::configfile_symlink,
   $git_settings              = $r10k::params::git_settings,
   $forge_settings            = $r10k::params::forge_settings,
+  $root_user                 = $r10k::params::root_user,
+  $root_group                = $r10k::params::root_group,
   $postrun                   = undef,
   $include_prerun_command    = false,
   $include_postrun_command   = false,
@@ -71,6 +73,8 @@ class r10k (
     git_settings              => $git_settings,
     forge_settings            => $forge_settings,
     postrun                   => $postrun,
+    root_user                 => $root_user,
+    root_group                => $root_group,
   }
 
   if $mcollective {

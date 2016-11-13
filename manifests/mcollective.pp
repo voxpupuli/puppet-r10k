@@ -11,6 +11,8 @@ class r10k::mcollective (
   $git_ssl_no_verify = $r10k::params::mc_git_ssl_no_verify,
 ) inherits r10k::params {
 
+  require r10k
+
   $ensure_file = $ensure ? {
     true  => 'file',
     false => 'absent',
@@ -18,8 +20,8 @@ class r10k::mcollective (
 
   File {
     ensure => $ensure_file,
-    owner  => 'root',
-    group  => '0',
+    owner  => $::r10k::root_user,
+    group  => $::r10k::root_group,
     mode   => '0644',
   }
 

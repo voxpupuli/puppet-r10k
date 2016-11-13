@@ -13,8 +13,8 @@ class r10k::webhook(
 
   File {
     ensure => $ensure,
-    owner  => 'root',
-    group  => '0',
+    owner  => $::r10k::root_user,
+    group  => $::r10k::root_group,
     mode   => '0755',
   }
 

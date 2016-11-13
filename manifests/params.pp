@@ -31,32 +31,6 @@ class r10k::params
   # Include the mcollective agent
   $mcollective = false
 
-  # Webhook configuration information
-  $webhook_bind_address          = '0.0.0.0'
-  $webhook_port                  = '8088'
-  $webhook_access_logfile        = '/var/log/webhook/access.log'
-  $webhook_client_cfg            = '/var/lib/peadmin/.mcollective'
-  $webhook_use_mco_ruby          = false
-  $webhook_protected             = true
-  $webhook_github_secret         = undef
-  $webhook_discovery_timeout     = 10
-  $webhook_client_timeout        = 120
-  $webhook_prefix                = false         # ':repo' | ':user' | ':command' (or true for backwards compatibility) | 'string' | false
-  $webhook_prefix_command        = '/bin/echo example'
-  $webhook_server_software       = 'WebHook'
-  $webhook_enable_ssl            = true
-  $webhook_use_mcollective       = true
-  $webhook_r10k_deploy_arguments = '-pv'
-  $webhook_bin_template          = 'r10k/webhook.bin.erb'
-  $webhook_yaml_template         = 'r10k/webhook.yaml.erb'
-  $webhook_r10k_command_prefix   = 'umask 0022;' # 'sudo' is the canonical example for this
-  $webhook_repository_events     = undef
-  $webhook_enable_mutex_lock     = false
-  $webhook_allow_uppercase       = true          # for backwards compatibility. Default to off on a major semver update.
-  $webhook_configfile_owner      = 'root'
-  $webhook_configfile_group      = '0'
-  $webhook_configfile_mode       = '0644'
-
   if $::osfamily == 'Debian' {
     $functions_path     = '/lib/lsb/init-functions'
     $start_pidfile_args = '--pidfile=$pidfile'
@@ -105,6 +79,8 @@ class r10k::params
     $webhook_private_key_path      = '/var/lib/peadmin/.mcollective.d/peadmin-private.pem'
     $webhook_certname              = 'peadmin'
     $webhook_certpath              = '/var/lib/peadmin/.mcollective.d'
+    $root_user                     = 'root'
+    $root_group                    = 'root'
   }
   elsif $is_pe_server and versioncmp("${::puppetversion}", '4.0.0') == -1 { #lint:ignore:only_variable_string
     # PE 3.x.x specific settings
@@ -129,6 +105,8 @@ class r10k::params
     $webhook_private_key_path      = '/var/lib/peadmin/.mcollective.d/peadmin-private.pem'
     $webhook_certname              = 'peadmin'
     $webhook_certpath              = '/var/lib/peadmin/.mcollective.d'
+    $root_user                     = 'root'
+    $root_group                    = 'root'
   }
   elsif versioncmp("${::puppetversion}", '4.0.0') >= 0 { #lint:ignore:only_variable_string
     #FOSS 4 or greater specific settings
@@ -153,6 +131,8 @@ class r10k::params
     $webhook_private_key_path      = undef
     $webhook_certname              = undef
     $webhook_certpath              = undef
+    $root_user                     = 'root'
+    $root_group                    = 'root'
   }
   else {
     # Versions of FOSS prior to Puppet 4 (all in one)
@@ -180,18 +160,24 @@ class r10k::params
         $provider        = 'gem'
         $r10k_binary     = 'r10k'
         $mc_service_name = 'mcollective'
+        $root_user       = 'root'
+        $root_group      = 'root'
       }
       'gentoo': {
         $plugins_dir     = '/usr/libexec/mcollective/mcollective'
         $provider        = 'portage'
         $r10k_binary     = 'r10k'
         $mc_service_name = 'mcollective'
+        $root_user       = 'root'
+        $root_group      = 'root'
       }
       'suse': {
         $plugins_dir     = '/usr/share/mcollective/plugins/mcollective'
         $provider        = 'zypper'
         $r10k_binary     = 'r10k'
         $mc_service_name = 'mcollective'
+        $root_user       = 'root'
+        $root_group      = 'root'
       }
       'openbsd': {
         $plugins_dir     = '/usr/local/libexec/mcollective/mcollective'
@@ -201,6 +187,8 @@ class r10k::params
         } else {
           $r10k_binary     = 'r10k22'
         }
+        $root_user       = 'root'
+        $root_group      = 'wheel'
         $mc_service_name = 'mcollectived'
       }
       default: {
@@ -208,6 +196,8 @@ class r10k::params
         $provider        = 'gem'
         $r10k_binary     = 'r10k'
         $mc_service_name = 'mcollective'
+        $root_user       = 'root'
+        $root_group      = 'root'
       }
     }
   }
@@ -224,6 +214,32 @@ class r10k::params
   $mc_application_path = "${plugins_dir}/application"
   $mc_http_proxy       = undef
   $mc_git_ssl_no_verify = 0
+
+  # Webhook configuration information
+  $webhook_bind_address          = '0.0.0.0'
+  $webhook_port                  = '8088'
+  $webhook_access_logfile        = '/var/log/webhook/access.log'
+  $webhook_client_cfg            = '/var/lib/peadmin/.mcollective'
+  $webhook_use_mco_ruby          = false
+  $webhook_protected             = true
+  $webhook_github_secret         = undef
+  $webhook_discovery_timeout     = 10
+  $webhook_client_timeout        = 120
+  $webhook_prefix                = false         # ':repo' | ':user' | ':command' (or true for backwards compatibility) | 'string' | false
+  $webhook_prefix_command        = '/bin/echo example'
+  $webhook_server_software       = 'WebHook'
+  $webhook_enable_ssl            = true
+  $webhook_use_mcollective       = true
+  $webhook_r10k_deploy_arguments = '-pv'
+  $webhook_bin_template          = 'r10k/webhook.bin.erb'
+  $webhook_yaml_template         = 'r10k/webhook.yaml.erb'
+  $webhook_r10k_command_prefix   = 'umask 0022;' # 'sudo' is the canonical example for this
+  $webhook_repository_events     = undef
+  $webhook_enable_mutex_lock     = false
+  $webhook_allow_uppercase       = true          # for backwards compatibility. Default to off on a major semver update.
+  $webhook_configfile_owner      = 'root'
+  $webhook_configfile_group      = $root_group
+  $webhook_configfile_mode       = '0644'
 
   # Service Settings for SystemD in EL7
   if $::osfamily == 'RedHat' and $::operatingsystemmajrelease == '7' {
