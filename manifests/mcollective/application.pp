@@ -8,7 +8,7 @@ class r10k::mcollective::application(
   $mc_service        = $r10k::params::mc_service_name,
 ) inherits r10k::params {
 
-  require r10k
+  require ::r10k
 
   File {
     ensure => present,
@@ -17,11 +17,13 @@ class r10k::mcollective::application(
     mode   => '0644',
   }
   # Install the agent and its ddl file
-  file { "${app_path}/${app_name}"  :
+  file { 'mcollective_application_exec':
+    path   => "${app_path}/${app_name}",
     source => "puppet:///modules/${module_name}/application/${agent_name}",
   }
 
-  file { "${agent_path}/${agent_ddl}"  :
+  file { 'mcollective_application_ddl':
+    path   => "${agent_path}/${agent_ddl}",
     source => "puppet:///modules/${module_name}/agent/${agent_ddl}",
   }
 

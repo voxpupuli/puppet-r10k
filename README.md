@@ -1,10 +1,10 @@
 # r10k Configuration Module
-[![Puppet Forge](http://img.shields.io/puppetforge/v/zack/r10k.svg)](https://forge.puppetlabs.com/zack/r10k)
-[![Build Status](https://travis-ci.org/acidprime/r10k.png?branch=master)](https://travis-ci.org/acidprime/r10k)
-[![Github Tag](https://img.shields.io/github/tag/acidprime/r10k.svg)](https://github.com/acidprime/r10k)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/acidprime/r10k?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![Puppet Forge Downloads](http://img.shields.io/puppetforge/dt/zack/r10k.svg)](https://forge.puppetlabs.com/zack/r10k)
-[![Puppet Forge Endorsement](https://img.shields.io/puppetforge/e/zack/r10k.svg)](https://forge.puppetlabs.com/zack/r10k)
+[![Puppet Forge](http://img.shields.io/puppetforge/v/puppet/r10k.svg)](https://forge.puppetlabs.com/puppet/r10k)
+[![Build Status](https://travis-ci.org/voxpupuli/puppet-r10k.png?branch=master)](https://travis-ci.org/acidprime/r10k)
+[![Github Tag](https://img.shields.io/github/tag/voxpupuli/puppet-r10k.svg)](https://github.com/acidprime/r10k)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/voxpupuli/puppet-r10k?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Puppet Forge Downloads](http://img.shields.io/puppetforge/dt/puppet/r10k.svg)](https://forge.puppetlabs.com/puppet/r10k)
+[![Puppet Forge Endorsement](https://img.shields.io/puppetforge/e/puppet/r10k.svg)](https://forge.puppetlabs.com/puppet/r10k)
 
 
 #### Table of Contents
@@ -414,7 +414,7 @@ The following is an example of declaring the webhook when r10k [prefixing](#pref
 This script is fed the github/gitlab payload in via stdin. This script is meant to return the prefix as its output.
 This is needed as the payload does not contain the r10k prefix. The simplest way to determine the prefix is to
 use the remote url in the payload and find the respective key in r10k.yaml. An example prefix command is located in
-this repo [here](https://github.com/acidprime/r10k/blob/master/files/prefix_command.rb). Note that you may need to
+this repo [here](https://github.com/voxpupuli/puppet-r10k/blob/master/files/prefix_command.rb). Note that you may need to
 modify this script depending on your remote configuration to use one of the various remote styles.
 
 ```puppet
@@ -454,7 +454,7 @@ git_webhook { 'web_post_receive_webhook' :
 ### Webhook FOSS support
 
 Currently the webhook relies on existing certificates for its ssl configuration.
-See this following [ticket](https://github.com/acidprime/r10k/issues/140) for more information.
+See this following [ticket](https://github.com/voxpupuli/puppet-r10k/issues/140) for more information.
 Until then , its possible to re-use you existing FOSS mcollective certificates.
 
 Here is an working example on  Ubuntu 14.04.2 LTS
@@ -615,7 +615,7 @@ This module is likely going to be broken up into 2/3 modules i.e. r10k_webhook, 
 
 ##Support
 
-Please log tickets and issues at our [Projects site](https://github.com/acidprime/r10k/issues)
+Please log tickets and issues at our [Projects site](https://github.com/voxpupuli/puppet-r10k/issues)
 
 ##Development
 

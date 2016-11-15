@@ -1,158 +1,92 @@
 require 'spec_helper'
 describe 'r10k' do
-  context 'On RedHat with PE with default values for params' do
-    let :facts do
-      {
-        :osfamily               => 'RedHat',
-        :operatingsystemrelease => '5',
-        :operatingsystem        => 'Centos',
-        :is_pe                  => 'true'
-      }
-    end
-    it { should compile.with_all_deps }
-    it { should_not contain_class('r10k::prerun_command') }
-    it { should_not contain_class('r10k::postrun_command') }
-  end
-  context 'On OpenBSD with Puppet FOSS with default values for params' do
-    let :facts do
-      {
-        :osfamily               => 'OpenBSD',
-        :is_pe                  => 'false'
-      }
-    end
-    it { should compile.with_all_deps }
-    it { should_not contain_class('r10k::prerun_command') }
-    it { should_not contain_class('r10k::postrun_command') }
-  end
-  context 'when manage_ruby_dependency has an invalid value' do
-    let (:params) {{'manage_ruby_dependency' => 'BOGON'}}
-    it 'should fail' do
-      expect { catalogue }.to raise_error(Puppet::Error, /"BOGON" does not match/)
-    end
-  end
-
-  ['true',true].each do |value|
-    context "On RedHat with PE with param include_prerun_command set to #{value}" do
-      let(:params) { { :include_prerun_command => value } }
+  on_supported_os.each do |os, facts|
+    context "on #{os} " do
       let :facts do
-        {
-          :osfamily               => 'RedHat',
-          :operatingsystemrelease => '5',
-          :operatingsystem        => 'Centos',
-          :is_pe                  => 'true'
-        }
+        facts
       end
 
-      it { should compile.with_all_deps }
-
-      it { should contain_class('r10k::prerun_command') }
-    end
-    context "On OpenBSD with Puppet FOSS with param include_prerun_command set to #{value}" do
-      let(:params) { { :include_prerun_command => value } }
-      let :facts do
-        {
-          :osfamily               => 'OpenBSD',
-          :is_pe                  => 'false'
-        }
+      context 'with default values' do
+        it { is_expected.to compile }
+        it { is_expected.to contain_class('r10k::install') }
+        it { is_expected.to contain_class('r10k::config') }
+        it { is_expected.not_to contain_class('r10k::mcollective') }
+        it { is_expected.not_to contain_class('r10k::prerun_command') }
+        it { is_expected.not_to contain_class('r10k::postrun_command') }
       end
 
-      it { should compile.with_all_deps }
+      context 'with PE 3.8.0 and default values' do
+        let :facts do
+          facts.merge(
+            is_pe:      true,
+            pe_version: '3.8.0'
+          )
+        end
 
-      it { should contain_class('r10k::prerun_command') }
-    end
-  end
-
-  ['false',false].each do |value|
-    context "On RedHat with PE with param include_prerun_command set to #{value}" do
-      let(:params) { { :include_prerun_command => value } }
-      let :facts do
-        {
-          :osfamily               => 'RedHat',
-          :operatingsystemrelease => '5',
-          :operatingsystem        => 'Centos',
-          :is_pe                  => 'true'
-        }
+        it { is_expected.to compile }
       end
 
-      it { should compile.with_all_deps }
+      context 'when manage_ruby_dependency has an invalid value' do
+        let :params do
+          {
+            manage_ruby_dependency: 'BOGON'
+          }
+        end
 
-      it { should_not contain_class('r10k::prerun_command') }
-    end
-    context "On OpenBSD with Puppet FOSS with param include_prerun_command set to #{value}" do
-      let(:params) { { :include_prerun_command => value } }
-      let :facts do
-        {
-          :osfamily               => 'OpenBSD',
-          :is_pe                  => 'false'
-        }
+        it { expect { catalogue }.to raise_error(Puppet::Error, %r{"BOGON" does not match}) }
       end
 
-      it { should compile.with_all_deps }
+      ['true', true].each do |value|
+        context "with param include_prerun_command set to #{value}" do
+          let :params do
+            {
+              include_prerun_command: value
+            }
+          end
 
-      it { should_not contain_class('r10k::prerun_command') }
+          it { is_expected.to compile }
+          it { is_expected.to contain_class('r10k::prerun_command') }
+        end
+      end
+
+      ['false', false].each do |value|
+        context "with param include_prerun_command set to #{value}" do
+          let :params do
+            {
+              include_prerun_command: value
+            }
+          end
+
+          it { is_expected.to compile }
+          it { is_expected.not_to contain_class('r10k::prerun_command') }
+        end
+      end
+
+      ['true', true].each do |value|
+        context "with param include_postrun_command set to #{value}" do
+          let :params do
+            {
+              include_postrun_command: value
+            }
+          end
+
+          it { is_expected.to compile }
+          it { is_expected.to contain_class('r10k::postrun_command') }
+        end
+      end
+
+      ['false', false].each do |value|
+        context "with param include_postrun_command set to #{value}" do
+          let :params do
+            {
+              include_postrun_command: value
+            }
+          end
+
+          it { is_expected.to compile }
+          it { is_expected.not_to contain_class('r10k::postrun_command') }
+        end
+      end
     end
   end
-
-  ['true',true].each do |value|
-    context "On RedHat with PE with param include_postrun_command set to #{value}" do
-      let(:params) { { :include_postrun_command => value } }
-      let :facts do
-        {
-          :osfamily               => 'RedHat',
-          :operatingsystemrelease => '5',
-          :operatingsystem        => 'Centos',
-          :is_pe                  => 'true'
-        }
-      end
-
-      it { should compile.with_all_deps }
-
-      it { should contain_class('r10k::postrun_command') }
-    end
-    context "On OpenBSD with Puppet FOSS with param include_postrun_command set to #{value}" do
-      let(:params) { { :include_postrun_command => value } }
-      let :facts do
-        {
-          :osfamily               => 'OpenBSD',
-          :is_pe                  => 'false'
-        }
-      end
-
-      it { should compile.with_all_deps }
-
-      it { should contain_class('r10k::postrun_command') }
-    end
-  end
-
-  ['false',false].each do |value|
-    context "On RedHat with PE with param include_postrun_command set to #{value}" do
-      let(:params) { { :include_postrun_command => value } }
-      let :facts do
-        {
-          :osfamily               => 'RedHat',
-          :operatingsystemrelease => '5',
-          :operatingsystem        => 'Centos',
-          :is_pe                  => 'true'
-        }
-      end
-
-      it { should compile.with_all_deps }
-
-      it { should_not contain_class('r10k::postrun_command') }
-    end
-    context "On OpenBSD with Puppet FOSS with param include_postrun_command set to #{value}" do
-      let(:params) { { :include_postrun_command => value } }
-      let :facts do
-        {
-          :osfamily               => 'OpenBSD',
-          :is_pe                  => 'false'
-        }
-      end
-
-      it { should compile.with_all_deps }
-
-      it { should_not contain_class('r10k::postrun_command') }
-    end
-  end
-
 end

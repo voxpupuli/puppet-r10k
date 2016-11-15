@@ -1,31 +1,26 @@
 require 'spec_helper'
-describe 'r10k::params' , :type => 'class' do
-  context "Puppet Enterprise on a RedHat 5 OS" do
-    let :facts do
-      {
-        :osfamily               => 'RedHat',
-        :operatingsystemrelease => '5',
-        :operatingsystem        => 'Centos',
-        :is_pe                  => 'true'
-      }
-    end
-    it { should contain_class('r10k::params')}
+describe 'r10k::params', type: :class do
+  on_supported_os.each do |os, facts|
+    context "on #{os} " do
+      let :facts do
+        facts
+      end
 
-    it "Should not contain any resources" do
-      expect(catalogue.resources.size).to eq(4)
-    end
-  end
-  context "Puppet FOSS on OpenBSD" do
-    let :facts do
-      {
-        :osfamily               => 'OpenBSD',
-        :is_pe                  => 'false'
-      }
-    end
-    it { should contain_class('r10k::params')}
+      context 'with Puppet Enterprise' do
+        let :facts do
+          facts.merge(
+            is_pe: true
+          )
+        end
 
-    it "Should not contain any resources" do
-      expect(catalogue.resources.size).to eq(4)
+        it { is_expected.to contain_class('r10k::params') }
+        it { expect(catalogue.resources.size).to eq(4) }
+      end
+
+      context 'with Puppet FOSS' do
+        it { is_expected.to contain_class('r10k::params') }
+        it { expect(catalogue.resources.size).to eq(4) }
+      end
     end
   end
 end

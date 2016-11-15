@@ -1,16 +1,17 @@
-require "spec_helper"
+require 'spec_helper'
+require 'facter/r10k_path'
 
-describe "Facter::Util::Fact" do
-  before {
-    Facter.clear
-    allow(Facter.fact(:kernel)).to receive(:value).and_return("Linux")
-  }
+describe 'r10k_path fact specs', type: :fact do
+  before { Facter.clear }
 
-  describe "r10k_path" do
-    it do
-      allow(Facter::Util::Resolution).to receive(:exec).with("which r10k 2> /dev/null").
-      and_return("/usr/local/bin/r10k")
-      Facter.fact(:r10k_path).value.should == "/usr/local/bin/r10k"
+  describe 'r10k_path' do
+    before do
+      Facter.fact(:kernel).stubs(:value).returns 'Linux'
+      Facter::Util::Resolution.expects(:exec).with('which r10k 2> /dev/null').returns('/usr/local/bin/r10k')
+    end
+
+    it 'defaults to /usr/local/bin/r10k' do
+      expect(Facter.fact(:r10k_path).value).to eq('/usr/local/bin/r10k')
     end
   end
 end

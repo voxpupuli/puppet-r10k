@@ -11,7 +11,7 @@ class r10k::mcollective (
   $git_ssl_no_verify = $r10k::params::mc_git_ssl_no_verify,
 ) inherits r10k::params {
 
-  require r10k
+  require ::r10k
 
   $ensure_file = $ensure ? {
     true  => 'file',
@@ -26,16 +26,19 @@ class r10k::mcollective (
   }
 
   # Install the agent and its ddl file
-  file { "${app_path}/${app_name}":
+  file { 'mcollective_agent_executable':
+    path   => "${app_path}/${app_name}",
     source => "puppet:///modules/${module_name}/application/${agent_name}",
   }
 
-  file { "${agent_path}/${agent_ddl}":
+  file { 'mcollective_agent_ddl':
+    path   => "${agent_path}/${agent_ddl}",
     source => "puppet:///modules/${module_name}/agent/${agent_ddl}",
   }
 
   # Install the application file (all masters at the moment)
-  file { "${agent_path}/${agent_name}":
+  file { 'mcollective_application_file':
+    path    => "${agent_path}/${agent_name}",
     content => template("${module_name}/agent/${agent_name}.erb"),
     require => File["${agent_path}/${agent_ddl}"],
   }
