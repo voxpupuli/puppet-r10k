@@ -1,3 +1,16 @@
+4.0.0 - Multiple Authors
+  * First Vox Pupuli release of r10k!
+  * Badge updates #298
+  * First modulesync after migration #296
+  * unbreak on OS where root group != 'root' #279
+  * Update config_version.sh #291
+  * Duplicate certpath key #287
+  * Fixes Puppet 4 path for webhook #295
+  * add curl example to readme #274
+  * Fix testing #288
+  * Add support for custom permissions and ownership of webhooks.yaml #278
+  * Add GitHub signature #262 
+  * fix mcollective image #264
 3.2.0 - Multiple Authors
   * Support for TFS/Visual Studio Git #259
   * Lowercase Environment names #256
