@@ -2,13 +2,6 @@
   "author": "Vox Pupuli",
   "license": "Apache-2.0",
   "name": "puppet-r10k",
-  "operatingsystem_support": [],
-  "project_page": "https://github.com/voxpupuli/puppet-r10k",
-  "issues_url": "https://github.com/voxpupuli/puppet-r10k/issues",
-  "source": "https://github.com/voxpupuli/puppet-r10k",
-  "summary": "Module for setting up dynamic environments using r10k",
-  "tags": ["git", "pe", "environment", "mcollective","r10k"],
-  "version": "4.0.0",
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
@@ -49,6 +42,18 @@
       ]
     }
   ],
+  "project_page": "https://github.com/voxpupuli/puppet-r10k",
+  "issues_url": "https://github.com/voxpupuli/puppet-r10k/issues",
+  "source": "https://github.com/voxpupuli/puppet-r10k",
+  "summary": "Module for setting up dynamic environments using r10k",
+  "tags": [
+    "git",
+    "pe",
+    "environment",
+    "mcollective",
+    "r10k"
+  ],
+  "version": "4.0.1-rc0",
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
