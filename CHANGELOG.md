@@ -1,5 +1,6 @@
-4.0.0 - Multiple Authors
+4.0.0 - 2016/11/20
   * First Vox Pupuli release of r10k!
+  * Rename changelog #301
   * Badge updates #298
   * First modulesync after migration #296
   * unbreak on OS where root group != 'root' #279
