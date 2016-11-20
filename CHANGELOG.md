@@ -1,5 +1,6 @@
-## 2016-11-20 Release 4.0.1
+## 2016-11-20 Release 4.0.2
   * First Vox Pupuli release of r10k!
+  * Release 4.0.2 #305
   * Changelog for 4.0.1 #304
   * Release 4.0.1 #303
   * Reformat release header for 4.0.0 #302
