@@ -30,22 +30,22 @@ describe 'GitHub Secret Enabled, System Ruby with No SSL, Not protected, No mcol
       it { is_expected.to be_enabled }
       it { is_expected.to be_running }
     end
-    it 'supports style Github payloads via module end point with signature in header' do
+    context 'supports style Github payloads via module end point with signature in header' do
       HMAC_DIGEST = OpenSSL::Digest::Digest.new('sha1')
       signature = 'sha1=' + OpenSSL::HMAC.hexdigest(HMAC_DIGEST, 'secret', '{ "repository": { "name": "puppetlabs-stdlib" } }')
 
       shell("/usr/bin/curl -d '{ \"repository\": { \"name\": \"puppetlabs-stdlib\" } }' -H \"Accept: application/json\" \"http://localhost:8088/module\" -H \"X-Hub-Signature: #{signature}\" -k -q") do |r|
-        expect(r.stdout).to match(%r{^.*success.*$})
-        expect(r.exit_code).to eq(0)
+        it { expect(r.stdout).to match(%r{^.*success.*$}) }
+        it { expect(r.exit_code).to eq(0) }
       end
     end
-    it 'supports style Github payloads via payload end point with signature in header' do
+    context 'supports style Github payloads via payload end point with signature in header' do
       HMAC_DIGEST = OpenSSL::Digest::Digest.new('sha1')
       signature = 'sha1=' + OpenSSL::HMAC.hexdigest(HMAC_DIGEST, 'secret', '{ "ref": "refs/heads/production" }')
 
       shell("/usr/bin/curl -d '{ \"ref\": \"refs/heads/production\" }' -H \"Accept: application/json\" -H \"X-Hub-Signature: #{signature}\" \"http://localhost:8088/payload\" -k -q") do |r|
-        expect(r.stdout).to match(%r{^.*success.*$})
-        expect(r.exit_code).to eq(0)
+        it { expect(r.stdout).to match(%r{^.*success.*$}) }
+        it { expect(r.exit_code).to eq(0) }
       end
     end
   end

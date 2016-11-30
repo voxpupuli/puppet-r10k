@@ -2,18 +2,20 @@ require 'puppetlabs_spec_helper/module_spec_helper'
 require 'rspec-puppet-facts'
 include RspecPuppetFacts
 
-unless RUBY_VERSION =~ %r{^1.9}
+if Dir.exist?(File.expand_path('../../lib', __FILE__)) && RUBY_VERSION !~ %r{^1.9}
   require 'coveralls'
   require 'simplecov'
   require 'simplecov-console'
-
   SimpleCov.formatters = [
     SimpleCov::Formatter::HTMLFormatter,
     SimpleCov::Formatter::Console,
     Coveralls::SimpleCov::Formatter
   ]
   SimpleCov.start do
-    add_filter 'spec/fixtures'
+    track_files 'lib/**/*.rb'
+    add_filter '/spec'
+    add_filter '/vendor'
+    add_filter '/.vendor'
   end
 end
 
@@ -27,4 +29,5 @@ RSpec.configure do |c|
   c.default_facts = default_facts
 end
 
+add_custom_fact :pe_version, '2016.4.2'
 # vim: syntax=ruby
