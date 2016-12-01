@@ -9,10 +9,6 @@ AllCops:
     - .vendor/**/*
     - pkg/**/*
     - spec/fixtures/**/*
-
-RSpec/MultipleExpectations:
-  Max: 2
-
 Lint/ConditionPosition:
   Enabled: True
 

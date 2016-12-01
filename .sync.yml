@@ -1,5 +1,3 @@
 ---
 .travis.yml:
   secure: "WcBaQ0iem0kLmgOHvOEYOsgAk6eFZcSJ/6AisPhS4Ty9gxaEcytE8if2d9ThOItRRua5XGAPk7WbYmTa/cy/EsH0LYwSDdP2eagI95CnmryGya5TShKwUMv1ETUOBFucRYxtcOo7URnTMe2d6IpxEazuZ87cwGLUV5taBRkEvkw="
-spec_overrides:
-  - "add_custom_fact :pe_version, '2016.4.2'"

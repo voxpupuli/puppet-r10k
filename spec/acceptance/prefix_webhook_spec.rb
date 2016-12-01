@@ -49,39 +49,30 @@ describe 'Prefix Enabled,System Ruby with No SSL, Not protected, No mcollective'
       "
     end
     it 'applies with no errors' do
-      apply_manifest(pp, :catch_failures => true) # rubocop:disable Style/HashSyntax
+      apply_manifest(pp, catch_failures: true)
     end
     it 'is idempotent' do
-      apply_manifest(pp, :catch_changes => true) # rubocop:disable Style/HashSyntax
+      apply_manifest(pp, catch_changes: true)
     end
     describe service('webhook') do
       it { is_expected.to be_enabled }
       it { is_expected.to be_running }
     end
-    it 'calculates webteam prefix Github payloads via payload end point' do
-      shell('/usr/bin/curl -d \'{ "ref": "refs/heads/production", "repository": { "name": "puppet-control" , "url": "https://github.com/webteam/somerepo.git"} }\' -H "Accept: application/json" "http://localhost:8088/payload" -k -q') do |r|
-        expect(r.stdout).to match(%r{^.*webteam_production.*$})
-        expect(r.exit_code).to eq(0)
-      end
+    shell('/usr/bin/curl -d \'{ "ref": "refs/heads/production", "repository": { "name": "puppet-control" , "url": "https://github.com/webteam/somerepo.git"} }\' -H "Accept: application/json" "http://localhost:8088/payload" -k -q') do |r|
+      it { expect(r.stdout).to match(%r{^.*webteam_production.*$}) }
+      it { expect(r.exit_code).to eq(0) }
     end
-    it 'calculates secteam prefix with Github payloads via payload end point' do
-      shell('/usr/bin/curl -d \'{ "ref": "refs/heads/production", "repository": { "name": "puppet-control" , "url": "https://github.com/secteam/someotherrepo.git"} }\' -H "Accept: application/json" "http://localhost:8088/payload" -k -q') do |r|
-        expect(r.stdout).to match(%r{^.*secteam_production.*$})
-        expect(r.exit_code).to eq(0)
-      end
+    shell('/usr/bin/curl -d \'{ "ref": "refs/heads/production", "repository": { "name": "puppet-control" , "url": "https://github.com/secteam/someotherrepo.git"} }\' -H "Accept: application/json" "http://localhost:8088/payload" -k -q') do |r|
+      it { expect(r.stdout).to match(%r{^.*secteam_production.*$}) }
+      it { expect(r.exit_code).to eq(0) }
     end
-    it 'calculates custom prefix with Github payloads via payload end point' do
-      shell('/usr/bin/curl -d \'{ "ref": "refs/heads/production", "repository": { "name": "puppet-control" , "url": "https://github.com/customprefix/repo.git"} }\' -H "Accept: application/json" "http://localhost:8088/payload" -k -q') do |r|
-        expect(r.stdout).to match(%r{^.*custom_production.*$})
-        expect(r.exit_code).to eq(0)
-      end
+    shell('/usr/bin/curl -d \'{ "ref": "refs/heads/production", "repository": { "name": "puppet-control" , "url": "https://github.com/customprefix/repo.git"} }\' -H "Accept: application/json" "http://localhost:8088/payload" -k -q') do |r|
+      it { expect(r.stdout).to match(%r{^.*custom_production.*$}) }
+      it { expect(r.exit_code).to eq(0) }
     end
-
-    it 'calculates no prefix Github payloads via payload end point' do
-      shell('/usr/bin/curl -d \'{ "ref": "refs/heads/production", "repository": { "name": "puppet-control" , "url": "https://github.com/noprefix/repo.git"} }\' -H "Accept: application/json" "http://localhost:8088/payload" -k -q') do |r|
-        expect(r.stdout).to match(%r{^.* production.*$})
-        expect(r.exit_code).to eq(0)
-      end
+    shell('/usr/bin/curl -d \'{ "ref": "refs/heads/production", "repository": { "name": "puppet-control" , "url": "https://github.com/noprefix/repo.git"} }\' -H "Accept: application/json" "http://localhost:8088/payload" -k -q') do |r|
+      it { expect(r.stdout).to match(%r{^.* production.*$}) }
+      it { expect(r.exit_code).to eq(0) }
     end
   end
 end
