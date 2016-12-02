@@ -28,4 +28,5 @@ RSpec.configure do |c|
   default_facts.merge!(YAML.load(File.read(File.expand_path('../default_module_facts.yml', __FILE__)))) if File.exist?(File.expand_path('../default_module_facts.yml', __FILE__))
   c.default_facts = default_facts
 end
+
 # vim: syntax=ruby
