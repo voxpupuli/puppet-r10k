@@ -13,7 +13,7 @@ describe 'System Ruby with No SSL, Not protected, No mcollective' do
         use_mcollective => false,
         notify     => Service['webhook'],
       }
-      
+
       class {'r10k::webhook':
         require => Class['r10k::webhook::config'],
       }
@@ -58,5 +58,17 @@ describe 'System Ruby with No SSL, Not protected, No mcollective' do
         expect(r.exit_code).to eq(0)
       end
     end
+
+    it 'should successfully lock when hammered with multiple requests' do
+      4.times.map do
+        Thread.new do
+          shell('/usr/bin/curl -d \'{ "ref": "refs/heads/production" }\' -H "Accept: application/json" "http://localhost:8088/payload" -k -q') do |r|
+            expect(r.stdout).to match(/^.*success.*$/)
+            expect(r.exit_code).to eq(0)
+          end
+        end
+      end
+    end
+
   end
 end
