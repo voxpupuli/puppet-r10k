@@ -2,6 +2,7 @@ require 'puppetlabs_spec_helper/rake_tasks'
 require 'puppet_blacksmith/rake_tasks'
 require 'voxpupuli/release/rake_tasks'
 require 'puppet-strings/tasks'
+require 'github_changelog_generator/task'
 
 PuppetLint.configuration.log_format = '%{path}:%{line}:%{check}:%{KIND}:%{message}'
 PuppetLint.configuration.fail_on_warnings = true
@@ -30,4 +31,7 @@ task test: [
   :metadata_lint,
   :release_checks,
 ]
+
+GitHubChangelogGenerator::RakeTask.new :changelog do |config|
+end
 # vim: syntax=ruby
