@@ -58,9 +58,9 @@ describe 'System Ruby with No SSL, Not protected, No mcollective' do
         expect(r.exit_code).to eq(0)
       end
     end
-
+    # rubocop:disable RSpec/MultipleExpectations
     it 'should successfully lock when hammered with multiple requests' do
-      4.times.map do
+      4.times do
         Thread.new do
           shell('/usr/bin/curl -d \'{ "ref": "refs/heads/production" }\' -H "Accept: application/json" "http://localhost:8088/payload" -k -q') do |r|
             expect(r.stdout).to match(/^.*success.*$/)
@@ -69,6 +69,5 @@ describe 'System Ruby with No SSL, Not protected, No mcollective' do
         end
       end
     end
-
   end
 end
