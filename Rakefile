@@ -33,5 +33,7 @@ task test: [
 ]
 
 GitHubChangelogGenerator::RakeTask.new :changelog do |config|
+  version = (Blacksmith::Modulefile.new).version
+  config.future_release = "v#{version}"
 end
 # vim: syntax=ruby
