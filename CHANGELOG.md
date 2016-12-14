@@ -1,6 +1,10 @@
-# Change Log
+# Change log
 
-## [v4.0.3-rc0](https://github.com/voxpupuli/puppet-r10k/tree/v4.0.3-rc0) (2016-12-13)
+All notable changes to this project will be documented in this file.
+Each new release typically also includes the latest Vox Pupuli modulesync defaults.
+These should not impact the functionality of the module.
+
+## [v4.0.3-rc0](https://github.com/voxpupuli/puppet-r10k/tree/v4.0.3-rc0) (2016-12-14)
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v4.0.2...v4.0.3-rc0)
 
 **Closed issues:**
@@ -43,7 +47,6 @@
 - Webhook cannot do new puppet module install [\#280](https://github.com/voxpupuli/puppet-r10k/issues/280)
 - mcollective agent unable to find r10k binary [\#275](https://github.com/voxpupuli/puppet-r10k/issues/275)
 - MCollective r10k only syncs git based modules [\#273](https://github.com/voxpupuli/puppet-r10k/issues/273)
-- Question: MCollective r10k agent not working [\#267](https://github.com/voxpupuli/puppet-r10k/issues/267)
 - images in README.md broken [\#263](https://github.com/voxpupuli/puppet-r10k/issues/263)
 
 **Merged pull requests:**
