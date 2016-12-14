@@ -17,9 +17,6 @@ These should not impact the functionality of the module.
 
 **Merged pull requests:**
 
-- Modulesync 0.16.4, stop duplicate CI builds [\#313](https://github.com/voxpupuli/puppet-r10k/pull/313) ([rnelson0](https://github.com/rnelson0))
-- modulesync 0.16.3 [\#312](https://github.com/voxpupuli/puppet-r10k/pull/312) ([bastelfreak](https://github.com/bastelfreak))
-- Modulesync v0.16.3 [\#311](https://github.com/voxpupuli/puppet-r10k/pull/311) ([rnelson0](https://github.com/rnelson0))
 - \[284\] Replace hard-coded version 1.5.1 with installed [\#308](https://github.com/voxpupuli/puppet-r10k/pull/308) ([rnelson0](https://github.com/rnelson0))
 - use puppet/make instead of deprecated croddy/make [\#307](https://github.com/voxpupuli/puppet-r10k/pull/307) ([croddy](https://github.com/croddy))
 
@@ -54,8 +51,6 @@ These should not impact the functionality of the module.
 - Reformat release header for 4.0.0 [\#302](https://github.com/voxpupuli/puppet-r10k/pull/302) ([rnelson0](https://github.com/rnelson0))
 - Rename CHANGELOG.md [\#301](https://github.com/voxpupuli/puppet-r10k/pull/301) ([rnelson0](https://github.com/rnelson0))
 - Release candidate for v4.0.0 [\#299](https://github.com/voxpupuli/puppet-r10k/pull/299) ([rnelson0](https://github.com/rnelson0))
-- Badge updates [\#298](https://github.com/voxpupuli/puppet-r10k/pull/298) ([rnelson0](https://github.com/rnelson0))
-- First modulesync after migration [\#296](https://github.com/voxpupuli/puppet-r10k/pull/296) ([rnelson0](https://github.com/rnelson0))
 - Fixes Puppet 4 path for webhook [\#295](https://github.com/voxpupuli/puppet-r10k/pull/295) ([andrewwippler](https://github.com/andrewwippler))
 - Update config\_version.sh [\#291](https://github.com/voxpupuli/puppet-r10k/pull/291) ([seanscottking](https://github.com/seanscottking))
 - Fix testing [\#288](https://github.com/voxpupuli/puppet-r10k/pull/288) ([ghoneycutt](https://github.com/ghoneycutt))
