@@ -57,19 +57,19 @@
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.6.0"
+      "version_requirement": ">= 4.6.0 < 5.0.0"
     },
     {
       "name": "puppetlabs/ruby",
-      "version_requirement": ">= 0.0.2"
+      "version_requirement": ">= 0.6.0 < 2.0.0"
     },
     {
       "name": "puppetlabs/gcc",
-      "version_requirement": ">= 0.0.3"
+      "version_requirement": ">= 0.3.0 < 2.0.0"
     },
     {
       "name": "puppetlabs/pe_gem",
-      "version_requirement": ">= 0.0.1"
+      "version_requirement": ">= 0.2.0 < 2.0.0"
     },
     {
       "name": "puppet/make",
@@ -77,19 +77,19 @@
     },
     {
       "name": "puppetlabs/inifile",
-      "version_requirement": ">= 1.0.0"
+      "version_requirement": ">=1.4.1 < 2.0.0"
     },
     {
       "name": "puppetlabs/vcsrepo",
-      "version_requirement": ">= 0.1.2"
+      "version_requirement": ">=1.3.1 < 2.0.0"
     },
     {
       "name": "puppetlabs/git",
-      "version_requirement": ">= 0.0.3"
+      "version_requirement": ">= 0.5.0 < 2.0.0"
     },
     {
       "name": "gentoo/portage",
-      "version_requirement": ">= 2.0.0"
+      "version_requirement": ">= 2.3.0 < 3.0.0"
     }
   ],
   "requirements": [
