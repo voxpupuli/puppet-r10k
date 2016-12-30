@@ -5,7 +5,7 @@ class r10k::params
   $version                = 'installed'
   $manage_modulepath      = false
   $manage_ruby_dependency = 'declare'
-  $install_options        = []
+  $install_options        = ['--no-ri', '--no-rdoc']
   $sources                = undef
   $puppet_master          = true
 
