@@ -72,7 +72,7 @@ You can override this by passing the `version` parameter.
 
 | Module Version | r10k Version |
 | -------------- | ------------ |
-| Next Major     | [![Latest Version](https://img.shields.io/gem/v/r10k.svg?style=flat-square)](https://rubygems.org/gems/r10k)        |
+| v4.0.0+        | [![Latest Version](https://img.shields.io/gem/v/r10k.svg?style=flat-square)](https://rubygems.org/gems/r10k)        |
 | v3.0.x         | 1.5.1        |
 | v2.8.2         | 1.5.1        |
 | v2.7.x         | 1.5.1        |
