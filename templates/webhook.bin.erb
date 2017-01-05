@@ -20,6 +20,7 @@ require 'open3'
 
 WEBHOOK_CONFIG = '/etc/webhook.yaml'
 PIDFILE        = '/var/run/webhook/webhook.pid'
+LOCKFILE       = '/var/run/webhook/webhook.lock'
 APP_ROOT       = '/var/run/webhook'
 
 if (File.exists?(WEBHOOK_CONFIG))
@@ -181,15 +182,23 @@ end
     end
 
     def run_command(command)
-      if Open3.respond_to?('capture3')
-        stdout, stderr, exit_status = Open3.capture3(command)
-        message = "triggered: #{command}\n#{stdout}\n#{stderr}"
-      else
-      message = "forked: #{command}"
-        Process.detach(fork{ exec "#{command} &"})
-        exit_status = 0
+      message = ''
+      File.open(LOCKFILE, 'w+') do |file|
+        # r10k has a small race condition which can cause failed deploys if two happen
+        # more or less simultaneously. To mitigate, we just lock on a file and wait for
+        # the other one to complete.
+        file.flock(File::LOCK_EX)
+
+        if Open3.respond_to?('capture3')
+          stdout, stderr, exit_status = Open3.capture3(command)
+          message = "triggered: #{command}\n#{stdout}\n#{stderr}"
+        else
+          message = "forked: #{command}"
+          Process.detach(fork{ exec "#{command} &"})
+          exit_status = 0
+        end
+        raise "#{stdout}\n#{stderr}" if exit_status != 0
       end
-      raise "#{stdout}\n#{stderr}" if exit_status != 0
       message
     end
 
