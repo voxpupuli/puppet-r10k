@@ -6,11 +6,9 @@ describe 'r10k::install::bundle', type: :class do
         facts
       end
 
-      context 'Puppet Enterprise with bundle & no params' do
+      context 'Puppet with bundle & no params' do
         let :facts do
-          facts.merge(
-            is_pe: 'true'
-          )
+          facts
         end
 
         it do
@@ -46,9 +44,7 @@ describe 'r10k::install::bundle', type: :class do
           }
         end
         let :facts do
-          facts.merge(
-            is_pe: 'true'
-          )
+          facts
         end
 
         it do

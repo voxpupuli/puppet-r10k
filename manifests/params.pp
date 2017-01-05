@@ -5,6 +5,7 @@ class r10k::params
   $version                = 'installed'
   $manage_modulepath      = false
   $manage_ruby_dependency = 'declare'
+  $provider               = 'puppet_gem'
   $install_options        = []
   $sources                = undef
   $puppet_master          = true
@@ -57,7 +58,8 @@ class r10k::params
     $is_pe_server      = false
   }
 
-  if $is_pe_server and versioncmp("${::puppetversion}", '4.0.0') >= 0 { #lint:ignore:only_variable_string
+  if getvar('::pe_server_version') {
+    #if $is_pe_server and versioncmp("${::puppetversion}", '4.0.0') >= 0 { #lint:ignore:only_variable_string
     # PE 4 or greater specific settings
     # r10k configuration
     $r10k_config_file          = '/etc/r10k.yaml'
@@ -68,33 +70,6 @@ class r10k::params
     # Mcollective configuration dynamic
     $mc_service_name  = 'mcollective'
     $plugins_dir      = '/opt/puppetlabs/mcollective/plugins/mcollective'
-    $provider         = 'puppet_gem'
-    $r10k_binary      = 'r10k'
-    $modulepath       = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
-
-    # webhook
-    $webhook_user    = 'peadmin'
-    $webhook_pass    = 'peadmin'
-    $webhook_group   = 'peadmin'
-    $webhook_public_key_path       = '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem'
-    $webhook_private_key_path      = '/var/lib/peadmin/.mcollective.d/peadmin-private.pem'
-    $webhook_certname              = 'peadmin'
-    $webhook_certpath              = '/var/lib/peadmin/.mcollective.d'
-    $root_user                     = 'root'
-    $root_group                    = 'root'
-  }
-  elsif $is_pe_server and versioncmp("${::puppetversion}", '4.0.0') == -1 { #lint:ignore:only_variable_string
-    # PE 3.x.x specific settings
-    # r10k configuration
-    $r10k_config_file          = '/etc/r10k.yaml'
-
-    $puppetconf_path = '/etc/puppetlabs/puppet'
-
-    $pe_module_path  = '/opt/puppet/share/puppet/modules'
-    # Mcollective configuration dynamic
-    $mc_service_name  = 'pe-mcollective'
-    $plugins_dir      = '/opt/puppet/libexec/mcollective/mcollective'
-    $provider         = 'pe_gem'
     $r10k_binary      = 'r10k'
     $modulepath       = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
 
@@ -121,7 +96,6 @@ class r10k::params
     $mc_service_name = 'mcollective'
     $plugins_dir     = '/opt/puppetlabs/puppet/lib/ruby/vendor_ruby/mcollective'
     $modulepath      = undef
-    $provider        = 'puppet_gem'
     $r10k_binary     = 'r10k'
 
     # webhook
@@ -136,71 +110,7 @@ class r10k::params
     $root_group                    = 'root'
   }
   else {
-    # Versions of FOSS prior to Puppet 4 (all in one)
-    # FOSS 2.x and 3.x specific settings
-    # r10k configuration
-    $r10k_config_file          = '/etc/r10k.yaml'
-
-    $puppetconf_path = '/etc/puppet'
-
-    # Mcollective configuration dynamic
-    $modulepath       = "${r10k_basedir}/\$environment/modules"
-
-    # webhook
-    $webhook_user    = 'puppet'
-    $webhook_pass    = 'puppet'
-    $webhook_group   = 'puppet'
-    $webhook_public_key_path       = undef
-    $webhook_private_key_path      = undef
-    $webhook_certname              = undef
-    $webhook_certpath              = undef
-
-    case $::osfamily {
-      'debian': {
-        $plugins_dir     = '/usr/share/mcollective/plugins/mcollective'
-        $provider        = 'gem'
-        $r10k_binary     = 'r10k'
-        $mc_service_name = 'mcollective'
-        $root_user       = 'root'
-        $root_group      = 'root'
-      }
-      'gentoo': {
-        $plugins_dir     = '/usr/libexec/mcollective/mcollective'
-        $provider        = 'portage'
-        $r10k_binary     = 'r10k'
-        $mc_service_name = 'mcollective'
-        $root_user       = 'root'
-        $root_group      = 'root'
-      }
-      'suse': {
-        $plugins_dir     = '/usr/share/mcollective/plugins/mcollective'
-        $provider        = 'zypper'
-        $r10k_binary     = 'r10k'
-        $mc_service_name = 'mcollective'
-        $root_user       = 'root'
-        $root_group      = 'root'
-      }
-      'openbsd': {
-        $plugins_dir     = '/usr/local/libexec/mcollective/mcollective'
-        $provider        = 'openbsd'
-        if (versioncmp("${::kernelversion}", '5.8') < 0) { #lint:ignore:only_variable_string
-          $r10k_binary     = 'r10k21'
-        } else {
-          $r10k_binary     = 'r10k22'
-        }
-        $root_user       = 'root'
-        $root_group      = 'wheel'
-        $mc_service_name = 'mcollectived'
-      }
-      default: {
-        $plugins_dir     = '/usr/libexec/mcollective/mcollective'
-        $provider        = 'gem'
-        $r10k_binary     = 'r10k'
-        $mc_service_name = 'mcollective'
-        $root_user       = 'root'
-        $root_group      = 'root'
-      }
-    }
+    fail("Puppet version ${::puppetversion} is no longer supported. Please use an earlier version of puppet/r10k.")
   }
 
   # prerun_command in puppet.conf

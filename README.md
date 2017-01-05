@@ -59,8 +59,7 @@ class { 'r10k':
 
 * Installation of the r10k `gem`
 * Installation of git
-* Installation of ruby when not using an existing ruby stack i.e. when using `pe_gem` or `puppet_gem`
-* Installation of ruby if not using an existing ruby stack i.e. when using  `pe_gem` or `puppet_gem`.
+* Installation of ruby when not using an existing ruby stack i.e. when using `puppet_gem`
 * Management of the `r10k.yaml` in /etc
 * Installation and configuration of a sinatra app when using the [webhook](#webhook-support).
 
@@ -134,16 +133,6 @@ This will configure `/etc/r10k.yaml` and install the r10k gem after installing
 ruby using the [puppetlabs/ruby](http://forge.puppetlabs.com/puppetlabs/ruby) module.
 
 It also supports installation via multiple providers, such as installation in the puppet_enterprise ruby stack in versions less than 3.8
-
-Installing into the puppet enterprise ruby stack in PE 3.x
-```puppet
-class { 'r10k':
-  remote   => 'git@github.com:someuser/puppet.git',
-  provider => 'pe_gem',
-}
-```
-_Note: On Puppet Enterprise 3.8 and higher the package is not declared as 3.8
-ships with an embdedded r10k gem installed via the PE packages. To install r10k on a PE 3.8+ non-master, set puppet_master to false for the main r10k class (e.g. to use r10k with Razor)_
 
 Installing into the Puppet Enterprise ruby stack in PE 2015.x
 
@@ -575,7 +564,6 @@ The supported installation modes for this module
 * portage
 * yum
 * bundle
-* pe_gem
 * puppet_gem
 * gem
 * zypper

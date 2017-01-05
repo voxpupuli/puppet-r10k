@@ -31,44 +31,6 @@ describe 'r10k::config', type: :class do
         it { is_expected.not_to contain_ini_setting('R10k Modulepath') }
       end
 
-      context 'on Puppet Enterprise 3.8.0' do
-        let :params do
-          {
-            configfile:        '/etc/r10k.yaml',
-            cachedir:          '/var/cache/r10k',
-            manage_modulepath: true,
-            root_user:         'root',
-            root_group:        'root'
-          }
-        end
-
-        let :facts do
-          super().merge(
-            is_pe:      'true',
-            pe_version: '3.8.0'
-          )
-        end
-
-        it { is_expected.to contain_class('r10k::params') }
-        it do
-          is_expected.to contain_file('r10k.yaml').with(
-            ensure: 'file',
-            owner:  'root',
-            group:  'root',
-            mode:   '0644',
-            path:   '/etc/r10k.yaml'
-          )
-        end
-        it do
-          is_expected.to contain_ini_setting('R10k Modulepath').with(
-            ensure:  'present',
-            path:    '/etc/puppetlabs/puppet/puppet.conf',
-            section: 'main',
-            setting: 'modulepath'
-          )
-        end
-      end
-
       context 'when forgetting to pass a hash' do
         let :params do
           {

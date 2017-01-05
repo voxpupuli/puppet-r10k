@@ -15,17 +15,6 @@ describe 'r10k' do
         it { is_expected.not_to contain_class('r10k::postrun_command') }
       end
 
-      context 'with PE 3.8.0 and default values' do
-        let :facts do
-          facts.merge(
-            is_pe:      true,
-            pe_version: '3.8.0'
-          )
-        end
-
-        it { is_expected.to compile }
-      end
-
       context 'when manage_ruby_dependency has an invalid value' do
         let :params do
           {
