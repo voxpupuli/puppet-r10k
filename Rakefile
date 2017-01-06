@@ -2,6 +2,7 @@ require 'puppetlabs_spec_helper/rake_tasks'
 require 'puppet_blacksmith/rake_tasks'
 require 'voxpupuli/release/rake_tasks'
 require 'puppet-strings/tasks'
+require 'github_changelog_generator/task'
 
 PuppetLint.configuration.log_format = '%{path}:%{line}:%{check}:%{KIND}:%{message}'
 PuppetLint.configuration.fail_on_warnings = true
@@ -30,4 +31,11 @@ task test: [
   :metadata_lint,
   :release_checks,
 ]
+
+GitHubChangelogGenerator::RakeTask.new :changelog do |config|
+  version = (Blacksmith::Modulefile.new).version
+  config.future_release = "v#{version}"
+  config.header = "# Change log\n\nAll notable changes to this project will be documented in this file.\nEach new release typically also includes the latest modulesync defaults.\nThese should not impact the functionality of the module."
+  config.exclude_labels = %w{duplicate question invalid wontfix modulesync}
+end
 # vim: syntax=ruby
