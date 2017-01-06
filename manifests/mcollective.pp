@@ -9,10 +9,9 @@ class r10k::mcollective (
   $mc_service        = $r10k::params::mc_service_name,
   $http_proxy        = $r10k::params::mc_http_proxy,
   $git_ssl_no_verify = $r10k::params::mc_git_ssl_no_verify,
+  $root_user         = $r10k::params::root_user,
+  $root_group        = $r10k::params::root_group,
 ) inherits r10k::params {
-
-  require ::r10k
-
   $ensure_file = $ensure ? {
     true  => 'file',
     false => 'absent',
@@ -20,8 +19,8 @@ class r10k::mcollective (
 
   File {
     ensure => $ensure_file,
-    owner  => $::r10k::root_user,
-    group  => $::r10k::root_group,
+    owner  => $root_user,
+    group  => $root_group,
     mode   => '0644',
   }
 

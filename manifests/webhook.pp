@@ -8,14 +8,15 @@ class r10k::webhook(
   $service_file     = $r10k::params::webhook_service_file,
   $use_mcollective  = $r10k::params::webhook_use_mcollective,
   $is_pe_server     = $r10k::params::is_pe_server,
+  $root_user        = $r10k::params::root_user,
+  $root_group       = $r10k::params::root_group,
   $manage_packages  = true,
 ) inherits r10k::params {
-  require ::r10k
 
   File {
     ensure => $ensure,
-    owner  => $::r10k::root_user,
-    group  => $::r10k::root_group,
+    owner  => $root_user,
+    group  => $root_group,
     mode   => '0755',
   }
 
