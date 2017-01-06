@@ -610,8 +610,11 @@ been configured with r10k. This will cause r10k to synchronize after each
 puppet run. Any errors synchronizing will be logged to the standard puppet run.
 
 ## Limitations
-This module is likely going to be broken up into 2/3 modules i.e. r10k_webhook, r10k_mcollective in the future. Puppet Enterprise 4.0 will likely being shipping its own configuration module for r10k and so this module will migrate to managing FOSS installations i.e. `/etc/r10k.yaml` vs PE's configuration file `/etc/puppetlabs/puppet/r10k.yaml`. As of PE 3.8 you can still use this module to manage the `/etc/r10k.yaml` file and it will be loaded but package/version management of r10k and its symlinks has been disabled to not conflict with the pe packages ability to install and upgrade the gem as part of Puppet Enterprise.
+The 4.1.x release *deprecates* support for:
+* Puppet 3
+* Ruby 1.9.3
 
+These items are are planned for removal in v5.0.0.
 
 ##Support
 
