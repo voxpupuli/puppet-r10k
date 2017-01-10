@@ -103,7 +103,7 @@ sshkey { "your.internal.gitlab.server.com":
   key    => "...+dffsfHQ=="
 }
 
-# https://github.com/abrader/abrader-gms
+# Requires the module https://forge.puppet.com/abrader/gms
 git_deploy_key { 'add_deploy_key_to_puppet_control':
   ensure       => present,
   name         => $::fqdn,
@@ -276,8 +276,9 @@ class {'r10k::webhook':
   require => Class['r10k::webhook::config'],
 }
 
-# https://github.com/abrader/abrader-gms
 # Add webhook to control repository ( the repo where the Puppetfile lives )
+#
+# Requires the module https://forge.puppet.com/abrader/gms
 git_webhook { 'web_post_receive_webhook' :
   ensure       => present,
   webhook_url  => 'http://master.of.masters:8088/payload',
@@ -294,6 +295,8 @@ git_webhook { 'web_post_receive_webhook' :
 #  :branch => 'master'
 # The module name is determined from the repo name , i.e. <puppet-><module_name>
 # All characters with left and including any hyphen are removed i.e. <puppet->
+#
+# Requires the module https://forge.puppet.com/abrader/gms
 git_webhook { 'web_post_receive_webhook_for_module' :
   ensure       => present,
   webhook_url  => 'http://master.of.masters:8088/module',
@@ -325,9 +328,9 @@ class {'r10k::webhook':
   require => Class['r10k::webhook::config'],
 }
 
-# https://github.com/abrader/abrader-gms
 # Add webhook to control repository ( the repo where the Puppetfile lives )
-# Requires gms 0.0.6+ for disable_ssl_verify param
+#
+# Requires the module https://forge.puppet.com/abrader/gms
 git_webhook { 'web_post_receive_webhook' :
   ensure             => present,
   webhook_url        => 'https://puppet:puppet@hole.in.firewall:8088/payload',
@@ -344,6 +347,8 @@ git_webhook { 'web_post_receive_webhook' :
 #  :branch => 'master'
 # The module name is determined from the repo name , i.e. <puppet-><module_name>
 # All characters with left and including any hyphen are removed i.e. <puppet->
+#
+# Requires the module https://forge.puppet.com/abrader/gms
 git_webhook { 'web_post_receive_webhook_for_module' :
   ensure       => present,
   webhook_url  => 'https://puppet:puppet@hole.in.firewall:8088/module',
@@ -439,7 +444,8 @@ class {'r10k::webhook':
   require => Class['r10k::webhook::config'],
 }
 # Deploy this webhook to your local gitlab server for the puppet/control repo.
-# https://github.com/abrader/abrader-gms
+#
+# Requires the module https://forge.puppet.com/abrader/gms
 git_webhook { 'web_post_receive_webhook' :
   ensure       => present,
   webhook_url  => 'https://puppet:puppet@master.of.masters:8088/payload',
