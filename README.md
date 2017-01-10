@@ -278,7 +278,7 @@ class {'r10k::webhook':
 
 # Add webhook to control repository ( the repo where the Puppetfile lives )
 #
-# Requires the module https://forge.puppet.com/abrader/gms
+# Resource git_webhook is provided by https://forge.puppet.com/abrader/gms
 git_webhook { 'web_post_receive_webhook' :
   ensure       => present,
   webhook_url  => 'http://master.of.masters:8088/payload',
