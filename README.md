@@ -103,7 +103,7 @@ sshkey { "your.internal.gitlab.server.com":
   key    => "...+dffsfHQ=="
 }
 
-https://groups.google.com/forum/#!topic/puppet-users/wDaZljAKs2k
+# Resource git_webhook is provided by https://forge.puppet.com/abrader/gms
 git_deploy_key { 'add_deploy_key_to_puppet_control':
   ensure       => present,
   name         => $::fqdn,
