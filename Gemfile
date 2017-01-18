@@ -26,14 +26,13 @@ group :test do
   gem 'puppet-blacksmith',                                          :require => false
   gem 'voxpupuli-release',                                          :require => false, :git => 'https://github.com/voxpupuli/voxpupuli-release-gem.git'
   gem 'puppet-strings', '~> 1.0.0',                                 :require => false
-  gem 'rubocop-rspec', '~> 1.9.0',                                  :require => false if RUBY_VERSION >= '2.3.0'
+  gem 'redcarpet',                                                  :require => false
+  gem 'rubocop', '~> 0.47.0',                                       :require => false if RUBY_VERSION >= '2.3.0'
+  gem 'rubocop-rspec', '~> 1.10.0',                                 :require => false if RUBY_VERSION >= '2.3.0'
   gem 'json_pure', '<= 2.0.1',                                      :require => false if RUBY_VERSION < '2.0.0'
   gem 'mocha', '>= 1.2.1',                                          :require => false
   gem 'coveralls',                                                  :require => false if RUBY_VERSION >= '2.0.0'
   gem 'simplecov-console',                                          :require => false if RUBY_VERSION >= '2.0.0'
-  gem 'github_changelog_generator', '~> 1.13.0',                    :require => false if RUBY_VERSION < '2.2.2'
-  gem 'github_changelog_generator',                                 :require => false if RUBY_VERSION >= '2.2.2'
-  gem 'rack', '~> 1.0',                                             :require => false if RUBY_VERSION < '2.2.2'
 end
 
 group :development do
