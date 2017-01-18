@@ -29,6 +29,8 @@ describe 'System Ruby with No SSL, Not protected, No mcollective' do
       it { is_expected.to be_enabled }
       it { is_expected.to be_running }
     end
+
+    # rubocop:disable RSpec/RepeatedExample
     shell('/usr/bin/curl -d \'{ "repository": { "name": "puppetlabs-stdlib" } }\' -H "Accept: application/json" "http://localhost:8088/module" -k -q') do |r|
       it { expect(r.stdout).to match(%r{^.*success.*$}) }
       it { expect(r.exit_code).to eq(0) }
@@ -49,6 +51,8 @@ describe 'System Ruby with No SSL, Not protected, No mcollective' do
       it { expect(r.stdout).to match(%r{^.*success.*$}) }
       it { expect(r.exit_code).to eq(0) }
     end
+    # rubocop:enable RSpec/RepeatedExample
+
     # rubocop:disable RSpec/MultipleExpectations
     it 'successfully locks when hammered with multiple requests' do
       4.times do

@@ -76,12 +76,6 @@ describe 'r10k::webhook', type: :class do
             provider: 'pe_gem'
           )
         end
-        it do
-          is_expected.to contain_package('sinatra').with(
-            ensure:   'installed',
-            provider: 'pe_gem'
-          )
-        end
         it { is_expected.not_to contain_file('peadmin-cert.pem').with(path: '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem') }
       end
 
@@ -97,12 +91,6 @@ describe 'r10k::webhook', type: :class do
           )
         end
 
-        it do
-          is_expected.to contain_package('sinatra').with(
-            ensure:   'installed',
-            provider: 'puppet_gem'
-          )
-        end
         it do
           is_expected.to contain_package('sinatra').with(
             ensure:   'installed',
@@ -133,12 +121,6 @@ describe 'r10k::webhook', type: :class do
         end
         it do
           is_expected.to contain_package('rack').with(
-            ensure:   'installed',
-            provider: 'gem'
-          )
-        end
-        it do
-          is_expected.to contain_package('sinatra').with(
             ensure:   'installed',
             provider: 'gem'
           )
