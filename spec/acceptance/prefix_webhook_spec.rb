@@ -58,6 +58,8 @@ describe 'Prefix Enabled,System Ruby with No SSL, Not protected, No mcollective'
       it { is_expected.to be_enabled }
       it { is_expected.to be_running }
     end
+
+    # rubocop:disable RSpec/RepeatedExample
     shell('/usr/bin/curl -d \'{ "ref": "refs/heads/production", "repository": { "name": "puppet-control" , "url": "https://github.com/webteam/somerepo.git"} }\' -H "Accept: application/json" "http://localhost:8088/payload" -k -q') do |r|
       it { expect(r.stdout).to match(%r{^.*webteam_production.*$}) }
       it { expect(r.exit_code).to eq(0) }
@@ -74,5 +76,6 @@ describe 'Prefix Enabled,System Ruby with No SSL, Not protected, No mcollective'
       it { expect(r.stdout).to match(%r{^.* production.*$}) }
       it { expect(r.exit_code).to eq(0) }
     end
+    # rubocop:enable RSpec/RepeatedExample
   end
 end
