@@ -118,7 +118,7 @@ class r10k::params
 
     # Mcollective configuration dynamic
     $mc_service_name = 'mcollective'
-    $plugins_dir     = '/opt/puppetlabs/mcollective/plugins/mcollective'
+    $plugins_dir     = '/opt/puppetlabs/puppet/lib/ruby/vendor_ruby/mcollective'
     $modulepath      = undef
     $provider        = 'puppet_gem'
     $r10k_binary     = 'r10k'
