@@ -265,14 +265,14 @@ end
         message = run_command(command)
         $logger.info("message: #{message} module_name: #{module_name}")
         status_message = {:status => :success, :message => message.to_s, :module_name => module_name, :status_code => 200}
-        status_message.to_json
         notify_slack(status_message) if slack?
+        status_message.to_json
       rescue => e
         $logger.error("message: #{e.message} trace: #{e.backtrace}")
         status 500
         status_message = {:status => :fail, :message => e.message, :trace => e.backtrace, :module_name => module_name, :status_code => 500}
-        status_message.to_json
         notify_slack(status_message) if slack?
+        status_message.to_json
       end
     end
 
@@ -296,14 +296,14 @@ end
         end
         status_message =  {:status => :success, :message => message.to_s, :branch => branch, :status_code => 200}
         $logger.info("message: #{message} branch: #{branch}")
-        status_message.to_json
         notify_slack(status_message) if slack?
+        status_message.to_json
      rescue => e
         status_message = {:status => :fail, :message => e.message, :trace => e.backtrace, :branch => branch, :status_code => 500}
         $logger.error("message: #{e.message} trace: #{e.backtrace}")
         status 500
-        status_message.to_json
         notify_slack(status_message) if slack?
+        status_message.to_json
       end
     end  #end deploy()
 
