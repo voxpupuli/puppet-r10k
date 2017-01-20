@@ -57,6 +57,10 @@ if $config['use_mcollective'] then
   include MCollective::RPC
 end
 
+if $config['slack_webhook'] then
+  require 'slack-notifier'
+end
+
 $command_prefix = $config['command_prefix'] || ''
 
 class Server < Sinatra::Base
@@ -202,6 +206,53 @@ end
       message
     end
 
+    def notify_slack(status_message)
+      if $config['slack_channel']
+        slack_channel = $config['slack_channel']
+      else
+        slack_channel = '#default'
+      end
+
+      if $config['slack_user']
+        slack_user = $config['slack_user']
+      else
+        slack_user = 'r10k'
+      end
+
+      notifier = Slack::Notifier.new $config['slack_webhook'] do
+        defaults channel: slack_channel,
+                 username: slack_user,
+                 icon_emoji: ":ocean:"
+      end
+
+      if status_message[:branch]
+        target = status_message[:branch]
+      elsif status_message[:module]
+        target = status_message[:module]
+      end
+
+      message = {
+        author: 'r10k for Puppet',
+        title: "r10k deployment of Puppet environment #{target}"
+      }
+
+      case status_message[:status_code]
+      when 200
+        message.merge!(
+          color: "good",
+          text: "Successfully deployed #{target}",
+          fallback: "Successfully deployed #{target}"
+        )
+      when 500
+        message.merge!(
+          color: "bad",
+          text: "Failed to deploy #{target}",
+          fallback: "Failed to deploy #{target}"
+        )
+      end
+
+      notifier.post text: message[:fallback], attachments: [message]
+    end
 
     def deploy_module(module_name)
       begin
@@ -213,11 +264,15 @@ end
         end
         message = run_command(command)
         $logger.info("message: #{message} module_name: #{module_name}")
-        {:status => :success, :message => message.to_s }.to_json
+        status_message = {:status => :success, :message => message.to_s, :module_name => module_name, :status_code => 200}
+        status_message.to_json
+        notify_slack(status_message) if slack?
       rescue => e
         $logger.error("message: #{e.message} trace: #{e.backtrace}")
         status 500
-        {:status => :fail, :message => e.message, :trace => e.backtrace}.to_json
+        status_message = {:status => :fail, :message => e.message, :trace => e.backtrace, :module_name => module_name, :status_code => 500}
+        status_message.to_json
+        notify_slack(status_message) if slack?
       end
     end
 
@@ -239,12 +294,16 @@ end
           end
           message = run_command(command)
         end
+        status_message =  {:status => :success, :message => message.to_s, :branch => branch, :status_code => 200}
         $logger.info("message: #{message} branch: #{branch}")
-        {:status => :success, :message => message.to_s }.to_json
+        status_message.to_json
+        notify_slack(status_message) if slack?
      rescue => e
+        status_message = {:status => :fail, :message => e.message, :trace => e.backtrace, :branch => branch, :status_code => 500}
         $logger.error("message: #{e.message} trace: #{e.backtrace}")
         status 500
-        {:status => :fail, :message => e.message, :trace => e.backtrace}.to_json
+        status_message.to_json
+        notify_slack(status_message) if slack?
       end
     end  #end deploy()
 
@@ -256,7 +315,6 @@ end
      client.timeout           = $config['client_timeout']
      result = client.send('deploy',{:environment => branch})
    end # end deploy()
-
 
     def protected!
       unless authorized?
@@ -270,6 +328,10 @@ end
       @auth.provided? && @auth.basic? && @auth.credentials &&
       @auth.credentials == [$config['user'],$config['pass']]
     end  #end authorized?
+
+    def slack?
+      !!$config['slack_webhook']
+    end
 
     def verify_signature(payload_body)
       signature = 'sha1=' + OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha1'), $config['github_secret'], payload_body)
