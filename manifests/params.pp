@@ -237,6 +237,9 @@ class r10k::params
   $webhook_repository_events     = undef
   $webhook_enable_mutex_lock     = false
   $webhook_allow_uppercase       = true          # for backwards compatibility. Default to off on a major semver update.
+  $webhook_slack_webhook         = undef
+  $webhook_slack_channel         = undef
+  $webhook_slack_username        = undef
   $webhook_configfile_owner      = 'root'
   $webhook_configfile_group      = $root_group
   $webhook_configfile_mode       = '0644'

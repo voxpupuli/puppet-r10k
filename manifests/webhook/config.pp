@@ -33,6 +33,9 @@ class r10k::webhook::config (
   $command_prefix        = $r10k::params::webhook_r10k_command_prefix,
   $repository_events     = $r10k::params::webhook_repository_events,
   $allow_uppercase       = $r10k::params::webhook_allow_uppercase,
+  $slack_webhook         = $r10k::params::webhook_slack_webhook,
+  $slack_channel         = $r10k::params::webhook_slack_channel,
+  $slack_username        = $r10k::params::webhook_slack_username,
   $configfile_owner      = $r10k::params::webhook_configfile_owner,
   $configfile_group      = $r10k::params::webhook_configfile_group,
   $configfile_mode       = $r10k::params::webhook_configfile_mode,
@@ -69,6 +72,9 @@ class r10k::webhook::config (
       'repository_events'     => $repository_events,
       'enable_mutex_lock'     => $enable_mutex_lock,
       'allow_uppercase'       => $allow_uppercase,
+      'slack_webhook'         => $slack_webhook,
+      'slack_channel'         => $slack_channel,
+      'slack_username'        => $slack_username,
     }
   } else {
     validate_hash($hash)

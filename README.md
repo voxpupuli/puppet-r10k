@@ -480,6 +480,30 @@ class { '::r10k::webhook':
 }
 ```
 
+### Webhook Slack notifications
+
+You can enable Slack notifications for the webhook. You will need a
+Slack webhook URL and the `slack-notifier` gem installed.
+
+To get the Slack webhook URL you need to:
+
+1. Go to
+   [https://slack.com/apps/A0F7XDUAZ-incoming-webhooks](https://slack.com/apps/A0F7XDUAZ-incoming-webhooks).
+2. Choose your team, press `Configure`.
+3. In configurations press `Add configuration`.
+4. Choose channel, press `Add Incoming WebHooks integration`.
+
+Then configure the webhook to add your Slack Webhook URL.
+
+```puppet
+class { '::r10k::webhook::config':
+  . . .
+  slack_webhook  => 'http://slack.webhook/webhook', # mandatory for usage
+  slack_channel  => '#channel', # defaults to #default
+  slack_username => 'r10k', # the username to use
+}
+```
+
 ### Triggering the webhook from curl
 
 To aid in debugging, or to give you some hints as to how to trigger the webhook by unsupported systems, here's a curl command to trigger the webhook to deploy the 'production' environment:

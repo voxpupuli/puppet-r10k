@@ -265,6 +265,48 @@ user: "puppet"
         it { is_expected.to contain_file('webhook.yaml').with_content(content) }
       end
 
+      context 'FOSS with slack webhook enabled' do
+        let :params do
+          {
+            slack_webhook: 'slack_webhook'
+          }
+        end
+
+        it do
+          is_expected.to contain_file('webhook.yaml').with(
+            path:   '/etc/webhook.yaml',
+            ensure: 'file',
+            owner:  'root',
+            group:  'root',
+            mode:   '0644',
+            notify: 'Service[webhook]'
+          )
+        end
+        content = '---
+access_logfile: "/var/log/webhook/access.log"
+allow_uppercase: true
+bind_address: "0.0.0.0"
+client_cfg: "/var/lib/peadmin/.mcollective"
+client_timeout: "120"
+command_prefix: "umask 0022;"
+discovery_timeout: "10"
+enable_mutex_lock: false
+enable_ssl: true
+pass: "puppet"
+port: "8088"
+prefix: false
+prefix_command: "/bin/echo example"
+protected: true
+r10k_deploy_arguments: "-pv"
+server_software: "WebHook"
+slack_webhook: "slack_webhook"
+use_mco_ruby: false
+use_mcollective: true
+user: "puppet"
+'
+        it { is_expected.to contain_file('webhook.yaml').with_content(content) }
+      end
+
       context 'Puppet Enterprise 2015.3.1 removing Webhook Config' do
         let :params do
           {
