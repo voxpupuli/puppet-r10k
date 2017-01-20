@@ -292,7 +292,6 @@ command_prefix: "umask 0022;"
 discovery_timeout: "10"
 enable_mutex_lock: false
 enable_ssl: true
-slack_webhook: "slack_webhook"
 pass: "puppet"
 port: "8088"
 prefix: false
@@ -300,6 +299,7 @@ prefix_command: "/bin/echo example"
 protected: true
 r10k_deploy_arguments: "-pv"
 server_software: "WebHook"
+slack_webhook: "slack_webhook"
 use_mco_ruby: false
 use_mcollective: true
 user: "puppet"
