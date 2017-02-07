@@ -19,6 +19,7 @@ class r10k (
   $configfile_symlink        = $r10k::params::configfile_symlink,
   $git_settings              = $r10k::params::git_settings,
   $forge_settings            = $r10k::params::forge_settings,
+  $deploy_settings           = $r10k::params::deploy_settings,
   $root_user                 = $r10k::params::root_user,
   $root_group                = $r10k::params::root_group,
   $postrun                   = undef,
@@ -37,7 +38,7 @@ class r10k (
 
   $ruby_dependency_options=['include','declare','ignore']
   validate_re($manage_ruby_dependency,$ruby_dependency_options)
-  validate_hash($git_settings, $forge_settings)
+  validate_hash($git_settings, $forge_settings, $deploy_settings)
 
   # TODO: Clean this up when 4.0 to require a boolean
   if $include_prerun_command == true  or $include_prerun_command == 'true'{
@@ -72,6 +73,7 @@ class r10k (
     configfile_symlink        => $configfile_symlink,
     git_settings              => $git_settings,
     forge_settings            => $forge_settings,
+    deploy_settings           => $deploy_settings,
     postrun                   => $postrun,
     root_user                 => $root_user,
     root_group                => $root_group,

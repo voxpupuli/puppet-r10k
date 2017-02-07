@@ -12,6 +12,12 @@
 <% end -%>
 <% end -%>
 <% end %>
+<% if !@deploy_settings.empty? -%>
+deploy:
+<% @deploy_settings.sort.each do |key, value| -%>
+    <%=key-%>: <%=value%>
+<% end -%>
+<% end -%>
 <% if !@git_settings.empty? -%>
 git:
 <% @git_settings.sort.each do |key, value| -%>

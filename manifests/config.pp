@@ -62,6 +62,7 @@ class r10k::config (
   $r10k_yaml_template        = 'r10k/r10k.yaml.erb',
   $git_settings              = {},
   $forge_settings            = {},
+  $deploy_settings           = {},
 ) inherits r10k::params {
 
   validate_bool($manage_modulepath)
