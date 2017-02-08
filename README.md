@@ -623,6 +623,20 @@ This is the `forge:` key in r10k, it accepts a hash that contains settings for d
     }
 ```
 
+##### `deploy_settings`
+This is the `deploy:` key in r10k, it accepts a hash that contains setting that control how r10k code deployments behave. Documentation for the settings can be found [here](https://docs.puppet.com/pe/latest/r10k_custom.html#deploy).
+
+```puppet
+    $deploy_settings = {
+      'purge_levels' => ['puppetfile'],
+    }
+
+    class {'r10k':
+      remote          => 'git@github.com:voxpupuli/puppet.git',
+      deploy_settings => $deploy_settings,
+    }
+```
+
 ##### `configfile_symlink`
 boolean if to manage symlink
 
