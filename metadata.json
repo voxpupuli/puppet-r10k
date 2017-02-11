@@ -89,7 +89,7 @@
     },
     {
       "name": "gentoo/portage",
-      "version_requirement": ">= 2.3.0 < 3.0.0"
+      "version_requirement": "2.3.0"
     }
   ],
   "requirements": [
