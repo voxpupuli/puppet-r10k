@@ -10,6 +10,8 @@ fixtures:
     inifile: "git://github.com/puppetlabs/puppetlabs-inifile.git"
     vcsrepo: "git://github.com/puppetlabs/puppetlabs-vcsrepo.git"
     git:     "git://github.com/puppetlabs/puppetlabs-git.git"
-    portage: "git://github.com/gentoo/puppet-portage.git"
+    portage:
+      repo: "git://github.com/gentoo/puppet-portage.git"
+      ref: "2.3.0"
   symlinks:
     r10k:    "#{source_dir}"

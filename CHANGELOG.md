@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not impact the functionality of the module.
 
+## [4.2.0](https://github.com/voxpupuli/puppet-r10k/tree/4.2.0) (2017-02-11)
+
+This is the last release with Puppet3 support!
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v4.1.0...4.2.0)
+
+**Closed issues:**
+
+- Add support for changing deploy settings [\#332](https://github.com/voxpupuli/puppet-r10k/issues/332)
+- Document breaking changes in CHANGELOG [\#306](https://github.com/voxpupuli/puppet-r10k/issues/306)
+- Status 42, OK, but it doesn't completely work [\#261](https://github.com/voxpupuli/puppet-r10k/issues/261)
+- \(enhancement\) pre-commit hook only validates what's on disk [\#234](https://github.com/voxpupuli/puppet-r10k/issues/234)
+
+**Merged pull requests:**
+
+- Added new 'deploy\_settings' information [\#334](https://github.com/voxpupuli/puppet-r10k/pull/334) ([triforce](https://github.com/triforce))
+- Add support for changing the 'deploy' settings in the r10k.yaml configuration file [\#333](https://github.com/voxpupuli/puppet-r10k/pull/333) ([triforce](https://github.com/triforce))
+- Added Slack webhook [\#331](https://github.com/voxpupuli/puppet-r10k/pull/331) ([jamtur01](https://github.com/jamtur01))
+- mcollective plugin dir has changed for foss puppet 4 [\#330](https://github.com/voxpupuli/puppet-r10k/pull/330) ([attachmentgenie](https://github.com/attachmentgenie))
+- Better document soft dependency abrader/gms [\#327](https://github.com/voxpupuli/puppet-r10k/pull/327) ([rnelson0](https://github.com/rnelson0))
+
 ## [v4.1.0](https://github.com/voxpupuli/puppet-r10k/tree/v4.1.0) (2017-01-06)
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v4.0.2...v4.1.0)
 
@@ -15,11 +35,10 @@ These should not impact the functionality of the module.
 
 **Merged pull requests:**
 
+- Release 4.1.0 [\#325](https://github.com/voxpupuli/puppet-r10k/pull/325) ([rnelson0](https://github.com/rnelson0))
 - \(GH323\) Better parameterization of root user/group from \#279 [\#324](https://github.com/voxpupuli/puppet-r10k/pull/324) ([rnelson0](https://github.com/rnelson0))
 - Fix rubocop failures from \#268 [\#322](https://github.com/voxpupuli/puppet-r10k/pull/322) ([rnelson0](https://github.com/rnelson0))
-- modulesync 0.16.7 [\#320](https://github.com/voxpupuli/puppet-r10k/pull/320) ([bastelfreak](https://github.com/bastelfreak))
 - Bump minimum version dependencies \(for Puppet 4\) [\#318](https://github.com/voxpupuli/puppet-r10k/pull/318) ([juniorsysadmin](https://github.com/juniorsysadmin))
-- modulesync 0.16.6 [\#317](https://github.com/voxpupuli/puppet-r10k/pull/317) ([bastelfreak](https://github.com/bastelfreak))
 - Bump puppet minimum version\_requirement to 3.8.7 [\#315](https://github.com/voxpupuli/puppet-r10k/pull/315) ([juniorsysadmin](https://github.com/juniorsysadmin))
 - \[284\] Replace hard-coded version 1.5.1 with installed [\#308](https://github.com/voxpupuli/puppet-r10k/pull/308) ([rnelson0](https://github.com/rnelson0))
 - use puppet/make instead of deprecated croddy/make [\#307](https://github.com/voxpupuli/puppet-r10k/pull/307) ([croddy](https://github.com/croddy))
