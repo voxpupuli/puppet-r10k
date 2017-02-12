@@ -3,6 +3,7 @@ fixtures:
     stdlib:
       repo: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
       ref:  "4.15.0"
+    systemd: "https://github.com/camptocamp/puppet-systemd.git"
     ruby:    "https://github.com/puppetlabs/puppetlabs-ruby.git"
     gcc:     "https://github.com/puppetlabs/puppetlabs-gcc.git"
     pe_gem:  "https://github.com/puppetlabs/puppetlabs-pe_gem.git"

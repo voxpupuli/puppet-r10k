@@ -154,15 +154,16 @@ class r10k::params
   $webhook_webrick_version       = '1.3.1'       # Webrick 1.4 requires ruby >= 2.3
   $webhook_generate_types        = false
 
+  $webhook_service_provider      = $::service_provider
   # Service Settings for SystemD in EL7
   if $::osfamily == 'RedHat' and $::operatingsystemmajrelease == '7' {
-    $webhook_service_file     = '/usr/lib/systemd/system/webhook.service'
+    $webhook_service_file     = undef
     $webhook_service_template = 'webhook.redhat.service.erb'
   } elsif $::osfamily == 'Gentoo' {
     $webhook_service_file     = '/etc/init.d/webhook'
     $webhook_service_template = 'webhook.init.gentoo.erb'
   } elsif $::osfamily == 'Suse' and $::operatingsystemrelease >= '12' { #lint:ignore:version_comparison
-    $webhook_service_file     = '/etc/systemd/system/webhook.service'
+    $webhook_service_file     = undef
     $webhook_service_template = 'webhook.suse.service.erb'
   } else {
     $webhook_service_file     = '/etc/init.d/webhook'

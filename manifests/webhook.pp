@@ -7,6 +7,7 @@ class r10k::webhook(
   $bin_template     = $r10k::params::webhook_bin_template,
   $service_template = $r10k::params::webhook_service_template,
   $service_file     = $r10k::params::webhook_service_file,
+  $service_provider = $r10k::params::webhook_service_provider,
   $use_mcollective  = $r10k::params::webhook_use_mcollective,
   $is_pe_server     = $r10k::params::is_pe_server,
   $root_user        = $r10k::params::root_user,
@@ -64,14 +65,24 @@ class r10k::webhook(
     ensure => $ensure_directory,
     owner  => $user,
     group  => $group,
-    before => File['webhook_init_script'],
+    before => File['webhook_bin'],
   }
 
-  file { 'webhook_init_script':
-    ensure  => $ensure_file,
-    content => template("r10k/${service_template}"),
-    path    => $service_file,
-    before  => File['webhook_bin'],
+  if $service_provider == 'systemd' {
+    systemd::unit_file { 'webhook.service':
+      ensure  => $ensure_file,
+      content => template("r10k/${service_template}"),
+      require => File['webhook_bin'],
+      notify  => Service['webhook'],
+    }
+  } else {
+    file { 'webhook_init_script':
+      ensure  => $ensure_file,
+      content => template("r10k/${service_template}"),
+      path    => $service_file,
+      require => File['webhook_bin'],
+      notify  => Service['webhook'],
+    }
   }
 
   file { 'webhook_bin':
@@ -82,8 +93,9 @@ class r10k::webhook(
   }
 
   service { 'webhook':
-    ensure => $ensure_service,
-    enable => $ensure,
+    ensure   => $ensure_service,
+    enable   => $ensure,
+    provider => $service_provider,
   }
 
   # We don't remove the packages/ gem as
