@@ -4,10 +4,10 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not impact the functionality of the module.
 
-## [4.2.0](https://github.com/voxpupuli/puppet-r10k/tree/4.2.0) (2017-02-11)
+## [v4.2.0](https://github.com/voxpupuli/puppet-r10k/tree/v4.2.0) (2017-02-11)
 
 This is the last release with Puppet3 support!
-[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v4.1.0...4.2.0)
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v4.1.0...v4.2.0)
 
 **Closed issues:**
 
