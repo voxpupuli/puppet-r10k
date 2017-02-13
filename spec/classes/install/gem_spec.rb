@@ -9,7 +9,7 @@ describe 'r10k::install::gem', type: :class do
         facts
       end
 
-      context "installing version '#{version}' via gem with puppet FOSS" do
+      context "installing version '#{version}' via gem" do
         let :params do
           {
             manage_ruby_dependency: 'declare',

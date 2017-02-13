@@ -6,11 +6,10 @@ describe 'r10k::mcollective::application', type: :class do
         facts
       end
 
-      context 'Puppet Enterprise' do
+      context 'Puppet Enterprise 2016.4.2' do
         let :facts do
           facts.merge(
-            is_pe:       true,
-            pe_version: '2016.4.2'
+            pe_build: '2016.4.2'
           )
         end
 

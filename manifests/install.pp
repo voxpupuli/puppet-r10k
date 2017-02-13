@@ -49,7 +49,7 @@ class r10k::install (
         version      => $version,
       }
     }
-    'pe_gem', 'puppet_gem', 'gem', 'openbsd', 'yum', 'zypper': {
+    'puppet_gem', 'gem', 'openbsd', 'yum', 'zypper': {
       if $provider == 'gem' {
         class { '::r10k::install::gem':
           manage_ruby_dependency => $manage_ruby_dependency,
@@ -61,18 +61,13 @@ class r10k::install (
         # Using puppet_gem uses that instead of the system ruby.
         include ::r10k::install::puppet_gem
       }
-      elsif $provider == 'pe_gem' {
-        class { '::r10k::install::pe_gem':
-          puppet_master => $puppet_master,
-        }
-      }
 
       # Currently we share a package resource to keep things simple
       # Puppet seems to have a bug (see #87 ) related to passing an
-      # empty to value to the gem,pe_gem providers. This code
+      # empty to value to the gem providers This code
       # converts an empty array to semi-standard gem options
       # This was previously undef but that caused strict var issues
-      if $provider in ['pe_gem', 'puppet_gem', 'gem' ] and $install_options == [] {
+      if $provider in ['puppet_gem', 'gem' ] and $install_options == [] {
         $provider_install_options = ['--no-ri', '--no-rdoc']
       } else {
         $provider_install_options = $install_options
@@ -87,6 +82,6 @@ class r10k::install (
       }
 
     }
-    default: { fail("${module_name}: ${provider} is not supported. Valid values are: 'gem', 'pe_gem', 'puppet_gem', 'bundle', 'openbsd', 'portage', 'yum', 'zypper'") }
+    default: { fail("${module_name}: ${provider} is not supported. Valid values are: 'gem', 'puppet_gem', 'bundle', 'openbsd', 'portage', 'yum', 'zypper'") }
   }
 }

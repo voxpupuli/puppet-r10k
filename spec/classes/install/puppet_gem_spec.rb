@@ -3,9 +3,7 @@ describe 'r10k::install::puppet_gem', type: :class do
   on_supported_os.each do |os, facts|
     context "on #{os} " do
       let :facts do
-        facts.merge(
-          puppetversion: '4.2.0'
-        )
+        facts
       end
 
       context 'with defaults' do
