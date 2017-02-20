@@ -238,18 +238,19 @@ class { 'r10k::mcollective':
   ensure => false,
 }
 ```
-This will remove the mcollective agent/application and ddl files from disk. This likely would be if you are migrating to Code managerin Puppet Enterprise.
+This will remove the mcollective agent/application and ddl files from disk. This likely would be if you are migrating to Code manager in Puppet Enterprise.
 
 # Webhook Support
 
 ![alt tag](https://gist.githubusercontent.com/acidprime/be25026c11a76bf3e7fb/raw/44df86181c3e5d14242a1b1f4281bf24e9c48509/webhook.gif)  
 For version control systems that use web driven post-receive processes you can use the example webhook included in this module.
-This webhook currently only runs on Puppet Enterprise and uses mcollective to automatically synchronize your environment across multiple masters.
-The webhook must be configured on the respective "control" repository a master that has mco installed and can contact the other masters in your fleet.
+When the webhook receives the post-receive event, it will synchronize environments on your puppet masters.
+The webhook uses mcollective for multi-master synchronization and the `peadmin` user from Puppet Enterprise by default.
+These settings are all configurable for your specific use case, as shown below in these configuration examples.
 
 ### Webhook Github Enterprise - Non Authenticated
 This is an example of using the webhook without authentication.
-The `git_webhook` type will use the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want to automate the addtion of the webhook to the repo.
+The `git_webhook` type will use the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want to automate the addition of the webhook to the repo.
 
 ```puppet
 # Required unless you disable mcollective
@@ -297,8 +298,8 @@ git_webhook { 'web_post_receive_webhook_for_module' :
 ```
 
 ### Webhook Github Example - Authenticated
-This is an example of using the webhook with authentication
-The `git_webhook` type will use the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want to automate the addtion of the webhook to the repo.
+This is an example of using the webhook with authentication.
+The `git_webhook` type will use the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want to automate the addition of the webhook to the repo.
 
 ```puppet
 # Required unless you disable mcollective
@@ -366,7 +367,7 @@ class { 'r10k::webhook':
 ```
 
 ### Webhook - remove webhook init script and config file.
-Moving to Code manager, and removing webhook
+For use when moving to Code Manager, or other solutions, and the webhook should be removed.
 ```puppet
 class {'r10k::webhook::config':
   ensure => false,
@@ -378,9 +379,9 @@ class {'r10k::webhook':
 ```
 
 ### Running without mcollective
-If you have only a single master, you may want to have the webhook run r10k directly rather then
-as peadmin via mcollective. This requires you to run as the user that can perform `r10k` commands
-which is typically root. The peadmin certificate no longer is managed or required.
+If you have only a single master, you may want to have the webhook run r10k directly rather then as peadmin via mcollective.
+This requires you to run as the user that can perform `r10k` commands which is typically root.
+The peadmin certificate no longer is managed or required.
 
 
 ```puppet
@@ -405,11 +406,12 @@ class {'r10k::webhook':
 The following is an example of declaring the webhook when r10k [prefixing](#prefixes) are enabled.
 
 #### prefix_command.rb
-This script is fed the github/gitlab payload in via stdin. This script is meant to return the prefix as its output.
-This is needed as the payload does not contain the r10k prefix. The simplest way to determine the prefix is to
-use the remote url in the payload and find the respective key in r10k.yaml. An example prefix command is located in
-this repo [here](https://github.com/voxpupuli/puppet-r10k/blob/master/files/prefix_command.rb). Note that you may need to
-modify this script depending on your remote configuration to use one of the various remote styles.
+This script is fed the github/gitlab payload in via stdin.
+This script is meant to return the prefix as its output.
+This is needed as the payload does not contain the r10k prefix.
+The simplest way to determine the prefix is to use the remote url in the payload and find the respective key in r10k.yaml.
+An example prefix command is located in this repo [here](https://github.com/voxpupuli/puppet-r10k/blob/master/files/prefix_command.rb).
+Note that you may need to modify this script depending on your remote configuration to use one of the various remote styles.
 
 ```puppet
 file {'/usr/local/bin/prefix_command.rb':
@@ -446,26 +448,39 @@ git_webhook { 'web_post_receive_webhook' :
 
 
 ```
-### Webhook FOSS support
+### Webhook FOSS support with MCollective
 
 Currently the webhook relies on existing certificates for its ssl configuration.
 See this following [ticket](https://github.com/voxpupuli/puppet-r10k/issues/140) for more information.
-Until then , its possible to re-use you existing FOSS mcollective certificates.
+Until then, its possible to re-use you existing FOSS mcollective certificates.
 
 Here is an working example on  Ubuntu 14.04.2 LTS
 
 ```puppet
 class { '::r10k::webhook::config':
-  protected        => false,
   public_key_path  => '/etc/mcollective/server_public.pem',  # Mandatory for FOSS
   private_key_path => '/etc/mcollective/server_private.pem', # Mandatory for FOSS
-  notify           => Service['webhook'],
 }
 
 class { '::r10k::webhook':
   user    => 'puppet',                                       # Mandatory for FOSS
   group   => 'puppet',                                       # Mandatory for FOSS
-  require => Class['::r10k::webhook::config'],
+}
+```
+
+### Webhook FOSS support without MCollective
+Some instances may require the user/group `root/root` (Linux) or `root/wheel` (BSD).
+Verify that the specified user has the permissions to run `r10k` commands.
+```puppet
+class { '::r10k::webhook::config':
+  use_mcollective  => false,
+  public_key_path  => '/etc/mcollective/server_public.pem',  # Mandatory even when use_mcollective is false
+  private_key_path => '/etc/mcollective/server_private.pem', # Mandatory even when use_mcollective is false
+}
+
+class { '::r10k::webhook':
+  user    => 'root',                                       # Mandatory for FOSS
+  group   => 'root',                                       # Mandatory for FOSS
 }
 ```
 
