@@ -9,5 +9,10 @@ User=<%= @user %>
 ExecStart=/usr/local/bin/webhook
 PIDFile=/var/run/webhook/webhook.pid
 
+ExecStartPre=/bin/mkdir -p /var/run/webhook
+ExecStartPre=/bin/chown <%= @user %> /var/run/webhook
+PermissionsStartOnly=true
+
+
 [Install]
 WantedBy=multi-user.target
