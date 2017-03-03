@@ -1,31 +1,31 @@
 # This class configures r10k
 class r10k (
-  $remote                    = $r10k::params::remote,
-  $sources                   = $r10k::params::sources,
-  $cachedir                  = $r10k::params::r10k_cache_dir,
-  $configfile                = $r10k::params::r10k_config_file,
-  $version                   = $r10k::params::version,
-  $puppet_master             = $r10k::params::puppet_master,
-  $modulepath                = $r10k::params::modulepath,
-  $manage_modulepath         = $r10k::params::manage_modulepath,
-  $manage_ruby_dependency    = $r10k::params::manage_ruby_dependency,
-  $r10k_basedir              = $r10k::params::r10k_basedir,
-  $package_name              = $r10k::params::package_name,
-  $provider                  = $r10k::params::provider,
-  $gentoo_keywords           = $r10k::params::gentoo_keywords,
-  $install_options           = $r10k::params::install_options,
-  $mcollective               = $r10k::params::mcollective,
-  $manage_configfile_symlink = $r10k::params::manage_configfile_symlink,
-  $configfile_symlink        = $r10k::params::configfile_symlink,
-  $git_settings              = $r10k::params::git_settings,
-  $forge_settings            = $r10k::params::forge_settings,
-  $deploy_settings           = $r10k::params::deploy_settings,
-  $root_user                 = $r10k::params::root_user,
-  $root_group                = $r10k::params::root_group,
-  $postrun                   = undef,
-  $include_prerun_command    = false,
-  $include_postrun_command   = false,
-  $install_gcc               = false,
+  $remote                                                     = $r10k::params::remote,
+  $sources                                                    = $r10k::params::sources,
+  $cachedir                                                   = $r10k::params::r10k_cache_dir,
+  $configfile                                                 = $r10k::params::r10k_config_file,
+  $version                                                    = $r10k::params::version,
+  $puppet_master                                              = $r10k::params::puppet_master,
+  $modulepath                                                 = $r10k::params::modulepath,
+  $manage_modulepath                                          = $r10k::params::manage_modulepath,
+  Enum['include','declare','ignore'] $manage_ruby_dependency  = $r10k::params::manage_ruby_dependency,
+  $r10k_basedir                                               = $r10k::params::r10k_basedir,
+  $package_name                                               = $r10k::params::package_name,
+  $provider                                                   = $r10k::params::provider,
+  $gentoo_keywords                                            = $r10k::params::gentoo_keywords,
+  $install_options                                            = $r10k::params::install_options,
+  $mcollective                                                = $r10k::params::mcollective,
+  $manage_configfile_symlink                                  = $r10k::params::manage_configfile_symlink,
+  $configfile_symlink                                         = $r10k::params::configfile_symlink,
+  Hash $git_settings                                          = $r10k::params::git_settings,
+  Hash $forge_settings                                        = $r10k::params::forge_settings,
+  Hash $deploy_settings                                       = $r10k::params::deploy_settings,
+  $root_user                                                  = $r10k::params::root_user,
+  $root_group                                                 = $r10k::params::root_group,
+  $postrun                                                    = undef,
+  Boolean $include_prerun_command                             = false,
+  Boolean $include_postrun_command                            = false,
+  Boolean $install_gcc                                        = false,
 ) inherits r10k::params {
 
   # Check if user is declaring both classes
@@ -36,19 +36,13 @@ class r10k (
     fail('This module does not support being declared with pe_r10k')
   }
 
-  $ruby_dependency_options=['include','declare','ignore']
-  validate_re($manage_ruby_dependency,$ruby_dependency_options)
-  validate_hash($git_settings, $forge_settings, $deploy_settings)
-
-  # TODO: Clean this up when 4.0 to require a boolean
-  if $include_prerun_command == true  or $include_prerun_command == 'true'{
+  if $include_prerun_command {
     include ::r10k::prerun_command
   }
 
-  if $include_postrun_command == true  or $include_postrun_command == 'true'{
+  if $include_postrun_command {
     include ::r10k::postrun_command
   }
-
 
   class { '::r10k::install':
     install_options        => $install_options,

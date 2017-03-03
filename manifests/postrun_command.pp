@@ -1,11 +1,8 @@
 # This class will configure r10k to run as part of the masters agent run
 class r10k::postrun_command (
-  $command = $r10k::params::pre_postrun_command,
-  $ensure  = 'present',
+  $command                          = $r10k::params::pre_postrun_command,
+  Enum['present', 'absent'] $ensure = 'present',
 ) inherits r10k::params {
-
-  validate_re($ensure, [ '^present', '^absent' ],
-  'ensure must be either present or absent')
 
   ini_setting { 'r10k_postrun_command':
     ensure  => $ensure,

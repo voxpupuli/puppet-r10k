@@ -15,66 +15,26 @@ describe 'r10k' do
         it { is_expected.not_to contain_class('r10k::postrun_command') }
       end
 
-      context 'when manage_ruby_dependency has an invalid value' do
+      context 'with param include_prerun_command set to true' do
         let :params do
           {
-            manage_ruby_dependency: 'BOGON'
+            include_prerun_command: true
           }
         end
 
-        it { expect { catalogue }.to raise_error(Puppet::Error, %r{"BOGON" does not match}) }
+        it { is_expected.to compile }
+        it { is_expected.to contain_class('r10k::prerun_command') }
       end
 
-      ['true', true].each do |value|
-        context "with param include_prerun_command set to #{value}" do
-          let :params do
-            {
-              include_prerun_command: value
-            }
-          end
-
-          it { is_expected.to compile }
-          it { is_expected.to contain_class('r10k::prerun_command') }
+      context 'with param include_postrun_command set to true' do
+        let :params do
+          {
+            include_postrun_command: true
+          }
         end
-      end
 
-      ['false', false].each do |value|
-        context "with param include_prerun_command set to #{value}" do
-          let :params do
-            {
-              include_prerun_command: value
-            }
-          end
-
-          it { is_expected.to compile }
-          it { is_expected.not_to contain_class('r10k::prerun_command') }
-        end
-      end
-
-      ['true', true].each do |value|
-        context "with param include_postrun_command set to #{value}" do
-          let :params do
-            {
-              include_postrun_command: value
-            }
-          end
-
-          it { is_expected.to compile }
-          it { is_expected.to contain_class('r10k::postrun_command') }
-        end
-      end
-
-      ['false', false].each do |value|
-        context "with param include_postrun_command set to #{value}" do
-          let :params do
-            {
-              include_postrun_command: value
-            }
-          end
-
-          it { is_expected.to compile }
-          it { is_expected.not_to contain_class('r10k::postrun_command') }
-        end
+        it { is_expected.to compile }
+        it { is_expected.to contain_class('r10k::postrun_command') }
       end
     end
   end

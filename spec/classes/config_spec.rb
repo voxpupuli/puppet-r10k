@@ -31,62 +31,41 @@ describe 'r10k::config', type: :class do
         it { is_expected.not_to contain_ini_setting('R10k Modulepath') }
       end
 
-      context 'when forgetting to pass a hash' do
-        let :params do
-          {
-            configfile:        '/etc/r10k.yaml',
-            cachedir:          '/var/cache/r10k',
-            manage_modulepath: true,
-            sources:           'i-am-not-a-hash',
-            root_user:         'root',
-            root_group:        'root'
-          }
-        end
-
-        it 'fails when sources is not a hash' do
-          expect { catalogue }.to raise_error(Puppet::Error, %r{is not a Hash})
-        end
-      end
-
       describe 'with manage_configfile_symlink' do
-        ['true', true].each do |value|
-          context "set to value '#{value}' and a configfile specified" do
-            let :params do
-              {
-                manage_configfile_symlink: value,
-                configfile:                '/etc/puppet/r10k.yaml',
-                cachedir:                  '/var/cache/r10k',
-                manage_modulepath:         false,
-                root_user:                 'root',
-                root_group:                'root'
-              }
-            end
+        context 'set to value true and a configfile specified' do
+          let :params do
+            {
+              manage_configfile_symlink: true,
+              configfile:                '/etc/puppet/r10k.yaml',
+              cachedir:                  '/var/cache/r10k',
+              manage_modulepath:         false,
+              root_user:                 'root',
+              root_group:                'root'
+            }
+          end
 
-            it do
-              is_expected.to contain_file('symlink_r10k.yaml').with(
-                ensure: 'link',
-                path:   '/etc/r10k.yaml',
-                target: '/etc/puppet/r10k.yaml'
-              )
-            end
+          it do
+            is_expected.to contain_file('symlink_r10k.yaml').with(
+              ensure: 'link',
+              path:   '/etc/r10k.yaml',
+              target: '/etc/puppet/r10k.yaml'
+            )
           end
         end
 
-        ['false', false].each do |value|
-          context "set to value '#{value}' and a configfile specified" do
-            let :params do
-              {
-                manage_configfile_symlink: value,
-                configfile:                '/etc/puppet/r10k.yaml',
-                cachedir:                  '/var/cache/r10k',
-                manage_modulepath:         false,
-                root_user:                 'root',
-                root_group:                'root'
-              }
-            end
-
-            it { is_expected.not_to contain_file('symlink_r10k.yaml') }
+        context 'set to value false and a configfile specified' do
+          let :params do
+            {
+              manage_configfile_symlink: false,
+              configfile:                '/etc/puppet/r10k.yaml',
+              cachedir:                  '/var/cache/r10k',
+              manage_modulepath:         false,
+              root_user:                 'root',
+              root_group:                'root'
+            }
           end
+
+          it { is_expected.not_to contain_file('symlink_r10k.yaml') }
         end
 
         context 'set to a non-boolean value' do
@@ -169,25 +148,6 @@ describe 'r10k::config', type: :class do
           end
 
           it { is_expected.to contain_file('r10k.yaml').with_content(%r{^.*:postrun: \[\"/usr/bin/curl\", \"-F\", \"deploy=done\", \"http://my-app\.site/endpoint\"\]\n.*$}) }
-        end
-
-        ['string', true, 1, 1.0, {}].each do |value|
-          context "with #{value}" do
-            let :params do
-              {
-                configfile:          '/etc/r10k.yaml',
-                cachedir:            '/var/cache/r10k',
-                manage_modulepath:   false,
-                postrun:             value,
-                root_user:          'root',
-                root_group:         'root'
-              }
-            end
-
-            it 'fails when sources is not an Array' do
-              expect { catalogue }.to raise_error(Puppet::Error, %r{is not an Array})
-            end
-          end
         end
       end
     end

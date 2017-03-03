@@ -48,33 +48,22 @@
 class r10k::config (
   $configfile,
   $cachedir,
-  $manage_modulepath,
+  Boolean $manage_modulepath,
   $root_user,
   $root_group,
   $modulepath                = undef,
   $remote                    = '',
-  $sources                   = 'UNSET',
-  $postrun                   = undef,
-  $puppetconf_path           = $r10k::params::puppetconf_path,
-  $r10k_basedir              = $r10k::params::r10k_basedir,
-  $manage_configfile_symlink = $r10k::params::manage_configfile_symlink,
-  $configfile_symlink        = '/etc/r10k.yaml',
-  $r10k_yaml_template        = 'r10k/r10k.yaml.erb',
-  $git_settings              = {},
-  $forge_settings            = {},
-  $deploy_settings           = {},
+  Variant[String, Hash ] $sources           = 'UNSET',
+  Optional[Array] $postrun                  = undef,
+  Stdlib::Absolutepath $puppetconf_path     = $r10k::params::puppetconf_path,
+  Stdlib::Absolutepath $r10k_basedir        = $r10k::params::r10k_basedir,
+  Boolean $manage_configfile_symlink        = $r10k::params::manage_configfile_symlink,
+  Stdlib::Absolutepath $configfile_symlink  = '/etc/r10k.yaml',
+  String $r10k_yaml_template                = 'r10k/r10k.yaml.erb',
+  Hash $git_settings                        = {},
+  Hash $forge_settings                      = {},
+  Hash $deploy_settings                     = {},
 ) inherits r10k::params {
-
-  validate_bool($manage_modulepath)
-
-  if is_string($manage_configfile_symlink) {
-    $manage_configfile_symlink_real = str2bool($manage_configfile_symlink)
-  } else {
-    $manage_configfile_symlink_real = $manage_configfile_symlink
-  }
-  validate_bool($manage_configfile_symlink_real)
-
-  validate_absolute_path($configfile_symlink)
 
   if $sources == 'UNSET' {
     $r10k_sources  = {
@@ -85,14 +74,8 @@ class r10k::config (
     }
     $source_keys = keys($r10k_sources)
   } else {
-    validate_hash($sources)
-
     $r10k_sources = $sources
     $source_keys = keys($r10k_sources)
-  }
-
-  if $postrun != undef {
-    validate_array($postrun)
   }
 
   if $configfile == '/etc/puppetlabs/r10k/r10k.yaml' {
@@ -113,7 +96,7 @@ class r10k::config (
     content => template($r10k_yaml_template),
   }
 
-  if $manage_configfile_symlink_real == true {
+  if $manage_configfile_symlink {
     file { 'symlink_r10k.yaml':
       ensure => 'link',
       path   => $configfile_symlink,
