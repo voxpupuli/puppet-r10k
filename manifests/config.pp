@@ -46,26 +46,26 @@
 # Charlie Sharpsteen <source@sharpsteen.net>
 # Zack Smith <zack@puppetlabs.com>
 class r10k::config (
-  $configfile,
-  $cachedir,
-  Boolean $manage_modulepath,
-  $root_user,
-  $root_group,
-  $modulepath                = undef,
-  $remote                    = '',
-  Variant[String, Hash ] $sources           = 'UNSET',
-  Optional[Array] $postrun                  = undef,
-  Stdlib::Absolutepath $puppetconf_path     = $r10k::params::puppetconf_path,
+  $configfile                               = $r10k::params::r10k_config_file,
+  $cachedir                                 = $r10k::params::r10k_cache_dir,
+  Optional[Hash] $sources                   = $r10k::params::sources,
+  $modulepath                               = $r10k::params::modulepath,
+  $remote                                   = $r10k::params::remote,
+  Boolean $manage_modulepath                = $r10k::params::manage_modulepath,
   Stdlib::Absolutepath $r10k_basedir        = $r10k::params::r10k_basedir,
   Boolean $manage_configfile_symlink        = $r10k::params::manage_configfile_symlink,
-  Stdlib::Absolutepath $configfile_symlink  = '/etc/r10k.yaml',
+  Stdlib::Absolutepath $configfile_symlink  = $r10k::params::configfile_symlink,
+  Hash $git_settings                        = $r10k::params::git_settings,
+  Hash $forge_settings                      = $r10k::params::forge_settings,
+  Hash $deploy_settings                     = $r10k::params::deploy_settings,
+  Optional[Array] $postrun                  = undef,
+  $root_user                                = $r10k::params::root_user,
+  $root_group                               = $r10k::params::root_group,
+  Stdlib::Absolutepath $puppetconf_path     = $r10k::params::puppetconf_path,
   String $r10k_yaml_template                = 'r10k/r10k.yaml.erb',
-  Hash $git_settings                        = {},
-  Hash $forge_settings                      = {},
-  Hash $deploy_settings                     = {},
 ) inherits r10k::params {
 
-  if $sources == 'UNSET' {
+  if $sources == undef {
     $r10k_sources  = {
       'puppet' => {
         'remote'  => $remote,
