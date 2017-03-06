@@ -10,13 +10,11 @@ class r10k::params
   $sources                = undef
   $puppet_master          = true
 
-  if versioncmp("${::puppetversion}", '4.0.0') >= 0 { #lint:ignore:only_variable_string
-    $r10k_basedir    = $::settings::environmentpath
-    $r10k_cache_dir  = "${::settings::vardir}/r10k"
-  } else {
-    $r10k_basedir    = "${::settings::confdir}/environments"
-    $r10k_cache_dir  = '/var/cache/r10k'
-  }
+  $r10k_basedir              = $::settings::environmentpath
+  $r10k_cache_dir            = "${::settings::vardir}/r10k"
+  $r10k_config_file          = '/etc/puppetlabs/r10k/r10k.yaml'
+  $r10k_binary               = 'r10k'
+  $puppetconf_path           = '/etc/puppetlabs/puppet'
   $manage_configfile_symlink = false
   $configfile_symlink        = '/etc/r10k.yaml'
   $git_settings              = {}
@@ -59,24 +57,20 @@ class r10k::params
   }
 
   if getvar('::pe_server_version') {
-    #if $is_pe_server and versioncmp("${::puppetversion}", '4.0.0') >= 0 { #lint:ignore:only_variable_string
     # PE 4 or greater specific settings
     # r10k configuration
-    $r10k_config_file          = '/etc/r10k.yaml'
-
-    $puppetconf_path = '/etc/puppetlabs/puppet'
 
     $pe_module_path  = '/opt/puppetlabs/puppet/modules'
+
     # Mcollective configuration dynamic
     $mc_service_name  = 'mcollective'
     $plugins_dir      = '/opt/puppetlabs/mcollective/plugins/mcollective'
-    $r10k_binary      = 'r10k'
     $modulepath       = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
 
     # webhook
-    $webhook_user    = 'peadmin'
-    $webhook_pass    = 'peadmin'
-    $webhook_group   = 'peadmin'
+    $webhook_user                  = 'peadmin'
+    $webhook_pass                  = 'peadmin'
+    $webhook_group                 = 'peadmin'
     $webhook_public_key_path       = '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem'
     $webhook_private_key_path      = '/var/lib/peadmin/.mcollective.d/peadmin-private.pem'
     $webhook_certname              = 'peadmin'
@@ -87,21 +81,18 @@ class r10k::params
   elsif versioncmp("${::puppetversion}", '4.0.0') >= 0 { #lint:ignore:only_variable_string
     #FOSS 4 or greater specific settings
     # r10k configuration
-    $r10k_config_file          = '/etc/puppetlabs/r10k/r10k.yaml'
 
-    $puppetconf_path = '/etc/puppetlabs/puppet'
     $module_path     = '/opt/puppetlabs/puppet/code/modules'
 
     # Mcollective configuration dynamic
     $mc_service_name = 'mcollective'
     $plugins_dir     = '/opt/puppetlabs/puppet/lib/ruby/vendor_ruby/mcollective'
     $modulepath      = undef
-    $r10k_binary     = 'r10k'
 
     # webhook
-    $webhook_user    = 'puppet'
-    $webhook_pass    = 'puppet'
-    $webhook_group   = 'puppet'
+    $webhook_user                  = 'puppet'
+    $webhook_pass                  = 'puppet'
+    $webhook_group                 = 'puppet'
     $webhook_public_key_path       = undef
     $webhook_private_key_path      = undef
     $webhook_certname              = undef
