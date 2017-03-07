@@ -2,6 +2,7 @@
   "author": "Vox Pupuli",
   "license": "Apache-2.0",
   "name": "puppet-r10k",
+  "version": "5.0.0",
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
@@ -50,7 +51,6 @@
     "mcollective",
     "r10k"
   ],
-  "version": "5.0.0-rc0",
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
