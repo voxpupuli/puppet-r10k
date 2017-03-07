@@ -4,9 +4,23 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not impact the functionality of the module.
 
-## [v4.2.0](https://github.com/voxpupuli/puppet-r10k/tree/v4.2.0) (2017-02-11)
+## [v5.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v5.0.0) (2017-03-07)
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v4.2.0...v5.0.0)
 
-This is the last release with Puppet3 support!
+**Closed issues:**
+
+- r10k.yaml placement is incorrect [\#342](https://github.com/voxpupuli/puppet-r10k/issues/342)
+
+**Merged pull requests:**
+
+- r10k.yaml contents indentation is incorrect [\#345](https://github.com/voxpupuli/puppet-r10k/pull/345) ([Kotty666](https://github.com/Kotty666))
+- Update yaml location for \>PE3 [\#343](https://github.com/voxpupuli/puppet-r10k/pull/343) ([rnelson0](https://github.com/rnelson0))
+- replace all validate functions with datatypes [\#341](https://github.com/voxpupuli/puppet-r10k/pull/341) ([bastelfreak](https://github.com/bastelfreak))
+- Cleanup webhook use case notes; specifically PE/FOSS split. [\#338](https://github.com/voxpupuli/puppet-r10k/pull/338) ([rnelson0](https://github.com/rnelson0))
+- Remove support for Puppet 3 and Ruby \<2.0.0 [\#321](https://github.com/voxpupuli/puppet-r10k/pull/321) ([rnelson0](https://github.com/rnelson0))
+- Ensure webhook run folder exists on redhat systemd environments [\#283](https://github.com/voxpupuli/puppet-r10k/pull/283) ([luisfdez](https://github.com/luisfdez))
+
+## [v4.2.0](https://github.com/voxpupuli/puppet-r10k/tree/v4.2.0) (2017-02-12)
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v4.1.0...v4.2.0)
 
 **Closed issues:**
