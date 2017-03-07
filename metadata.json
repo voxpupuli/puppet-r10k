@@ -2,7 +2,7 @@
   "author": "Vox Pupuli",
   "license": "Apache-2.0",
   "name": "puppet-r10k",
-  "version": "5.0.0",
+  "version": "5.0.1-rc0",
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
@@ -64,7 +64,7 @@
       "name": "puppetlabs/gcc",
       "version_requirement": ">= 0.3.0 < 2.0.0"
     },
-        {
+    {
       "name": "puppet/make",
       "version_requirement": ">= 1.0.0 < 2.0.0"
     },
