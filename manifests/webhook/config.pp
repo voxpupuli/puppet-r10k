@@ -13,6 +13,7 @@ class r10k::webhook::config (
   $user                       = $r10k::params::webhook_user,
   $pass                       = $r10k::params::webhook_pass,
   $bind_address               = $r10k::params::webhook_bind_address,
+  $background                 = $r10k::params::webhook_background,
   $port                       = $r10k::params::webhook_port,
   $access_logfile             = $r10k::params::webhook_access_logfile,
   $client_cfg                 = $r10k::params::webhook_client_cfg,
@@ -45,11 +46,18 @@ class r10k::webhook::config (
   $enable_mutex_lock          = $r10k::params::webhook_enable_mutex_lock,
 ) inherits r10k::params {
 
+
+  $server_type = $background ? {
+    true  => 'WEBrick::Daemon',
+    false => 'WEBrick::SimpleServer',
+  }
+
   if $hash == 'UNSET' {
     $webhook_hash  = {
       'user'                  => $user,
       'pass'                  => $pass,
       'bind_address'          => $bind_address,
+      'server_type'           => $server_type,
       'port'                  => $port,
       'certname'              => $certname,
       'client_timeout'        => $client_timeout,

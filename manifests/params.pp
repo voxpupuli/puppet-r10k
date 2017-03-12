@@ -124,6 +124,7 @@ class r10k::params
   $webhook_client_cfg            = '/var/lib/peadmin/.mcollective'
   $webhook_use_mco_ruby          = false
   $webhook_protected             = true
+  $webhook_background            = true
   $webhook_github_secret         = undef
   $webhook_discovery_timeout     = 10
   $webhook_client_timeout        = 120
