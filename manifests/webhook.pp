@@ -3,6 +3,7 @@ class r10k::webhook(
   $ensure           = true,
   $user             = $r10k::params::webhook_user,
   $group            = $r10k::params::webhook_group,
+  $background       = $r10k::params::webhook_background,
   $bin_template     = $r10k::params::webhook_bin_template,
   $service_template = $r10k::params::webhook_service_template,
   $service_file     = $r10k::params::webhook_service_file,
@@ -35,6 +36,11 @@ class r10k::webhook(
   $ensure_service = $ensure ? {
     true  => 'running',
     false => 'stopped',
+  }
+
+  $server_type = $background ? {
+    true  => 'WEBrick::Daemon',
+    false => 'WEBrick::SimpleServer',
   }
 
   file { '/var/log/webhook/access.log':
