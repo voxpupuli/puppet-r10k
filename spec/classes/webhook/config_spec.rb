@@ -44,7 +44,6 @@ protected: true
 public_key_path: "/var/lib/peadmin/.mcollective.d/peadmin-cert.pem"
 r10k_deploy_arguments: "-pv"
 server_software: "WebHook"
-server_type: "WEBrick::Daemon"
 use_mco_ruby: false
 use_mcollective: true
 user: "peadmin"
@@ -96,7 +95,6 @@ public_key_path: "/var/lib/peadmin/.mcollective.d/peadmin-cert.pem"
 r10k_deploy_arguments: "-pv"
 repository_events: ["merge", "release"]
 server_software: "WebHook"
-server_type: "WEBrick::Daemon"
 use_mco_ruby: false
 use_mcollective: true
 user: "peadmin"
@@ -153,7 +151,6 @@ prefix_command: "/bin/echo example"
 protected: true
 r10k_deploy_arguments: "-pv"
 server_software: "WebHook"
-server_type: "WEBrick::Daemon"
 use_mco_ruby: false
 use_mcollective: true
 user: "puppet"
@@ -196,7 +193,6 @@ prefix_command: "/bin/echo example"
 protected: true
 r10k_deploy_arguments: "-pv"
 server_software: "WebHook"
-server_type: "WEBrick::Daemon"
 use_mco_ruby: false
 use_mcollective: true
 user: "puppet"
@@ -239,7 +235,6 @@ prefix_command: "/bin/echo example"
 protected: true
 r10k_deploy_arguments: "-pv"
 server_software: "WebHook"
-server_type: "WEBrick::Daemon"
 use_mco_ruby: false
 use_mcollective: true
 user: "puppet"
@@ -281,7 +276,6 @@ prefix_command: "/bin/echo example"
 protected: true
 r10k_deploy_arguments: "-pv"
 server_software: "WebHook"
-server_type: "WEBrick::Daemon"
 slack_webhook: "slack_webhook"
 use_mco_ruby: false
 use_mcollective: true
