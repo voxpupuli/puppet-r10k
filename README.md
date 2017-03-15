@@ -520,7 +520,18 @@ curl -d '
   }' http://puppet-master.example:8088/payload
 ```
 
+### Docker
 
+If you are building your image with the puppet, you need to prevent the webhook process from starting as a daemon.
+
+The following is an example of declaring the webhook without a background mode
+
+```puppet
+class { '::r10k::webhook':
+  . . .
+  background  => false  
+}
+```
 
 ## Reference
 
