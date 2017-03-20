@@ -95,11 +95,11 @@ This is helpful when you need to automatically deploy new masters
 
 ```puppet
 #https://docs.puppetlabs.com/references/latest/type.html#sshkey
-sshkey { "your.internal.gitlab.server.com":
+sshkey { 'your.internal.gitlab.server.com':
   ensure => present,
-  type   => "ssh-rsa",
-  target => "/root/.ssh/known_hosts",
-  key    => "...+dffsfHQ=="
+  type   => 'ssh-rsa',
+  target => '/root/.ssh/known_hosts',
+  key    => '...+dffsfHQ==',
 }
 
 # Resource git_webhook is provided by https://forge.puppet.com/abrader/gms
