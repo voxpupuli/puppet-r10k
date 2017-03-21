@@ -340,7 +340,7 @@ end
 
     def repo_name(data)
       # Tested with GitHub only
-      data['repository']['name'] rescue nil
+      data['repository']['name'].sub(/^.*-/, '') rescue nil
     end
 
     def repo_user(data)
