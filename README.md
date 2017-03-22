@@ -95,11 +95,11 @@ This is helpful when you need to automatically deploy new masters
 
 ```puppet
 #https://docs.puppetlabs.com/references/latest/type.html#sshkey
-sshkey { "your.internal.gitlab.server.com":
+sshkey { 'your.internal.gitlab.server.com':
   ensure => present,
-  type   => "ssh-rsa",
-  target => "/root/.ssh/known_hosts",
-  key    => "...+dffsfHQ=="
+  type   => 'ssh-rsa',
+  target => '/root/.ssh/known_hosts',
+  key    => '...+dffsfHQ==',
 }
 
 # Resource git_webhook is provided by https://forge.puppet.com/abrader/gms
@@ -520,7 +520,18 @@ curl -d '
   }' http://puppet-master.example:8088/payload
 ```
 
+### Docker
 
+If you are building your image with the puppet, you need to prevent the webhook process from starting as a daemon.
+
+The following is an example of declaring the webhook without a background mode
+
+```puppet
+class { '::r10k::webhook':
+  . . .
+  background  => false  
+}
+```
 
 ## Reference
 

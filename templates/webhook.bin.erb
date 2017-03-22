@@ -40,7 +40,7 @@ opts = {
   :Host           => $config['bind_address'],
   :Port           => $config['port'],
   :Logger         => $logger,
-  :ServerType     => WEBrick::Daemon,
+  :ServerType     => <%= @server_type %>,
   :ServerSoftware => $config['server_software'],
   :SSLEnable      => $config['enable_ssl'],
   :StartCallback  => Proc.new { File.open(PIDFILE, 'w') {|f| f.write Process.pid } },
@@ -213,8 +213,8 @@ end
         slack_channel = '#default'
       end
 
-      if $config['slack_user']
-        slack_user = $config['slack_user']
+      if $config['slack_username']
+        slack_user = $config['slack_username']
       else
         slack_user = 'r10k'
       end
@@ -340,7 +340,7 @@ end
 
     def repo_name(data)
       # Tested with GitHub only
-      data['repository']['name'].sub(/^.*-/, '') rescue nil
+      data['repository']['name'] rescue nil
     end
 
     def repo_user(data)
