@@ -17,6 +17,7 @@ require 'json'
 require 'yaml'
 require 'cgi'
 require 'open3'
+require 'shellwords'
 
 WEBHOOK_CONFIG = '/etc/webhook.yaml'
 PIDFILE        = '/var/run/webhook/webhook.pid'
@@ -102,6 +103,7 @@ end
       module_name = ( data['repository']['name'] ).sub(/^.*-/, '')
     end
 
+    module_name = sanitize_input(module_name)
     deploy_module(module_name)
   end
 
@@ -156,6 +158,7 @@ end
       $config['prefix']
     end
 
+    branch = sanitize_input(branch)
     # r10k doesn't yet know how to deploy all branches from a single source.
     # The best we can do is just deploy all environments by passing nil to
     # deploy() if we don't know the correct branch.
@@ -388,6 +391,16 @@ end
           end
       end
     end #end run_prefix_command
+    
+
+    # :deploy and :deploy_module methods are vulnerable to shell
+    # injection. e.g. a branch named ";yes". Or a malicious POST request with
+    # "; rm -rf *;" as the payload. 
+    def sanitize_input(input_string)
+      sanitized = Shellwords.shellescape(input_string)
+      $logger.info("module or branch name #{sanitized} had to be escaped!") unless input_string == sanitized
+      sanitized
+    end
 
   end  #end helpers
 end
