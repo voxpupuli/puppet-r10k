@@ -9,18 +9,18 @@ class r10k::install::gem (
     'include': {
       include ::ruby
       include ::ruby::dev
-      Class['::ruby']    ->
-      Class['ruby::dev'] ->
-      Anchor['r10k::ruby_done']
+      Class['::ruby']
+      -> Class['ruby::dev']
+      -> Anchor['r10k::ruby_done']
     }
     'declare': {
       class { '::ruby':
         rubygems_update => false,
       }
       include ::ruby::dev
-      Class['::ruby'] ->
-      Class['::ruby::dev'] ->
-      Anchor['r10k::ruby_done']
+      Class['::ruby']
+      -> Class['::ruby::dev']
+      -> Anchor['r10k::ruby_done']
     }
     default: {
       #This catches the 'ignore' case, and satisfies the 'default' requirement
@@ -37,10 +37,10 @@ class r10k::install::gem (
     include ::make
     include ::gcc
 
-    Anchor['r10k::ruby_done'] ->
-    Class['gcc']       ->
-    Class['make']      ->
-    Package['r10k']
+    Anchor['r10k::ruby_done']
+    -> Class['gcc']
+    -> Class['make']
+    -> Package['r10k']
   }
 
 }
