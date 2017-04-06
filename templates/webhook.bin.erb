@@ -1,4 +1,4 @@
-#!<%= if @is_pe == true or @is_pe == 'true' then '/opt/puppet/bin' elsif @puppetversion >= '4.2.0' or @puppetversion == '4.10.0' then '/opt/puppetlabs/puppet/bin' else '/usr/bin' end %>/ruby
+#!<%= if @is_pe == true or @is_pe == 'true' then '/opt/puppet/bin' elsif @puppetversion >= '4.2.0' or @puppetversion >= '4.10.0' then '/opt/puppetlabs/puppet/bin' else '/usr/bin' end %>/ruby
 # This mini-webserver is meant to be run as the peadmin user
 # so that it can call mcollective from a puppetmaster
 # Authors:
