@@ -166,7 +166,7 @@ end
     end
 
     if ignore_env?(env)
-      $logger.info("Ignoring #{env} environment deploying")
+      $logger.info("Skipping deployment of environment #{env} according to ignore_environments configuration parameter")
       return 200
     else
       deploy(env)
