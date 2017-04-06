@@ -537,9 +537,10 @@ class { '::r10k::webhook':
 
 If you need to configure webhook to not trigger r10k when changes pushed in some branch or repository, you can list them in
 `r10k::webhook::config::ignore_environments` parameter as array.
-There is ability to specify it as a regular expression by enclosing it in forward slashes.
+There is an ability to specify it as a regular expression by enclosing it in forward slashes.
 
-Here is example showing that test branch in dev repository and all feature branches in all repositories will be skipped:
+Here is an example where the test branch in dev repository and all branches in all repositories that includes the word 'feature' 
+in names will be skipped:
 
 ```puppet
 class { '::r10k::webhook::config':
