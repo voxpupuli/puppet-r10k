@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not impact the functionality of the module.
 
+## [v5.0.1](https://github.com/voxpupuli/puppet-r10k/tree/v5.0.1) (2017-04-06)
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v5.0.0...v5.0.1)
+
+**Closed issues:**
+
+- Migrate r10k module to Vox Pupuli [\#290](https://github.com/voxpupuli/puppet-r10k/issues/290)
+
+**Merged pull requests:**
+
+- puppet-lint: fix arrow\_on\_right\_operand\_line [\#357](https://github.com/voxpupuli/puppet-r10k/pull/357) ([bastelfreak](https://github.com/bastelfreak))
+- Create sanitize\_input helper method for strings sent to run\_command method. [\#356](https://github.com/voxpupuli/puppet-r10k/pull/356) ([xraystyle](https://github.com/xraystyle))
+- Use styleguide compliant syntax for sshkey example. [\#353](https://github.com/voxpupuli/puppet-r10k/pull/353) ([kallies](https://github.com/kallies))
+- Fix webhook slack\_username parameter handling [\#350](https://github.com/voxpupuli/puppet-r10k/pull/350) ([alexbrett](https://github.com/alexbrett))
+- Webhook Background mode [\#349](https://github.com/voxpupuli/puppet-r10k/pull/349) ([luckyraul](https://github.com/luckyraul))
+
 ## [v5.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v5.0.0) (2017-03-07)
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v4.2.0...v5.0.0)
 
@@ -13,6 +28,7 @@ These should not impact the functionality of the module.
 
 **Merged pull requests:**
 
+- Release 5.0.0 [\#347](https://github.com/voxpupuli/puppet-r10k/pull/347) ([rnelson0](https://github.com/rnelson0))
 - r10k.yaml contents indentation is incorrect [\#345](https://github.com/voxpupuli/puppet-r10k/pull/345) ([Kotty666](https://github.com/Kotty666))
 - Update yaml location for \>PE3 [\#343](https://github.com/voxpupuli/puppet-r10k/pull/343) ([rnelson0](https://github.com/rnelson0))
 - replace all validate functions with datatypes [\#341](https://github.com/voxpupuli/puppet-r10k/pull/341) ([bastelfreak](https://github.com/bastelfreak))
