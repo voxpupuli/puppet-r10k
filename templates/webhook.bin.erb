@@ -163,11 +163,17 @@ end
     # The best we can do is just deploy all environments by passing nil to
     # deploy() if we don't know the correct branch.
     if prefix.nil? or prefix.empty? or branch.nil? or branch.empty?
-      deploy(normalize(branch))
+      env = normalize(branch)
     else
-      deploy(normalize("#{prefix}_#{branch}"))
+      env = normalize("#{prefix}_#{branch}")
     end
 
+    if ignore_env?(env)
+      $logger.info("Skipping deployment of environment #{env} according to ignore_environments configuration parameter")
+      return 200
+    else
+      deploy(env)
+    end
   end
 
   not_found do
@@ -175,6 +181,24 @@ end
   end
 
   helpers do
+
+    # Ignore environments that we don't care about e.g. feature or bugfix branches
+    def ignore_env?(env)
+      list = $config['ignore_environments']
+      return false if list.nil? or list.empty?
+
+      list.each do |l|
+        # Even unquoted array elements wrapped by slashes becomes strings after YAML parsing
+        # So we need to convert it into Regexp manually
+        if l =~ /^\/.+\/$/
+          return true if env =~ Regexp.new(l[1..-2])
+        else
+          return true if env == l
+        end
+      end
+
+      return false
+    end
 
     # Check to see if this is an event we care about. Default to responding to all events
     def ignore_event?

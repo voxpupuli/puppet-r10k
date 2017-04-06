@@ -146,6 +146,7 @@ class r10k::params
   $webhook_configfile_owner      = 'root'
   $webhook_configfile_group      = $root_group
   $webhook_configfile_mode       = '0644'
+  $webhook_ignore_environments   = []
 
   # Service Settings for SystemD in EL7
   if $::osfamily == 'RedHat' and $::operatingsystemmajrelease == '7' {

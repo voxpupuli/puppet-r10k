@@ -35,6 +35,7 @@ command_prefix: "umask 0022;"
 discovery_timeout: "10"
 enable_mutex_lock: false
 enable_ssl: true
+ignore_environments: []
 pass: "peadmin"
 port: "8088"
 prefix: false
@@ -85,6 +86,7 @@ command_prefix: "umask 0022;"
 discovery_timeout: "10"
 enable_mutex_lock: false
 enable_ssl: true
+ignore_environments: []
 pass: "peadmin"
 port: "8088"
 prefix: false
@@ -144,6 +146,7 @@ command_prefix: "umask 0022;"
 discovery_timeout: "10"
 enable_mutex_lock: false
 enable_ssl: true
+ignore_environments: []
 pass: "puppet"
 port: "8088"
 prefix: false
@@ -186,6 +189,7 @@ command_prefix: "umask 0022;"
 discovery_timeout: "10"
 enable_mutex_lock: true
 enable_ssl: true
+ignore_environments: []
 pass: "puppet"
 port: "8088"
 prefix: false
@@ -228,6 +232,7 @@ discovery_timeout: "10"
 enable_mutex_lock: false
 enable_ssl: true
 github_secret: "secret"
+ignore_environments: []
 pass: "puppet"
 port: "8088"
 prefix: false
@@ -269,6 +274,7 @@ command_prefix: "umask 0022;"
 discovery_timeout: "10"
 enable_mutex_lock: false
 enable_ssl: true
+ignore_environments: []
 pass: "puppet"
 port: "8088"
 prefix: false
