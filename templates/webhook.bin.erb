@@ -67,10 +67,9 @@ $command_prefix = $config['command_prefix'] || ''
 class Server < Sinatra::Base
 
   set :static, false
-if $config['enable_mutex_lock'] then
-  set :lock,   true
-end
-
+  if $config['enable_mutex_lock'] then
+    set :lock,   true
+  end
 
   get '/' do
     raise Sinatra::NotFound
@@ -341,7 +340,7 @@ end
      client.discovery_timeout = $config['discovery_timeout']
      client.timeout           = $config['client_timeout']
      result = client.send('deploy',{:environment => branch})
-   end # end deploy()
+   end # end mco()
 
     def protected!
       unless authorized?
