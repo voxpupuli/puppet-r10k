@@ -1,4 +1,10 @@
-#!<%= if @is_pe == true or @is_pe == 'true' then '/opt/puppet/bin' elsif Puppet::Util::Package.versioncmp(Puppet.version, '4.2.0') >= 0 then '/opt/puppetlabs/puppet/bin' else '/usr/bin' end %>/ruby
+<% if @is_pe == true or @is_pe == 'true' -%>
+#!<%= '/opt/puppet/bin'%>/ruby
+<% elsif Puppet::Util::Package.versioncmp(Puppet.version, '4.2.0') >= 0 -%>
+#!<%= '/opt/puppetlabs/puppet/bin' %>/ruby
+<% else -%>
+#!<%= '/usr/bin' %>/ruby
+<% end -%>
 # This mini-webserver is meant to be run as the peadmin user
 # so that it can call mcollective from a puppetmaster
 # Authors:
