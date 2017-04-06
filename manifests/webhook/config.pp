@@ -44,6 +44,7 @@ class r10k::webhook::config (
   $configfile_symlink         = '/etc/webhook.yaml',
   $enable_mutex_lock          = $r10k::params::webhook_enable_mutex_lock,
   Array $ignore_environments  = $r10k::params::webhook_ignore_environments,
+  $mco_arguments              = $r10k::params::webhook_mco_arguments,
 ) inherits r10k::params {
 
   if $hash == 'UNSET' {
@@ -77,6 +78,7 @@ class r10k::webhook::config (
       'slack_channel'         => $slack_channel,
       'slack_username'        => $slack_username,
       'ignore_environments'   => $ignore_environments,
+      'mco_arguments'         => $mco_arguments,
     }
   } else {
     $webhook_hash = $hash
