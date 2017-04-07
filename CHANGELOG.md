@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not impact the functionality of the module.
 
+## [v5.0.2](https://github.com/voxpupuli/puppet-r10k/tree/v5.0.2) (2017-04-06)
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v5.0.1...v5.0.2)
+
+**Closed issues:**
+
+- Webhook not compatible with Puppet 4.10.0 [\#359](https://github.com/voxpupuli/puppet-r10k/issues/359)
+
+**Merged pull requests:**
+
+- Add check to fix the ruby path on puppet 4.10.0 [\#360](https://github.com/voxpupuli/puppet-r10k/pull/360) ([dhollinger](https://github.com/dhollinger))
+- Webhook: ignore deploying some environments [\#355](https://github.com/voxpupuli/puppet-r10k/pull/355) ([nike38rus](https://github.com/nike38rus))
+
 ## [v5.0.1](https://github.com/voxpupuli/puppet-r10k/tree/v5.0.1) (2017-04-06)
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v5.0.0...v5.0.1)
 
@@ -13,6 +25,7 @@ These should not impact the functionality of the module.
 
 **Merged pull requests:**
 
+- Release 5.0.1 [\#358](https://github.com/voxpupuli/puppet-r10k/pull/358) ([bastelfreak](https://github.com/bastelfreak))
 - puppet-lint: fix arrow\_on\_right\_operand\_line [\#357](https://github.com/voxpupuli/puppet-r10k/pull/357) ([bastelfreak](https://github.com/bastelfreak))
 - Create sanitize\_input helper method for strings sent to run\_command method. [\#356](https://github.com/voxpupuli/puppet-r10k/pull/356) ([xraystyle](https://github.com/xraystyle))
 - Use styleguide compliant syntax for sshkey example. [\#353](https://github.com/voxpupuli/puppet-r10k/pull/353) ([kallies](https://github.com/kallies))
