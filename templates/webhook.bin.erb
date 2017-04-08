@@ -287,7 +287,7 @@ class Server < Sinatra::Base
     def deploy_module(module_name)
       begin
         if $config['use_mcollective']
-          command = "#{$command_prefix} mco r10k deploy_module #{module_name} #{config['mco_arguments']}"
+          command = "#{$command_prefix} mco r10k deploy_module #{module_name} #{$config['mco_arguments']}"
         else
           # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
           command = "#{$command_prefix} r10k deploy module #{module_name}"
@@ -317,7 +317,7 @@ class Server < Sinatra::Base
           end
         else
           if $config['use_mcollective']
-              command = "#{$command_prefix} mco r10k deploy #{branch} #{config['mco_arguments']}"
+              command = "#{$command_prefix} mco r10k deploy #{branch} #{$config['mco_arguments']}"
           else
             # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
             command = "#{$command_prefix} r10k deploy environment #{branch} #{$config['r10k_deploy_arguments']}"
@@ -349,10 +349,10 @@ class Server < Sinatra::Base
     def protected!
       unless authorized?
         response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
-        $logger.error("Authentication failed from IP #{request.ip}")
+        $logger.error("Authentication failure from IP #{request.ip}")
         throw(:halt, [401, "Not authorized\n"])
       else
-        $logger.info("Authenticated: #{$config['user']} from IP #{request.ip}")
+        $logger.info("Authenticated as user #{$config['user']} from IP #{request.ip}")
       end
     end  #end protected!
 
