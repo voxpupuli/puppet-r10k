@@ -91,7 +91,6 @@ class Server < Sinatra::Base
   # is used in the repository URL and is most useful for this webhook handler.
   post '/module' do
     protected! if $config['protected']
-    $logger.info("authenticated: #{$config['user']}")
     request.body.rewind  # in case someone already read it
 
     # Short circuit if we're ignoring this event
@@ -127,7 +126,6 @@ class Server < Sinatra::Base
 
   post '/payload' do
     protected! if $config['protected']
-    $logger.info("authenticated: #{$config['user']}")
     request.body.rewind  # in case someone already read it
 
     # Short circuit if we're ignoring this event
@@ -351,7 +349,10 @@ class Server < Sinatra::Base
     def protected!
       unless authorized?
         response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
+        $logger.error("Authentication failure from IP #{request.ip}")
         throw(:halt, [401, "Not authorized\n"])
+      else
+        $logger.info("Authenticated as user #{$config['user']} from IP #{request.ip}")
       end
     end  #end protected!
 
