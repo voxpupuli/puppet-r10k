@@ -290,7 +290,7 @@ end
     def deploy_module(module_name)
       begin
         if $config['use_mcollective']
-          command = "#{$command_prefix} mco r10k deploy_module #{module_name}"
+          command = "#{$command_prefix} mco r10k deploy_module #{module_name} #{$config['mco_arguments']}"
         else
           # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
           command = "#{$command_prefix} r10k deploy module #{module_name}"
@@ -320,7 +320,7 @@ end
           end
         else
           if $config['use_mcollective']
-              command = "#{$command_prefix} mco r10k deploy #{branch}"
+              command = "#{$command_prefix} mco r10k deploy #{branch} #{$config['mco_arguments']}"
           else
             # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
             command = "#{$command_prefix} r10k deploy environment #{branch} #{$config['r10k_deploy_arguments']}"
