@@ -550,6 +550,18 @@ class { '::r10k::webhook::config':
 }
 ```
 
+### Passing extra arguments to mco command
+
+You can pass some additional arguments to mco command like `--no-progress` or `--timeout 60` or any others by specifying them
+in the `r10k::webhook::config::mco_arguments` parameter as string:
+
+```puppet
+class { '::r10k::webhook::config':
+  . . .
+  mco_arguments  => '--no-progress'
+}
+```
+
 ## Reference
 
 ####Class: `r10k`
