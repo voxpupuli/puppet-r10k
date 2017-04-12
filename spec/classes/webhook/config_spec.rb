@@ -331,7 +331,7 @@ user: "puppet"
           )
         end
       end
-      
+
       context 'FOSS with extra mco argument' do
         let :params do
           {
