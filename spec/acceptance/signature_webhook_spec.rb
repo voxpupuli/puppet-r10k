@@ -47,12 +47,11 @@ describe 'GitHub Secret Enabled, System Ruby with No SSL, Not protected, No mcol
         expect(r.exit_code).to eq(0)
       end
     end
-    it 'should respond with success on /heartbeat' do
+    it '/heartbeat is successful' do
       shell('/usr/bin/curl -H \"Accept: application/json\" \"http://localhost:8088/heartbeat\" -k -q') do |r|
-        expect(r.stdout).to match(%r/^.*success.*$/)
+        expect(r.stdout).to match(%r{^.*success.*$})
         expect(r.exit_code).to eq(0)
       end
     end
-
   end
 end
