@@ -73,10 +73,9 @@ $command_prefix = $config['command_prefix'] || ''
 class Server < Sinatra::Base
 
   set :static, false
-if $config['enable_mutex_lock'] then
-  set :lock,   true
-end
-
+  if $config['enable_mutex_lock'] then
+    set :lock,   true
+  end
 
   get '/' do
     raise Sinatra::NotFound
@@ -96,7 +95,6 @@ end
   # is used in the repository URL and is most useful for this webhook handler.
   post '/module' do
     protected! if $config['protected']
-    $logger.info("authenticated: #{$config['user']}")
     request.body.rewind  # in case someone already read it
 
     # Short circuit if we're ignoring this event
@@ -132,7 +130,6 @@ end
 
   post '/payload' do
     protected! if $config['protected']
-    $logger.info("authenticated: #{$config['user']}")
     request.body.rewind  # in case someone already read it
 
     # Short circuit if we're ignoring this event
@@ -294,7 +291,7 @@ end
     def deploy_module(module_name)
       begin
         if $config['use_mcollective']
-          command = "#{$command_prefix} mco r10k deploy_module #{module_name}"
+          command = "#{$command_prefix} mco r10k deploy_module #{module_name} #{$config['mco_arguments']}"
         else
           # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
           command = "#{$command_prefix} r10k deploy module #{module_name}"
@@ -324,7 +321,7 @@ end
           end
         else
           if $config['use_mcollective']
-              command = "#{$command_prefix} mco r10k deploy #{branch}"
+              command = "#{$command_prefix} mco r10k deploy #{branch} #{$config['mco_arguments']}"
           else
             # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
             command = "#{$command_prefix} r10k deploy environment #{branch} #{$config['r10k_deploy_arguments']}"
@@ -351,12 +348,15 @@ end
      client.discovery_timeout = $config['discovery_timeout']
      client.timeout           = $config['client_timeout']
      result = client.send('deploy',{:environment => branch})
-   end # end deploy()
+   end # end mco()
 
     def protected!
       unless authorized?
         response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
+        $logger.error("Authentication failure from IP #{request.ip}")
         throw(:halt, [401, "Not authorized\n"])
+      else
+        $logger.info("Authenticated as user #{$config['user']} from IP #{request.ip}")
       end
     end  #end protected!
 
