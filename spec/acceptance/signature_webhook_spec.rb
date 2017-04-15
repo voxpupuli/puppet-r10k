@@ -20,6 +20,7 @@ describe 'GitHub Secret Enabled, System Ruby with No SSL, Not protected, No mcol
       }
       "
     end
+
     it 'applies with no errors' do
       apply_manifest(pp, catch_failures: true)
     end

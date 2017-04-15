@@ -21,6 +21,7 @@ describe 'r10k::install', type: :class do
             puppet_master:          true
           }
         end
+
         it { is_expected.to contain_class('git') }
 
         # New versions of this gem do not require these packages

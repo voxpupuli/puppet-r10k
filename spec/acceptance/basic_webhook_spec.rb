@@ -19,6 +19,7 @@ describe 'System Ruby with No SSL, Not protected, No mcollective' do
       }
       "
     end
+
     it 'applies with no errors' do
       apply_manifest(pp, catch_failures: true)
     end
