@@ -42,7 +42,7 @@ class r10k::mcollective (
     require => File["${agent_path}/${agent_ddl}"],
   }
 
-  Service <| title == $mc_service |> {
+  Service <| name == $mc_service |> {
     subscribe +> [ File["${app_path}/${app_name}"], File["${agent_path}/${agent_ddl}"] ],
   }
 }
