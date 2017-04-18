@@ -55,7 +55,7 @@ user: "peadmin"
       context 'Puppet Enterprise 2016.4.2 with events defined' do
         let :params do
           {
-            repository_events: %w(merge release)
+            repository_events: %w[merge release]
           }
         end
         let :facts do
