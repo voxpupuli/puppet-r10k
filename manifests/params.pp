@@ -10,8 +10,8 @@ class r10k::params
   $sources                = undef
   $puppet_master          = true
 
-  $r10k_basedir              = $::settings::environmentpath
-  $r10k_cache_dir            = "${::settings::vardir}/r10k"
+  $r10k_basedir              = $facts['puppet_environmentpath']
+  $r10k_cache_dir            = "${facts['puppet_vardir']}/r10k"
   $r10k_config_file          = '/etc/puppetlabs/r10k/r10k.yaml'
   $r10k_binary               = 'r10k'
   $puppetconf_path           = '/etc/puppetlabs/puppet'
