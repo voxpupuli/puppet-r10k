@@ -11,13 +11,6 @@ class r10k::webhook::package (
       before   => Service['webhook'],
     }
   }
-  if !defined(Package['rack']) {
-    package { 'rack':
-      ensure   => installed,
-      provider => $provider,
-      before   => Service['webhook'],
-    }
-  }
   if (! $is_pe_server) {
     if !defined(Package['webrick']) {
       package { 'webrick':

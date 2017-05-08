@@ -24,7 +24,6 @@ describe 'r10k::webhook::package', type: :class do
             provider: 'puppet_gem'
           )
         end
-        it { is_expected.to contain_package('rack').with(ensure: 'installed') }
         it { is_expected.not_to contain_package('webrick') }
         it { is_expected.not_to contain_package('json') }
       end
@@ -40,7 +39,6 @@ describe 'r10k::webhook::package', type: :class do
         it { is_expected.to contain_package('sinatra').with(ensure: 'installed') }
         it { is_expected.to contain_package('webrick').with(ensure: 'installed') }
         it { is_expected.to contain_package('json').with(ensure: 'installed') }
-        it { is_expected.to contain_package('rack').with(ensure: 'installed') }
       end
     end
   end
