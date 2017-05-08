@@ -148,6 +148,7 @@ class r10k::params
   $webhook_configfile_mode       = '0644'
   $webhook_ignore_environments   = []
   $webhook_mco_arguments         = undef
+  $webhook_sinatra_version       = '~> 1.0'      # Sinatra 2 requires rack 2 which in turn requires ruby 2.2. Puppet 4 AIO ships with ruby 2.1
 
   # Service Settings for SystemD in EL7
   if $::osfamily == 'RedHat' and $::operatingsystemmajrelease == '7' {
