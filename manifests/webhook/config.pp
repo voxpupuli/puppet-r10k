@@ -36,6 +36,7 @@ class r10k::webhook::config (
   $slack_webhook                  = $r10k::params::webhook_slack_webhook,
   $slack_channel                  = $r10k::params::webhook_slack_channel,
   $slack_username                 = $r10k::params::webhook_slack_username,
+  $slack_proxy_url                = $r10k::params::webhook_slack_proxy_url,
   $configfile_owner               = $r10k::params::webhook_configfile_owner,
   $configfile_group               = $r10k::params::webhook_configfile_group,
   $configfile_mode                = $r10k::params::webhook_configfile_mode,
@@ -77,6 +78,7 @@ class r10k::webhook::config (
       'slack_webhook'         => $slack_webhook,
       'slack_channel'         => $slack_channel,
       'slack_username'        => $slack_username,
+      'slack_proxy_url'       => $slack_proxy_url,
       'ignore_environments'   => $ignore_environments,
       'mco_arguments'         => $mco_arguments,
     }
