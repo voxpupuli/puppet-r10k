@@ -4,7 +4,28 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not impact the functionality of the module.
 
-## [v5.0.2](https://github.com/voxpupuli/puppet-r10k/tree/v5.0.2) (2017-04-06)
+## [v6.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.0.0) (2017-05-10)
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v5.0.2...v6.0.0)
+
+**Implemented enhancements:**
+
+- Add slack\_proxy\_url parameter [\#368](https://github.com/voxpupuli/puppet-r10k/pull/368) ([alexjfisher](https://github.com/alexjfisher))
+
+**Closed issues:**
+
+- Support using webhook slack notifier through a proxy [\#367](https://github.com/voxpupuli/puppet-r10k/issues/367)
+- webhook gems aren't installable [\#365](https://github.com/voxpupuli/puppet-r10k/issues/365)
+- cachedir setting is not idempotent [\#351](https://github.com/voxpupuli/puppet-r10k/issues/351)
+- webhook fails to auto-start on Systemd based systems [\#339](https://github.com/voxpupuli/puppet-r10k/issues/339)
+
+**Merged pull requests:**
+
+- BREAKING: Fix webhook installation by pinning sinatra gem [\#366](https://github.com/voxpupuli/puppet-r10k/pull/366) ([alexjfisher](https://github.com/alexjfisher))
+- Webhook: ability to pass extra arguments to mco [\#363](https://github.com/voxpupuli/puppet-r10k/pull/363) ([nike38rus](https://github.com/nike38rus))
+- use stdlib puppet facts for configuration [\#352](https://github.com/voxpupuli/puppet-r10k/pull/352) ([vchepkov](https://github.com/vchepkov))
+- Added /heartbeat url endpoint to webhook [\#272](https://github.com/voxpupuli/puppet-r10k/pull/272) ([thebaron](https://github.com/thebaron))
+
+## [v5.0.2](https://github.com/voxpupuli/puppet-r10k/tree/v5.0.2) (2017-04-07)
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v5.0.1...v5.0.2)
 
 **Closed issues:**
@@ -13,6 +34,7 @@ These should not impact the functionality of the module.
 
 **Merged pull requests:**
 
+- Release 5.0.2 [\#361](https://github.com/voxpupuli/puppet-r10k/pull/361) ([dhollinger](https://github.com/dhollinger))
 - Add check to fix the ruby path on puppet 4.10.0 [\#360](https://github.com/voxpupuli/puppet-r10k/pull/360) ([dhollinger](https://github.com/dhollinger))
 - Webhook: ignore deploying some environments [\#355](https://github.com/voxpupuli/puppet-r10k/pull/355) ([nike38rus](https://github.com/nike38rus))
 
