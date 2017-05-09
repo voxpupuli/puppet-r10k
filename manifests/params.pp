@@ -143,6 +143,7 @@ class r10k::params
   $webhook_slack_webhook         = undef
   $webhook_slack_channel         = undef
   $webhook_slack_username        = undef
+  $webhook_slack_proxy_url       = undef
   $webhook_configfile_owner      = 'root'
   $webhook_configfile_group      = $root_group
   $webhook_configfile_mode       = '0644'

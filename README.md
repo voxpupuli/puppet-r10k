@@ -507,9 +507,10 @@ Then configure the webhook to add your Slack Webhook URL.
 ```puppet
 class { '::r10k::webhook::config':
   . . .
-  slack_webhook  => 'http://slack.webhook/webhook', # mandatory for usage
-  slack_channel  => '#channel', # defaults to #default
-  slack_username => 'r10k', # the username to use
+  slack_webhook   => 'http://slack.webhook/webhook', # mandatory for usage
+  slack_channel   => '#channel', # defaults to #default
+  slack_username  => 'r10k', # the username to use
+  slack_proxy_url => 'http://proxy.example.com:3128' # Optional.  Defaults to undef.
 }
 ```
 
