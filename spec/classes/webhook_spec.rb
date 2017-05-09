@@ -18,12 +18,7 @@ describe 'r10k::webhook', type: :class do
           )
         end
 
-        it do
-          is_expected.to contain_package('sinatra').with(
-            ensure:   'installed',
-            provider: 'puppet_gem'
-          )
-        end
+        it { is_expected.to contain_class('r10k::webhook::package') }
         it { is_expected.not_to contain_file('peadmin-cert.pem').with(path: '/var/lib/peadmin/.mcollective.d/peadmin-cert.pem') }
       end
     end
