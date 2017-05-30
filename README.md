@@ -526,6 +526,13 @@ curl -d '
   }' http://puppet-master.example:8088/payload
 ```
 
+### Troubleshooting
+
+If you're not sure whether your webhook setup works:
+
+- Watch the webhook logfile at `/var/log/webhook/access.log`
+- Try to make a GET request to the `heartbeat` endpoint (e.g. http://puppet-master.example:8088/heartbeat)
+
 ### Docker
 
 If you are building your image with the puppet, you need to prevent the webhook process from starting as a daemon.
