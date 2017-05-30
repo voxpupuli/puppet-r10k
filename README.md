@@ -514,6 +514,16 @@ class { '::r10k::webhook::config':
 }
 ```
 
+### Webhook Default Branch
+
+The default branch of the controlrepo is commonly called `production`. This value can be overriden if you use another default branch name, such as `master`.
+
+```puppet
+class { 'r10k::webhook::config':
+  default_branch => 'master',    # Optional. Defaults to 'production'
+}
+```
+
 ### Triggering the webhook from curl
 
 To aid in debugging, or to give you some hints as to how to trigger the webhook by unsupported systems, here's a curl command to trigger the webhook to deploy the 'production' environment:

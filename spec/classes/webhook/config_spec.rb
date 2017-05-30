@@ -32,6 +32,7 @@ certpath: "/var/lib/peadmin/.mcollective.d"
 client_cfg: "/var/lib/peadmin/.mcollective"
 client_timeout: "120"
 command_prefix: "umask 0022;"
+default_branch: "production"
 discovery_timeout: "10"
 enable_mutex_lock: false
 enable_ssl: true
@@ -83,6 +84,7 @@ certpath: "/var/lib/peadmin/.mcollective.d"
 client_cfg: "/var/lib/peadmin/.mcollective"
 client_timeout: "120"
 command_prefix: "umask 0022;"
+default_branch: "production"
 discovery_timeout: "10"
 enable_mutex_lock: false
 enable_ssl: true
@@ -143,6 +145,7 @@ bind_address: "0.0.0.0"
 client_cfg: "/var/lib/peadmin/.mcollective"
 client_timeout: "120"
 command_prefix: "umask 0022;"
+default_branch: "production"
 discovery_timeout: "10"
 enable_mutex_lock: false
 enable_ssl: true
@@ -186,6 +189,7 @@ bind_address: "0.0.0.0"
 client_cfg: "/var/lib/peadmin/.mcollective"
 client_timeout: "120"
 command_prefix: "umask 0022;"
+default_branch: "production"
 discovery_timeout: "10"
 enable_mutex_lock: true
 enable_ssl: true
@@ -228,6 +232,7 @@ bind_address: "0.0.0.0"
 client_cfg: "/var/lib/peadmin/.mcollective"
 client_timeout: "120"
 command_prefix: "umask 0022;"
+default_branch: "production"
 discovery_timeout: "10"
 enable_mutex_lock: false
 enable_ssl: true
@@ -271,6 +276,7 @@ bind_address: "0.0.0.0"
 client_cfg: "/var/lib/peadmin/.mcollective"
 client_timeout: "120"
 command_prefix: "umask 0022;"
+default_branch: "production"
 discovery_timeout: "10"
 enable_mutex_lock: false
 enable_ssl: true
@@ -356,6 +362,7 @@ bind_address: "0.0.0.0"
 client_cfg: "/var/lib/peadmin/.mcollective"
 client_timeout: "120"
 command_prefix: "umask 0022;"
+default_branch: "production"
 discovery_timeout: "10"
 enable_mutex_lock: false
 enable_ssl: true
