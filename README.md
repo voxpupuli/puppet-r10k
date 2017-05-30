@@ -457,12 +457,12 @@ Until then, its possible to re-use you existing FOSS mcollective certificates.
 Here is an working example on  Ubuntu 14.04.2 LTS
 
 ```puppet
-class { '::r10k::webhook::config':
+class { 'r10k::webhook::config':
   public_key_path  => '/etc/mcollective/server_public.pem',  # Mandatory for FOSS
   private_key_path => '/etc/mcollective/server_private.pem', # Mandatory for FOSS
 }
 
-class { '::r10k::webhook':
+class { 'r10k::webhook':
   user    => 'puppet',                                       # Mandatory for FOSS
   group   => 'puppet',                                       # Mandatory for FOSS
 }
@@ -472,13 +472,13 @@ class { '::r10k::webhook':
 Some instances may require the user/group `root/root` (Linux) or `root/wheel` (BSD).
 Verify that the specified user has the permissions to run `r10k` commands.
 ```puppet
-class { '::r10k::webhook::config':
+class { 'r10k::webhook::config':
   use_mcollective  => false,
   public_key_path  => '/etc/mcollective/server_public.pem',  # Mandatory even when use_mcollective is false
   private_key_path => '/etc/mcollective/server_private.pem', # Mandatory even when use_mcollective is false
 }
 
-class { '::r10k::webhook':
+class { 'r10k::webhook':
   user    => 'root',                                       # Mandatory for FOSS
   group   => 'root',                                       # Mandatory for FOSS
 }
@@ -505,12 +505,22 @@ To get the Slack webhook URL you need to:
 Then configure the webhook to add your Slack Webhook URL.
 
 ```puppet
-class { '::r10k::webhook::config':
+class { 'r10k::webhook::config':
   . . .
   slack_webhook   => 'http://slack.webhook/webhook', # mandatory for usage
   slack_channel   => '#channel', # defaults to #default
   slack_username  => 'r10k', # the username to use
   slack_proxy_url => 'http://proxy.example.com:3128' # Optional.  Defaults to undef.
+}
+```
+
+### Webhook Default Branch
+
+The default branch of the controlrepo is commonly called `production`. This value can be overriden if you use another default branch name, such as `master`.
+
+```puppet
+class { 'r10k::webhook::config':
+  default_branch => 'master',    # Optional. Defaults to 'production'
 }
 ```
 
@@ -533,7 +543,7 @@ If you are building your image with the puppet, you need to prevent the webhook 
 The following is an example of declaring the webhook without a background mode
 
 ```puppet
-class { '::r10k::webhook':
+class { 'r10k::webhook':
   . . .
   background  => false  
 }
@@ -549,7 +559,7 @@ Here is an example where the test branch in dev repository and all branches in a
 in names will be skipped:
 
 ```puppet
-class { '::r10k::webhook::config':
+class { 'r10k::webhook::config':
   . . .
   prefix               => ':repo',
   ignore_environments  => ['dev_test', '/.*feature.*/']
@@ -562,7 +572,7 @@ You can pass some additional arguments to mco command like `--no-progress` or `-
 in the `r10k::webhook::config::mco_arguments` parameter as string:
 
 ```puppet
-class { '::r10k::webhook::config':
+class { 'r10k::webhook::config':
   . . .
   mco_arguments  => '--no-progress'
 }

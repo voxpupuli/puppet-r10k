@@ -165,7 +165,15 @@ class Server < Sinatra::Base
       $config['prefix']
     end
 
-    branch = sanitize_input(branch)
+    # When a branch is being deleted, a deploy against it will result in a failure, as it no longer exists.
+    # Instead, deploy the default branch, which will purge deleted branches per the user's configuration
+    deleted = data['deleted'] rescue false
+    if deleted
+      branch = $config['default_branch']
+    else
+      branch = sanitize_input(branch)
+    end
+
     # r10k doesn't yet know how to deploy all branches from a single source.
     # The best we can do is just deploy all environments by passing nil to
     # deploy() if we don't know the correct branch.
