@@ -536,6 +536,27 @@ curl -d '
   }' http://puppet-master.example:8088/payload
 ```
 
+### Troubleshooting
+
+If you're not sure whether your webhook setup works:
+
+- Try to make a GET request to the `heartbeat` endpoint (e.g. http://puppet-master.example:8088/heartbeat).
+  There should be a short JSON answer, ideally including the word `{ ... "success" ... }`. 
+- Watch the webhook logfile at `/var/log/webhook/access.log`, and send requests (e.g. using curl).
+  Example output if successful:
+
+``` bash
+$ tail -f /var/log/webhook/access.log
+...
+[2015-05-03 13:01:45] DEBUG Rack::Handler::WEBrick is mounted on /.
+[2015-05-03 13:01:45] INFO  WEBrick::HTTPServer#start: pid=7185 port=8088
+[2015-05-03 13:02:46] DEBUG accept: 192.30.252.46:39379
+[2015-05-03 13:02:46] DEBUG Rack::Handler::WEBrick is invoked.
+[2015-05-03 13:02:46] INFO  authenticated: puppet
+[2015-05-03 13:02:46] INFO  message: triggered: r10k deploy environment test_webhook -pv ...
+...
+```
+
 ### Docker
 
 If you are building your image with the puppet, you need to prevent the webhook process from starting as a daemon.
