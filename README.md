@@ -541,7 +541,7 @@ curl -d '
 If you're not sure whether your webhook setup works:
 
 - Try to make a GET request to the `heartbeat` endpoint (e.g. http://puppet-master.example:8088/heartbeat).
-  There should be a short JSON answer, ideally including the word `{ ... "success" ... }`. 
+  You should see a short JSON answer similar to `{"status":"success","message":"running"}`.
 - Watch the webhook logfile at `/var/log/webhook/access.log`, and send requests (e.g. using curl).
   Example output if successful:
 
