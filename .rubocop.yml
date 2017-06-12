@@ -503,6 +503,10 @@ Style/ClosingParenthesisIndentation:
 
 # RSpec
 
+RSpec/BeforeAfterAll:
+  Exclude:
+    - spec/acceptance/**/*
+
 # We don't use rspec in this way
 RSpec/DescribeClass:
   Enabled: False
