@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not impact the functionality of the module.
 
+## [v6.1.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.1.0) (2017-06-24)
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.0.0...v6.1.0)
+
+**Closed issues:**
+
+- Clean up the log output when deleting a branch [\#374](https://github.com/voxpupuli/puppet-r10k/issues/374)
+
+**Merged pull requests:**
+
+- Quote the exact JSON response for `heartbeat` [\#379](https://github.com/voxpupuli/puppet-r10k/pull/379) ([bittner](https://github.com/bittner))
+- Deleted branch [\#376](https://github.com/voxpupuli/puppet-r10k/pull/376) ([rnelson0](https://github.com/rnelson0))
+- Add Troubleshooting section \(logfile, heartbeat\) to README [\#375](https://github.com/voxpupuli/puppet-r10k/pull/375) ([bittner](https://github.com/bittner))
+- Fix github license detection [\#372](https://github.com/voxpupuli/puppet-r10k/pull/372) ([alexjfisher](https://github.com/alexjfisher))
+
 ## [v6.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.0.0) (2017-05-10)
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v5.0.2...v6.0.0)
 
@@ -20,6 +34,7 @@ These should not impact the functionality of the module.
 
 **Merged pull requests:**
 
+- Release 6.0.0 [\#371](https://github.com/voxpupuli/puppet-r10k/pull/371) ([dhollinger](https://github.com/dhollinger))
 - BREAKING: Fix webhook installation by pinning sinatra gem [\#366](https://github.com/voxpupuli/puppet-r10k/pull/366) ([alexjfisher](https://github.com/alexjfisher))
 - Webhook: ability to pass extra arguments to mco [\#363](https://github.com/voxpupuli/puppet-r10k/pull/363) ([nike38rus](https://github.com/nike38rus))
 - use stdlib puppet facts for configuration [\#352](https://github.com/voxpupuli/puppet-r10k/pull/352) ([vchepkov](https://github.com/vchepkov))
