@@ -358,7 +358,7 @@ Enable the webhook over the repository settings `External Async Post Receive Hoo
  - Executable: e.g. `/opt/atlassian/bitbucket-data/external-hooks/stash_mco.rb` (see hook_exe)
  - Positional parameters: `-t http://git.example.com:8088/payload`
 
-
+```puppet
 # Add deploy key
 git_deploy_key { 'add_deploy_key_to_puppet_control':
   ensure       => present,
@@ -384,6 +384,7 @@ git_webhook { 'web_post_receive_webhook' :
   provider     => 'stash',
   hook_exe     => '/opt/atlassian/bitbucket-data/external-hooks/stash_mco.rb', 
 }
+```
 
 ### GitHub Secret Support
 GitHub webhooks allow the use of a secret value that gets hashed against the payload to pass a
