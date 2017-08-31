@@ -112,6 +112,7 @@ class Server < Sinatra::Base
     end
 
     module_name = sanitize_input(module_name)
+    $logger.info("Deploying module #{module_name}")
     deploy_module(module_name)
   end
 
@@ -187,6 +188,7 @@ class Server < Sinatra::Base
       $logger.info("Skipping deployment of environment #{env} according to ignore_environments configuration parameter")
       return 200
     else
+      $logger.info("Deploying environment #{env}")
       deploy(env)
     end
   end
