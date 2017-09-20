@@ -6,6 +6,10 @@ describe 'r10k::webhook::config', type: :class do
         facts
       end
 
+      let :pre_condition do
+        'include r10k::webhook'
+      end
+
       context 'Puppet Enterprise 2016.4.2 with defaults' do
         let :facts do
           facts.merge(

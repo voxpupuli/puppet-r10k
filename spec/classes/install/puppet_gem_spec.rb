@@ -6,6 +6,10 @@ describe 'r10k::install::puppet_gem', type: :class do
         facts
       end
 
+      let :pre_condition do
+        'include r10k'
+      end
+
       context 'with defaults' do
         it do
           is_expected.to contain_file('/usr/bin/r10k').with(

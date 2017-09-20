@@ -6,6 +6,10 @@ describe 'r10k::webhook::package', type: :class do
         facts
       end
 
+      let :pre_condition do
+        "service { 'webhook': ensure => present,}"
+      end
+
       context 'Puppet Enterprise 2016.4.2' do
         let :params do
           {
