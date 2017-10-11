@@ -1,8 +1,19 @@
-# Change log
+# Changelog
 
 All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
-These should not impact the functionality of the module.
+These should not affect the functionality of the module.
+
+## [v6.2.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.2.0) (2017-10-11)
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.1.0...v6.2.0)
+
+**Implemented enhancements:**
+
+- Bump upper limit of the vcsrepo and inifile dependencies [\#386](https://github.com/voxpupuli/puppet-r10k/pull/386) ([dhollinger](https://github.com/dhollinger))
+
+**Merged pull requests:**
+
+- Add logging messages [\#385](https://github.com/voxpupuli/puppet-r10k/pull/385) ([amateo](https://github.com/amateo))
 
 ## [v6.1.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.1.0) (2017-06-24)
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.0.0...v6.1.0)
@@ -13,8 +24,9 @@ These should not impact the functionality of the module.
 
 **Merged pull requests:**
 
+- release 6.1.0 [\#381](https://github.com/voxpupuli/puppet-r10k/pull/381) ([bastelfreak](https://github.com/bastelfreak))
 - Quote the exact JSON response for `heartbeat` [\#379](https://github.com/voxpupuli/puppet-r10k/pull/379) ([bittner](https://github.com/bittner))
-- Deleted branch [\#376](https://github.com/voxpupuli/puppet-r10k/pull/376) ([rnelson0](https://github.com/rnelson0))
+- Better handling for the default branch [\#376](https://github.com/voxpupuli/puppet-r10k/pull/376) ([rnelson0](https://github.com/rnelson0))
 - Add Troubleshooting section \(logfile, heartbeat\) to README [\#375](https://github.com/voxpupuli/puppet-r10k/pull/375) ([bittner](https://github.com/bittner))
 - Fix github license detection [\#372](https://github.com/voxpupuli/puppet-r10k/pull/372) ([alexjfisher](https://github.com/alexjfisher))
 
@@ -94,7 +106,6 @@ These should not impact the functionality of the module.
 - Add support for changing deploy settings [\#332](https://github.com/voxpupuli/puppet-r10k/issues/332)
 - Document breaking changes in CHANGELOG [\#306](https://github.com/voxpupuli/puppet-r10k/issues/306)
 - Status 42, OK, but it doesn't completely work [\#261](https://github.com/voxpupuli/puppet-r10k/issues/261)
-- \(enhancement\) pre-commit hook only validates what's on disk [\#234](https://github.com/voxpupuli/puppet-r10k/issues/234)
 
 **Merged pull requests:**
 
@@ -345,10 +356,6 @@ These should not impact the functionality of the module.
 ## [v2.7.3](https://github.com/voxpupuli/puppet-r10k/tree/v2.7.3) (2015-04-22)
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.7.2...v2.7.3)
 
-**Implemented enhancements:**
-
-- prefix support [\#42](https://github.com/voxpupuli/puppet-r10k/issues/42)
-
 ## [v2.7.2](https://github.com/voxpupuli/puppet-r10k/tree/v2.7.2) (2015-04-21)
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.7.1...v2.7.2)
 
@@ -416,10 +423,6 @@ These should not impact the functionality of the module.
 
 ## [v2.6.3](https://github.com/voxpupuli/puppet-r10k/tree/v2.6.3) (2015-02-24)
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.6.2...v2.6.3)
-
-**Closed issues:**
-
-- prerun\_command setting has no dependencies [\#36](https://github.com/voxpupuli/puppet-r10k/issues/36)
 
 **Merged pull requests:**
 
