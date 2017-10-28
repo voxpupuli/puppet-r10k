@@ -250,6 +250,24 @@ class Server < Sinatra::Base
       message
     end
 
+    def generate_types(environment)
+      begin
+        command = "#{$command_prefix} /opt/puppetlabs/bin/puppet generate types --environment #{environment}"
+
+        message = run_command(command)
+        $logger.info("message: #{message} module_name: #{module_name}")
+        status_message = {:status => :success, :message => message.to_s, :module_name => module_name, :status_code => 200}
+        notify_slack(status_message) if slack?
+        status_message.to_json
+      rescue => e
+        $logger.error("message: #{e.message} trace: #{e.backtrace}")
+        status 500
+        status_message = {:status => :fail, :message => e.message, :trace => e.backtrace, :module_name => module_name, :status_code => 500}
+        notify_slack(status_message) if slack?
+        status_message.to_json
+      end
+    end
+
     def notify_slack(status_message)
       if $config['slack_channel']
         slack_channel = $config['slack_channel']
@@ -352,6 +370,7 @@ class Server < Sinatra::Base
         end
         status_message =  {:status => :success, :message => message.to_s, :branch => branch, :status_code => 200}
         $logger.info("message: #{message} branch: #{branch}")
+        generate_types(branch) if types?
         notify_slack(status_message) if slack?
         status_message.to_json
      rescue => e
@@ -390,6 +409,10 @@ class Server < Sinatra::Base
 
     def slack?
       !!$config['slack_webhook']
+    end
+
+    def types?
+      !!$config['generate_types']
     end
 
     def verify_signature(payload_body)
