@@ -40,6 +40,7 @@ default_branch: "production"
 discovery_timeout: "10"
 enable_mutex_lock: false
 enable_ssl: true
+generate_types: false
 ignore_environments: []
 pass: "peadmin"
 port: "8088"
@@ -92,6 +93,7 @@ default_branch: "production"
 discovery_timeout: "10"
 enable_mutex_lock: false
 enable_ssl: true
+generate_types: false
 ignore_environments: []
 pass: "peadmin"
 port: "8088"
@@ -153,6 +155,7 @@ default_branch: "production"
 discovery_timeout: "10"
 enable_mutex_lock: false
 enable_ssl: true
+generate_types: false
 ignore_environments: []
 pass: "puppet"
 port: "8088"
@@ -197,6 +200,7 @@ default_branch: "production"
 discovery_timeout: "10"
 enable_mutex_lock: true
 enable_ssl: true
+generate_types: false
 ignore_environments: []
 pass: "puppet"
 port: "8088"
@@ -240,6 +244,7 @@ default_branch: "production"
 discovery_timeout: "10"
 enable_mutex_lock: false
 enable_ssl: true
+generate_types: false
 github_secret: "secret"
 ignore_environments: []
 pass: "puppet"
@@ -284,6 +289,7 @@ default_branch: "production"
 discovery_timeout: "10"
 enable_mutex_lock: false
 enable_ssl: true
+generate_types: false
 ignore_environments: []
 pass: "puppet"
 port: "8088"
@@ -370,6 +376,7 @@ default_branch: "production"
 discovery_timeout: "10"
 enable_mutex_lock: false
 enable_ssl: true
+generate_types: false
 ignore_environments: []
 mco_arguments: "--no-progress"
 pass: "puppet"
