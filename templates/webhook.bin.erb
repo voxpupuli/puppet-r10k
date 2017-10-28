@@ -154,6 +154,15 @@ class Server < Sinatra::Base
         data['repository']['default_branch']                     # github tagged release; no ref.
       ).sub('refs/heads/', '') rescue nil
 
+    deleted = (
+      data['deleted'] || # Github
+      data['after']      # Github and Gitlab
+    )
+
+    if deleted == true || deleted == '0000000000000000000000000000000000000000'
+      branch_deleted = true
+    end
+
     # If prefix is enabled in our config file, determine what the prefix should be
     prefix = case $config['prefix']
     when :repo
@@ -189,7 +198,7 @@ class Server < Sinatra::Base
       return 200
     else
       $logger.info("Deploying environment #{env}")
-      deploy(env)
+      deploy(env, branch_deleted)
     end
   end
 
@@ -255,14 +264,14 @@ class Server < Sinatra::Base
         command = "#{$command_prefix} /opt/puppetlabs/bin/puppet generate types --environment #{environment}"
 
         message = run_command(command)
-        $logger.info("message: #{message} module_name: #{module_name}")
-        status_message = {:status => :success, :message => message.to_s, :module_name => module_name, :status_code => 200}
+        $logger.info("message: #{message} environment: #{environment}")
+        status_message = {:status => :success, :message => message.to_s, :environment => environment, :status_code => 200}
         notify_slack(status_message) if slack?
         status_message.to_json
       rescue => e
         $logger.error("message: #{e.message} trace: #{e.backtrace}")
         status 500
-        status_message = {:status => :fail, :message => e.message, :trace => e.backtrace, :module_name => module_name, :status_code => 500}
+        status_message = {:status => :fail, :message => e.message, :trace => e.backtrace, :environment => environment, :status_code => 500}
         notify_slack(status_message) if slack?
         status_message.to_json
       end
@@ -350,7 +359,7 @@ class Server < Sinatra::Base
       end
     end
 
-    def deploy(branch)
+    def deploy(branch, deleted)
       begin
         if $config['use_mco_ruby']
           result = mco(branch).first
@@ -370,7 +379,9 @@ class Server < Sinatra::Base
         end
         status_message =  {:status => :success, :message => message.to_s, :branch => branch, :status_code => 200}
         $logger.info("message: #{message} branch: #{branch}")
-        generate_types(branch) if types?
+        unless deleted
+          generate_types(branch) if types?
+        end
         notify_slack(status_message) if slack?
         status_message.to_json
      rescue => e
