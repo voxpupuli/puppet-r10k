@@ -202,7 +202,7 @@ An example post-receive hook is included in the files directory.
 This hook can automatically cause code to synchronize on your
 servers at time of push in git. More modern git systems use webhooks, for  those see below.
 
-###Install mcollective support for post receive hooks
+### Install mcollective support for post receive hooks
 Install the `mco` command from the puppet enterprise installation directory i.e.
 ```shell
 cd ~/puppet-enterprise-3.0.1-el-6-x86_64/packages/el-6-x86_64
@@ -601,7 +601,7 @@ class { 'r10k::webhook::config':
 
 ## Reference
 
-####Class: `r10k`
+#### Class: `r10k`
 This is the main public class to be declared , handingly installation and configuration declarations
 
 **Parameters within `r10k`:**
@@ -740,37 +740,34 @@ The 4.1.x release *deprecates* support for:
 
 These items are are planned for removal in v5.0.0.
 
-##Support
+## Support
 
 Please log tickets and issues at our [Projects site](https://github.com/voxpupuli/puppet-r10k/issues)
 
-##Development
+## Development
 
-###Contributing
+### Contributing
 
 Modules on the Puppet Forge are open projects, and community contributions are essential for keeping them great. We can’t access the huge number of platforms and myriad of hardware, software, and deployment configurations that Puppet is intended to serve.
 
 We want to keep it as easy as possible to contribute changes so that our modules work in your environment. There are a few guidelines that we need contributors to follow so that we can have a chance of keeping on top of things.
 
-Read the complete module [contribution guide](https://docs.puppetlabs.com/forge/contributing.html)
+Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for more details.
 
-###Running tests
+### Running tests
 
-This project contains tests for [rspec-puppet](http://rspec-puppet.com/) to verify functionality. For in-depth information please see their respective documentation.
+This project contains tests for [rspec-puppet](http://rspec-puppet.com/) to
+verify functionality. For in-depth information please see their respective
+documentation, as well as [CONTRIBUTING](.github/CONTRIBUTING.md).
 
 Quickstart:
 
 ```
     gem install bundler
     bundle install --without system_tests
-    bundle exec rake spec
+    bundle exec rake test
     bundle exec rake lint
 ```
 
 Check the .travis.yml for supported Operating System Versions
 
-[Puppetconf](http://puppetconf.com) beer fund for all those that submit pull
-requests:
-
-
-[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.svg)](https://gratipay.com/acidprime/)
