@@ -382,14 +382,14 @@ class Server < Sinatra::Base
       end
     end  #end deploy()
 
-   def mco(branch)
-     options =  MCollective::Util.default_options
-     options[:config] = $config['client_cfg']
-     client = rpcclient('r10k', :exit_on_failure => false,:options => options)
-     client.discovery_timeout = $config['discovery_timeout']
-     client.timeout           = $config['client_timeout']
-     result = client.send('deploy',{:environment => branch})
-   end # end mco()
+    def mco(branch)
+      options =  MCollective::Util.default_options
+      options[:config] = $config['client_cfg']
+      client = rpcclient('r10k', :exit_on_failure => false,:options => options)
+      client.discovery_timeout = $config['discovery_timeout']
+      client.timeout           = $config['client_timeout']
+      result = client.send('deploy',{:environment => branch})
+    end # end mco()
 
     def protected!
       unless authorized?
