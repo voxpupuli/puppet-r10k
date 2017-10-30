@@ -168,9 +168,10 @@ class Server < Sinatra::Base
 
     # When a branch is being deleted, a deploy against it will result in a failure, as it no longer exists.
     # Instead, deploy the default branch, which will purge deleted branches per the user's configuration
-    branch_deleted = (
+    deleted = (
       data['deleted'] rescue false || # Github
-      data['after']      # Github and Gitlab
+      data['push']['changes'][0]['closed'] rescue false || # Bitbucket
+      data['after] rescue false     # Gitlab
     )
 
     if branch_deleted == true || deleted == '0000000000000000000000000000000000000000'
