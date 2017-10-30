@@ -154,15 +154,6 @@ class Server < Sinatra::Base
         data['repository']['default_branch']                     # github tagged release; no ref.
       ).sub('refs/heads/', '') rescue nil
 
-    deleted = (
-      data['deleted'] || # Github
-      data['after']      # Github and Gitlab
-    )
-
-    if deleted == true || deleted == '0000000000000000000000000000000000000000'
-      branch_deleted = true
-    end
-
     # If prefix is enabled in our config file, determine what the prefix should be
     prefix = case $config['prefix']
     when :repo
@@ -177,7 +168,15 @@ class Server < Sinatra::Base
 
     # When a branch is being deleted, a deploy against it will result in a failure, as it no longer exists.
     # Instead, deploy the default branch, which will purge deleted branches per the user's configuration
-    deleted = data['deleted'] rescue false
+    branch_deleted = (
+      data['deleted'] rescue false || # Github
+      data['after']      # Github and Gitlab
+    )
+
+    if branch_deleted == true || deleted == '0000000000000000000000000000000000000000'
+      deleted = true
+    end
+
     if deleted
       branch = $config['default_branch']
     else
@@ -198,7 +197,7 @@ class Server < Sinatra::Base
       return 200
     else
       $logger.info("Deploying environment #{env}")
-      deploy(env, branch_deleted)
+      deploy(env, deleted)
     end
   end
 
