@@ -168,7 +168,19 @@ class Server < Sinatra::Base
 
     # When a branch is being deleted, a deploy against it will result in a failure, as it no longer exists.
     # Instead, deploy the default branch, which will purge deleted branches per the user's configuration
-    deleted = data['deleted'] rescue false
+    branch_deleted = (
+      data['deleted'] rescue false || # Github
+      data['push']['changes'][0]['closed'] rescue false || # Bitbucket
+      data['refChanges'][0]['type'] rescue false || # Stash/Bitbucket Server
+      data['after] rescue false     # Gitlab
+    )
+
+    if [true, 'DELETED', '0000000000000000000000000000000000000000'].include?(branch_deleted)
+      deleted = true
+    else
+      deleted = false
+    end
+
     if deleted
       branch = $config['default_branch']
     else
@@ -189,7 +201,7 @@ class Server < Sinatra::Base
       return 200
     else
       $logger.info("Deploying environment #{env}")
-      deploy(env)
+      deploy(env, deleted)
     end
   end
 
@@ -248,6 +260,21 @@ class Server < Sinatra::Base
         raise "#{stdout}\n#{stderr}" if exit_status != 0
       end
       message
+    end
+
+    def generate_types(environment)
+      begin
+        command = "#{$command_prefix} /opt/puppetlabs/bin/puppet generate types --environment #{environment}"
+
+        message = run_command(command)
+        $logger.info("message: #{message} environment: #{environment}")
+        status_message = {:status => :success, :message => message.to_s, :environment => environment, :status_code => 200}
+        notify_slack(status_message) if slack?
+      rescue => e
+        $logger.error("message: #{e.message} trace: #{e.backtrace}")
+        status_message = {:status => :fail, :message => e.message, :trace => e.backtrace, :environment => environment, :status_code => 500}
+        notify_slack(status_message) if slack?
+      end
     end
 
     def notify_slack(status_message)
@@ -332,7 +359,7 @@ class Server < Sinatra::Base
       end
     end
 
-    def deploy(branch)
+    def deploy(branch, deleted)
       begin
         if $config['use_mco_ruby']
           result = mco(branch).first
@@ -352,6 +379,9 @@ class Server < Sinatra::Base
         end
         status_message =  {:status => :success, :message => message.to_s, :branch => branch, :status_code => 200}
         $logger.info("message: #{message} branch: #{branch}")
+        unless deleted
+          generate_types(branch) if types?
+        end
         notify_slack(status_message) if slack?
         status_message.to_json
      rescue => e
@@ -363,14 +393,14 @@ class Server < Sinatra::Base
       end
     end  #end deploy()
 
-   def mco(branch)
-     options =  MCollective::Util.default_options
-     options[:config] = $config['client_cfg']
-     client = rpcclient('r10k', :exit_on_failure => false,:options => options)
-     client.discovery_timeout = $config['discovery_timeout']
-     client.timeout           = $config['client_timeout']
-     result = client.send('deploy',{:environment => branch})
-   end # end mco()
+    def mco(branch)
+      options =  MCollective::Util.default_options
+      options[:config] = $config['client_cfg']
+      client = rpcclient('r10k', :exit_on_failure => false,:options => options)
+      client.discovery_timeout = $config['discovery_timeout']
+      client.timeout           = $config['client_timeout']
+      result = client.send('deploy',{:environment => branch})
+    end # end mco()
 
     def protected!
       unless authorized?
@@ -390,6 +420,10 @@ class Server < Sinatra::Base
 
     def slack?
       !!$config['slack_webhook']
+    end
+
+    def types?
+      !!$config['generate_types']
     end
 
     def verify_signature(payload_body)

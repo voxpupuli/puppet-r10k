@@ -47,6 +47,7 @@ class r10k::webhook::config (
   $enable_mutex_lock              = $r10k::params::webhook_enable_mutex_lock,
   Array $ignore_environments      = $r10k::params::webhook_ignore_environments,
   Optional[String] $mco_arguments = $r10k::params::webhook_mco_arguments,
+  Boolean $generate_types         = $r10k::params::webhook_generate_types,
 ) inherits r10k::params {
 
   if $hash == 'UNSET' {
@@ -83,6 +84,7 @@ class r10k::webhook::config (
       'slack_proxy_url'       => $slack_proxy_url,
       'ignore_environments'   => $ignore_environments,
       'mco_arguments'         => $mco_arguments,
+      'generate_types'        => $generate_types,
     }
   } else {
     $webhook_hash = $hash
