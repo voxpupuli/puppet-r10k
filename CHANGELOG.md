@@ -4,7 +4,21 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v6.3.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.3.0) (2017-11-26)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.2.0...v6.3.0)
+
+**Closed issues:**
+
+- /usr/local/bin/webhook PATH variable should include /usr/local/bundle/bin [\#373](https://github.com/voxpupuli/puppet-r10k/issues/373)
+
+**Merged pull requests:**
+
+- docs updates, remove top level CONTRIBUTING.md [\#390](https://github.com/voxpupuli/puppet-r10k/pull/390) ([wyardley](https://github.com/wyardley))
+- Generate types option [\#389](https://github.com/voxpupuli/puppet-r10k/pull/389) ([dhollinger](https://github.com/dhollinger))
+
 ## [v6.2.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.2.0) (2017-10-11)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.1.0...v6.2.0)
 
 **Implemented enhancements:**
@@ -13,9 +27,11 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
+- release 6.2.0 [\#388](https://github.com/voxpupuli/puppet-r10k/pull/388) ([bastelfreak](https://github.com/bastelfreak))
 - Add logging messages [\#385](https://github.com/voxpupuli/puppet-r10k/pull/385) ([amateo](https://github.com/amateo))
 
 ## [v6.1.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.1.0) (2017-06-24)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.0.0...v6.1.0)
 
 **Closed issues:**
@@ -29,9 +45,15 @@ These should not affect the functionality of the module.
 - Better handling for the default branch [\#376](https://github.com/voxpupuli/puppet-r10k/pull/376) ([rnelson0](https://github.com/rnelson0))
 - Add Troubleshooting section \(logfile, heartbeat\) to README [\#375](https://github.com/voxpupuli/puppet-r10k/pull/375) ([bittner](https://github.com/bittner))
 - Fix github license detection [\#372](https://github.com/voxpupuli/puppet-r10k/pull/372) ([alexjfisher](https://github.com/alexjfisher))
+- Release 6.0.0 [\#371](https://github.com/voxpupuli/puppet-r10k/pull/371) ([dhollinger](https://github.com/dhollinger))
 
 ## [v6.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.0.0) (2017-05-10)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v5.0.2...v6.0.0)
+
+**Breaking changes:**
+
+- BREAKING: Fix webhook installation by pinning sinatra gem [\#366](https://github.com/voxpupuli/puppet-r10k/pull/366) ([alexjfisher](https://github.com/alexjfisher))
 
 **Implemented enhancements:**
 
@@ -46,13 +68,13 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- Release 6.0.0 [\#371](https://github.com/voxpupuli/puppet-r10k/pull/371) ([dhollinger](https://github.com/dhollinger))
-- BREAKING: Fix webhook installation by pinning sinatra gem [\#366](https://github.com/voxpupuli/puppet-r10k/pull/366) ([alexjfisher](https://github.com/alexjfisher))
 - Webhook: ability to pass extra arguments to mco [\#363](https://github.com/voxpupuli/puppet-r10k/pull/363) ([nike38rus](https://github.com/nike38rus))
+- Release 5.0.2 [\#361](https://github.com/voxpupuli/puppet-r10k/pull/361) ([dhollinger](https://github.com/dhollinger))
 - use stdlib puppet facts for configuration [\#352](https://github.com/voxpupuli/puppet-r10k/pull/352) ([vchepkov](https://github.com/vchepkov))
 - Added /heartbeat url endpoint to webhook [\#272](https://github.com/voxpupuli/puppet-r10k/pull/272) ([thebaron](https://github.com/thebaron))
 
 ## [v5.0.2](https://github.com/voxpupuli/puppet-r10k/tree/v5.0.2) (2017-04-07)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v5.0.1...v5.0.2)
 
 **Closed issues:**
@@ -61,11 +83,11 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- Release 5.0.2 [\#361](https://github.com/voxpupuli/puppet-r10k/pull/361) ([dhollinger](https://github.com/dhollinger))
 - Add check to fix the ruby path on puppet 4.10.0 [\#360](https://github.com/voxpupuli/puppet-r10k/pull/360) ([dhollinger](https://github.com/dhollinger))
 - Webhook: ignore deploying some environments [\#355](https://github.com/voxpupuli/puppet-r10k/pull/355) ([nike38rus](https://github.com/nike38rus))
 
 ## [v5.0.1](https://github.com/voxpupuli/puppet-r10k/tree/v5.0.1) (2017-04-06)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v5.0.0...v5.0.1)
 
 **Closed issues:**
@@ -82,6 +104,7 @@ These should not affect the functionality of the module.
 - Webhook Background mode [\#349](https://github.com/voxpupuli/puppet-r10k/pull/349) ([luckyraul](https://github.com/luckyraul))
 
 ## [v5.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v5.0.0) (2017-03-07)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v4.2.0...v5.0.0)
 
 **Closed issues:**
@@ -99,6 +122,7 @@ These should not affect the functionality of the module.
 - Ensure webhook run folder exists on redhat systemd environments [\#283](https://github.com/voxpupuli/puppet-r10k/pull/283) ([luisfdez](https://github.com/luisfdez))
 
 ## [v4.2.0](https://github.com/voxpupuli/puppet-r10k/tree/v4.2.0) (2017-02-12)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v4.1.0...v4.2.0)
 
 **Closed issues:**
@@ -116,6 +140,7 @@ These should not affect the functionality of the module.
 - Better document soft dependency abrader/gms [\#327](https://github.com/voxpupuli/puppet-r10k/pull/327) ([rnelson0](https://github.com/rnelson0))
 
 ## [v4.1.0](https://github.com/voxpupuli/puppet-r10k/tree/v4.1.0) (2017-01-06)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v4.0.2...v4.1.0)
 
 **Closed issues:**
@@ -136,21 +161,24 @@ These should not affect the functionality of the module.
 - Lockfile to mitigate r10k race condition. [\#268](https://github.com/voxpupuli/puppet-r10k/pull/268) ([binford2k](https://github.com/binford2k))
 
 ## [v4.0.2](https://github.com/voxpupuli/puppet-r10k/tree/v4.0.2) (2016-11-20)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v4.0.1...v4.0.2)
 
 **Merged pull requests:**
 
 - Release 4.0.2 [\#305](https://github.com/voxpupuli/puppet-r10k/pull/305) ([rnelson0](https://github.com/rnelson0))
+- Changelog for 4.0.1 [\#304](https://github.com/voxpupuli/puppet-r10k/pull/304) ([rnelson0](https://github.com/rnelson0))
 
 ## [v4.0.1](https://github.com/voxpupuli/puppet-r10k/tree/v4.0.1) (2016-11-20)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v4.0.0...v4.0.1)
 
 **Merged pull requests:**
 
-- Changelog for 4.0.1 [\#304](https://github.com/voxpupuli/puppet-r10k/pull/304) ([rnelson0](https://github.com/rnelson0))
 - Release 4.0.1 [\#303](https://github.com/voxpupuli/puppet-r10k/pull/303) ([rnelson0](https://github.com/rnelson0))
 
 ## [v4.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v4.0.0) (2016-11-20)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v3.2.0...v4.0.0)
 
 **Closed issues:**
@@ -177,6 +205,7 @@ These should not affect the functionality of the module.
 - Add GitHub signature [\#262](https://github.com/voxpupuli/puppet-r10k/pull/262) ([ayohrling](https://github.com/ayohrling))
 
 ## [v3.2.0](https://github.com/voxpupuli/puppet-r10k/tree/v3.2.0) (2015-12-16)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v3.1.1...v3.2.0)
 
 **Implemented enhancements:**
@@ -204,6 +233,7 @@ These should not affect the functionality of the module.
 - Add single request concurrency option in r10k webhook [\#240](https://github.com/voxpupuli/puppet-r10k/pull/240) ([pdaukintis](https://github.com/pdaukintis))
 
 ## [v3.1.1](https://github.com/voxpupuli/puppet-r10k/tree/v3.1.1) (2015-08-12)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v3.1.0...v3.1.1)
 
 **Implemented enhancements:**
@@ -215,6 +245,7 @@ These should not affect the functionality of the module.
 - stderr of the which command shows during Puppet runs on agent nodes [\#241](https://github.com/voxpupuli/puppet-r10k/issues/241)
 
 ## [v3.1.0](https://github.com/voxpupuli/puppet-r10k/tree/v3.1.0) (2015-08-10)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.8.4...v3.1.0)
 
 **Merged pull requests:**
@@ -225,6 +256,7 @@ These should not affect the functionality of the module.
 - Let rb scripts resolve what ruby to use themselves [\#233](https://github.com/voxpupuli/puppet-r10k/pull/233) ([attachmentgenie](https://github.com/attachmentgenie))
 
 ## [v2.8.4](https://github.com/voxpupuli/puppet-r10k/tree/v2.8.4) (2015-08-03)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v3.0.0...v2.8.4)
 
 **Merged pull requests:**
@@ -232,6 +264,7 @@ These should not affect the functionality of the module.
 - Making r10k webhook 2015.x compatible [\#229](https://github.com/voxpupuli/puppet-r10k/pull/229) ([WhatsARanjit](https://github.com/WhatsARanjit))
 
 ## [v3.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v3.0.0) (2015-07-31)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.8.3...v3.0.0)
 
 **Implemented enhancements:**
@@ -262,15 +295,12 @@ These should not affect the functionality of the module.
 - Add a custom fact 'r10k\_path' [\#222](https://github.com/voxpupuli/puppet-r10k/pull/222) ([poikilotherm](https://github.com/poikilotherm))
 
 ## [v2.8.3](https://github.com/voxpupuli/puppet-r10k/tree/v2.8.3) (2015-07-17)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.8.2...v2.8.3)
-
-**Implemented enhancements:**
-
-- \[Bug\] Webhook does not support Ping event from GitHub [\#89](https://github.com/voxpupuli/puppet-r10k/issues/89)
 
 **Fixed bugs:**
 
-- \\[Bug\\] Webhook does not support Ping event from GitHub [\#89](https://github.com/voxpupuli/puppet-r10k/issues/89)
+- \[Bug\] Webhook does not support Ping event from GitHub [\#89](https://github.com/voxpupuli/puppet-r10k/issues/89)
 
 **Closed issues:**
 
@@ -286,9 +316,11 @@ These should not affect the functionality of the module.
 - Add EnvironmentFile line as optional [\#206](https://github.com/voxpupuli/puppet-r10k/pull/206) ([brandonweeks](https://github.com/brandonweeks))
 
 ## [v2.8.2](https://github.com/voxpupuli/puppet-r10k/tree/v2.8.2) (2015-06-26)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.8.1...v2.8.2)
 
 ## [v2.8.1](https://github.com/voxpupuli/puppet-r10k/tree/v2.8.1) (2015-06-24)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.8.0...v2.8.1)
 
 **Implemented enhancements:**
@@ -331,6 +363,7 @@ These should not affect the functionality of the module.
 - add logic to prevent issue with pe\_version on foss puppet with strict\_variables enabled [\#161](https://github.com/voxpupuli/puppet-r10k/pull/161) ([smithtrevor](https://github.com/smithtrevor))
 
 ## [v2.8.0](https://github.com/voxpupuli/puppet-r10k/tree/v2.8.0) (2015-05-12)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.7.4...v2.8.0)
 
 **Closed issues:**
@@ -342,6 +375,7 @@ These should not affect the functionality of the module.
 - Systemd [\#168](https://github.com/voxpupuli/puppet-r10k/pull/168) ([trlinkin](https://github.com/trlinkin))
 
 ## [v2.7.4](https://github.com/voxpupuli/puppet-r10k/tree/v2.7.4) (2015-05-08)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.7.3...v2.7.4)
 
 **Closed issues:**
@@ -354,9 +388,11 @@ These should not affect the functionality of the module.
 - Update r10k gem version for v2.7.x module version [\#159](https://github.com/voxpupuli/puppet-r10k/pull/159) ([aharden](https://github.com/aharden))
 
 ## [v2.7.3](https://github.com/voxpupuli/puppet-r10k/tree/v2.7.3) (2015-04-22)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.7.2...v2.7.3)
 
 ## [v2.7.2](https://github.com/voxpupuli/puppet-r10k/tree/v2.7.2) (2015-04-21)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.7.1...v2.7.2)
 
 **Closed issues:**
@@ -364,11 +400,8 @@ These should not affect the functionality of the module.
 - Gem install has the space problem regressed. [\#155](https://github.com/voxpupuli/puppet-r10k/issues/155)
 
 ## [v2.7.1](https://github.com/voxpupuli/puppet-r10k/tree/v2.7.1) (2015-04-20)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.7.0...v2.7.1)
-
-**Implemented enhancements:**
-
-- /var/log/webhook permissions not managed properly [\#144](https://github.com/voxpupuli/puppet-r10k/issues/144)
 
 **Fixed bugs:**
 
@@ -380,6 +413,7 @@ These should not affect the functionality of the module.
 - Support of Puppet FOSS for Webhook [\#150](https://github.com/voxpupuli/puppet-r10k/pull/150) ([acidprime](https://github.com/acidprime))
 
 ## [v2.7.0](https://github.com/voxpupuli/puppet-r10k/tree/v2.7.0) (2015-04-08)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.6.5...v2.7.0)
 
 **Implemented enhancements:**
@@ -396,6 +430,7 @@ These should not affect the functionality of the module.
 - 3.x [\#148](https://github.com/voxpupuli/puppet-r10k/pull/148) ([acidprime](https://github.com/acidprime))
 
 ## [v2.6.5](https://github.com/voxpupuli/puppet-r10k/tree/v2.6.5) (2015-03-18)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.6.4...v2.6.5)
 
 **Fixed bugs:**
@@ -413,6 +448,7 @@ These should not affect the functionality of the module.
 - support for 'user' argument to su to another user when executing git and R10K [\#142](https://github.com/voxpupuli/puppet-r10k/pull/142) ([GeoffWilliams](https://github.com/GeoffWilliams))
 
 ## [v2.6.4](https://github.com/voxpupuli/puppet-r10k/tree/v2.6.4) (2015-02-26)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.6.3...v2.6.4)
 
 **Fixed bugs:**
@@ -422,6 +458,7 @@ These should not affect the functionality of the module.
 - webhook does not normalize branch name [\#115](https://github.com/voxpupuli/puppet-r10k/issues/115)
 
 ## [v2.6.3](https://github.com/voxpupuli/puppet-r10k/tree/v2.6.3) (2015-02-24)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.6.2...v2.6.3)
 
 **Merged pull requests:**
@@ -429,6 +466,7 @@ These should not affect the functionality of the module.
 - Ensure webhook dependencies are met before running the service [\#134](https://github.com/voxpupuli/puppet-r10k/pull/134) ([elyscape](https://github.com/elyscape))
 
 ## [v2.6.2](https://github.com/voxpupuli/puppet-r10k/tree/v2.6.2) (2015-02-19)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.6.1...v2.6.2)
 
 **Fixed bugs:**
@@ -443,6 +481,7 @@ These should not affect the functionality of the module.
 - Support Puppet v3.7.x [\#128](https://github.com/voxpupuli/puppet-r10k/pull/128) ([ghoneycutt](https://github.com/ghoneycutt))
 
 ## [v2.6.1](https://github.com/voxpupuli/puppet-r10k/tree/v2.6.1) (2015-02-13)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.6.0...v2.6.1)
 
 **Merged pull requests:**
@@ -450,6 +489,7 @@ These should not affect the functionality of the module.
 - Add r10k\_deploy\_arguments for non-MCO deploys [\#125](https://github.com/voxpupuli/puppet-r10k/pull/125) ([glarizza](https://github.com/glarizza))
 
 ## [v2.6.0](https://github.com/voxpupuli/puppet-r10k/tree/v2.6.0) (2015-02-11)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.5.4...v2.6.0)
 
 **Merged pull requests:**
@@ -461,6 +501,7 @@ These should not affect the functionality of the module.
 - Update webhook.pp - adjusted peadmin-cert.pem [\#120](https://github.com/voxpupuli/puppet-r10k/pull/120) ([aharden](https://github.com/aharden))
 
 ## [v2.5.4](https://github.com/voxpupuli/puppet-r10k/tree/v2.5.4) (2015-02-03)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.5.3...v2.5.4)
 
 **Closed issues:**
@@ -468,6 +509,7 @@ These should not affect the functionality of the module.
 - mco doesn't deploy modules when using forge functionality of Puppetfile [\#65](https://github.com/voxpupuli/puppet-r10k/issues/65)
 
 ## [v2.5.3](https://github.com/voxpupuli/puppet-r10k/tree/v2.5.3) (2015-01-29)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.5.2...v2.5.3)
 
 **Closed issues:**
@@ -482,6 +524,7 @@ These should not affect the functionality of the module.
 - 105 updated webhook.ini.erb for ubuntu support [\#118](https://github.com/voxpupuli/puppet-r10k/pull/118) ([MarsuperMammal](https://github.com/MarsuperMammal))
 
 ## [v2.5.2](https://github.com/voxpupuli/puppet-r10k/tree/v2.5.2) (2015-01-16)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.5.1...v2.5.2)
 
 **Closed issues:**
@@ -495,9 +538,11 @@ These should not affect the functionality of the module.
 - support strict\_variables = true [\#114](https://github.com/voxpupuli/puppet-r10k/pull/114) ([jlambert121](https://github.com/jlambert121))
 
 ## [v2.5.1](https://github.com/voxpupuli/puppet-r10k/tree/v2.5.1) (2014-12-17)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.5.0...v2.5.1)
 
 ## [v2.5.0](https://github.com/voxpupuli/puppet-r10k/tree/v2.5.0) (2014-12-17)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.4.4...v2.5.0)
 
 **Closed issues:**
@@ -512,6 +557,7 @@ These should not affect the functionality of the module.
 - Spelling [\#111](https://github.com/voxpupuli/puppet-r10k/pull/111) ([skibum55](https://github.com/skibum55))
 
 ## [v2.4.4](https://github.com/voxpupuli/puppet-r10k/tree/v2.4.4) (2014-12-15)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.4.3...v2.4.4)
 
 **Closed issues:**
@@ -526,6 +572,7 @@ These should not affect the functionality of the module.
 - Documentation fixes [\#103](https://github.com/voxpupuli/puppet-r10k/pull/103) ([elyscape](https://github.com/elyscape))
 
 ## [v2.4.3](https://github.com/voxpupuli/puppet-r10k/tree/v2.4.3) (2014-11-22)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.4.2...v2.4.3)
 
 **Closed issues:**
@@ -533,19 +580,23 @@ These should not affect the functionality of the module.
 - Versions and the Puppet Forge [\#100](https://github.com/voxpupuli/puppet-r10k/issues/100)
 
 ## [v2.4.2](https://github.com/voxpupuli/puppet-r10k/tree/v2.4.2) (2014-11-21)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.4.1...v2.4.2)
 
 ## [v2.4.1](https://github.com/voxpupuli/puppet-r10k/tree/v2.4.1) (2014-11-21)
-[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.4.0...v2.4.1)
 
-## [v2.4.0](https://github.com/voxpupuli/puppet-r10k/tree/v2.4.0) (2014-11-21)
-[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.3.4...v2.4.0)
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.4.0...v2.4.1)
 
 **Closed issues:**
 
 - r10k 1.3.5 has been released [\#98](https://github.com/voxpupuli/puppet-r10k/issues/98)
 
+## [v2.4.0](https://github.com/voxpupuli/puppet-r10k/tree/v2.4.0) (2014-11-21)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.3.4...v2.4.0)
+
 ## [v2.3.4](https://github.com/voxpupuli/puppet-r10k/tree/v2.3.4) (2014-11-20)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.3.3...v2.3.4)
 
 **Closed issues:**
@@ -558,6 +609,7 @@ These should not affect the functionality of the module.
 - Refresh webhook service when config file changes [\#91](https://github.com/voxpupuli/puppet-r10k/pull/91) ([elyscape](https://github.com/elyscape))
 
 ## [v2.3.3](https://github.com/voxpupuli/puppet-r10k/tree/v2.3.3) (2014-11-20)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.3.2...v2.3.3)
 
 **Closed issues:**
@@ -569,6 +621,7 @@ These should not affect the functionality of the module.
 - Check for variations of $is\_pe [\#97](https://github.com/voxpupuli/puppet-r10k/pull/97) ([xaque208](https://github.com/xaque208))
 
 ## [v2.3.2](https://github.com/voxpupuli/puppet-r10k/tree/v2.3.2) (2014-11-20)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.3.1...v2.3.2)
 
 **Merged pull requests:**
@@ -576,6 +629,7 @@ These should not affect the functionality of the module.
 - Replaced references to type\(\) function with is\_string\(\) for Puppet 3.7.x... [\#96](https://github.com/voxpupuli/puppet-r10k/pull/96) ([xaque208](https://github.com/xaque208))
 
 ## [v2.3.1](https://github.com/voxpupuli/puppet-r10k/tree/v2.3.1) (2014-11-11)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.3.0...v2.3.1)
 
 **Closed issues:**
@@ -596,6 +650,7 @@ These should not affect the functionality of the module.
 - bumped version 1.3.4 [\#81](https://github.com/voxpupuli/puppet-r10k/pull/81) ([kennyg](https://github.com/kennyg))
 
 ## [v2.3.0](https://github.com/voxpupuli/puppet-r10k/tree/v2.3.0) (2014-09-15)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.2.8...v2.3.0)
 
 **Closed issues:**
@@ -611,6 +666,7 @@ These should not affect the functionality of the module.
 - provide a knob to flexibly manage the ruby requirement [\#67](https://github.com/voxpupuli/puppet-r10k/pull/67) ([wolfspyre](https://github.com/wolfspyre))
 
 ## [v2.2.8](https://github.com/voxpupuli/puppet-r10k/tree/v2.2.8) (2014-08-28)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.2.7...v2.2.8)
 
 **Closed issues:**
@@ -629,12 +685,15 @@ These should not affect the functionality of the module.
 - Fix default postrun\_command [\#63](https://github.com/voxpupuli/puppet-r10k/pull/63) ([joshbeard](https://github.com/joshbeard))
 
 ## [v2.2.7](https://github.com/voxpupuli/puppet-r10k/tree/v2.2.7) (2014-07-16)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.2.6...v2.2.7)
 
 ## [v2.2.6](https://github.com/voxpupuli/puppet-r10k/tree/v2.2.6) (2014-07-16)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.2.5...v2.2.6)
 
 ## [v2.2.5](https://github.com/voxpupuli/puppet-r10k/tree/v2.2.5) (2014-07-16)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.2.4...v2.2.5)
 
 **Closed issues:**
@@ -647,12 +706,15 @@ These should not affect the functionality of the module.
 - Fix quoting to pass linting [\#57](https://github.com/voxpupuli/puppet-r10k/pull/57) ([adamcrews](https://github.com/adamcrews))
 
 ## [v2.2.4](https://github.com/voxpupuli/puppet-r10k/tree/v2.2.4) (2014-07-07)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.2.3...v2.2.4)
 
 ## [v2.2.3](https://github.com/voxpupuli/puppet-r10k/tree/v2.2.3) (2014-07-07)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.2.2...v2.2.3)
 
 ## [v2.2.2](https://github.com/voxpupuli/puppet-r10k/tree/v2.2.2) (2014-07-07)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.2.1...v2.2.2)
 
 **Closed issues:**
@@ -665,9 +727,11 @@ These should not affect the functionality of the module.
 - Removed symlinked r10k fixture/modules directory. [\#56](https://github.com/voxpupuli/puppet-r10k/pull/56) ([dreilly1982](https://github.com/dreilly1982))
 
 ## [v2.2.1](https://github.com/voxpupuli/puppet-r10k/tree/v2.2.1) (2014-06-04)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.1.2...v2.2.1)
 
 ## [v2.1.2](https://github.com/voxpupuli/puppet-r10k/tree/v2.1.2) (2014-06-04)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.1.1...v2.1.2)
 
 **Merged pull requests:**
@@ -675,9 +739,11 @@ These should not affect the functionality of the module.
 - Stop quoting all configuration options so that prefix is not always on [\#51](https://github.com/voxpupuli/puppet-r10k/pull/51) ([ghoneycutt](https://github.com/ghoneycutt))
 
 ## [v2.1.1](https://github.com/voxpupuli/puppet-r10k/tree/v2.1.1) (2014-06-03)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.1.0...v2.1.1)
 
 ## [v2.1.0](https://github.com/voxpupuli/puppet-r10k/tree/v2.1.0) (2014-06-03)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.0.0...v2.1.0)
 
 **Closed issues:**
@@ -690,6 +756,7 @@ These should not affect the functionality of the module.
 - Attempted fix for issue\#25 [\#44](https://github.com/voxpupuli/puppet-r10k/pull/44) ([tfhartmann](https://github.com/tfhartmann))
 
 ## [v2.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v2.0.0) (2014-06-03)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v1.0.2...v2.0.0)
 
 **Closed issues:**
@@ -706,9 +773,11 @@ These should not affect the functionality of the module.
 - Add ability to specify a symlink for r10k.yaml [\#41](https://github.com/voxpupuli/puppet-r10k/pull/41) ([ghoneycutt](https://github.com/ghoneycutt))
 
 ## [v1.0.2](https://github.com/voxpupuli/puppet-r10k/tree/v1.0.2) (2014-02-19)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v1.0.1...v1.0.2)
 
 ## [v1.0.1](https://github.com/voxpupuli/puppet-r10k/tree/v1.0.1) (2014-02-11)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v1.0.0...v1.0.1)
 
 **Merged pull requests:**
@@ -717,6 +786,7 @@ These should not affect the functionality of the module.
 - update travis config, minor lint fixes [\#34](https://github.com/voxpupuli/puppet-r10k/pull/34) ([jlambert121](https://github.com/jlambert121))
 
 ## [v1.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v1.0.0) (2014-02-09)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v0.0.9...v1.0.0)
 
 **Closed issues:**
@@ -739,6 +809,7 @@ These should not affect the functionality of the module.
 - Add tests for Gentoo [\#18](https://github.com/voxpupuli/puppet-r10k/pull/18) ([tampakrap](https://github.com/tampakrap))
 
 ## [v0.0.9](https://github.com/voxpupuli/puppet-r10k/tree/v0.0.9) (2013-10-21)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v0.0.8...v0.0.9)
 
 **Closed issues:**
@@ -749,6 +820,7 @@ These should not affect the functionality of the module.
 - Require Git [\#10](https://github.com/voxpupuli/puppet-r10k/issues/10)
 
 ## [v0.0.8](https://github.com/voxpupuli/puppet-r10k/tree/v0.0.8) (2013-10-15)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v0.0.7...v0.0.8)
 
 **Closed issues:**
@@ -764,6 +836,7 @@ These should not affect the functionality of the module.
 - Install using bundle option added for bleeding edge features not in gem ... [\#8](https://github.com/voxpupuli/puppet-r10k/pull/8) ([diginc](https://github.com/diginc))
 
 ## [v0.0.7](https://github.com/voxpupuli/puppet-r10k/tree/v0.0.7) (2013-09-10)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v0.0.5...v0.0.7)
 
 **Merged pull requests:**
@@ -772,6 +845,7 @@ These should not affect the functionality of the module.
 - Clean up install class [\#6](https://github.com/voxpupuli/puppet-r10k/pull/6) ([reidmv](https://github.com/reidmv))
 
 ## [v0.0.5](https://github.com/voxpupuli/puppet-r10k/tree/v0.0.5) (2013-08-24)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v0.0.4...v0.0.5)
 
 **Merged pull requests:**
@@ -780,9 +854,11 @@ These should not affect the functionality of the module.
 - fixing comment typo [\#3](https://github.com/voxpupuli/puppet-r10k/pull/3) ([fiddyspence](https://github.com/fiddyspence))
 
 ## [v0.0.4](https://github.com/voxpupuli/puppet-r10k/tree/v0.0.4) (2013-07-25)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v0.0.3...v0.0.4)
 
 ## [v0.0.3](https://github.com/voxpupuli/puppet-r10k/tree/v0.0.3) (2013-07-25)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v0.0.2...v0.0.3)
 
 **Merged pull requests:**
@@ -790,9 +866,13 @@ These should not affect the functionality of the module.
 - Update R10k for PE [\#1](https://github.com/voxpupuli/puppet-r10k/pull/1) ([glarizza](https://github.com/glarizza))
 
 ## [v0.0.2](https://github.com/voxpupuli/puppet-r10k/tree/v0.0.2) (2013-07-11)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v0.0.1...v0.0.2)
 
 ## [v0.0.1](https://github.com/voxpupuli/puppet-r10k/tree/v0.0.1) (2013-06-12)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/ef99b4e25b70fa0293e65b7e0994f4eec6f1815e...v0.0.1)
+
 
 
 \* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
