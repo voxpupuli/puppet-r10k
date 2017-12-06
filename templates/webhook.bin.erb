@@ -172,7 +172,7 @@ class Server < Sinatra::Base
       data['deleted'] rescue false || # Github
       data['push']['changes'][0]['closed'] rescue false || # Bitbucket
       data['refChanges'][0]['type'] rescue false || # Stash/Bitbucket Server
-      data['after] rescue false     # Gitlab
+      data['after'] rescue false     # Gitlab
     )
 
     if [true, 'DELETED', '0000000000000000000000000000000000000000'].include?(branch_deleted)
