@@ -308,12 +308,6 @@ class Server < Sinatra::Base
                  http_options: http_options
       end
 
-      if prefix.nil? or prefix.empty?
-        target_prefix = ''
-      else
-        target_prefix = "#{prefix}_"
-      end
-
       if status_message[:branch]
         target = status_message[:branch]
       elsif status_message[:module]
@@ -322,21 +316,21 @@ class Server < Sinatra::Base
 
       message = {
         author: 'r10k for Puppet',
-        title: "r10k deployment of Puppet environment #{target_prefix}#{target}"
+        title: "r10k deployment of Puppet environment #{target}"
       }
 
       case status_message[:status_code]
       when 200
         message.merge!(
           color: "good",
-          text: "Successfully deployed #{target_prefix}#{target}",
-          fallback: "Successfully deployed #{target_prefix}#{target}"
+          text: "Successfully deployed #{target}",
+          fallback: "Successfully deployed #{target}"
         )
       when 500
         message.merge!(
           color: "bad",
-          text: "Failed to deploy #{target_prefix}#{target}",
-          fallback: "Failed to deploy #{target_prefix}#{target}"
+          text: "Failed to deploy #{target}",
+          fallback: "Failed to deploy #{target}"
         )
       end
 
@@ -463,11 +457,11 @@ class Server < Sinatra::Base
           end
       end
     end #end run_prefix_command
-
+    
 
     # :deploy and :deploy_module methods are vulnerable to shell
     # injection. e.g. a branch named ";yes". Or a malicious POST request with
-    # "; rm -rf *;" as the payload.
+    # "; rm -rf *;" as the payload. 
     def sanitize_input(input_string)
       sanitized = Shellwords.shellescape(input_string)
       $logger.info("module or branch name #{sanitized} had to be escaped!") unless input_string == sanitized
