@@ -1,4 +1,4 @@
-#!/opt/puppetlabs/puppet/bin/ruby
+#!/usr/bin/env ruby
 require 'json'
 require 'open3'
 
@@ -47,9 +47,9 @@ if environments.nil? && modules.nil?
 end
 
 puts({
-  'status'   => (exitstatus == 0),
+  'status'   => exitstatus.zero?,
   'messages' => messages,
   'warnings' => warnings,
-  'errors'   => errors,
+  'errors'   => errors
 }.to_json)
 exit exitstatus
