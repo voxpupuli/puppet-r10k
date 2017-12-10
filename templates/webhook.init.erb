@@ -7,6 +7,15 @@
 #
 # description: Enables web based runs of r10k i.e. github enterprise post hooks
 # processname: webhook
+#
+### BEGIN INIT INFO
+# Required-Start:    $remote_fs $network
+# Required-Stop:     $remote_fs $network
+# Provides:          webhook
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Init script for running the r10k webhook daemon
+### END INIT INFO
 
 [ -f /etc/sysconfig/webhook ] && . /etc/sysconfig/webhook
 
