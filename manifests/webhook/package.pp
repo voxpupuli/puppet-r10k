@@ -4,6 +4,7 @@ class r10k::webhook::package (
   $is_pe_server    = $r10k::params::is_pe_server,
   $provider        = $r10k::params::provider,
   $sinatra_version = $r10k::params::webhook_sinatra_version,
+  $webrick_version = $r10k::params::webhook_webrick_version,
 ) inherits r10k::params {
   if !defined(Package['sinatra']) {
     package { 'sinatra':
@@ -15,7 +16,7 @@ class r10k::webhook::package (
   if (! $is_pe_server) {
     if !defined(Package['webrick']) {
       package { 'webrick':
-        ensure   => installed,
+        ensure   => $webrick_version,
         provider => $provider,
         before   => Service['webhook'],
       }
