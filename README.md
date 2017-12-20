@@ -489,6 +489,12 @@ class { 'r10k::webhook':
 By default, the `r10k::webhook::package` class uses the `puppet_gem` provider to install the latest ruby 2.1 compatible version of sinatra ('~> 1.0').
 If you are overriding `r10k::webhook::package::provider`, you will also need to override `r10k::webhook::package::sinatra_version`.
 
+### Webhook webrick gem installation
+
+By default, the `r10k::webhook::package` class uses the `puppet_gem` provider to install the webrick gem (version 1.3.1)
+This version is compatible with all ruby version (webrick version 1.4.1 require Ruby version >=2.3.0)
+If you are overriding `r10k::webhook::package::provider`, you may also override `r10k::webhook::package::webrick_version`.
+
 ### Webhook Slack notifications
 
 You can enable Slack notifications for the webhook. You will need a
