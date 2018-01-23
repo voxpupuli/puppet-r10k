@@ -13,6 +13,7 @@ describe 'r10k::mcollective', type: :class do
             pe_version: '2016.4.2'
           )
         end
+        let(:pre_condition) { "service { 'mcollective': }" }
 
         it { is_expected.to contain_class('r10k::params') }
         it do
@@ -40,6 +41,15 @@ describe 'r10k::mcollective', type: :class do
           )
         end
         it { is_expected.to contain_file('mcollective_application_file').with_content(%r{\"GIT_SSL_NO_VERIFY\" => \"0\"}) }
+        it do
+          is_expected.to contain_service('mcollective').with(
+            subscribe: [
+              'File[mcollective_agent_executable]',
+              'File[mcollective_agent_ddl]',
+              'File[mcollective_application_file]'
+            ]
+          )
+        end
       end
 
       context 'Puppet Enterprise removing the mcollective agent & application' do
@@ -77,6 +87,8 @@ describe 'r10k::mcollective', type: :class do
       end
 
       context 'Puppet FOSS with defaults' do
+        let(:pre_condition) { "service { 'mcollective': }" }
+
         it { is_expected.to contain_class('r10k::params') }
         it do
           is_expected.to contain_file('mcollective_agent_executable').with(
@@ -100,6 +112,15 @@ describe 'r10k::mcollective', type: :class do
             owner:  'root',
             group:  'root',
             mode:   '0644'
+          )
+        end
+        it do
+          is_expected.to contain_service('mcollective').with(
+            subscribe: [
+              'File[mcollective_agent_executable]',
+              'File[mcollective_agent_ddl]',
+              'File[mcollective_application_file]'
+            ]
           )
         end
       end
