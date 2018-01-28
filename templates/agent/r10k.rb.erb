@@ -22,7 +22,9 @@ module MCollective
             path = request[:path]
             reply.fail "Path not found #{path}" unless File.exists?(path)
             return unless reply.statuscode == 0
-            run_cmd act, path
+            lock do
+              run_cmd act, path
+            end
             reply[:path] = path
           end
         end
@@ -35,15 +37,21 @@ module MCollective
             if act == 'deploy'
               validate :environment, :shellsafe
               environment = request[:environment]
-              run_cmd act, environment
+              lock do
+                run_cmd act, environment
+              end
               reply[:environment] = environment
             elsif act == 'deploy_module'
               validate :module_name, :shellsafe
               module_name = request[:module_name]
-              run_cmd act, module_name
+              lock do
+                run_cmd act, module_name
+              end
               reply[:module_name] = module_name
             else
-              run_cmd act
+              lock do
+                run_cmd act
+              end
             end
           end
         end
@@ -87,6 +95,17 @@ module MCollective
               cmd << 'deploy' << 'module' << arg
             end
             reply[:status] = run(cmd_as_user(cmd), :stderr => :error, :stdout => :output, :chomp => true, :environment => environment)
+        end
+      end
+
+      def lock
+        File.open('/var/run/r10k.lock', 'w+') do |f|
+          if (not f.flock(File::LOCK_EX | File::LOCK_NB))
+            reply.fail "Another instance of r10k already running"
+            Log.info "Another instance of r10k already running"
+          else
+            yield
+          end
         end
       end
     end
