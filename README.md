@@ -24,7 +24,7 @@
 
 This module was built to install and configure r10k. It has a base class to configure r10k to
 synchronize [dynamic environments](https://github.com/adrienthebo/r10k/blob/master/doc/dynamic-environments.mkd).
-It also has a series of lateral scripts and tools that assist in general workflow, that will be seperated into
+It also has a series of lateral scripts and tools that assist in general workflow, that will be separated into
 their own modules into the future.
 
 ## Module Description
@@ -37,7 +37,7 @@ Please refer to the official [r10k docs](https://github.com/puppetlabs/r10k/tree
 
 ### Prefix Example
 Instead of passing a single `remote`, you can pass a puppet [hash](https://docs.puppetlabs.com/puppet/latest/reference/lang_datatypes.html#hashes) as the `sources`
-parameter. This allows you to configure r10k with [prefix](https://github.com/puppetlabs/r10k/blob/910709a2924d6167e2e53e03d64d2cc1a64827d4/doc/dynamic-environments/configuration.mkd#prefix) support. This often used when multiple teams use seperate repos, or if hiera and puppet are distributed across two repos.
+parameter. This allows you to configure r10k with [prefix](https://github.com/puppetlabs/r10k/blob/910709a2924d6167e2e53e03d64d2cc1a64827d4/doc/dynamic-environments/configuration.mkd#prefix) support. This often used when multiple teams use separate repos, or if hiera and puppet are distributed across two repos.
 
 ```puppet
 class { 'r10k':
@@ -242,7 +242,7 @@ This will remove the mcollective agent/application and ddl files from disk. This
 
 # Webhook Support
 
-![alt tag](https://gist.githubusercontent.com/acidprime/be25026c11a76bf3e7fb/raw/44df86181c3e5d14242a1b1f4281bf24e9c48509/webhook.gif)  
+![alt tag](https://gist.githubusercontent.com/acidprime/be25026c11a76bf3e7fb/raw/44df86181c3e5d14242a1b1f4281bf24e9c48509/webhook.gif)
 For version control systems that use web driven post-receive processes you can use the example webhook included in this module.
 When the webhook receives the post-receive event, it will synchronize environments on your puppet masters.
 The webhook uses mcollective for multi-master synchronization and the `peadmin` user from Puppet Enterprise by default.
@@ -522,7 +522,7 @@ class { 'r10k::webhook::config':
 
 ### Webhook Default Branch
 
-The default branch of the controlrepo is commonly called `production`. This value can be overriden if you use another default branch name, such as `master`.
+The default branch of the controlrepo is commonly called `production`. This value can be overridden if you use another default branch name, such as `master`.
 
 ```puppet
 class { 'r10k::webhook::config':
@@ -537,7 +537,7 @@ To aid in debugging, or to give you some hints as to how to trigger the webhook 
 ```bash
 curl -d '
   {
-    "repository": {"name": "foo", "owner": {"login": "foo"}}, 
+    "repository": {"name": "foo", "owner": {"login": "foo"}},
     "ref": "production"
   }' http://puppet-master.example:8088/payload
 ```
@@ -572,7 +572,7 @@ The following is an example of declaring the webhook without a background mode
 ```puppet
 class { 'r10k::webhook':
   . . .
-  background  => false  
+  background  => false
 }
 ```
 
@@ -582,7 +582,7 @@ If you need to configure webhook to not trigger r10k when changes pushed in some
 `r10k::webhook::config::ignore_environments` parameter as array.
 There is an ability to specify it as a regular expression by enclosing it in forward slashes.
 
-Here is an example where the test branch in dev repository and all branches in all repositories that includes the word 'feature' 
+Here is an example where the test branch in dev repository and all branches in all repositories that includes the word 'feature'
 in names will be skipped:
 
 ```puppet
@@ -728,7 +728,7 @@ boolean if to manage symlink
 
 ##### `include_prerun_command`
 Deprecated: Add [prerun_command](https://docs.puppetlabs.com/references/latest/configuration.html#preruncommand) to puppet.conf to run r10k when the agent on the master runs.
-Suggest instead declaring `r10k::postrun_command ` as that will run after the agent runs which prevents r10k from stopping configuration management of masters from occuring as it does with `prerun_command`s
+Suggest instead declaring `r10k::postrun_command ` as that will run after the agent runs which prevents r10k from stopping configuration management of masters from occurring as it does with `prerun_command`s
 
 ##### `include_postrun_command`
 ```
@@ -744,7 +744,7 @@ The 4.1.x release *deprecates* support for:
 * Puppet 3
 * Ruby 1.9.3
 
-These items are are planned for removal in v5.0.0.
+These items are planned for removal in v5.0.0.
 
 ## Support
 
@@ -776,4 +776,3 @@ Quickstart:
 ```
 
 Check the .travis.yml for supported Operating System Versions
-
