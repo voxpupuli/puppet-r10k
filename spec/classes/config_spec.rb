@@ -56,7 +56,7 @@ describe 'r10k::config', type: :class do
           }
         end
 
-        it { is_expected.to contain_file('r10k.yaml').with_content(%r{git:\n.*private_key: /root/\.ssh/id_dsa\n.*provider: rugged\n}) }
+        it { is_expected.to contain_file('r10k.yaml').with_content(%r{git:\n.*private_key: "/root/\.ssh/id_dsa"\n.*provider: rugged\n}) }
       end
 
       context 'manage forge settings of r10k via forge_settings' do
