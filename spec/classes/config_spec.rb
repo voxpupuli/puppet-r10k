@@ -56,7 +56,22 @@ describe 'r10k::config', type: :class do
           }
         end
 
-        it { is_expected.to contain_file('r10k.yaml').with_content(%r{git:\n.*private_key: /root/\.ssh/id_dsa\n.*provider: rugged\n}) }
+        it { is_expected.to contain_file('r10k.yaml').with_content(%r{git:\n.*private_key: "/root/\.ssh/id_dsa"\n.*provider: rugged\n}) }
+      end
+
+      context 'managing git repository settings' do
+        let :params do
+          {
+            git_settings: {
+              repositories: [{
+                remote: 'https://github.com/voxpupuli/fake_repo',
+                proxy: 'http://some.proxy.com'
+              }]
+            }
+          }
+        end
+
+        it { is_expected.to contain_file('r10k.yaml').with_content(%r{git:\n\s+repositories:\n\s+- remote: https://github\.com/voxpupuli/fake_repo\n\s+proxy: http://some\.proxy\.com\n}) }
       end
 
       context 'manage forge settings of r10k via forge_settings' do
