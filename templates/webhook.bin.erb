@@ -68,6 +68,10 @@ if $config['slack_webhook'] then
   require 'slack-notifier'
 end
 
+if $config['rocketchat_webhook'] then
+  require 'rocket-chat-notifier'
+end
+
 $command_prefix = $config['command_prefix'] || ''
 
 class Server < Sinatra::Base
@@ -337,6 +341,54 @@ class Server < Sinatra::Base
       notifier.post text: message[:fallback], attachments: [message]
     end
 
+    def notify_rocketchat(status_message)
+      if $config['rocketchat_channel']
+        rocketchat_channel = $config['rocketchat_channel']
+      else
+        rocketchat_channel = '#r10k'
+      end
+
+      if $config['rocketchat_username']
+        rocketchat_user = $config['rocketchat_username']
+      else
+        rocketchat_user = 'r10k'
+      end
+
+      notifier = RocketChat::Notifier.new $config['rocketchat_webhook']
+      notifier.username = rocketchat_user
+      notifier.channel = rocketchat_channel
+      
+      if status_message[:branch]
+        target = status_message[:branch]
+      elsif status_message[:module]
+        target = status_message[:module]
+      end
+
+      message = "r10k deployment of Puppet environment/module #{target}"
+      attachments = {
+        author: 'r10k for Puppet',
+        title: "r10k deployment of Puppet environment #{target}",
+      }
+
+      case status_message[:status_code]
+      when 200
+        attachments.merge!(
+          color: "good",
+          text: "Successfully deployed #{target}",
+          fallback: "Successfully deployed #{target}",
+        )
+      when 500
+        attachments.merge!(
+          color: "bad",
+          text: "Failed to deploy #{target}",
+          fallback: "Failed to deploy #{target}",
+        )
+      end
+
+      notifier.ping message, attachments: [attachments]
+
+    end
+
     def deploy_module(module_name)
       begin
         if $config['use_mcollective']
@@ -349,12 +401,14 @@ class Server < Sinatra::Base
         $logger.info("message: #{message} module_name: #{module_name}")
         status_message = {:status => :success, :message => message.to_s, :module_name => module_name, :status_code => 200}
         notify_slack(status_message) if slack?
+        notify_rocketchat(status_message) if rocketchat?
         status_message.to_json
       rescue => e
         $logger.error("message: #{e.message} trace: #{e.backtrace}")
         status 500
         status_message = {:status => :fail, :message => e.message, :trace => e.backtrace, :module_name => module_name, :status_code => 500}
         notify_slack(status_message) if slack?
+        notify_rocketchat(status_message) if rocketchat?
         status_message.to_json
       end
     end
@@ -383,6 +437,7 @@ class Server < Sinatra::Base
           generate_types(branch) if types?
         end
         notify_slack(status_message) if slack?
+        notify_rocketchat(status_message) if rocketchat?
         status_message.to_json
      rescue => e
         status_message = {:status => :fail, :message => e.message, :trace => e.backtrace, :branch => branch, :status_code => 500}
@@ -420,6 +475,10 @@ class Server < Sinatra::Base
 
     def slack?
       !!$config['slack_webhook']
+    end
+
+    def rocketchat?
+      !!$config['rocketchat_webhook']
     end
 
     def types?

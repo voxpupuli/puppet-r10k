@@ -520,6 +520,33 @@ class { 'r10k::webhook::config':
 }
 ```
 
+### Webhook Rocket.Chat notifications
+
+You can enable Rocket.Chat notifications for the webhook. You will need a
+Rocket.Chat incoming webhook URL and the `rocket-chat-notifier` gem installed.
+
+To get the Rocket.Chat incoming webhook URL you need to:
+
+1. Go to your Rocket.Chat and then select `Administration-Integrations`.
+2. Choose `New integration`.
+3. Choose `Incoming WebHook`. In the webhook form configure:
+  * `Enabled`: `True`.
+  * `Name`: A name for your webhook.
+  * `Post to Channel`: The channel to post to by default.
+4. Save changes with `Save Changes` bottom.
+
+Then configure the webhook to add your Rocket.Chat Webhook URL.
+
+```puppet
+class { 'r10k::webhook::config':
+  . . .
+  rocketchat_webhook  => <your incoming webhook URL>,  # mandatory for usage
+  rocketchat_username => 'username', # defaults to r10k
+  rocketchat_channel  => '#channel', # defaults to #r10k
+}
+```
+
+
 ### Webhook Default Branch
 
 The default branch of the controlrepo is commonly called `production`. This value can be overridden if you use another default branch name, such as `master`.
