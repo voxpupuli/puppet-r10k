@@ -349,6 +349,42 @@ git_webhook { 'web_post_receive_webhook_for_module' :
   provider     => 'github',
 }
 ```
+### Webhook Bitbucket Example
+This is an example of using the webhook with Atlassian Bitbucket (former Stash).
+Requires the `external hooks` addon by https://marketplace.atlassian.com/plugins/com.ngs.stash.externalhooks.external-hooks/server/overview
+and a specific Bitbucket user/pass. 
+Remember to place the `stash_mco.rb` on the bitbucket server an make it executable.
+Enable the webhook over the repository settings `External Async Post Receive Hook`:
+ - Executable: e.g. `/opt/atlassian/bitbucket-data/external-hooks/stash_mco.rb` (see hook_exe)
+ - Positional parameters: `-t http://git.example.com:8088/payload`
+
+```puppet
+# Add deploy key
+git_deploy_key { 'add_deploy_key_to_puppet_control':
+  ensure       => present,
+  name         => $::fqdn,  
+  path         => '/root/.ssh/id_rsa.pub',
+  username     => 'api', 
+  password     => 'pass',
+  project_name => 'project',
+  repo_name    => 'puppet',
+  server_url   => 'https://git.example.com',
+  provider     => 'stash',
+}
+
+# Add webhook
+git_webhook { 'web_post_receive_webhook' :
+  ensure       => present,
+  webhook_url  => 'https://puppet:puppet@hole.in.firewall:8088/module',
+  password     => 'pass',
+  username     => 'api',
+  project_name => 'project',
+  repo_name    => 'puppet',
+  server_url   => 'https://git.example.com',
+  provider     => 'stash',
+  hook_exe     => '/opt/atlassian/bitbucket-data/external-hooks/stash_mco.rb', 
+}
+```
 
 ### GitHub Secret Support
 GitHub webhooks allow the use of a secret value that gets hashed against the payload to pass a
