@@ -4,7 +4,34 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v6.3.2](https://github.com/voxpupuli/puppet-r10k/tree/v6.3.2) (2018-01-08)
+## [v6.4.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.4.0) (2018-03-28)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.3.2...v6.4.0)
+
+**Implemented enhancements:**
+
+- Using \#to\_yaml instead of printing each element [\#410](https://github.com/voxpupuli/puppet-r10k/pull/410) ([danzilio](https://github.com/danzilio))
+
+**Fixed bugs:**
+
+- Fix metadata for the deploy task [\#415](https://github.com/voxpupuli/puppet-r10k/pull/415) ([dnlsng](https://github.com/dnlsng))
+
+**Closed issues:**
+
+- r10k deploy not working with a minimal Puppetfile [\#409](https://github.com/voxpupuli/puppet-r10k/issues/409)
+- Document bitbucket / stash config / hook\_exe behavior  [\#383](https://github.com/voxpupuli/puppet-r10k/issues/383)
+
+**Merged pull requests:**
+
+- bump puppet to latest supported version 4.10.0 [\#417](https://github.com/voxpupuli/puppet-r10k/pull/417) ([bastelfreak](https://github.com/bastelfreak))
+- Propose small spelling changes [\#408](https://github.com/voxpupuli/puppet-r10k/pull/408) ([jeis2497052](https://github.com/jeis2497052))
+- Restart mcollective if any of the managed files change [\#407](https://github.com/voxpupuli/puppet-r10k/pull/407) ([treydock](https://github.com/treydock))
+- Implement locking for mcollective r10k to avoid multiple instances running in parallel [\#406](https://github.com/voxpupuli/puppet-r10k/pull/406) ([treydock](https://github.com/treydock))
+- Add LSB tags to the webhook init script. [\#405](https://github.com/voxpupuli/puppet-r10k/pull/405) ([dickp](https://github.com/dickp))
+- Add deploy task [\#400](https://github.com/voxpupuli/puppet-r10k/pull/400) ([binford2k](https://github.com/binford2k))
+- add documentation for bitbucket webhook [\#384](https://github.com/voxpupuli/puppet-r10k/pull/384) ([khaefeli](https://github.com/khaefeli))
+
+## [v6.3.2](https://github.com/voxpupuli/puppet-r10k/tree/v6.3.2) (2018-01-09)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.3.1...v6.3.2)
 
@@ -25,10 +52,6 @@ These should not affect the functionality of the module.
 
 - syntax errors when starting the webhook [\#394](https://github.com/voxpupuli/puppet-r10k/issues/394)
 - Fix typo in webhook [\#396](https://github.com/voxpupuli/puppet-r10k/pull/396) ([alexjfisher](https://github.com/alexjfisher))
-
-**Merged pull requests:**
-
-- release 6.3.0 [\#393](https://github.com/voxpupuli/puppet-r10k/pull/393) ([bastelfreak](https://github.com/bastelfreak))
 
 ## [v6.3.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.3.0) (2017-11-26)
 
@@ -53,7 +76,6 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- release 6.2.0 [\#388](https://github.com/voxpupuli/puppet-r10k/pull/388) ([bastelfreak](https://github.com/bastelfreak))
 - Add logging messages [\#385](https://github.com/voxpupuli/puppet-r10k/pull/385) ([amateo](https://github.com/amateo))
 
 ## [v6.1.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.1.0) (2017-06-24)
@@ -71,7 +93,6 @@ These should not affect the functionality of the module.
 - Better handling for the default branch [\#376](https://github.com/voxpupuli/puppet-r10k/pull/376) ([rnelson0](https://github.com/rnelson0))
 - Add Troubleshooting section \(logfile, heartbeat\) to README [\#375](https://github.com/voxpupuli/puppet-r10k/pull/375) ([bittner](https://github.com/bittner))
 - Fix github license detection [\#372](https://github.com/voxpupuli/puppet-r10k/pull/372) ([alexjfisher](https://github.com/alexjfisher))
-- Release 6.0.0 [\#371](https://github.com/voxpupuli/puppet-r10k/pull/371) ([dhollinger](https://github.com/dhollinger))
 
 ## [v6.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.0.0) (2017-05-10)
 
@@ -95,7 +116,6 @@ These should not affect the functionality of the module.
 **Merged pull requests:**
 
 - Webhook: ability to pass extra arguments to mco [\#363](https://github.com/voxpupuli/puppet-r10k/pull/363) ([nike38rus](https://github.com/nike38rus))
-- Release 5.0.2 [\#361](https://github.com/voxpupuli/puppet-r10k/pull/361) ([dhollinger](https://github.com/dhollinger))
 - use stdlib puppet facts for configuration [\#352](https://github.com/voxpupuli/puppet-r10k/pull/352) ([vchepkov](https://github.com/vchepkov))
 - Added /heartbeat url endpoint to webhook [\#272](https://github.com/voxpupuli/puppet-r10k/pull/272) ([thebaron](https://github.com/thebaron))
 
@@ -122,7 +142,6 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- Release 5.0.1 [\#358](https://github.com/voxpupuli/puppet-r10k/pull/358) ([bastelfreak](https://github.com/bastelfreak))
 - puppet-lint: fix arrow\_on\_right\_operand\_line [\#357](https://github.com/voxpupuli/puppet-r10k/pull/357) ([bastelfreak](https://github.com/bastelfreak))
 - Create sanitize\_input helper method for strings sent to run\_command method. [\#356](https://github.com/voxpupuli/puppet-r10k/pull/356) ([xraystyle](https://github.com/xraystyle))
 - Use styleguide compliant syntax for sshkey example. [\#353](https://github.com/voxpupuli/puppet-r10k/pull/353) ([kallies](https://github.com/kallies))
@@ -139,7 +158,6 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- Release 5.0.0 [\#347](https://github.com/voxpupuli/puppet-r10k/pull/347) ([rnelson0](https://github.com/rnelson0))
 - r10k.yaml contents indentation is incorrect [\#345](https://github.com/voxpupuli/puppet-r10k/pull/345) ([Kotty666](https://github.com/Kotty666))
 - Update yaml location for \>PE3 [\#343](https://github.com/voxpupuli/puppet-r10k/pull/343) ([rnelson0](https://github.com/rnelson0))
 - replace all validate functions with datatypes [\#341](https://github.com/voxpupuli/puppet-r10k/pull/341) ([bastelfreak](https://github.com/bastelfreak))
@@ -177,7 +195,6 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- Release 4.1.0 [\#325](https://github.com/voxpupuli/puppet-r10k/pull/325) ([rnelson0](https://github.com/rnelson0))
 - \(GH323\) Better parameterization of root user/group from \#279 [\#324](https://github.com/voxpupuli/puppet-r10k/pull/324) ([rnelson0](https://github.com/rnelson0))
 - Fix rubocop failures from \#268 [\#322](https://github.com/voxpupuli/puppet-r10k/pull/322) ([rnelson0](https://github.com/rnelson0))
 - Bump minimum version dependencies \(for Puppet 4\) [\#318](https://github.com/voxpupuli/puppet-r10k/pull/318) ([juniorsysadmin](https://github.com/juniorsysadmin))
@@ -192,16 +209,11 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- Release 4.0.2 [\#305](https://github.com/voxpupuli/puppet-r10k/pull/305) ([rnelson0](https://github.com/rnelson0))
 - Changelog for 4.0.1 [\#304](https://github.com/voxpupuli/puppet-r10k/pull/304) ([rnelson0](https://github.com/rnelson0))
 
 ## [v4.0.1](https://github.com/voxpupuli/puppet-r10k/tree/v4.0.1) (2016-11-20)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v4.0.0...v4.0.1)
-
-**Merged pull requests:**
-
-- Release 4.0.1 [\#303](https://github.com/voxpupuli/puppet-r10k/pull/303) ([rnelson0](https://github.com/rnelson0))
 
 ## [v4.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v4.0.0) (2016-11-20)
 
@@ -217,9 +229,7 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- Reformat release header for 4.0.0 [\#302](https://github.com/voxpupuli/puppet-r10k/pull/302) ([rnelson0](https://github.com/rnelson0))
 - Rename CHANGELOG.md [\#301](https://github.com/voxpupuli/puppet-r10k/pull/301) ([rnelson0](https://github.com/rnelson0))
-- Release candidate for v4.0.0 [\#299](https://github.com/voxpupuli/puppet-r10k/pull/299) ([rnelson0](https://github.com/rnelson0))
 - Fixes Puppet 4 path for webhook [\#295](https://github.com/voxpupuli/puppet-r10k/pull/295) ([andrewwippler](https://github.com/andrewwippler))
 - Update config\_version.sh [\#291](https://github.com/voxpupuli/puppet-r10k/pull/291) ([seanscottking](https://github.com/seanscottking))
 - Fix testing [\#288](https://github.com/voxpupuli/puppet-r10k/pull/288) ([ghoneycutt](https://github.com/ghoneycutt))
@@ -324,7 +334,7 @@ These should not affect the functionality of the module.
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.8.2...v2.8.3)
 
-**Fixed bugs:**
+**Implemented enhancements:**
 
 - \[Bug\] Webhook does not support Ping event from GitHub [\#89](https://github.com/voxpupuli/puppet-r10k/issues/89)
 
@@ -429,10 +439,13 @@ These should not affect the functionality of the module.
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.7.0...v2.7.1)
 
+**Implemented enhancements:**
+
+- /var/log/webhook permissions not managed properly [\#144](https://github.com/voxpupuli/puppet-r10k/issues/144)
+
 **Fixed bugs:**
 
 - Sinatra gem required for PE webhook? [\#154](https://github.com/voxpupuli/puppet-r10k/issues/154)
-- /var/log/webhook permissions not managed properly [\#144](https://github.com/voxpupuli/puppet-r10k/issues/144)
 
 **Merged pull requests:**
 
