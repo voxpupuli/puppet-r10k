@@ -10,7 +10,7 @@ class r10k::webhook::package (
     package { 'sinatra':
       ensure   => $sinatra_version,
       provider => $provider,
-      before   => Service['webhook'],
+      notify   => Service['webhook'],
     }
   }
   if (! $is_pe_server) {
@@ -18,7 +18,7 @@ class r10k::webhook::package (
       package { 'webrick':
         ensure   => $webrick_version,
         provider => $provider,
-        before   => Service['webhook'],
+        notify   => Service['webhook'],
       }
     }
 
@@ -26,7 +26,7 @@ class r10k::webhook::package (
       package { 'json':
         ensure   => installed,
         provider => $provider,
-        before   => Service['webhook'],
+        notify   => Service['webhook'],
       }
     }
   }
