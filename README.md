@@ -175,7 +175,7 @@ mco r10k synchronize
 You can sync an individual environment using:
 
 ```shell
-mco r10k deploy <environment>
+mco r10k deploy environment <environment>
 ```
 Note: This implies `-p`
 
