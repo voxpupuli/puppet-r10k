@@ -1,6 +1,9 @@
 <%
     def settings_to_yaml(type, settings)
-      sorted_settings = settings.sort_by { |k,v| k }.to_h
+      require 'yaml'
+      hash = {}
+      settings.sort.map { |k,v| hash[k] = v }
+      sorted_settings = hash 
       hash = { type.to_sym => sorted_settings }
       hash.to_yaml.gsub(/---\n/, '')
     end
