@@ -117,7 +117,7 @@ class Server < Sinatra::Base
 
     module_name = sanitize_input(module_name)
     $logger.info("Deploying module #{module_name}")
-    deploy_module(module_name)
+    Process.detach(fork { deploy_module(module_name) })
   end
 
   # Simulate a github post:
@@ -205,7 +205,7 @@ class Server < Sinatra::Base
       return 200
     else
       $logger.info("Deploying environment #{env}")
-      deploy(env, deleted)
+      Process.detach(fork { deploy(env, deleted) })
     end
   end
 
@@ -253,14 +253,9 @@ class Server < Sinatra::Base
         # the other one to complete.
         file.flock(File::LOCK_EX)
 
-        if Open3.respond_to?('capture3')
-          stdout, stderr, exit_status = Open3.capture3(command)
-          message = "triggered: #{command}\n#{stdout}\n#{stderr}"
-        else
-          message = "forked: #{command}"
-          Process.detach(fork{ exec "#{command} &"})
-          exit_status = 0
-        end
+        message = "forked: #{command}"
+        exec "#{command} &"
+        exit_status = 0
         raise "#{stdout}\n#{stderr}" if exit_status != 0
       end
       message
