@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v6.5.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.5.0) (2018-04-25)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.4.0...v6.5.0)
+
+**Fixed bugs:**
+
+- Restart webhook service after package update/installation [\#419](https://github.com/voxpupuli/puppet-r10k/pull/419) ([tuxmea](https://github.com/tuxmea))
+
+**Closed issues:**
+
+- undefined method `to\_h' in r10k.yaml.erb [\#421](https://github.com/voxpupuli/puppet-r10k/issues/421)
+
+**Merged pull requests:**
+
+- Remove Open3 and move process forks [\#425](https://github.com/voxpupuli/puppet-r10k/pull/425) ([dhollinger](https://github.com/dhollinger))
+- Fixing compatibility with puppetserver/jruby. [\#424](https://github.com/voxpupuli/puppet-r10k/pull/424) ([dforste](https://github.com/dforste))
+- Minor syntax update for deploying individual environment. [\#423](https://github.com/voxpupuli/puppet-r10k/pull/423) ([bschonec](https://github.com/bschonec))
+- Add supports for rocketchat [\#413](https://github.com/voxpupuli/puppet-r10k/pull/413) ([amateo](https://github.com/amateo))
+
 ## [v6.4.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.4.0) (2018-03-28)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.3.2...v6.4.0)
@@ -207,13 +226,13 @@ These should not affect the functionality of the module.
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v4.0.1...v4.0.2)
 
-**Merged pull requests:**
-
-- Changelog for 4.0.1 [\#304](https://github.com/voxpupuli/puppet-r10k/pull/304) ([rnelson0](https://github.com/rnelson0))
-
 ## [v4.0.1](https://github.com/voxpupuli/puppet-r10k/tree/v4.0.1) (2016-11-20)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v4.0.0...v4.0.1)
+
+**Merged pull requests:**
+
+- Changelog for 4.0.1 [\#304](https://github.com/voxpupuli/puppet-r10k/pull/304) ([rnelson0](https://github.com/rnelson0))
 
 ## [v4.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v4.0.0) (2016-11-20)
 
@@ -290,14 +309,11 @@ These should not affect the functionality of the module.
 - Automatically calculate some prefixes [\#236](https://github.com/voxpupuli/puppet-r10k/pull/236) ([binford2k](https://github.com/binford2k))
 - Add the ability to respond only to certain events [\#235](https://github.com/voxpupuli/puppet-r10k/pull/235) ([binford2k](https://github.com/binford2k))
 - Let rb scripts resolve what ruby to use themselves [\#233](https://github.com/voxpupuli/puppet-r10k/pull/233) ([attachmentgenie](https://github.com/attachmentgenie))
+- Making r10k webhook 2015.x compatible [\#229](https://github.com/voxpupuli/puppet-r10k/pull/229) ([WhatsARanjit](https://github.com/WhatsARanjit))
 
 ## [v2.8.4](https://github.com/voxpupuli/puppet-r10k/tree/v2.8.4) (2015-08-03)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v3.0.0...v2.8.4)
-
-**Merged pull requests:**
-
-- Making r10k webhook 2015.x compatible [\#229](https://github.com/voxpupuli/puppet-r10k/pull/229) ([WhatsARanjit](https://github.com/WhatsARanjit))
 
 ## [v3.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v3.0.0) (2015-07-31)
 
@@ -467,6 +483,9 @@ These should not affect the functionality of the module.
 **Merged pull requests:**
 
 - 3.x [\#148](https://github.com/voxpupuli/puppet-r10k/pull/148) ([acidprime](https://github.com/acidprime))
+- fix for /var/run being mounted on tmpfs in ubuntu 14.04 [\#147](https://github.com/voxpupuli/puppet-r10k/pull/147) ([spidersddd](https://github.com/spidersddd))
+- Add commas in README example [\#143](https://github.com/voxpupuli/puppet-r10k/pull/143) ([cmurphy](https://github.com/cmurphy))
+- support for 'user' argument to su to another user when executing git and R10K [\#142](https://github.com/voxpupuli/puppet-r10k/pull/142) ([GeoffWilliams](https://github.com/GeoffWilliams))
 
 ## [v2.6.5](https://github.com/voxpupuli/puppet-r10k/tree/v2.6.5) (2015-03-18)
 
@@ -479,12 +498,6 @@ These should not affect the functionality of the module.
 **Closed issues:**
 
 - Add Gitlab support \(or add Gitlab documentation\) [\#145](https://github.com/voxpupuli/puppet-r10k/issues/145)
-
-**Merged pull requests:**
-
-- fix for /var/run being mounted on tmpfs in ubuntu 14.04 [\#147](https://github.com/voxpupuli/puppet-r10k/pull/147) ([spidersddd](https://github.com/spidersddd))
-- Add commas in README example [\#143](https://github.com/voxpupuli/puppet-r10k/pull/143) ([cmurphy](https://github.com/cmurphy))
-- support for 'user' argument to su to another user when executing git and R10K [\#142](https://github.com/voxpupuli/puppet-r10k/pull/142) ([GeoffWilliams](https://github.com/GeoffWilliams))
 
 ## [v2.6.4](https://github.com/voxpupuli/puppet-r10k/tree/v2.6.4) (2015-02-26)
 
@@ -626,13 +639,13 @@ These should not affect the functionality of the module.
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.4.0...v2.4.1)
 
-**Closed issues:**
-
-- r10k 1.3.5 has been released [\#98](https://github.com/voxpupuli/puppet-r10k/issues/98)
-
 ## [v2.4.0](https://github.com/voxpupuli/puppet-r10k/tree/v2.4.0) (2014-11-21)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v2.3.4...v2.4.0)
+
+**Closed issues:**
+
+- r10k 1.3.5 has been released [\#98](https://github.com/voxpupuli/puppet-r10k/issues/98)
 
 ## [v2.3.4](https://github.com/voxpupuli/puppet-r10k/tree/v2.3.4) (2014-11-20)
 
@@ -835,11 +848,8 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- Update config tests [\#33](https://github.com/voxpupuli/puppet-r10k/pull/33) ([xaque208](https://github.com/xaque208))
 - Update config.pp [\#32](https://github.com/voxpupuli/puppet-r10k/pull/32) ([xaque208](https://github.com/xaque208))
 - add ability to include mcollective agent through main class [\#30](https://github.com/voxpupuli/puppet-r10k/pull/30) ([jlambert121](https://github.com/jlambert121))
-- update travis config, minor lint fixes [\#29](https://github.com/voxpupuli/puppet-r10k/pull/29) ([jlambert121](https://github.com/jlambert121))
-- fixes for open-source puppet edition [\#28](https://github.com/voxpupuli/puppet-r10k/pull/28) ([attilabogar](https://github.com/attilabogar))
 - The gem is called 'bundler' [\#27](https://github.com/voxpupuli/puppet-r10k/pull/27) ([glarizza](https://github.com/glarizza))
 - Bump to 0.0.10 [\#26](https://github.com/voxpupuli/puppet-r10k/pull/26) ([glarizza](https://github.com/glarizza))
 - Ability to pass package\_name [\#24](https://github.com/voxpupuli/puppet-r10k/pull/24) ([tampakrap](https://github.com/tampakrap))
