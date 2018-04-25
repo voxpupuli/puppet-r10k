@@ -116,7 +116,7 @@ class Server < Sinatra::Base
     end
 
     module_name = sanitize_input(module_name)
-    $logger.info("Deploying module #{module_name}")
+    $logger.info("Deploying module #{module_name}" in the background.)
     Process.detach(fork { deploy_module(module_name) })
   end
 
@@ -204,7 +204,7 @@ class Server < Sinatra::Base
       $logger.info("Skipping deployment of environment #{env} according to ignore_environments configuration parameter")
       return 200
     else
-      $logger.info("Deploying environment #{env}")
+      $logger.info("Deploying environment #{env} in the background")
       Process.detach(fork { deploy(env, deleted) })
     end
   end
@@ -253,7 +253,7 @@ class Server < Sinatra::Base
         # the other one to complete.
         file.flock(File::LOCK_EX)
 
-        message = "forked: #{command}"
+        message = "triggered: #{command}"
         exec "#{command} &"
         exit_status = 0
         raise "#{stdout}\n#{stderr}" if exit_status != 0
@@ -394,7 +394,7 @@ class Server < Sinatra::Base
         end
         message = run_command(command)
         $logger.info("message: #{message} module_name: #{module_name}")
-        status_message = {:status => :success, :message => message.to_s, :module_name => module_name, :status_code => 200}
+        status_message = {:status => :success, :message => message.to_s, :module_name => module_name, :status_code => 202}
         notify_slack(status_message) if slack?
         notify_rocketchat(status_message) if rocketchat?
         status_message.to_json
@@ -426,7 +426,7 @@ class Server < Sinatra::Base
           end
           message = run_command(command)
         end
-        status_message =  {:status => :success, :message => message.to_s, :branch => branch, :status_code => 200}
+        status_message =  {:status => :success, :message => message.to_s, :branch => branch, :status_code => 202}
         $logger.info("message: #{message} branch: #{branch}")
         unless deleted
           generate_types(branch) if types?
