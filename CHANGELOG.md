@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v6.5.1](https://github.com/voxpupuli/puppet-r10k/tree/v6.5.1) (2018-05-01)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.5.0...v6.5.1)
+
+**Closed issues:**
+
+- Syntax Error in voxpupuli/puppet-r10k/templates/webhook.bin.erb, line 119 [\#427](https://github.com/voxpupuli/puppet-r10k/issues/427)
+
+**Merged pull requests:**
+
+- Update webhook.bin.erb [\#428](https://github.com/voxpupuli/puppet-r10k/pull/428) ([rnelson0](https://github.com/rnelson0))
+
 ## [v6.5.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.5.0) (2018-04-25)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.4.0...v6.5.0)
@@ -18,6 +30,7 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
+- Release 6.5.0 [\#426](https://github.com/voxpupuli/puppet-r10k/pull/426) ([dhollinger](https://github.com/dhollinger))
 - Remove Open3 and move process forks [\#425](https://github.com/voxpupuli/puppet-r10k/pull/425) ([dhollinger](https://github.com/dhollinger))
 - Fixing compatibility with puppetserver/jruby. [\#424](https://github.com/voxpupuli/puppet-r10k/pull/424) ([dforste](https://github.com/dforste))
 - Minor syntax update for deploying individual environment. [\#423](https://github.com/voxpupuli/puppet-r10k/pull/423) ([bschonec](https://github.com/bschonec))
