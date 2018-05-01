@@ -116,7 +116,7 @@ class Server < Sinatra::Base
     end
 
     module_name = sanitize_input(module_name)
-    $logger.info("Deploying module #{module_name}" in the background.)
+    $logger.info("Deploying module #{module_name} in the background.")
     Process.detach(fork { deploy_module(module_name) })
   end
 
