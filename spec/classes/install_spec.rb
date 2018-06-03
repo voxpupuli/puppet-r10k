@@ -93,7 +93,7 @@ describe 'r10k::install', type: :class do
           }
         end
 
-        it { is_expected.to contain_class('git') }
+        it { is_expected.not_to contain_class('git') }
         it { is_expected.to contain_class('r10k::install::puppet_gem') }
         it do
           is_expected.to contain_package('r10k').with(
