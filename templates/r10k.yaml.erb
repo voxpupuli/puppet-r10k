@@ -12,7 +12,9 @@
 <% if @postrun and @postrun.is_a?(Array) -%>
 :postrun: [<%= @postrun.map{ |s| "\"#{s}\"" }.join(', ') %>]
 <% end -%>
+<% if @cachedir and @cachedir != '' -%>
 :cachedir: <%= @cachedir %>
+<% end -%>
 <% unless @r10k_sources.empty? -%>
 :sources:
 <% @source_keys.sort.each do |source| -%>
