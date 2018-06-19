@@ -98,6 +98,16 @@ describe 'r10k::config', type: :class do
 
         it { is_expected.to contain_file('r10k.yaml').with_content(%r{^.*:postrun: \[\"/usr/bin/curl\", \"-F\", \"deploy=done\", \"http://my-app\.site/endpoint\"\]\n.*$}) }
       end
+
+      context 'with empty cachedir' do
+        let :params do
+          {
+            cachedir: ''
+          }
+        end
+
+        it { is_expected.to contain_file('r10k.yaml').without_content(%r{^:cachedir: .*$}) }
+      end
     end
   end
 end
