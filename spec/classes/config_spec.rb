@@ -102,7 +102,7 @@ describe 'r10k::config', type: :class do
       context 'with empty cachedir' do
         let :params do
           {
-            cachedir: '',
+            cachedir: ''
           }
         end
 
