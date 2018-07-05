@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v6.6.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.6.0) (2018-07-05)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.5.1...v6.6.0)
+
+**Implemented enhancements:**
+
+- wrap is\_pe fact in fact\(\) method to fail safely if it isn't present [\#438](https://github.com/voxpupuli/puppet-r10k/pull/438) ([bastelfreak](https://github.com/bastelfreak))
+- make cachedir optional [\#437](https://github.com/voxpupuli/puppet-r10k/pull/437) ([Andor](https://github.com/Andor))
+
+**Closed issues:**
+
+- Newest r10k breaks erb parsing [\#420](https://github.com/voxpupuli/puppet-r10k/issues/420)
+
+**Merged pull requests:**
+
+- Remove docker nodesets [\#434](https://github.com/voxpupuli/puppet-r10k/pull/434) ([bastelfreak](https://github.com/bastelfreak))
+- drop EOL OSs; fix puppet version range [\#433](https://github.com/voxpupuli/puppet-r10k/pull/433) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v6.5.1](https://github.com/voxpupuli/puppet-r10k/tree/v6.5.1) (2018-05-01)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.5.0...v6.5.1)
