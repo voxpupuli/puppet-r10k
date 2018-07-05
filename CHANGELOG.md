@@ -4,12 +4,13 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v6.6.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.6.0) (2018-07-05)
+## [v6.6.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.6.0) (2018-07-06)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.5.1...v6.6.0)
 
 **Implemented enhancements:**
 
+- provide proper default for $r10k\_basedir [\#440](https://github.com/voxpupuli/puppet-r10k/pull/440) ([bastelfreak](https://github.com/bastelfreak))
 - wrap is\_pe fact in fact\(\) method to fail safely if it isn't present [\#438](https://github.com/voxpupuli/puppet-r10k/pull/438) ([bastelfreak](https://github.com/bastelfreak))
 - make cachedir optional [\#437](https://github.com/voxpupuli/puppet-r10k/pull/437) ([Andor](https://github.com/Andor))
 
