@@ -253,9 +253,9 @@ class Server < Sinatra::Base
         # the other one to complete.
         file.flock(File::LOCK_EX)
 
-        stdout, stderr, exit_status = Open3.capture3(command)
-        message = "triggered: #{command}\n#{stdout}\n#{stderr}"
-
+        message = "triggered: #{command}"
+        exec "#{command} &"
+        exit_status = 0
         raise "#{stdout}\n#{stderr}" if exit_status != 0
       end
       message
