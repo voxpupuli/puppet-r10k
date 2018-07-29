@@ -439,6 +439,7 @@ class Server < Sinatra::Base
         $logger.error("message: #{e.message} trace: #{e.backtrace}")
         status 500
         notify_slack(status_message) if slack?
+        notify_rocketchat(status_message) if rocketchat?
         status_message.to_json
       end
     end  #end deploy()
