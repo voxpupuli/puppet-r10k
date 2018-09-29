@@ -520,6 +520,14 @@ class { 'r10k::webhook':
 }
 ```
 
+### Webhook FOSS support using OS Ruby
+Some OS bring r10k as OS installation package. In this case you want to be able to set the ruby interpreter explizitly.
+```puppet
+class { 'r10k::webhook':
+  ruby_bin => '/usr/bin/ruby',
+}
+```
+
 ### Webhook sinatra gem installation
 
 By default, the `r10k::webhook::package` class uses the `puppet_gem` provider to install the latest ruby 2.1 compatible version of sinatra ('~> 1.0').

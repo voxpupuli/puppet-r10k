@@ -12,6 +12,7 @@ class r10k::webhook(
   $root_user        = $r10k::params::root_user,
   $root_group       = $r10k::params::root_group,
   $manage_packages  = true,
+  $ruby_bin         = undef,
 ) inherits r10k::params {
 
   File {
