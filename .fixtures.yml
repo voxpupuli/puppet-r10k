@@ -11,5 +11,3 @@ fixtures:
     portage:
       repo: "https://github.com/gentoo/puppet-portage.git"
       ref: "2.3.0"
-  symlinks:
-    r10k:    "#{source_dir}"
