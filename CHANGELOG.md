@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v6.7.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.7.0) (2018-10-13)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.6.1...v6.7.0)
+
+**Implemented enhancements:**
+
+- Allow usage of OS r10k packages [\#453](https://github.com/voxpupuli/puppet-r10k/pull/453) ([tuxmea](https://github.com/tuxmea))
+
+**Fixed bugs:**
+
+- Handle environment name normalized by r10k [\#452](https://github.com/voxpupuli/puppet-r10k/pull/452) ([sapakt](https://github.com/sapakt))
+
+**Merged pull requests:**
+
+- allow puppet 6.x [\#454](https://github.com/voxpupuli/puppet-r10k/pull/454) ([bastelfreak](https://github.com/bastelfreak))
+- allow puppetlabs/stdlib 5.x [\#450](https://github.com/voxpupuli/puppet-r10k/pull/450) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v6.6.1](https://github.com/voxpupuli/puppet-r10k/tree/v6.6.1) (2018-07-29)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.6.0...v6.6.1)
