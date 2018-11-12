@@ -267,7 +267,11 @@ class Server < Sinatra::Base
 
     def generate_types(environment)
       begin
-        command = "#{$command_prefix} /opt/puppetlabs/bin/puppet generate types --environment #{environment.gsub(/\W/, '_')}"
+        if $config['use_mcollective']
+          command = "#{$command_prefix} mco r10k generate_types --environment #{environment.gsub(/\W/, '_')}"
+        else
+          command = "#{$command_prefix} /opt/puppetlabs/bin/puppet generate types --environment #{environment.gsub(/\W/, '_')}"
+        end
 
         message = run_command(command)
         $logger.info("message: #{message} environment: #{environment}")
