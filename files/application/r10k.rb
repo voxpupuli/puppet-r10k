@@ -1,4 +1,21 @@
 class MCollective::Application::R10k<MCollective::Application
+  description 'R10K interface for MCO'
+
+  usage <<-END_OF_USAGE
+mco r10k <ACTION> <ARGUMENTS>
+Usage: mco r10k <push|pull|status|deploy|deploy_module|generate_types>
+
+The ACTION can be one of the following:
+
+    push            - Git push a module
+    pull            - Git pull a module
+    status          - Git status of a module
+    deploy          - Deploy a specific environment, and its Puppetfile specified modules
+    deploy_module   - Deploy a specific module
+    generate_types  - Generate metadata file of resource types
+
+END_OF_USAGE
+
   def post_option_parser(configuration)
     if ARGV.length >= 1
       configuration[:command] = ARGV.shift

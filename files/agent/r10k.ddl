@@ -127,7 +127,7 @@ action 'deploy_module', :description => "Deploy a specific module" do
   display :always
 end
 
-action 'generate_types', :description => "Generate metadata files" do
+action 'generate_types', :description => "Generate metadata files of resource types" do
   input :environment,
         :prompt => "Specific environment",
         :description => "Generate metadata files for a particular environment",
