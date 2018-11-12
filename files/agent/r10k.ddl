@@ -126,4 +126,36 @@ action 'deploy_module', :description => "Deploy a specific module" do
 
   display :always
 end
+
+action 'generate_types', :description => "Generate metadata files" do
+  input :environment,
+        :prompt => "Specific environment",
+        :description => "Generate metadata files for a particular environment",
+        :type => :string,
+        :validation => '.',
+        :optional => true,
+        :maxlength => 256
+
+  input :user,
+        :prompt      => "User",
+        :description => "User to run as",
+        :type        => :string,
+        :validation  => '\w+',
+        :optional    => true,
+        :maxlength   => 32
+
+  output :environment,
+         :description => "Generate metadata files for a particular environment",
+         :display_as  => "Specific environment"
+
+  output :output,
+         :description => "Output from r10k",
+         :display_as  => "Output"
+
+  output :error,
+         :description => "Error from r10k",
+         :display_as  => "Errors"
+
+  display :always
+end
 # vim: set syntax=ruby:
