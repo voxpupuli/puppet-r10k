@@ -256,9 +256,9 @@ class Server < Sinatra::Base
         # more or less simultaneously. To mitigate, we just lock on a file and wait for
         # the other one to complete.
         file.flock(File::LOCK_EX)
-
+ 
         message = "triggered: #{command}"
-        Process.detach(fork { exec "#{command} &" })
+        fork { exec "#{command}" }
         exit_status = 0
         raise "#{stdout}\n#{stderr}" if exit_status != 0
       end
@@ -269,6 +269,9 @@ class Server < Sinatra::Base
       begin
         if $config['use_mcollective']
           command = "#{$command_prefix} mco r10k generate_types #{environment.gsub(/\W/, '_')}"
+          # because of the r10k racing condition issue  wait for other r10k processes to finish
+          # https://github.com/voxpupuli/puppet-r10k/pull/268
+          Process.waitall
         else
           command = "#{$command_prefix} /opt/puppetlabs/bin/puppet generate types --environment #{environment.gsub(/\W/, '_')}"
         end
