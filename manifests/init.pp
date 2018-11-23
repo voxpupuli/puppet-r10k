@@ -25,7 +25,6 @@ class r10k (
   $postrun                                                    = undef,
   Boolean $include_prerun_command                             = false,
   Boolean $include_postrun_command                            = false,
-  Boolean $install_gcc                                        = false,
 ) inherits r10k::params {
 
   # Check if user is declaring both classes
@@ -52,7 +51,6 @@ class r10k (
     provider               => $provider,
     version                => $version,
     puppet_master          => $puppet_master,
-    install_gcc            => $install_gcc,
   }
 
   class { '::r10k::config':
