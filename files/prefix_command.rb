@@ -5,7 +5,7 @@ require 'yaml'
 if STDIN.tty?
   puts 'This command is meant be launched by webhook'
 else
-  prefixes = YAML.load_file('/etc/r10k.yaml')
+  prefixes = YAML.load_file('/etc/puppetlabs/r10k/r10k.yaml')
 
   json_data = JSON.parse(STDIN.read)
   url = json_data['repository']['url']
