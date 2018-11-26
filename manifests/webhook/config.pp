@@ -20,7 +20,7 @@ class r10k::webhook::config (
   $use_mco_ruby                   = $r10k::params::webhook_use_mco_ruby,
   $protected                      = $r10k::params::webhook_protected,
   $github_secret                  = $r10k::params::webhook_github_secret,
-  $bitbucket_secret               = $r10k::params::webhook_bitbucket_secret,
+  String $bitbucket_secret        = $r10k::params::webhook_bitbucket_secret,
   $discovery_timeout              = $r10k::params::webhook_discovery_timeout,
   $client_timeout                 = $r10k::params::webhook_client_timeout,
   $prefix                         = $r10k::params::webhook_prefix,
