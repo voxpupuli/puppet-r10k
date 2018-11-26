@@ -2,7 +2,6 @@ fixtures:
   repositories:
     stdlib:  "https://github.com/puppetlabs/puppetlabs-stdlib.git"
     ruby:    "https://github.com/puppetlabs/puppetlabs-ruby.git"
-    gcc:     "https://github.com/puppetlabs/puppetlabs-gcc.git"
     pe_gem:  "https://github.com/puppetlabs/puppetlabs-pe_gem.git"
     make:    "https://github.com/voxpupuli/puppet-make.git"
     inifile: "https://github.com/puppetlabs/puppetlabs-inifile.git"
@@ -11,5 +10,3 @@ fixtures:
     portage:
       repo: "https://github.com/gentoo/puppet-portage.git"
       ref: "2.3.0"
-  symlinks:
-    r10k:    "#{source_dir}"
