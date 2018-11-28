@@ -24,10 +24,6 @@ describe 'r10k::install', type: :class do
 
         it { is_expected.to contain_class('git') }
 
-        # New versions of this gem do not require these packages
-        it { is_expected.not_to contain_class('make') }
-        it { is_expected.not_to contain_package('gcc') }
-
         it { is_expected.to contain_class('r10k::install::gem').with(version: version) }
         it do
           is_expected.to contain_package('r10k').with(
