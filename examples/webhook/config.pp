@@ -1,11 +1,11 @@
 include ::r10k::webhook
 
 file {'/usr/local/bin/prefix_command.rb':
-  ensure => file,
-  mode   => '0755',
-  owner  => 'root',
-  group  => '0',
-  source => 'puppet:///modules/r10k/prefix_command.rb',
+  ensure  => file,
+  mode    => '0755',
+  owner   => 'root',
+  group   => '0',
+  content => template('puppet-r10k/prefix_command.erb'),
 }
 
 class {'::r10k::webhook::config':

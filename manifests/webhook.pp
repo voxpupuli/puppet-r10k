@@ -1,5 +1,6 @@
 # This class creates a github webhoook to allow curl style post-rec scripts
 class r10k::webhook(
+  $configfile       = $r10k::params::r10k_config_file,
   $ensure           = true,
   $user             = $r10k::params::webhook_user,
   $group            = $r10k::params::webhook_group,

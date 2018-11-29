@@ -9,7 +9,7 @@ describe 'Prefix Enabled,System Ruby with No SSL, Not protected, No mcollective'
         mode   => '0755',
         owner  => 'root',
         group  => '0',
-        source => 'puppet:///modules/r10k/prefix_command.rb',
+        content => template('puppet-r10k/prefix_command.erb'),
       }
       class { 'r10k':
         sources => {
