@@ -31,7 +31,7 @@ describe 'GitHub Secret Enabled, System Ruby with No SSL, Not protected, No mcol
     end
 
     context 'supports style Github payloads via module end point with signature in header' do
-      HMAC_DIGEST = OpenSSL::Digest::Digest.new('sha1')
+      HMAC_DIGEST = OpenSSL::Digest.new('sha1')
       signature = 'sha1=' + OpenSSL::HMAC.hexdigest(HMAC_DIGEST, 'secret', '{ "repository": { "name": "puppetlabs-stdlib" } }')
 
       describe command("/usr/bin/curl -d '{ \"repository\": { \"name\": \"puppetlabs-stdlib\" } }' -H \"Accept: application/json\" \"http://localhost:8088/module\" -H \"X-Hub-Signature: #{signature}\" -k -q") do
@@ -40,7 +40,7 @@ describe 'GitHub Secret Enabled, System Ruby with No SSL, Not protected, No mcol
       end
     end
     context 'supports style Github payloads via payload end point with signature in header' do
-      HMAC_DIGEST = OpenSSL::Digest::Digest.new('sha1')
+      HMAC_DIGEST = OpenSSL::Digest.new('sha1')
       signature = 'sha1=' + OpenSSL::HMAC.hexdigest(HMAC_DIGEST, 'secret', '{ "ref": "refs/heads/production" }')
 
       describe command("/usr/bin/curl -d '{ \"ref\": \"refs/heads/production\" }' -H \"Accept: application/json\" -H \"X-Hub-Signature: #{signature}\" \"http://localhost:8088/payload\" -k -q") do
