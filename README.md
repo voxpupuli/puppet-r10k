@@ -352,7 +352,7 @@ git_webhook { 'web_post_receive_webhook_for_module' :
 ### Webhook Bitbucket Example
 This is an example of using the webhook with Atlassian Bitbucket (former Stash).
 Requires the `external hooks` addon by https://marketplace.atlassian.com/plugins/com.ngs.stash.externalhooks.external-hooks/server/overview
-and a specific Bitbucket user/pass. 
+and a specific Bitbucket user/pass.
 Remember to place the `stash_mco.rb` on the bitbucket server an make it executable.
 Enable the webhook over the repository settings `External Async Post Receive Hook`:
  - Executable: e.g. `/opt/atlassian/bitbucket-data/external-hooks/stash_mco.rb` (see hook_exe)
@@ -364,7 +364,7 @@ git_deploy_key { 'add_deploy_key_to_puppet_control':
   ensure       => present,
   name         => $::fqdn,  
   path         => '/root/.ssh/id_rsa.pub',
-  username     => 'api', 
+  username     => 'api',
   password     => 'pass',
   project_name => 'project',
   repo_name    => 'puppet',
@@ -382,7 +382,7 @@ git_webhook { 'web_post_receive_webhook' :
   repo_name    => 'puppet',
   server_url   => 'https://git.example.com',
   provider     => 'stash',
-  hook_exe     => '/opt/atlassian/bitbucket-data/external-hooks/stash_mco.rb', 
+  hook_exe     => '/opt/atlassian/bitbucket-data/external-hooks/stash_mco.rb',
 }
 ```
 
@@ -706,6 +706,9 @@ Deprecated: declare a resource for managing `modulepath` in Puppet.conf
 
 ##### `manage_ruby_dependency`
 When using system ruby , options on how to declare
+
+##### `proxy`
+A string setting the`r10k.yaml` configuration value of the same name
 
 ##### `r10k_basedir`
 This module requires the [puppetlabs-ruby](https://github.com/puppetlabs/puppetlabs-ruby.git) module. In the event that your environment already includes

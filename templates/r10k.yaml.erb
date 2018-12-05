@@ -3,7 +3,7 @@
       require 'yaml'
       hash = {}
       settings.sort.map { |k,v| hash[k] = v }
-      sorted_settings = hash 
+      sorted_settings = hash
       hash = { type.to_sym => sorted_settings }
       hash.to_yaml.gsub(/---\n/, '')
     end
@@ -32,4 +32,7 @@
 <% end -%>
 <% if !@forge_settings.empty? -%>
 <%= settings_to_yaml('forge', @forge_settings) %>
+<% end -%>
+<% if @proxy and @proxy != '' -%>
+:proxy: <%= @proxy %>
 <% end -%>

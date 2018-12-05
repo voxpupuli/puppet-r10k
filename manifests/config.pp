@@ -21,6 +21,9 @@
 #   Location of symlink that points to configfile. Default: /etc/r10k.yaml
 # * [*forge_settings*]
 #   Hash containing settings for downloading modules from the Puppet Forge.
+# * [*proxy*]
+#   String containing proxy setting for r10k.yaml.
+#   Default: ''
 #
 # === Examples
 #
@@ -62,6 +65,7 @@ class r10k::config (
   $root_user                                = $r10k::params::root_user,
   $root_group                               = $r10k::params::root_group,
   Stdlib::Absolutepath $puppetconf_path     = $r10k::params::puppetconf_path,
+  String $proxy                             = $r10k::params::proxy,
   String $r10k_yaml_template                = 'r10k/r10k.yaml.erb',
 ) inherits r10k::params {
 
