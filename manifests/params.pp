@@ -157,8 +157,12 @@ class r10k::params
   $webhook_configfile_mode       = '0644'
   $webhook_ignore_environments   = []
   $webhook_mco_arguments         = undef
-  $webhook_sinatra_version       = '~> 1.0'      # Sinatra 2 requires rack 2 which in turn requires ruby 2.2. Puppet 4 AIO ships with ruby 2.1
-  $webhook_webrick_version       = '1.3.1'       # Webrick 1.4 requires ruby >= 2.3
+  if $facts['pe_server_version'] == '2016.4.2' {
+    $webhook_sinatra_version       = '~> 1.0'
+  } else {
+    $webhook_sinatra_version       = 'installed'
+  }
+  $webhook_webrick_version       = 'installed'
   $webhook_generate_types        = false
 
   # Service Settings for SystemD in EL7
