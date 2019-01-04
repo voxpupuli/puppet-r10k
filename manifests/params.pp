@@ -60,7 +60,7 @@ class r10k::params
     $is_pe_server      = false
   }
 
-  if getvar('::pe_server_version') {
+  if fact('pe_server_version') {
     # PE 4 or greater specific settings
     # r10k configuration
 
@@ -82,7 +82,7 @@ class r10k::params
     $root_user                     = 'root'
     $root_group                    = 'root'
   }
-  elsif versioncmp("${::puppetversion}", '4.0.0') >= 0 { #lint:ignore:only_variable_string
+  elsif versioncmp($facts['puppetversion'], '4.0.0') >= 0 {
     #FOSS 4 or greater specific settings
     # r10k configuration
 
@@ -105,7 +105,7 @@ class r10k::params
     $root_group                    = 'root'
   }
   else {
-    fail("Puppet version ${::puppetversion} is no longer supported. Please use an earlier version of puppet/r10k.")
+    fail("Puppet version ${facts['puppetversion']} is no longer supported. Please use an earlier version of puppet/r10k.")
   }
 
   # prerun_command in puppet.conf
@@ -158,8 +158,12 @@ class r10k::params
   $webhook_configfile_mode       = '0644'
   $webhook_ignore_environments   = []
   $webhook_mco_arguments         = undef
-  $webhook_sinatra_version       = '~> 1.0'      # Sinatra 2 requires rack 2 which in turn requires ruby 2.2. Puppet 4 AIO ships with ruby 2.1
-  $webhook_webrick_version       = '1.3.1'       # Webrick 1.4 requires ruby >= 2.3
+  if $facts['pe_server_version'] == '2016.4.2' {
+    $webhook_sinatra_version       = '~> 1.0'
+  } else {
+    $webhook_sinatra_version       = 'installed'
+  }
+  $webhook_webrick_version       = 'installed'
   $webhook_generate_types        = false
 
   # Service Settings for SystemD in EL7

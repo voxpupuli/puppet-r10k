@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v6.8.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.8.0) (2018-12-23)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.7.0...v6.8.0)
+
+**Implemented enhancements:**
+
+- Update r10k path in example `prefix\_command.rb` [\#467](https://github.com/voxpupuli/puppet-r10k/pull/467) ([alexjfisher](https://github.com/alexjfisher))
+- Identify branch name from BitBucket server native webhook payload [\#462](https://github.com/voxpupuli/puppet-r10k/pull/462) ([venushka](https://github.com/venushka))
+
+**Closed issues:**
+
+- don't pin sinatra and webrick gems anymore [\#471](https://github.com/voxpupuli/puppet-r10k/issues/471)
+
+**Merged pull requests:**
+
+- set webrick and sinatra versions to 'installed' [\#475](https://github.com/voxpupuli/puppet-r10k/pull/475) ([kenyon](https://github.com/kenyon))
+- enable acceptance tests [\#469](https://github.com/voxpupuli/puppet-r10k/pull/469) ([Dan33l](https://github.com/Dan33l))
+- Remove gcc and make dependencies [\#465](https://github.com/voxpupuli/puppet-r10k/pull/465) ([Rudikza](https://github.com/Rudikza))
+
 ## [v6.7.0](https://github.com/voxpupuli/puppet-r10k/tree/v6.7.0) (2018-10-13)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.6.1...v6.7.0)
@@ -311,9 +330,9 @@ These should not affect the functionality of the module.
 
 - Rename CHANGELOG.md [\#301](https://github.com/voxpupuli/puppet-r10k/pull/301) ([rnelson0](https://github.com/rnelson0))
 - Fixes Puppet 4 path for webhook [\#295](https://github.com/voxpupuli/puppet-r10k/pull/295) ([andrewwippler](https://github.com/andrewwippler))
-- Update config\_version.sh [\#291](https://github.com/voxpupuli/puppet-r10k/pull/291) ([seanscottking](https://github.com/seanscottking))
+- Update config\_version.sh [\#291](https://github.com/voxpupuli/puppet-r10k/pull/291) ([solsglasses](https://github.com/solsglasses))
 - Fix testing [\#288](https://github.com/voxpupuli/puppet-r10k/pull/288) ([ghoneycutt](https://github.com/ghoneycutt))
-- Duplicate certpath key [\#287](https://github.com/voxpupuli/puppet-r10k/pull/287) ([seanscottking](https://github.com/seanscottking))
+- Duplicate certpath key [\#287](https://github.com/voxpupuli/puppet-r10k/pull/287) ([solsglasses](https://github.com/solsglasses))
 - unbreak on OS where root group != 'root' [\#279](https://github.com/voxpupuli/puppet-r10k/pull/279) ([buzzdeee](https://github.com/buzzdeee))
 - Add support for custom permissions and ownership of webhooks.yaml [\#278](https://github.com/voxpupuli/puppet-r10k/pull/278) ([elconas](https://github.com/elconas))
 - add curl example to readme [\#274](https://github.com/voxpupuli/puppet-r10k/pull/274) ([jessereynolds](https://github.com/jessereynolds))

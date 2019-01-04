@@ -13,6 +13,7 @@ class r10k::webhook::package (
       notify   => Service['webhook'],
     }
   }
+
   if (! $is_pe_server) {
     if !defined(Package['webrick']) {
       package { 'webrick':

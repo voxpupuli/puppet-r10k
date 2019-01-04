@@ -2,7 +2,7 @@ require 'spec_helper'
 
 version = '2.0.0'
 
-describe 'r10k::install', type: :class do
+describe 'r10k::install' do
   on_supported_os.each do |os, facts|
     context "on #{os} " do
       let :facts do
@@ -23,10 +23,6 @@ describe 'r10k::install', type: :class do
         end
 
         it { is_expected.to contain_class('git') }
-
-        # New versions of this gem do not require these packages
-        it { is_expected.not_to contain_class('make') }
-        it { is_expected.not_to contain_package('gcc') }
 
         it { is_expected.to contain_class('r10k::install::gem').with(version: version) }
         it do
@@ -170,73 +166,75 @@ describe 'r10k::install', type: :class do
         it { is_expected.not_to contain_class('git') }
         it { is_expected.to contain_package('rubygem-r10k') }
       end
-
-      context 'with zypper provider' do
-        let :params do
-          {
-            install_options:        '',
-            keywords:               '',
-            manage_ruby_dependency: 'declare',
-            package_name:           'r10k',
-            provider:               'zypper',
-            version:                'latest',
-            puppet_master:          true
-          }
-        end
-        let :facts do
-          {
-            osfamily:               'Suse',
-            operatingsystemrelease: '11.3'
-          }
-        end
-
-        it { is_expected.not_to contain_class('git') }
-        it { is_expected.to contain_package('r10k') }
-      end
-
-      context 'with portage provider' do
-        let :params do
-          {
-            install_options:        '',
-            keywords:               ['~amd64', '~x86'],
-            manage_ruby_dependency: 'declare',
-            package_name:           'app-admin/r10k',
-            provider:               'portage',
-            version:                version,
-            puppet_master:          true
-          }
-        end
-        let :facts do
-          {
-            osfamily:               'Gentoo',
-            operatingsystemrelease: '2.1'
-          }
-        end
-
-        it { is_expected.not_to contain_class('git') }
-        it do
-          is_expected.to contain_class('r10k::install::portage').with(
-            package_name: 'app-admin/r10k',
-            keywords:     ['~amd64', '~x86'],
-            version:      version
-          )
-        end
-        it do
-          is_expected.to contain_package_keywords('dev-ruby/cri').with(
-            keywords: ['~amd64', '~x86'],
-            target:   'puppet'
-          )
-        end
-        it do
-          is_expected.to contain_portage__package('app-admin/r10k').with(
-            keywords: ['~amd64', '~x86'],
-            ensure:   version,
-            target:   'puppet'
-          )
-        end
-        it { is_expected.to contain_package('app-admin/r10k') }
-        it { is_expected.not_to contain_package('r10k') }
-      end
     end
+  end
+
+  context 'with zypper provider' do
+    let :params do
+      {
+        install_options:        '',
+        keywords:               '',
+        manage_ruby_dependency: 'declare',
+        package_name:           'r10k',
+        provider:               'zypper',
+        version:                'latest',
+        puppet_master:          true
+      }
+    end
+    let :facts do
+      {
+        osfamily:               'Suse',
+        operatingsystemrelease: '11.3',
+        puppetversion:          Puppet.version
+      }
+    end
+
+    it { is_expected.not_to contain_class('git') }
+    it { is_expected.to contain_package('r10k') }
+  end
+
+  context 'with portage provider' do
+    let :params do
+      {
+        install_options:        '',
+        keywords:               ['~amd64', '~x86'],
+        manage_ruby_dependency: 'declare',
+        package_name:           'app-admin/r10k',
+        provider:               'portage',
+        version:                version,
+        puppet_master:          true
+      }
+    end
+    let :facts do
+      {
+        osfamily:               'Gentoo',
+        operatingsystemrelease: '2.1',
+        puppetversion:          Puppet.version
+      }
+    end
+
+    it { is_expected.not_to contain_class('git') }
+    it do
+      is_expected.to contain_class('r10k::install::portage').with(
+        package_name: 'app-admin/r10k',
+        keywords:     ['~amd64', '~x86'],
+        version:      version
+      )
+    end
+    it do
+      is_expected.to contain_package_keywords('dev-ruby/cri').with(
+        keywords: ['~amd64', '~x86'],
+        target:   'puppet'
+      )
+    end
+    it do
+      is_expected.to contain_portage__package('app-admin/r10k').with(
+        keywords: ['~amd64', '~x86'],
+        ensure:   version,
+        target:   'puppet'
+      )
+    end
+    it { is_expected.to contain_package('app-admin/r10k') }
+    it { is_expected.not_to contain_package('r10k') }
   end
 end

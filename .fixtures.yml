@@ -2,9 +2,7 @@ fixtures:
   repositories:
     stdlib:  "https://github.com/puppetlabs/puppetlabs-stdlib.git"
     ruby:    "https://github.com/puppetlabs/puppetlabs-ruby.git"
-    gcc:     "https://github.com/puppetlabs/puppetlabs-gcc.git"
     pe_gem:  "https://github.com/puppetlabs/puppetlabs-pe_gem.git"
-    make:    "https://github.com/voxpupuli/puppet-make.git"
     inifile: "https://github.com/puppetlabs/puppetlabs-inifile.git"
     vcsrepo: "https://github.com/puppetlabs/puppetlabs-vcsrepo.git"
     git:     "https://github.com/puppetlabs/puppetlabs-git.git"
