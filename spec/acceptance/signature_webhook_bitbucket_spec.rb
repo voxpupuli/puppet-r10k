@@ -1,10 +1,9 @@
 require 'spec_helper_acceptance'
-require 'json'
 require 'openssl'
-describe 'BitBucket Server Secret Enabled, System Ruby with No SSL, Not protected, No mcollective' do
+
+describe 'BitBucket Secret Enabled, System Ruby with No SSL, Not protected, No mcollective' do
   context 'default parameters' do
-    let(:pp) do
-      "
+    pp = %(
       class { 'r10k':
         remote => 'git@yourbitbucketserver.com:someuser/puppet.git',
       }
@@ -18,8 +17,7 @@ describe 'BitBucket Server Secret Enabled, System Ruby with No SSL, Not protecte
       class {'r10k::webhook':
         require => Class['r10k::webhook::config'],
       }
-      "
-    end
+    )
 
     it 'applies with no errors' do
       apply_manifest(pp, catch_failures: true)
@@ -31,27 +29,23 @@ describe 'BitBucket Server Secret Enabled, System Ruby with No SSL, Not protecte
       it { is_expected.to be_enabled }
       it { is_expected.to be_running }
     end
-    context 'supports style BitBucket server payloads via module end point with signature in header' do
-      HMAC_DIGEST = OpenSSL::Digest::Digest.new('sha256')
-      signature = 'sha256=' + OpenSSL::HMAC.hexdigest(HMAC_DIGEST, 'secret', '{ "repository": { "name": "puppetlabs-stdlib" } }')
 
-      shell("/usr/bin/curl -d '{ \"repository\": { \"name\": \"puppetlabs-stdlib\" } }' -H \"Accept: application/json\" \"http://localhost:8088/module\" -H \"X-Hub-Signature: #{signature}\" -k -q") do |r|
-        it { expect(r.stdout).to match(%r{^.*success.*$}) }
-        it { expect(r.exit_code).to eq(0) }
+    context 'supports style BitBucket payloads via module end point with signature in header' do
+      HMAC_DIGEST = OpenSSL::Digest.new('sha256')
+      signature = 'sha1=' + OpenSSL::HMAC.hexdigest(HMAC_DIGEST, 'secret', '{ "repository": { "name": "puppetlabs-stdlib" } }')
+
+      describe command("/usr/bin/curl -d '{ \"repository\": { \"name\": \"puppetlabs-stdlib\" } }' -H \"Accept: application/json\" \"http://localhost:8088/module\" -H \"X-Hub-Signature: #{signature}\" -k -q") do
+        its(:stdout) { is_expected.not_to match %r{.*You shall not pass.*} }
+        its(:exit_status) { is_expected.to eq 0 }
       end
     end
-    context 'supports style BitBucket server payloads via payload end point with signature in header' do
-      HMAC_DIGEST = OpenSSL::Digest::Digest.new('sha256')
-      signature = 'sha256=' + OpenSSL::HMAC.hexdigest(HMAC_DIGEST, 'secret', '{ "ref": "refs/heads/production" }')
+    context 'supports style BitBucket payloads via payload end point with signature in header' do
+      HMAC_DIGEST = OpenSSL::Digest.new('sha256')
+      signature = 'sha1=' + OpenSSL::HMAC.hexdigest(HMAC_DIGEST, 'secret', '{ "ref": "refs/heads/production" }')
 
-      shell("/usr/bin/curl -d '{ \"ref\": \"refs/heads/production\" }' -H \"Accept: application/json\" -H \"X-Hub-Signature: #{signature}\" \"http://localhost:8088/payload\" -k -q") do |r|
-        it { expect(r.stdout).to match(%r{^.*success.*$}) }
-        it { expect(r.exit_code).to eq(0) }
-      end
-    end
-    it '/heartbeat is successful' do
-      shell('/usr/bin/curl -H \"Accept: application/json\" \"http://localhost:8088/heartbeat\" -k -q') do |r|
-        expect(r.stdout).to match(%r{^.*success.*$})
+      describe command("/usr/bin/curl -d '{ \"ref\": \"refs/heads/production\" }' -H \"Accept: application/json\" -H \"X-Hub-Signature: #{signature}\" \"http://localhost:8088/payload\" -k -q") do
+        its(:stdout) { is_expected.not_to match %r{.*You shall not pass.*} }
+        its(:exit_status) { is_expected.to eq 0 }
       end
     end
   end
