@@ -402,6 +402,22 @@ class { 'r10k::webhook':
 }
 ```
 
+### BitBucket Server Secret Support
+BitBucket webhooks allow the use of a secret value that gets hashed against the payload to pass a
+signature in the request X-Hub-Signature header. To support the secret with the webhook do the
+following type of configuration.
+
+```puppet
+class { 'r10k::webhook::config':
+  protected        => false,
+  bitbucket_secret => 'THISISTHEBITBUCKETWEBHOOKSECRET',
+}
+
+class { 'r10k::webhook':
+  require => Class['r10k::webhook::config'],
+}
+```
+
 ### Webhook - remove webhook init script and config file.
 For use when moving to Code Manager, or other solutions, and the webhook should be removed.
 ```puppet
