@@ -6,6 +6,4 @@ fixtures:
     inifile: "https://github.com/puppetlabs/puppetlabs-inifile.git"
     vcsrepo: "https://github.com/puppetlabs/puppetlabs-vcsrepo.git"
     git:     "https://github.com/puppetlabs/puppetlabs-git.git"
-    portage:
-      repo: "https://github.com/gentoo/puppet-portage.git"
-      ref: "2.3.0"
+    portage: "https://github.com/gentoo/puppet-portage.git"
