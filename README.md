@@ -740,15 +740,11 @@ The name of the package to be installed via the provider
 ##### `provider`
 The supported installation modes for this module
 
-* portage
 * yum
 * bundle
 * puppet_gem
 * gem
 * zypper
-
-##### `gentoo_keywords`
-See `r10k::install::portage` class for more information
 
 ##### `install_options`
 Options to pass to the `provider` declaration
