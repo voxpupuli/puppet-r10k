@@ -28,11 +28,11 @@ class r10k::install (
 
   case $provider {
     'bundle': {
-      include ::r10k::install::bundle
+      include r10k::install::bundle
     }
     'puppet_gem', 'gem', 'openbsd', 'yum', 'zypper': {
       if $provider == 'gem' {
-        class { '::r10k::install::gem':
+        class { 'r10k::install::gem':
           manage_ruby_dependency => $manage_ruby_dependency,
           version                => $version;
         }
@@ -40,7 +40,7 @@ class r10k::install (
       elsif $provider == 'puppet_gem' {
         # Puppet FOSS 4.2 and up ships a vendor provided ruby.
         # Using puppet_gem uses that instead of the system ruby.
-        include ::r10k::install::puppet_gem
+        include r10k::install::puppet_gem
       }
 
       # Currently we share a package resource to keep things simple

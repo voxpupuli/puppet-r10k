@@ -1,1 +1,1 @@
-include ::r10k::prerun_command
+include r10k::prerun_command
