@@ -123,6 +123,8 @@ class Server < Sinatra::Base
     module_name = sanitize_input(module_name)
     $logger.info("Deploying module #{module_name} in the background.")
     Process.detach(fork { deploy_module(module_name) })
+
+    return 202,  {:status => :accepted, :message => 'accepted' }.to_json
   end
 
   # Simulate a github post:
@@ -213,6 +215,8 @@ class Server < Sinatra::Base
     else
       $logger.info("Deploying environment #{env} in the background")
       Process.detach(fork { deploy(env, deleted) })
+
+      return 202,  {:status => :accepted, :message => 'accepted' }.to_json
     end
   end
 
