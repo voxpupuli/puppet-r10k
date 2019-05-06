@@ -400,7 +400,7 @@ class Server < Sinatra::Base
         end
         message = run_command(command)
         $logger.info("message: #{message} module_name: #{module_name}")
-        status_message = {:status => :success, :message => message.to_s, :module_name => module_name, :status_code => 202}
+        status_message = {:status => :success, :message => message.to_s, :module_name => module_name, :status_code => 200}
         notify_slack(status_message) if slack?
         notify_rocketchat(status_message) if rocketchat?
         status_message.to_json
@@ -432,7 +432,7 @@ class Server < Sinatra::Base
           end
           message = run_command(command)
         end
-        status_message =  {:status => :success, :message => message.to_s, :branch => branch, :status_code => 202}
+        status_message =  {:status => :success, :message => message.to_s, :branch => branch, :status_code => 200}
         $logger.info("message: #{message} branch: #{branch}")
         notify_slack(status_message) if slack?
         notify_rocketchat(status_message) if rocketchat?
