@@ -299,6 +299,12 @@ class Server < Sinatra::Base
         slack_user = 'r10k'
       end
 
+      if $config['slack_icon']
+        slack_icon = $config['slack_icon']
+      else
+        slack_icon = ':ocean:'
+      end
+
       if $config['slack_proxy_url']
         uri = URI($config['slack_proxy_url'])
         http_options = {
@@ -313,7 +319,7 @@ class Server < Sinatra::Base
       notifier = Slack::Notifier.new $config['slack_webhook'] do
         defaults channel: slack_channel,
                  username: slack_user,
-                 icon_emoji: ":ocean:",
+                 icon_emoji: slack_icon,
                  http_options: http_options
       end
 
