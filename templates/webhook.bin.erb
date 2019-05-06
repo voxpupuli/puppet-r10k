@@ -317,15 +317,20 @@ class Server < Sinatra::Base
                  http_options: http_options
       end
 
-      if status_message[:branch]
+      if status_message[:environment]  # generate_types
+        target = status_message[:environment]
+        msg = "Generation of Puppet resource types for #{target}"
+      elsif status_message[:branch]    # deploy
         target = status_message[:branch]
-      elsif status_message[:module]
+        msg = "Deployment of Puppet environment #{target}"
+      elsif status_message[:module]    # deploy_module
         target = status_message[:module]
+        msg = "Deployment of Puppet module #{target}"
       end
 
       message = {
         author: 'r10k for Puppet',
-        title: "r10k deployment of Puppet environment #{target}"
+        title: msg
       }
 
       case status_message[:status_code]
@@ -343,7 +348,7 @@ class Server < Sinatra::Base
         )
       end
 
-      notifier.post text: message[:fallback], attachments: [message]
+      notifier.post text: 'r10k deployment', attachments: [message]
     end
 
     def notify_rocketchat(status_message)
@@ -363,16 +368,21 @@ class Server < Sinatra::Base
       notifier.username = rocketchat_user
       notifier.channel = rocketchat_channel
       
-      if status_message[:branch]
+      if status_message[:environment]  # generate_types
+        target = status_message[:environment]
+        msg = "Generation of Puppet resource types for #{target}"
+      elsif status_message[:branch]    # deploy
         target = status_message[:branch]
-      elsif status_message[:module]
+        msg = "Deployment of Puppet environment #{target}"
+      elsif status_message[:module]    # deploy_module
         target = status_message[:module]
+        msg = "Deployment of Puppet module #{target}"
       end
 
-      message = "r10k deployment of Puppet environment/module #{target}"
+      message = "r10k deployment"
       attachments = {
         author: 'r10k for Puppet',
-        title: "r10k deployment of Puppet environment #{target}",
+        title: msg,
       }
 
       case status_message[:status_code]
