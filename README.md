@@ -752,6 +752,9 @@ Deprecated: declare a resource for managing `modulepath` in Puppet.conf
 ##### `manage_ruby_dependency`
 When using system ruby , options on how to declare
 
+##### `proxy`
+A string setting the`r10k.yaml` configuration value of the same name
+
 ##### `r10k_basedir`
 This module requires the [puppetlabs-ruby](https://github.com/puppetlabs/puppetlabs-ruby.git) module. In the event that your environment already includes
 the module with some customization, you can use the `manage_ruby_dependency`
