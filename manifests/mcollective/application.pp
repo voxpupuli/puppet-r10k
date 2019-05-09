@@ -8,7 +8,7 @@ class r10k::mcollective::application(
   $mc_service        = $r10k::params::mc_service_name,
 ) inherits r10k::params {
 
-  require ::r10k
+  require r10k
 
   File {
     ensure => present,

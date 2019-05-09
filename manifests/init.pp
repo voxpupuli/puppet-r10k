@@ -36,14 +36,14 @@ class r10k (
   }
 
   if $include_prerun_command {
-    include ::r10k::prerun_command
+    include r10k::prerun_command
   }
 
   if $include_postrun_command {
-    include ::r10k::postrun_command
+    include r10k::postrun_command
   }
 
-  class { '::r10k::install':
+  class { 'r10k::install':
     install_options        => $install_options,
     keywords               => $gentoo_keywords,
     manage_ruby_dependency => $manage_ruby_dependency,
@@ -53,7 +53,7 @@ class r10k (
     puppet_master          => $puppet_master,
   }
 
-  class { '::r10k::config':
+  class { 'r10k::config':
     cachedir                  => $cachedir,
     configfile                => $configfile,
     sources                   => $sources,
@@ -72,6 +72,6 @@ class r10k (
   }
 
   if $mcollective {
-    class { '::r10k::mcollective': }
+    class { 'r10k::mcollective': }
   }
 }
