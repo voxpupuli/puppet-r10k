@@ -9,7 +9,7 @@ describe 'r10k_path fact specs', type: :fact do
 
   describe 'r10k_path' do
     before do
-      allow(Facter::Util::Resolution).to receive(:execute).with('which r10k 2> /dev/null').and_return('/usr/local/bin/r10k')
+      allow(Facter::Util::Resolution).to receive(:exec).with('which r10k 2> /dev/null').and_return('/usr/local/bin/r10k')
     end
 
     it 'defaults to /usr/local/bin/r10k' do
