@@ -149,23 +149,6 @@ describe 'r10k::install' do
         it { is_expected.to contain_class('r10k::install::bundle') }
         it { is_expected.not_to contain_package('r10k') }
       end
-
-      context 'with yum provider' do
-        let :params do
-          {
-            install_options:        '',
-            keywords:               '',
-            manage_ruby_dependency: 'declare',
-            package_name:           'rubygem-r10k',
-            provider:               'yum',
-            version:                'latest',
-            puppet_master:          true
-          }
-        end
-
-        it { is_expected.not_to contain_class('git') }
-        it { is_expected.to contain_package('rubygem-r10k') }
-      end
     end
   end
 
