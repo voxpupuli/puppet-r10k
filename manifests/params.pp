@@ -9,6 +9,7 @@ class r10k::params
   $install_options        = []
   $sources                = undef
   $puppet_master          = true
+  $proxy                  = undef
 
   if 'puppet_environment' in $facts {
     $r10k_basedir            = $facts['puppet_environmentpath']
