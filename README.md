@@ -781,7 +781,6 @@ The supported installation modes for this module
 * bundle
 * puppet_gem
 * gem
-* zypper
 
 ##### `install_options`
 Options to pass to the `provider` declaration

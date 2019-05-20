@@ -151,28 +151,4 @@ describe 'r10k::install' do
       end
     end
   end
-
-  context 'with zypper provider' do
-    let :params do
-      {
-        install_options:        '',
-        keywords:               '',
-        manage_ruby_dependency: 'declare',
-        package_name:           'r10k',
-        provider:               'zypper',
-        version:                'latest',
-        puppet_master:          true
-      }
-    end
-    let :facts do
-      {
-        osfamily:               'Suse',
-        operatingsystemrelease: '11.3',
-        puppetversion:          Puppet.version
-      }
-    end
-
-    it { is_expected.not_to contain_class('git') }
-    it { is_expected.to contain_package('r10k') }
-  end
 end

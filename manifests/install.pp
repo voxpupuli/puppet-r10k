@@ -29,7 +29,7 @@ class r10k::install (
     'bundle': {
       include r10k::install::bundle
     }
-    'puppet_gem', 'gem', 'openbsd', 'zypper': {
+    'puppet_gem', 'gem', 'openbsd': {
       if $provider == 'gem' {
         class { 'r10k::install::gem':
           manage_ruby_dependency => $manage_ruby_dependency,
@@ -62,6 +62,6 @@ class r10k::install (
       }
 
     }
-    default: { fail("${module_name}: ${provider} is not supported. Valid values are: 'gem', 'puppet_gem', 'bundle', 'openbsd', 'zypper'") }
+    default: { fail("${module_name}: ${provider} is not supported. Valid values are: 'gem', 'puppet_gem', 'bundle', 'openbsd'") }
   }
 }
