@@ -778,11 +778,9 @@ The name of the package to be installed via the provider
 ##### `provider`
 The supported installation modes for this module
 
-* yum
 * bundle
 * puppet_gem
 * gem
-* zypper
 
 ##### `install_options`
 Options to pass to the `provider` declaration

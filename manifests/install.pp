@@ -19,7 +19,6 @@ class r10k::install (
                       $real_package_name = 'ruby22-r10k'
                     }
                   }
-      'yum':     { $real_package_name = 'rubygem-r10k' }
       default:   { $real_package_name = 'r10k' }
     }
   } else {
@@ -30,7 +29,7 @@ class r10k::install (
     'bundle': {
       include r10k::install::bundle
     }
-    'puppet_gem', 'gem', 'openbsd', 'yum', 'zypper': {
+    'puppet_gem', 'gem', 'openbsd': {
       if $provider == 'gem' {
         class { 'r10k::install::gem':
           manage_ruby_dependency => $manage_ruby_dependency,
@@ -63,6 +62,6 @@ class r10k::install (
       }
 
     }
-    default: { fail("${module_name}: ${provider} is not supported. Valid values are: 'gem', 'puppet_gem', 'bundle', 'openbsd', 'yum', 'zypper'") }
+    default: { fail("${module_name}: ${provider} is not supported. Valid values are: 'gem', 'puppet_gem', 'bundle', 'openbsd'") }
   }
 }
