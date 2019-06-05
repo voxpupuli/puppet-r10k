@@ -4,11 +4,11 @@
   "parameters": {
     "environment": {
       "description": "The environment to deploy.",
-      "type": "Optional[Pattern[/\\A[a-z0-9_]+\\Z/]]"
+      "type": "Optional[Pattern[/\\A[a-zA-Z0-9_]+\\Z/]]"
     },
     "environments": {
       "description": "A comma separated list of environments to deploy. Takes precedence over `environment`.",
-      "type": "Optional[Pattern[/\\A[a-z0-9_,]+\\Z/]]"
+      "type": "Optional[Pattern[/\\A[a-zA-Z0-9_,]+\\Z/]]"
     },
     "module": {
       "description": "A module to deploy across all environments.",
