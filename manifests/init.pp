@@ -22,6 +22,7 @@ class r10k (
   Hash $deploy_settings                                       = $r10k::params::deploy_settings,
   $root_user                                                  = $r10k::params::root_user,
   Optional[String[1]] $proxy                                  = $r10k::params::proxy,
+  Optional[Integer[1]] $pool_size                             = $r10k::params::pool_size,
   $root_group                                                 = $r10k::params::root_group,
   $postrun                                                    = undef,
   Boolean $include_prerun_command                             = false,
@@ -71,6 +72,7 @@ class r10k (
     root_user                 => $root_user,
     root_group                => $root_group,
     proxy                     => $proxy,
+    pool_size                 => $pool_size,
   }
 
   if $mcollective {

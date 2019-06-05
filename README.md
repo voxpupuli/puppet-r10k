@@ -758,6 +758,9 @@ When using system ruby , options on how to declare
 ##### `proxy`
 A string setting the`r10k.yaml` configuration value of the same name
 
+##### `pool_size`
+Integer defining how many threads should be spawn while updating modules. Only available for r10k >= 3.3.0.
+
 ##### `r10k_basedir`
 This module requires the [puppetlabs-ruby](https://github.com/puppetlabs/puppetlabs-ruby.git) module. In the event that your environment already includes
 the module with some customization, you can use the `manage_ruby_dependency`

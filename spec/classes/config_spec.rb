@@ -117,6 +117,25 @@ describe 'r10k::config', type: :class do
 
         it { is_expected.to contain_file('r10k.yaml').with_content(%r{^:proxy: https://proxy.local:8080$}) }
       end
+
+      context 'with empty pool_size' do
+        let :params do
+          {
+            pool_size: :undef
+          }
+        end
+
+        it { is_expected.to contain_file('r10k.yaml').without_content(%r{^:pool_size: .*$}) }
+      end
+      context 'with pool_size' do
+        let :params do
+          {
+            pool_size: 5
+          }
+        end
+
+        it { is_expected.to contain_file('r10k.yaml').with_content(%r{^:pool_size: 5$}) }
+      end
     end
   end
 end
