@@ -300,7 +300,7 @@ class Server < Sinatra::Base
       end
 
       if $config['slack_icon']
-        slack_icon = $config['slack_icon']
+        slack_icon = ":#{$config['slack_icon']}:"
       else
         slack_icon = ':ocean:'
       end
