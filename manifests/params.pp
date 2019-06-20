@@ -151,7 +151,7 @@ class r10k::params
   $webhook_slack_channel         = undef
   $webhook_slack_username        = undef
   $webhook_slack_proxy_url       = undef
-  $webhook_slack_icon            = 'ocean'
+  $webhook_slack_icon            = undef
   $webhook_rocketchat_webhook    = undef
   $webhook_rocketchat_channel    = undef
   $webhook_rocketchat_username   = undef

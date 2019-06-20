@@ -606,7 +606,7 @@ class { 'r10k::webhook::config':
   slack_channel   => '#channel', # defaults to #default
   slack_username  => 'r10k', # the username to use
   slack_proxy_url => 'http://proxy.example.com:3128', # Optional.  Defaults to undef.
-  slack_icon      => 'unicorn_face' # Optional. Defaults to 'ocean'
+  slack_icon      => 'unicorn_face' # Optional. Defaults to undef.
 }
 ```
 
