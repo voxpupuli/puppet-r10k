@@ -1,18 +1,19 @@
 # This class creates a github webhoook to allow curl style post-rec scripts
 class r10k::webhook(
-  $ensure           = true,
-  $user             = $r10k::params::webhook_user,
-  $group            = $r10k::params::webhook_group,
-  $background       = $r10k::params::webhook_background,
-  $bin_template     = $r10k::params::webhook_bin_template,
-  $service_template = $r10k::params::webhook_service_template,
-  $service_file     = $r10k::params::webhook_service_file,
-  $use_mcollective  = $r10k::params::webhook_use_mcollective,
-  $is_pe_server     = $r10k::params::is_pe_server,
-  $root_user        = $r10k::params::root_user,
-  $root_group       = $r10k::params::root_group,
-  $manage_packages  = true,
-  $ruby_bin         = undef,
+  $ensure            = true,
+  $user              = $r10k::params::webhook_user,
+  $group             = $r10k::params::webhook_group,
+  $background        = $r10k::params::webhook_background,
+  $bin_template      = $r10k::params::webhook_bin_template,
+  $service_template  = $r10k::params::webhook_service_template,
+  $service_file      = $r10k::params::webhook_service_file,
+  $service_file_mode = $r10k::params::webhook_service_file_mode,
+  $use_mcollective   = $r10k::params::webhook_use_mcollective,
+  $is_pe_server      = $r10k::params::is_pe_server,
+  $root_user         = $r10k::params::root_user,
+  $root_group        = $r10k::params::root_group,
+  $manage_packages   = true,
+  $ruby_bin          = undef,
 ) inherits r10k::params {
 
   File {
@@ -72,6 +73,7 @@ class r10k::webhook(
     ensure  => $ensure_file,
     content => template("r10k/${service_template}"),
     path    => $service_file,
+    mode    => $service_file_mode,
     before  => File['webhook_bin'],
   }
 
