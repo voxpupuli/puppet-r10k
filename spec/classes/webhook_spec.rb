@@ -28,7 +28,7 @@ describe 'r10k::webhook', type: :class do
         if facts[:operatingsystemmajrelease].to_i >= 7
           it do
             is_expected.to contain_file('webhook_init_script').with(
-              path:   '/usr/lib/systemd/system/webhook.service',
+              path:   '/etc/systemd/system/webhook.service',
               content: %r{\[Unit\]}
             )
           end

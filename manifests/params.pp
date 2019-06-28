@@ -168,18 +168,17 @@ class r10k::params
   $webhook_webrick_version       = 'installed'
   $webhook_generate_types        = false
 
-  # Service Settings for SystemD in EL7
-  if $::osfamily == 'RedHat' and $::operatingsystemmajrelease == '7' {
-    $webhook_service_file     = '/usr/lib/systemd/system/webhook.service'
-    $webhook_service_template = 'webhook.redhat.service.erb'
-  } elsif $::osfamily == 'Gentoo' {
-    $webhook_service_file     = '/etc/init.d/webhook'
-    $webhook_service_template = 'webhook.init.gentoo.erb'
-  } elsif $::osfamily == 'Suse' and $::operatingsystemrelease >= '12' { #lint:ignore:version_comparison
-    $webhook_service_file     = '/etc/systemd/system/webhook.service'
-    $webhook_service_template = 'webhook.suse.service.erb'
+  if $facts['os']['family'] == 'Gentoo' {
+    $webhook_service_file      = '/etc/init.d/webhook'
+    $webhook_service_template  = 'webhook.init.gentoo.erb'
+    $webhook_service_file_mode = '0755'
+  } elsif $facts['os']['family'] == 'RedHat' and $facts['os']['release']['major'] < '7' {
+    $webhook_service_file      = '/etc/init.d/webhook'
+    $webhook_service_template  = 'webhook.init.erb'
+    $webhook_service_file_mode = '0755'
   } else {
-    $webhook_service_file     = '/etc/init.d/webhook'
-    $webhook_service_template = 'webhook.init.erb'
+    $webhook_service_file      = '/etc/systemd/system/webhook.service'
+    $webhook_service_template  = 'webhook.service.erb'
+    $webhook_service_file_mode = '0644'
   }
 }
