@@ -115,10 +115,7 @@ class Server < Sinatra::Base
 
     if data['repository'].has_key?('full_name')
       # handle BitBucket webhook...
-      module_name = ( data['repository']['full_name'] ).sub(/^.*\/.*-/, '')
-      # if the module name part does not contain a dash in the 'full_name'
-      # (i.e., the previous trimming did not work)
-      module_name = ( data['repository']['full_name'] ).sub(/^.*\//, '')
+      module_name = ( data['repository']['full_name'] ).sub(/^.*\/(.*-)?/, '')
     else
       module_name = ( data['repository']['name'] ).sub(/^.*-/, '')
     end
