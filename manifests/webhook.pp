@@ -20,7 +20,7 @@ class r10k::webhook(
     ensure => $ensure,
     owner  => $root_user,
     group  => $root_group,
-    mode   => '0755',
+    mode   => '0644',
   }
 
   # Rewrite the params to style guide in lieu of
@@ -49,17 +49,15 @@ class r10k::webhook(
     ensure => $ensure_file,
     owner  => $user,
     group  => $group,
-    mode   => '0644',
     before => File['webhook_bin'],
   }
 
   file { '/var/log/webhook':
-    ensure  => $ensure_directory,
-    owner   => $user,
-    group   => $group,
-    recurse => $ensure,
-    force   => $ensure,
-    before  => File['webhook_bin'],
+    ensure => $ensure_directory,
+    owner  => $user,
+    group  => $group,
+    force  => $ensure,
+    before => File['webhook_bin'],
   }
 
   file { '/var/run/webhook':
@@ -81,6 +79,7 @@ class r10k::webhook(
     ensure  => $ensure_file,
     content => template($bin_template),
     path    => '/usr/local/bin/webhook',
+    mode    => '0755',
     notify  => Service['webhook'],
   }
 
