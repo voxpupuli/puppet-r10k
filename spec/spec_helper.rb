@@ -42,8 +42,6 @@ if Dir.exist?(File.expand_path('../../lib', __FILE__))
 end
 
 RSpec.configure do |c|
-  c.default_facter_version = ENV['FACTERDB_FACTS_VERSION'] || '3.9.0'
-
   # Coverage generation
   c.after(:suite) do
     RSpec::Puppet::Coverage.report!
