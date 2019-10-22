@@ -10,6 +10,11 @@ require 'rspec-puppet-facts'
 require 'bundler'
 include RspecPuppetFacts
 
+if ENV['DEBUG']
+  Puppet::Util::Log.level = :debug
+  Puppet::Util::Log.newdestination(:console)
+end
+
 if File.exist?(File.join(__dir__, 'default_module_facts.yml'))
   facts = YAML.load(File.read(File.join(__dir__, 'default_module_facts.yml')))
   if facts
@@ -37,6 +42,8 @@ if Dir.exist?(File.expand_path('../../lib', __FILE__))
 end
 
 RSpec.configure do |c|
+  c.default_facter_version = ENV['FACTERDB_FACTS_VERSION'] || '3.9.0'
+
   # Coverage generation
   c.after(:suite) do
     RSpec::Puppet::Coverage.report!
