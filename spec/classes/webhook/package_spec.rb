@@ -22,10 +22,16 @@ describe 'r10k::webhook::package', type: :class do
           )
         end
 
+        provider = case facts[:os]['name']
+                   when 'Archlinux'
+                     'gem'
+                   else
+                     'puppet_gem'
+                   end
         it do
           is_expected.to contain_package('sinatra').with(
             ensure:   '~> 1.0',
-            provider: 'puppet_gem'
+            provider: provider
           )
         end
         it { is_expected.not_to contain_package('webrick') }
