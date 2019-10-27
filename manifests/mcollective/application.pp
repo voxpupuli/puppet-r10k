@@ -12,8 +12,8 @@ class r10k::mcollective::application(
 
   File {
     ensure => present,
-    owner  => $::r10k::root_user,
-    group  => $::r10k::root_group,
+    owner  => $r10k::root_user,
+    group  => $r10k::root_group,
     mode   => '0644',
   }
   # Install the agent and its ddl file

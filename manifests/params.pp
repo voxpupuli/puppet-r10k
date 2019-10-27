@@ -42,14 +42,16 @@ class r10k::params
   # Include the mcollective agent
   $mcollective = false
 
-  if $::osfamily == 'Debian' {
-    $functions_path     = '/lib/lsb/init-functions'
-    $start_pidfile_args = '--pidfile=$pidfile'
-  } elsif $::osfamily == 'SUSE' {
-    $functions_path     = '/etc/rc.status'
-  } else {
-    $functions_path     = '/etc/rc.d/init.d/functions'
-    $start_pidfile_args = '--pidfile $pidfile'
+  case $facts['os']['family'] {
+    'Debian': {
+      $functions_path     = '/lib/lsb/init-functions'
+      $start_pidfile_args = '--pidfile=$pidfile'
+    }
+    'SUSE': { $functions_path     = '/etc/rc.status' }
+    default:  {
+      $functions_path     = '/etc/rc.d/init.d/functions'
+      $start_pidfile_args = '--pidfile $pidfile'
+    }
   }
 
   # We check for the function right now instead of $::pe_server_version
