@@ -5,7 +5,12 @@ class r10k::params
   $version                = 'installed'
   $manage_modulepath      = false
   $manage_ruby_dependency = 'declare'
-  $provider               = 'puppet_gem'
+
+  $provider = $facts['os']['name'] ? {
+    'Archlinux' => 'gem',
+    default     => 'puppet_gem',
+  }
+
   $install_options        = []
   $sources                = undef
   $puppet_master          = true

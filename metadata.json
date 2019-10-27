@@ -37,6 +37,9 @@
       "operatingsystemrelease": [
         "14.04"
       ]
+    },
+    {
+      "operatingsystem": "Archlinux"
     }
   ],
   "project_page": "https://github.com/voxpupuli/puppet-r10k",
