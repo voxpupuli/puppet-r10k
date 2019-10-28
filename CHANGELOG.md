@@ -4,6 +4,36 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v8.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v8.0.0) (2019-10-27)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v7.0.0...v8.0.0)
+
+**Breaking changes:**
+
+- modulesync 2.9.0 & drop Ubuntu 14.04, add 16.04/18.04 [\#501](https://github.com/voxpupuli/puppet-r10k/pull/501) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- implement Archlinux support [\#503](https://github.com/voxpupuli/puppet-r10k/pull/503) ([bastelfreak](https://github.com/bastelfreak))
+- Implement pool\_size parameter [\#492](https://github.com/voxpupuli/puppet-r10k/pull/492) ([baurmatt](https://github.com/baurmatt))
+- Allow uppercase characters in environment names [\#491](https://github.com/voxpupuli/puppet-r10k/pull/491) ([nmaludy](https://github.com/nmaludy))
+
+**Fixed bugs:**
+
+- Trim "full\_name" when module name has no dash [\#498](https://github.com/voxpupuli/puppet-r10k/pull/498) ([posledov](https://github.com/posledov))
+
+**Closed issues:**
+
+- rotated logfiles should not have executable bit set [\#499](https://github.com/voxpupuli/puppet-r10k/issues/499)
+- r10k, invoked by r10k::webhook, does not update the module code [\#496](https://github.com/voxpupuli/puppet-r10k/issues/496)
+
+**Merged pull requests:**
+
+- remove git dependency from r10k::install::puppet\_gem [\#502](https://github.com/voxpupuli/puppet-r10k/pull/502) ([Andor](https://github.com/Andor))
+- r10k webhook logfiles should not be executable [\#500](https://github.com/voxpupuli/puppet-r10k/pull/500) ([tuxmea](https://github.com/tuxmea))
+- Add slack\_icon docs to README [\#497](https://github.com/voxpupuli/puppet-r10k/pull/497) ([0x6d617474](https://github.com/0x6d617474))
+- webhook: use the systemd service by default [\#494](https://github.com/voxpupuli/puppet-r10k/pull/494) ([kenyon](https://github.com/kenyon))
+
 ## [v7.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v7.0.0) (2019-06-18)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v6.8.0...v7.0.0)
@@ -222,7 +252,6 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- release 6.1.0 [\#381](https://github.com/voxpupuli/puppet-r10k/pull/381) ([bastelfreak](https://github.com/bastelfreak))
 - Quote the exact JSON response for `heartbeat` [\#379](https://github.com/voxpupuli/puppet-r10k/pull/379) ([bittner](https://github.com/bittner))
 - Better handling for the default branch [\#376](https://github.com/voxpupuli/puppet-r10k/pull/376) ([rnelson0](https://github.com/rnelson0))
 - Add Troubleshooting section \(logfile, heartbeat\) to README [\#375](https://github.com/voxpupuli/puppet-r10k/pull/375) ([bittner](https://github.com/bittner))
@@ -281,7 +310,6 @@ These should not affect the functionality of the module.
 - Use styleguide compliant syntax for sshkey example. [\#353](https://github.com/voxpupuli/puppet-r10k/pull/353) ([kallies](https://github.com/kallies))
 - Fix webhook slack\_username parameter handling [\#350](https://github.com/voxpupuli/puppet-r10k/pull/350) ([alexbrett](https://github.com/alexbrett))
 - Webhook Background mode [\#349](https://github.com/voxpupuli/puppet-r10k/pull/349) ([luckyraul](https://github.com/luckyraul))
-- Cleanup webhook use case notes; specifically PE/FOSS split. [\#338](https://github.com/voxpupuli/puppet-r10k/pull/338) ([rnelson0](https://github.com/rnelson0))
 
 ## [v5.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v5.0.0) (2017-03-07)
 
@@ -296,6 +324,7 @@ These should not affect the functionality of the module.
 - r10k.yaml contents indentation is incorrect [\#345](https://github.com/voxpupuli/puppet-r10k/pull/345) ([Kotty666](https://github.com/Kotty666))
 - Update yaml location for \>PE3 [\#343](https://github.com/voxpupuli/puppet-r10k/pull/343) ([rnelson0](https://github.com/rnelson0))
 - replace all validate functions with datatypes [\#341](https://github.com/voxpupuli/puppet-r10k/pull/341) ([bastelfreak](https://github.com/bastelfreak))
+- Cleanup webhook use case notes; specifically PE/FOSS split. [\#338](https://github.com/voxpupuli/puppet-r10k/pull/338) ([rnelson0](https://github.com/rnelson0))
 - Remove support for Puppet 3 and Ruby \<2.0.0 [\#321](https://github.com/voxpupuli/puppet-r10k/pull/321) ([rnelson0](https://github.com/rnelson0))
 - Ensure webhook run folder exists on redhat systemd environments [\#283](https://github.com/voxpupuli/puppet-r10k/pull/283) ([luisfdez](https://github.com/luisfdez))
 
