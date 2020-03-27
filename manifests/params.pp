@@ -131,7 +131,7 @@ class r10k::params
   $mc_git_ssl_no_verify = 0
 
   # Webhook configuration information
-  $webhook_bind_address          = '0.0.0.0'
+  $webhook_bind_address          = '*'
   $webhook_port                  = '8088'
   $webhook_access_logfile        = '/var/log/webhook/access.log'
   $webhook_client_cfg            = '/var/lib/peadmin/.mcollective'

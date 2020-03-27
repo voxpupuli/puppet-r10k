@@ -30,7 +30,7 @@ describe 'r10k::webhook::config', type: :class do
         content = '---
 access_logfile: "/var/log/webhook/access.log"
 allow_uppercase: true
-bind_address: "0.0.0.0"
+bind_address: "*"
 certname: "peadmin"
 certpath: "/var/lib/peadmin/.mcollective.d"
 client_cfg: "/var/lib/peadmin/.mcollective"
@@ -83,7 +83,7 @@ user: "peadmin"
         content = '---
 access_logfile: "/var/log/webhook/access.log"
 allow_uppercase: true
-bind_address: "0.0.0.0"
+bind_address: "*"
 certname: "peadmin"
 certpath: "/var/lib/peadmin/.mcollective.d"
 client_cfg: "/var/lib/peadmin/.mcollective"
@@ -147,7 +147,7 @@ user: "peadmin"
         content = '---
 access_logfile: "/var/log/webhook/access.log"
 allow_uppercase: true
-bind_address: "0.0.0.0"
+bind_address: "*"
 client_cfg: "/var/lib/peadmin/.mcollective"
 client_timeout: "120"
 command_prefix: "umask 0022;"
@@ -192,7 +192,7 @@ user: "puppet"
         content = '---
 access_logfile: "/var/log/webhook/access.log"
 allow_uppercase: true
-bind_address: "0.0.0.0"
+bind_address: "*"
 client_cfg: "/var/lib/peadmin/.mcollective"
 client_timeout: "120"
 command_prefix: "umask 0022;"
@@ -236,7 +236,7 @@ user: "puppet"
         content = '---
 access_logfile: "/var/log/webhook/access.log"
 allow_uppercase: true
-bind_address: "0.0.0.0"
+bind_address: "*"
 client_cfg: "/var/lib/peadmin/.mcollective"
 client_timeout: "120"
 command_prefix: "umask 0022;"
@@ -281,7 +281,7 @@ user: "puppet"
         content = '---
 access_logfile: "/var/log/webhook/access.log"
 allow_uppercase: true
-bind_address: "0.0.0.0"
+bind_address: "*"
 bitbucket_secret: "secret"
 client_cfg: "/var/lib/peadmin/.mcollective"
 client_timeout: "120"
@@ -326,7 +326,7 @@ user: "puppet"
         content = '---
 access_logfile: "/var/log/webhook/access.log"
 allow_uppercase: true
-bind_address: "0.0.0.0"
+bind_address: "*"
 client_cfg: "/var/lib/peadmin/.mcollective"
 client_timeout: "120"
 command_prefix: "umask 0022;"
@@ -371,7 +371,7 @@ user: "puppet"
         content = '---
 access_logfile: "/var/log/webhook/access.log"
 allow_uppercase: true
-bind_address: "0.0.0.0"
+bind_address: "*"
 client_cfg: "/var/lib/peadmin/.mcollective"
 client_timeout: "120"
 command_prefix: "umask 0022;"
@@ -458,7 +458,7 @@ user: "puppet"
         content = '---
 access_logfile: "/var/log/webhook/access.log"
 allow_uppercase: true
-bind_address: "0.0.0.0"
+bind_address: "*"
 client_cfg: "/var/lib/peadmin/.mcollective"
 client_timeout: "120"
 command_prefix: "umask 0022;"
