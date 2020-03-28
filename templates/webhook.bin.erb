@@ -57,10 +57,15 @@ opts = {
   :StartCallback  => Proc.new { File.open(PIDFILE, 'w') {|f| f.write Process.pid } },
 }
 if $config['enable_ssl'] then
+  CERT_PATTERN = /-----BEGIN.+?CERTIFICATE-----.+?-----END.+?CERTIFICATE-----/m
+  certs = File.open("#{$config['public_key_path']}").read.scan(CERT_PATTERN)
   opts[:SSLVerifyClient] = OpenSSL::SSL::VERIFY_NONE
-  opts[:SSLCertificate]  = OpenSSL::X509::Certificate.new(File.open("#{$config['public_key_path']}").read)
+  opts[:SSLCertificate]  = OpenSSL::X509::Certificate.new(certs.shift)
   opts[:SSLPrivateKey]   = OpenSSL::PKey::RSA.new(File.open("#{$config['private_key_path']}").read)
   opts[:SSLCertName]     = [ [ "CN",WEBrick::Utils::getservername ] ]
+  if ! certs.empty? then
+    opts[:SSLExtraChainCert] = certs.map { |x| OpenSSL::X509::Certificate.new(x) }
+  end
 end
 
 if $config['use_mcollective'] then
