@@ -49,7 +49,7 @@ class r10k::webhook(
     ensure => $ensure_file,
     owner  => $user,
     group  => $group,
-    before => File['webhook_bin'],
+    before => Service['webhook'],
   }
 
   file { '/var/log/webhook':
@@ -57,14 +57,14 @@ class r10k::webhook(
     owner  => $user,
     group  => $group,
     force  => $ensure,
-    before => File['webhook_bin'],
+    before => Service['webhook'],
   }
 
   file { '/var/run/webhook':
     ensure => $ensure_directory,
     owner  => $user,
     group  => $group,
-    before => File['webhook_init_script'],
+    before => Service['webhook'],
   }
 
   file { 'webhook_init_script':
@@ -72,7 +72,7 @@ class r10k::webhook(
     content => template("r10k/${service_template}"),
     path    => $service_file,
     mode    => $service_file_mode,
-    before  => File['webhook_bin'],
+    notify  => Service['webhook'],
   }
 
   file { 'webhook_bin':

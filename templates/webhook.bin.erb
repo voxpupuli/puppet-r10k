@@ -273,7 +273,16 @@ class Server < Sinatra::Base
 
     def generate_types(environment)
       begin
-        command = "#{$command_prefix} /opt/puppetlabs/bin/puppet generate types --environment #{environment.gsub(/\W/, '_')}"
+<% if @user != 'root' -%>
+<%# explicitly set working directories for non-root accounts -%>
+<% @generate_suffix=' --confdir ' + scope.lookupvar('settings::confdir') +
+  ' --codedir ' + scope.lookupvar('settings::codedir') +
+  ' --vardir  ' + scope.lookupvar('settings::vardir')
+-%>
+<% else -%>
+<% @generate_suffix='' -%>
+<% end -%>
+        command = "#{$command_prefix} /opt/puppetlabs/bin/puppet generate types --environment #{environment.gsub(/\W/, '_')}<%= @generate_suffix %>"
 
         message = run_command(command)
         $logger.info("message: #{message} environment: #{environment}")
