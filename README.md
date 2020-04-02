@@ -149,6 +149,9 @@ a clone of this modules features and file tickets for anything missing._
 
 ### Using an internal gem server
 
+Depending on implementation requirements, there are two ways to use alternate gem sources.
+
+#### The gemrc approach
 Create a global gemrc for Puppet Enterprise to add the local gem source. See http://projects.puppetlabs.com/issues/18053#note-12 for more information.
 
 ```puppet
@@ -172,6 +175,17 @@ class { 'r10k':
   remote   => 'git@github.com:someuser/puppet.git',
   provider => 'pe_gem',
   require  => File['gemrc'],
+}
+```
+
+#### The parameter approach
+Add gem_source to declaration.
+
+```puppet
+class { 'r10k':
+  remote      => 'git@github.com:someuser/puppet.git',
+  provider    => 'gem',
+  gem_source  => 'https://some.alternate.source.com/',
 }
 ```
 
@@ -757,6 +771,9 @@ When using system ruby , options on how to declare
 
 ##### `proxy`
 A string setting the`r10k.yaml` configuration value of the same name
+
+##### `gem_source`
+An optional string specifying location to retrieve gem
 
 ##### `pool_size`
 Integer defining how many threads should be spawn while updating modules. Only available for r10k >= 3.3.0.

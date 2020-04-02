@@ -8,6 +8,7 @@ class r10k::install (
   $manage_ruby_dependency,
   $puppet_master = true,
   $is_pe_server = $r10k::params::is_pe_server,
+  Optional[String[1]] $gem_source = undef,
 ) inherits r10k::params {
 
   if $package_name == '' {
@@ -58,6 +59,7 @@ class r10k::install (
       package { $real_package_name:
         ensure          => $version,
         provider        => $provider,
+        source          => $gem_source,
         install_options => $provider_install_options,
       }
 

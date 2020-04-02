@@ -132,6 +132,30 @@ describe 'r10k::install' do
         end
       end
 
+      context 'with defaults and source specified' do
+        let :params do
+          {
+            manage_ruby_dependency: 'include',
+            package_name:           'r10k',
+            provider:               'gem',
+            version:                version,
+            keywords:               '',
+            gem_source:             'https://some.alternate.source.com/',
+            install_options:        [],
+            puppet_master:          true
+          }
+        end
+
+        it { is_expected.to contain_class('r10k::install::gem') }
+        it do
+          is_expected.to contain_package('r10k').with(
+            ensure:   version,
+            provider: 'gem',
+            source:   'https://some.alternate.source.com/'
+          )
+        end
+      end
+
       context 'with bundle provider' do
         let :params do
           {
