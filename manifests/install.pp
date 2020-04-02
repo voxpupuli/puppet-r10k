@@ -5,6 +5,7 @@ class r10k::install (
   $provider,
   $keywords,
   $install_options,
+  $gem_source,
   $manage_ruby_dependency,
   $puppet_master = true,
   $is_pe_server = $r10k::params::is_pe_server,
@@ -58,6 +59,7 @@ class r10k::install (
       package { $real_package_name:
         ensure          => $version,
         provider        => $provider,
+        source          => $gem_source,
         install_options => $provider_install_options,
       }
 

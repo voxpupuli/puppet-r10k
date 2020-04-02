@@ -23,6 +23,7 @@ class r10k (
   $root_user                                                  = $r10k::params::root_user,
   Optional[String[1]] $proxy                                  = $r10k::params::proxy,
   Optional[Integer[1]] $pool_size                             = $r10k::params::pool_size,
+  Optional[String[1]] $gem_source                             = $r10k::params::gem_source,
   $root_group                                                 = $r10k::params::root_group,
   $postrun                                                    = undef,
   Boolean $include_prerun_command                             = false,
@@ -51,6 +52,7 @@ class r10k (
     manage_ruby_dependency => $manage_ruby_dependency,
     package_name           => $package_name,
     provider               => $provider,
+    gem_source             => $gem_source,
     version                => $version,
     puppet_master          => $puppet_master,
   }
