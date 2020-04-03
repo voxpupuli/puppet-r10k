@@ -4,7 +4,32 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v8.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v8.0.0) (2019-10-27)
+## [v8.1.0](https://github.com/voxpupuli/puppet-r10k/tree/v8.1.0) (2020-04-03)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v8.0.0...v8.1.0)
+
+**Implemented enhancements:**
+
+- Change webhook systemd service type to `simple` [\#513](https://github.com/voxpupuli/puppet-r10k/pull/513) ([alexjfisher](https://github.com/alexjfisher))
+
+**Closed issues:**
+
+- webhook does not support the use of intermediate certificates [\#510](https://github.com/voxpupuli/puppet-r10k/issues/510)
+- Travis CI tests are currently failing on centos7-x64 [\#509](https://github.com/voxpupuli/puppet-r10k/issues/509)
+- Allow IPv6 [\#490](https://github.com/voxpupuli/puppet-r10k/issues/490)
+- generate types feature doesn't work under unprivileged user id [\#412](https://github.com/voxpupuli/puppet-r10k/issues/412)
+- Let /payload webhook deploy to all environments [\#391](https://github.com/voxpupuli/puppet-r10k/issues/391)
+- dependency on puppetlabs/gcc which is not v1 [\#326](https://github.com/voxpupuli/puppet-r10k/issues/326)
+
+**Merged pull requests:**
+
+- Remove `anchor` resource from `r10k::install::gem` [\#519](https://github.com/voxpupuli/puppet-r10k/pull/519) ([alexjfisher](https://github.com/alexjfisher))
+- Use full certificate chain for webhook [\#515](https://github.com/voxpupuli/puppet-r10k/pull/515) ([mcb30](https://github.com/mcb30))
+- Fix webhook deployment on IPv6 machines [\#514](https://github.com/voxpupuli/puppet-r10k/pull/514) ([mcb30](https://github.com/mcb30))
+- fix webhook generate type functionailty for non-root user [\#512](https://github.com/voxpupuli/puppet-r10k/pull/512) ([vchepkov](https://github.com/vchepkov))
+- allow puppetlabs/inifile 4.x [\#505](https://github.com/voxpupuli/puppet-r10k/pull/505) ([bastelfreak](https://github.com/bastelfreak))
+
+## [v8.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v8.0.0) (2019-10-28)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v7.0.0...v8.0.0)
 
