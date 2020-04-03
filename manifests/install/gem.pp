@@ -4,23 +4,19 @@ class r10k::install::gem (
   $version,
 ) {
   require git
-  anchor{'r10k::ruby_done':}
+
   case $manage_ruby_dependency {
     'include': {
       include ruby
-      include ruby::dev
-      Class['::ruby']
-      -> Class['ruby::dev']
-      -> Anchor['r10k::ruby_done']
+      require ruby::dev
+      Class['ruby'] -> Class['ruby::dev']
     }
     'declare': {
       class { 'ruby':
         rubygems_update => false,
       }
-      include ruby::dev
-      Class['::ruby']
-      -> Class['::ruby::dev']
-      -> Anchor['r10k::ruby_done']
+      require ruby::dev
+      Class['ruby'] -> Class['ruby::dev']
     }
     default: {
       #This catches the 'ignore' case, and satisfies the 'default' requirement
