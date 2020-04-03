@@ -8,16 +8,6 @@ rescue LoadError
 end
 
 PuppetLint.configuration.log_format = '%{path}:%{line}:%{check}:%{KIND}:%{message}'
-PuppetLint.configuration.absolute_classname_reverse = true
-
-exclude_paths = %w(
-  pkg/**/*
-  vendor/**/*
-  .vendor/**/*
-  spec/**/*
-)
-PuppetLint.configuration.ignore_paths = exclude_paths
-PuppetSyntax.exclude_paths = exclude_paths
 
 desc 'Auto-correct puppet-lint offenses'
 task 'lint:auto_correct' do
@@ -36,7 +26,7 @@ namespace :check do
   desc 'Check for trailing whitespace'
   task :trailing_whitespace do
     Dir.glob('**/*.md', File::FNM_DOTMATCH).sort.each do |filename|
-      next if filename =~ %r{^((modules|acceptance|\.?vendor|spec/fixtures|pkg)/|REFERENCE.md)}
+      next if filename =~ %r{^((modules|acceptance|\.?vendor|spec/fixtures|pkg)/|REFERENCE.md|CHANGELOG.md)}
       File.foreach(filename).each_with_index do |line, index|
         if line =~ %r{\s\n$}
           puts "#{filename} has trailing whitespace on line #{index + 1}"
