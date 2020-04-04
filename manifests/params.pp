@@ -16,6 +16,7 @@ class r10k::params
   $puppet_master          = true
   $proxy                  = undef
   $pool_size              = undef
+  $gem_source             = undef
 
   if 'puppet_environment' in $facts {
     $r10k_basedir            = $facts['puppet_environmentpath']
