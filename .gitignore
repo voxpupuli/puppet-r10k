@@ -10,7 +10,6 @@ spec/fixtures/modules/
 .ruby-version
 coverage/
 log/
-bin/
 .idea/
 .dependencies/
 .librarian/
