@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v8.2.0](https://github.com/voxpupuli/puppet-r10k/tree/v8.2.0) (2020-04-06)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v8.1.0...v8.2.0)
+
+**Implemented enhancements:**
+
+- Add support for package source attribute [\#517](https://github.com/voxpupuli/puppet-r10k/pull/517) ([prolixalias](https://github.com/prolixalias))
+
 ## [v8.1.0](https://github.com/voxpupuli/puppet-r10k/tree/v8.1.0) (2020-04-03)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v8.0.0...v8.1.0)
