@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v8.3.0](https://github.com/voxpupuli/puppet-r10k/tree/v8.3.0) (2020-04-30)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v8.2.0...v8.3.0)
+
+**Implemented enhancements:**
+
+- Allow puppetlabs/vcsrepo 3.x [\#526](https://github.com/voxpupuli/puppet-r10k/pull/526) ([dhoppe](https://github.com/dhoppe))
+
+**Closed issues:**
+
+- vcsrepo is outdated - latest 6.x.x, requires \< 3.0.0 [\#525](https://github.com/voxpupuli/puppet-r10k/issues/525)
+
+**Merged pull requests:**
+
+- Use voxpupuli-acceptance [\#524](https://github.com/voxpupuli/puppet-r10k/pull/524) ([ekohl](https://github.com/ekohl))
+
 ## [v8.2.0](https://github.com/voxpupuli/puppet-r10k/tree/v8.2.0) (2020-04-06)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v8.1.0...v8.2.0)
