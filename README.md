@@ -451,6 +451,23 @@ class { 'r10k::webhook':
 }
 ```
 
+### GitLab Token Support
+GitLab webhooks [allow the use](https://gitlab.com/help/user/project/integrations/webhooks#secret-token)
+of a secret token value that gets sent in the header of the HTTP request. To have the webhook receiver
+verify the secret token value and perform the operation only if the sent value matches the configured
+value, use the following type of configuration:
+
+```puppet
+class { 'r10k::webhook::config':
+  protected        => false,
+  gitlab_token     => 'THISISTHEGITLABWEBHOOKSECRET',
+}
+
+class { 'r10k::webhook':
+  require => Class['r10k::webhook::config'],
+}
+```
+
 ### BitBucket Server Secret Support
 BitBucket webhooks allow the use of a secret value that gets hashed against the payload to pass a
 signature in the request X-Hub-Signature header. To support the secret with the webhook do the

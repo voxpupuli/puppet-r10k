@@ -140,6 +140,7 @@ class r10k::params
   $webhook_use_mco_ruby          = false
   $webhook_protected             = true
   $webhook_github_secret         = undef
+  $webhook_gitlab_token          = undef
   $webhook_bitbucket_secret      = undef
   $webhook_discovery_timeout     = 10
   $webhook_client_timeout        = 120
