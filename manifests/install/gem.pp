@@ -3,8 +3,6 @@ class r10k::install::gem (
   $manage_ruby_dependency,
   $version,
 ) {
-  require git
-
   case $manage_ruby_dependency {
     'include': {
       include ruby

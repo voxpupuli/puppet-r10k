@@ -58,7 +58,6 @@ class { 'r10k':
 ### What r10k affects
 
 * Installation of the r10k `gem`
-* Installation of git
 * Installation of ruby when not using an existing ruby stack i.e. when using `puppet_gem`
 * Management of the `r10k.yaml` in /etc
 * Installation and configuration of a sinatra app when using the [webhook](#webhook-support).
@@ -86,14 +85,15 @@ You can override this by passing the `version` parameter.
 
 ### Setup Requirements
 
-r10k connects via ssh and does so silently in the background, this typically requires ssh keys to be deployed in advance of configuring
-r10k. This includes the known host ( public ) key of the respective git server, and the user running r10k's private key used to authenticate
-git/ssh during background runs.
+r10k connects via ssh and does so silently in the background, this typically requires ssh keys to be deployed in advance of configuring r10k. This includes the known host ( public ) key of the respective git server, and the user running r10k's private key used to authenticate git/ssh during background runs.  If you are going to use git repos to retrieve modules, you also need git installed.
 
-Here is an example of deploying the ssh keys needed for r10k to connect to a repo called puppet/control on a gitlab server.
-This is helpful when you need to automatically deploy new masters
+Here is an example of deploying the git package and ssh keys needed for r10k to connect to a repo called puppet/control on a gitlab server.  This is helpful when you need to automatically deploy new masters
 
 ```puppet
+package { 'git':
+  ensure => installed,
+}
+
 #https://docs.puppetlabs.com/references/latest/type.html#sshkey
 sshkey { 'your.internal.gitlab.server.com':
   ensure => present,
