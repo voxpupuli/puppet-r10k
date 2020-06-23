@@ -22,8 +22,6 @@ describe 'r10k::install' do
           }
         end
 
-        it { is_expected.to contain_class('git') }
-
         it { is_expected.to contain_class('r10k::install::gem').with(version: version) }
         it do
           is_expected.to contain_package('r10k').with(
@@ -89,7 +87,6 @@ describe 'r10k::install' do
           }
         end
 
-        it { is_expected.not_to contain_class('git') }
         it { is_expected.to contain_class('r10k::install::puppet_gem') }
         it do
           is_expected.to contain_package('r10k').with(
@@ -169,7 +166,6 @@ describe 'r10k::install' do
           }
         end
 
-        it { is_expected.to contain_class('git') }
         it { is_expected.to contain_class('r10k::install::bundle') }
         it { is_expected.not_to contain_package('r10k') }
       end
