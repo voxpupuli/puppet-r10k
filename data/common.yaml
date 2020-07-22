@@ -1,0 +1,8 @@
+---
+r10k::include_postrun_command: false
+r10k::postrun_command::ensure: 'present'
+r10k::postrun_command::command: 'deploy environment -p'
+
+r10k::include_prerun_command: false
+r10k::prerun_command::ensure: 'present'
+r10k::prerun_command::command: 'deploy environment -p'

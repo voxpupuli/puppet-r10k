@@ -16,18 +16,17 @@ describe 'r10k::postrun_command', type: :class do
         context 'adding custom postrun_command' do
           let :params do
             {
-              command: 'r10k synchronize',
+              command: 'synchronize',
               ensure:  'present'
             }
           end
 
-          it { is_expected.to contain_class('r10k::params') }
           it do
             is_expected.to contain_ini_setting('r10k_postrun_command').with(
               ensure:  'present',
               section: 'agent',
               setting: 'postrun_command',
-              value:   'r10k synchronize'
+              value:   '/bin/r10k synchronize'
             )
           end
         end
@@ -35,18 +34,17 @@ describe 'r10k::postrun_command', type: :class do
         context 'removing custom postrun_command' do
           let :params do
             {
-              command: 'r10k synchronize',
+              command: 'synchronize',
               ensure:  'absent'
             }
           end
 
-          it { is_expected.to contain_class('r10k::params') }
           it do
             is_expected.to contain_ini_setting('r10k_postrun_command').with(
               ensure:  'absent',
               section: 'agent',
               setting: 'postrun_command',
-              value:   'r10k synchronize'
+              value:   '/bin/r10k synchronize'
             )
           end
         end
@@ -54,13 +52,12 @@ describe 'r10k::postrun_command', type: :class do
 
       context 'with Puppet FOSS' do
         context 'adding default postrun_command' do
-          it { is_expected.to contain_class('r10k::params') }
           it do
             is_expected.to contain_ini_setting('r10k_postrun_command').with(
               ensure:  'present',
               section: 'agent',
               setting: 'postrun_command',
-              value:   'r10k deploy environment -p'
+              value:   '/bin/r10k deploy environment -p'
             )
           end
         end
@@ -68,18 +65,17 @@ describe 'r10k::postrun_command', type: :class do
         context 'adding custom postrun_command' do
           let :params do
             {
-              command: 'r10k21 synchronize',
+              command: 'synchronize',
               ensure:  'present'
             }
           end
 
-          it { is_expected.to contain_class('r10k::params') }
           it do
             is_expected.to contain_ini_setting('r10k_postrun_command').with(
               ensure:  'present',
               section: 'agent',
               setting: 'postrun_command',
-              value:   'r10k21 synchronize'
+              value:   '/bin/r10k synchronize'
             )
           end
         end
@@ -87,18 +83,17 @@ describe 'r10k::postrun_command', type: :class do
         context 'removing custom postrun_command' do
           let :params do
             {
-              command: 'r10k21 synchronize',
+              command: 'synchronize',
               ensure:  'absent'
             }
           end
 
-          it { is_expected.to contain_class('r10k::params') }
           it do
             is_expected.to contain_ini_setting('r10k_postrun_command').with(
               ensure:  'absent',
               section: 'agent',
               setting: 'postrun_command',
-              value:   'r10k21 synchronize'
+              value:   '/bin/r10k synchronize'
             )
           end
         end
