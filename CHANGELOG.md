@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v9.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v9.0.0) (2020-07-28)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v8.3.0...v9.0.0)
+
+**Breaking changes:**
+
+- \[Issue \#530\] Removes dependence on puppetlabs-git [\#531](https://github.com/voxpupuli/puppet-r10k/pull/531) ([chadh](https://github.com/chadh))
+
+**Implemented enhancements:**
+
+- webhook: support verification of X-Gitlab-Token header [\#529](https://github.com/voxpupuli/puppet-r10k/pull/529) ([kenyon](https://github.com/kenyon))
+
+**Closed issues:**
+
+- Remove dependence on old puppetlabs-git module [\#530](https://github.com/voxpupuli/puppet-r10k/issues/530)
+- webhook: add support for verifying X-Gitlab-Token [\#528](https://github.com/voxpupuli/puppet-r10k/issues/528)
+
+**Merged pull requests:**
+
+- modulesync 3.0.0 & puppet-lint updates  [\#533](https://github.com/voxpupuli/puppet-r10k/pull/533) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v8.3.0](https://github.com/voxpupuli/puppet-r10k/tree/v8.3.0) (2020-04-30)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v8.2.0...v8.3.0)
