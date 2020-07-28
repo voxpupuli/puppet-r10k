@@ -116,6 +116,7 @@ class Server < Sinatra::Base
     decoded = request.body.read
     verify_signature(decoded, 'sha1', $config['github_secret']) if $config['github_secret']
     verify_signature(decoded, 'sha256', $config['bitbucket_secret']) if $config['bitbucket_secret']
+    verify_token($config['gitlab_token']) if $config['gitlab_token']
     data    = JSON.parse(decoded, :quirks_mode => true)
 
     if data['repository'].has_key?('full_name')
@@ -160,6 +161,7 @@ class Server < Sinatra::Base
     end
     verify_signature(decoded, 'sha1', $config['github_secret']) if $config['github_secret']
     verify_signature(decoded, 'sha256', $config['bitbucket_secret']) if $config['bitbucket_secret']
+    verify_token($config['gitlab_token']) if $config['gitlab_token']
     data = JSON.parse(decoded, :quirks_mode => true)
 
     # Iterate the data structure to determine what's should be deployed
@@ -387,7 +389,7 @@ class Server < Sinatra::Base
       notifier = RocketChat::Notifier.new $config['rocketchat_webhook']
       notifier.username = rocketchat_user
       notifier.channel = rocketchat_channel
-      
+
       if status_message[:environment]  # generate_types
         target = status_message[:environment]
         msg = "Generation of Puppet resource types for #{target}"
@@ -526,6 +528,10 @@ class Server < Sinatra::Base
       throw(:halt, [500, "Signatures didn't match!\n"]) unless Rack::Utils.secure_compare(signature, request.env['HTTP_X_HUB_SIGNATURE'])
     end
 
+    def verify_token(token)
+      throw(:halt, [500, "Incorrect Gitlab token!\n"]) unless request.env['HTTP_X_GITLAB_TOKEN'] == token
+    end
+
     def repo_name(data)
       # Tested with GitHub only
       data['repository']['name'] rescue nil
@@ -552,11 +558,11 @@ class Server < Sinatra::Base
           end
       end
     end #end run_prefix_command
-    
+
 
     # :deploy and :deploy_module methods are vulnerable to shell
     # injection. e.g. a branch named ";yes". Or a malicious POST request with
-    # "; rm -rf *;" as the payload. 
+    # "; rm -rf *;" as the payload.
     def sanitize_input(input_string)
       sanitized = Shellwords.shellescape(input_string)
       $logger.info("module or branch name #{sanitized} had to be escaped!") unless input_string == sanitized

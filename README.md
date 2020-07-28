@@ -10,15 +10,20 @@
 #### Table of Contents
 
 1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with r10k](#setup)
+1. [Module Description - What the module does and why it is useful](#module-description)
+1. [Setup - The basics of getting started with r10k](#setup)
+    * [Prefix Example](#prefix-example)
     * [What r10k affects](#what-r10k-affects)
-    * [Setup requirements](#setup-requirements)
+    * [Setup Requirements](#setup-requirements)
     * [Beginning with r10k](#beginning-with-r10k)
-4. [Usage - Configuration options and additional functionality](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
+    * [Using an internal gem server](#using-an-internal-gem-server)
+    * [Mcollective Support](#mcollective-support)
+1. [Webhook Support](#webhook-support)
+1. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+1. [Limitations - OS compatibility, etc.](#limitations)
+1. [Support](#support)
+1. [Development - Guide for contributing to the module](#development)
+1. [Running tests](#running-tests)
 
 ## Overview
 
@@ -251,7 +256,7 @@ class { '::r10k::mcollective':
 }
 ```
 
-### Install mcollective support for post receive hooks
+#### Install mcollective support for post receive hooks
 Install the `mco` command from the puppet enterprise installation directory i.e.
 ```shell
 cd ~/puppet-enterprise-3.0.1-el-6-x86_64/packages/el-6-x86_64
@@ -280,7 +285,7 @@ and copy the certs to somewhere that is readable by the respective user.
 ~~~
 _Note: PE2 only requires the .mcollective file as the default auth was psk_
 
-### Removing the mcollective agent
+#### Removing the mcollective agent
 
 ```puppet
 class { 'r10k::mcollective':
@@ -289,7 +294,7 @@ class { 'r10k::mcollective':
 ```
 This will remove the mcollective agent/application and ddl files from disk. This likely would be if you are migrating to Code manager in Puppet Enterprise.
 
-# Webhook Support
+## Webhook Support
 
 ![alt tag](https://gist.githubusercontent.com/acidprime/be25026c11a76bf3e7fb/raw/44df86181c3e5d14242a1b1f4281bf24e9c48509/webhook.gif)
 For version control systems that use web driven post-receive processes you can use the example webhook included in this module.
@@ -398,6 +403,7 @@ git_webhook { 'web_post_receive_webhook_for_module' :
   provider     => 'github',
 }
 ```
+
 ### Webhook Bitbucket Example
 This is an example of using the webhook with Atlassian Bitbucket (former Stash).
 Requires the `external hooks` addon by https://marketplace.atlassian.com/plugins/com.ngs.stash.externalhooks.external-hooks/server/overview
@@ -444,6 +450,23 @@ following type of configuration.
 class { 'r10k::webhook::config':
   protected     => false,
   github_secret => 'THISISTHEGITHUBWEBHOOKSECRET',
+}
+
+class { 'r10k::webhook':
+  require => Class['r10k::webhook::config'],
+}
+```
+
+### GitLab Token Support
+GitLab webhooks [allow the use](https://gitlab.com/help/user/project/integrations/webhooks#secret-token)
+of a secret token value that gets sent in the header of the HTTP request. To have the webhook receiver
+verify the secret token value and perform the operation only if the sent value matches the configured
+value, use the following type of configuration:
+
+```puppet
+class { 'r10k::webhook::config':
+  protected        => false,
+  gitlab_token     => 'THISISTHEGITLABWEBHOOKSECRET',
 }
 
 class { 'r10k::webhook':
@@ -547,8 +570,8 @@ git_webhook { 'web_post_receive_webhook' :
   provider     => 'gitlab',
 }
 
-
 ```
+
 ### Webhook FOSS support with MCollective
 
 Currently the webhook relies on existing certificates for its ssl configuration.
@@ -651,7 +674,6 @@ class { 'r10k::webhook::config':
   rocketchat_channel  => '#channel', # defaults to #r10k
 }
 ```
-
 
 ### Webhook Default Branch
 
