@@ -29,7 +29,6 @@ class r10k (
   Boolean $include_prerun_command                             = false,
   Boolean $include_postrun_command                            = false,
 ) inherits r10k::params {
-
   # Check if user is declaring both classes
   # Other classes like r10k::webhook is supported but
   # using both classes makes no sense unless given pe_r10k

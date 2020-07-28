@@ -1,6 +1,5 @@
 # Reasonable defaults for all classes
-class r10k::params
-{
+class r10k::params {
   $package_name           = ''
   $version                = 'installed'
   $manage_modulepath      = false
@@ -61,7 +60,7 @@ class r10k::params
   if fact('is_pe') == true or fact('is_pe') == 'true' {
     # < PE 4
     $is_pe_server      = true
-  }elsif is_function_available('pe_compiling_server_version') {
+  } elsif is_function_available('pe_compiling_server_version') {
     # >= PE 4
     $is_pe_server      = true
   }
@@ -120,7 +119,6 @@ class r10k::params
 
   # prerun_command in puppet.conf
   $pre_postrun_command = "${r10k_binary} deploy environment -p"
-
 
   # Mcollective configuration static
   $mc_agent_name       = "${module_name}.rb"

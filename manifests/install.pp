@@ -10,16 +10,15 @@ class r10k::install (
   $is_pe_server = $r10k::params::is_pe_server,
   Optional[String[1]] $gem_source = undef,
 ) inherits r10k::params {
-
   if $package_name == '' {
     case $provider {
       'openbsd': {
-                    if (versioncmp("${::kernelversion}", '5.8') < 0) { #lint:ignore:only_variable_string
-                      $real_package_name = 'ruby21-r10k'
-                    } else {
-                      $real_package_name = 'ruby22-r10k'
-                    }
-                  }
+        if (versioncmp("${::kernelversion}", '5.8') < 0) { #lint:ignore:only_variable_string
+          $real_package_name = 'ruby21-r10k'
+        } else {
+          $real_package_name = 'ruby22-r10k'
+        }
+      }
       default:   { $real_package_name = 'r10k' }
     }
   } else {
@@ -48,7 +47,7 @@ class r10k::install (
       # empty to value to the gem providers This code
       # converts an empty array to semi-standard gem options
       # This was previously undef but that caused strict var issues
-      if $provider in ['puppet_gem', 'gem' ] and $install_options == [] {
+      if $provider in ['puppet_gem', 'gem'] and $install_options == [] {
         $provider_install_options = ['--no-ri', '--no-rdoc']
       } else {
         $provider_install_options = $install_options
@@ -62,7 +61,6 @@ class r10k::install (
         source          => $gem_source,
         install_options => $provider_install_options,
       }
-
     }
     default: { fail("${module_name}: ${provider} is not supported. Valid values are: 'gem', 'puppet_gem', 'bundle', 'openbsd'") }
   }

@@ -72,7 +72,6 @@ class r10k::config (
   Optional[Integer[1]] $pool_size           = $r10k::params::pool_size,
   String $r10k_yaml_template                = 'r10k/r10k.yaml.erb',
 ) inherits r10k::params {
-
   if $sources == undef {
     $r10k_sources  = {
       'puppet' => {
@@ -87,7 +86,7 @@ class r10k::config (
   }
 
   if $configfile == '/etc/puppetlabs/r10k/r10k.yaml' {
-    file {'/etc/puppetlabs/r10k':
+    file { '/etc/puppetlabs/r10k':
       ensure => 'directory',
       owner  => $root_user,
       group  => $root_group,

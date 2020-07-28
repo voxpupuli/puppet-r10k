@@ -1,5 +1,5 @@
 # This class creates a github webhoook to allow curl style post-rec scripts
-class r10k::webhook(
+class r10k::webhook (
   $ensure            = true,
   $user              = $r10k::params::webhook_user,
   $group             = $r10k::params::webhook_group,
@@ -15,7 +15,6 @@ class r10k::webhook(
   $manage_packages   = true,
   $ruby_bin          = undef,
 ) inherits r10k::params {
-
   File {
     ensure => $ensure,
     owner  => $root_user,
