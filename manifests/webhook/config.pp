@@ -54,7 +54,6 @@ class r10k::webhook::config (
   Optional[String] $mco_arguments       = $r10k::params::webhook_mco_arguments,
   Boolean $generate_types               = $r10k::params::webhook_generate_types,
 ) inherits r10k::params {
-
   if $hash == 'UNSET' {
     $webhook_hash  = {
       'user'                  => $user,

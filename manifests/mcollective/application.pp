@@ -1,5 +1,5 @@
 # Install the r10k mcollective application to a client
-class r10k::mcollective::application(
+class r10k::mcollective::application (
   $agent_name        = $r10k::params::mc_agent_name,
   $app_name          = $r10k::params::mc_app_name,
   $agent_ddl         = $r10k::params::mc_agent_ddl_name,
@@ -7,7 +7,6 @@ class r10k::mcollective::application(
   $app_path          = $r10k::params::mc_application_path,
   $mc_service        = $r10k::params::mc_service_name,
 ) inherits r10k::params {
-
   require r10k
 
   File {
@@ -26,5 +25,4 @@ class r10k::mcollective::application(
     path   => "${agent_path}/${agent_ddl}",
     source => "puppet:///modules/${module_name}/agent/${agent_ddl}",
   }
-
 }

@@ -1,6 +1,6 @@
 include r10k::webhook
 
-file {'/usr/local/bin/prefix_command.rb':
+file { '/usr/local/bin/prefix_command.rb':
   ensure => file,
   mode   => '0755',
   owner  => 'root',
@@ -8,7 +8,7 @@ file {'/usr/local/bin/prefix_command.rb':
   source => 'puppet:///modules/r10k/prefix_command.rb',
 }
 
-class {'r10k::webhook::config':
+class { 'r10k::webhook::config':
   prefix         => true,
   prefix_command => '/usr/local/bin/prefix_command.rb',
   enable_ssl     => false,
