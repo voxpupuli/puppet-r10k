@@ -180,11 +180,6 @@ class r10k::params {
     $webhook_service_template  = 'webhook.init.gentoo.erb'
     $webhook_service_file_mode = '0755'
     $webhook_background        = true
-  } elsif $facts['os']['family'] == 'RedHat' and $facts['os']['release']['major'] < '7' {
-    $webhook_service_file      = '/etc/init.d/webhook'
-    $webhook_service_template  = 'webhook.init.erb'
-    $webhook_service_file_mode = '0755'
-    $webhook_background        = true
   } else {
     $webhook_service_file      = '/etc/systemd/system/webhook.service'
     $webhook_service_template  = 'webhook.service.erb'
