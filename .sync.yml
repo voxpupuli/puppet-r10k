@@ -1,8 +1,0 @@
----
-.travis.yml:
-  docker_sets:
-    - set: ubuntu1604-64
-    - set: ubuntu1804-64
-    - set: centos7-64
-    - set: centos6-64
-  secure: "WcBaQ0iem0kLmgOHvOEYOsgAk6eFZcSJ/6AisPhS4Ty9gxaEcytE8if2d9ThOItRRua5XGAPk7WbYmTa/cy/EsH0LYwSDdP2eagI95CnmryGya5TShKwUMv1ETUOBFucRYxtcOo7URnTMe2d6IpxEazuZ87cwGLUV5taBRkEvkw="
