@@ -48,7 +48,7 @@ describe 'r10k::install' do
           is_expected.to contain_package('r10k').with(
             ensure:          version,
             provider:        'gem',
-            install_options: ['--no-ri', '--no-rdoc']
+            install_options: ['--no-document']
           )
         end
       end
