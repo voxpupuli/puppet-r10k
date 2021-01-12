@@ -306,6 +306,49 @@ user: "puppet"
         it { is_expected.to contain_file('webhook.yaml').with_content(content) }
       end
 
+      context 'FOSS with access_logfile = stderr' do
+        let :params do
+          {
+            access_logfile: 'stderr',
+          }
+        end
+
+        it do
+          is_expected.to contain_file('webhook.yaml').with(
+            path:   '/etc/webhook.yaml',
+            ensure: 'file',
+            owner:  'root',
+            group:  'root',
+            mode:   '0644',
+            notify: 'Service[webhook]'
+          )
+        end
+        content = '---
+allow_uppercase: true
+bind_address: "*"
+client_cfg: "/var/lib/peadmin/.mcollective"
+client_timeout: "120"
+command_prefix: "umask 0022;"
+default_branch: "production"
+discovery_timeout: "10"
+enable_mutex_lock: false
+enable_ssl: true
+generate_types: false
+ignore_environments: []
+pass: "puppet"
+port: "8088"
+prefix: false
+prefix_command: "/bin/echo example"
+protected: true
+r10k_deploy_arguments: "-pv"
+server_software: "WebHook"
+use_mco_ruby: false
+use_mcollective: true
+user: "puppet"
+'
+        it { is_expected.to contain_file('webhook.yaml').with_content(content) }
+      end
+
       context 'FOSS with BitBucket server secret enabled' do
         let :params do
           {
