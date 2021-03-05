@@ -48,7 +48,7 @@ class r10k::install (
       # converts an empty array to semi-standard gem options
       # This was previously undef but that caused strict var issues
       if $provider in ['puppet_gem', 'gem'] and $install_options == [] {
-        $provider_install_options = ['--no-ri', '--no-rdoc']
+        $provider_install_options = ['--no-document']
       } else {
         $provider_install_options = $install_options
       }
