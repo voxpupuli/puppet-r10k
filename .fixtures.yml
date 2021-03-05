@@ -6,3 +6,19 @@ fixtures:
     inifile: "https://github.com/puppetlabs/puppetlabs-inifile.git"
     vcsrepo: "https://github.com/puppetlabs/puppetlabs-vcsrepo.git"
     git:     "https://github.com/puppetlabs/puppetlabs-git.git"
+    mcollective: "https://github.com/choria-io/puppet-mcollective.git"
+    choria: "https://github.com/choria-io/puppet-choria.git"
+    cron_core:
+      repo: "https://github.com/puppetlabs/puppetlabs-cron_core.git"
+      puppet_version: ">= 6.0.0"
+    yumrepo_core:
+      repo: "https://github.com/puppetlabs/puppetlabs-yumrepo_core.git"
+      puppet_version: ">= 6.0.0"
+    apt: "https://github.com/puppetlabs/puppetlabs-apt"
+  forge_modules:
+    mcollective_choria: "choria/mcollective_choria"
+    mcollective_agent_puppet: "choria/mcollective_agent_puppet"
+    mcollective_agent_service: "choria/mcollective_agent_service"
+    mcollective_agent_package: "choria/mcollective_agent_package"
+    mcollective_agent_filemgr: "choria/mcollective_agent_filemgr"
+    mcollective_util_actionpolicy: "choria/mcollective_util_actionpolicy"

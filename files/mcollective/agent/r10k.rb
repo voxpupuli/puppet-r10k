@@ -59,25 +59,26 @@ module MCollective
 
       def cmd_as_user(cmd, cwd = nil)
         if /^\w+$/.match(request[:user])
-          cmd_as_user = ['su', '-', request[:user], '-c', '\''] 
+          cmd_as_user = ['su', '-', request[:user], '-c', '\'']
           if cwd
             cmd_as_user += ['cd', cwd, '&&']
           end
           cmd_as_user += cmd + ["'"]
-        
+
           # doesn't seem to execute when passed as an array
           cmd_as_user.join(' ')
         else
           cmd
         end
-      end 
+      end
 
       def run_cmd(action,arg=nil)
         output = ''
         git  = ['/usr/bin/env', 'git']
         r10k = ['/usr/bin/env', 'r10k']
         # Given most people using this are using Puppet Enterprise, add the PE Path
-        environment = {"LC_ALL" => "C","PATH" => "#{ENV['PATH']}:<%= if @is_pe == true or @is_pe == 'true' then '/opt/puppet/bin' else '/usr/local/bin' end %>", "http_proxy" => "<%= @http_proxy %>", "https_proxy" => "<%= @http_proxy %>", "GIT_SSL_NO_VERIFY" => "<%= @git_ssl_no_verify %>" }
+        environment = {"LC_ALL" => "C","PATH" => "#{ENV['PATH']}:/opt/puppet/bin:/usr/local/bin"}
+        environment["http_proxy"] = config.pluginconf.fetch("r10k.http_proxy", "")
         case action
           when 'push','pull','status'
             cmd = git
