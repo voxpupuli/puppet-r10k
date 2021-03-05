@@ -95,7 +95,7 @@ class r10k::params {
     #FOSS 4 or greater specific settings
     # r10k configuration
 
-    $module_path     = '/opt/puppetlabs/puppet/code/modules'
+    $modulepath = "${r10k_basedir}/\$environment/modules"
 
     # webhook
     $webhook_user                  = 'puppet'
