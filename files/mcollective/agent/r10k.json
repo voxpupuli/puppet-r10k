@@ -1,0 +1,308 @@
+{
+  "$schema": "https://choria.io/schemas/mcorpc/ddl/v1/agent.json",
+  "metadata": {
+    "name": "r10k",
+    "description": "Syncs modules using git",
+    "author": "Zack Smith",
+    "license": "MIT",
+    "version": "1.0",
+    "url": "http://puppetlabs.com",
+    "timeout": 900
+  },
+  "actions": [
+    {
+      "action": "cache",
+      "input": {
+        "user": {
+          "prompt": "User",
+          "description": "User to run as",
+          "type": "string",
+          "default": null,
+          "optional": true,
+          "validation": "\\w+",
+          "maxlength": 32
+        }
+      },
+      "output": {
+        "output": {
+          "description": "Output from git",
+          "display_as": "Output",
+          "default": null
+        },
+        "error": {
+          "description": "Error from git",
+          "display_as": "Errors",
+          "default": null
+        }
+      },
+      "display": "always",
+      "description": "Cache "
+    },
+    {
+      "action": "deploy",
+      "input": {
+        "environment": {
+          "prompt": "Specific environment",
+          "description": "Deploy a particular environment",
+          "type": "string",
+          "default": null,
+          "optional": true,
+          "validation": ".",
+          "maxlength": 256
+        },
+        "user": {
+          "prompt": "User",
+          "description": "User to run as",
+          "type": "string",
+          "default": null,
+          "optional": true,
+          "validation": "\\w+",
+          "maxlength": 32
+        }
+      },
+      "output": {
+        "environment": {
+          "description": "Deploy a particular environment",
+          "display_as": "Specific environment",
+          "default": null
+        },
+        "output": {
+          "description": "Output from r10k",
+          "display_as": "Output",
+          "default": null
+        },
+        "error": {
+          "description": "Error from r10k",
+          "display_as": "Errors",
+          "default": null
+        }
+      },
+      "display": "always",
+      "description": "Deploy a specific environment, and its Puppetfile specified modules"
+    },
+    {
+      "action": "deploy_module",
+      "input": {
+        "module_name": {
+          "prompt": "Specific module",
+          "description": "Deploy a particular module",
+          "type": "string",
+          "default": null,
+          "optional": true,
+          "validation": ".",
+          "maxlength": 256
+        },
+        "user": {
+          "prompt": "User",
+          "description": "User to run as",
+          "type": "string",
+          "default": null,
+          "optional": true,
+          "validation": "\\w+",
+          "maxlength": 32
+        }
+      },
+      "output": {
+        "module_name": {
+          "description": "Deploy a particular module",
+          "display_as": "Specific module",
+          "default": null
+        },
+        "output": {
+          "description": "Output from r10k",
+          "display_as": "Output",
+          "default": null
+        },
+        "error": {
+          "description": "Error from r10k",
+          "display_as": "Errors",
+          "default": null
+        }
+      },
+      "display": "always",
+      "description": "Deploy a specific module"
+    },
+    {
+      "action": "pull",
+      "input": {
+        "path": {
+          "prompt": "Module path",
+          "description": "Operating on pull",
+          "type": "string",
+          "default": null,
+          "optional": false,
+          "validation": ".",
+          "maxlength": 256
+        },
+        "user": {
+          "prompt": "User",
+          "description": "User to run as",
+          "type": "string",
+          "default": null,
+          "optional": true,
+          "validation": "\\w+",
+          "maxlength": 32
+        }
+      },
+      "output": {
+        "path": {
+          "description": "Operating on pull",
+          "display_as": "Path",
+          "default": null
+        },
+        "output": {
+          "description": "Output from git",
+          "display_as": "Output",
+          "default": null
+        },
+        "error": {
+          "description": "Error from git",
+          "display_as": "Errors",
+          "default": null
+        }
+      },
+      "display": "always",
+      "description": "Pull "
+    },
+    {
+      "action": "push",
+      "input": {
+        "path": {
+          "prompt": "Module path",
+          "description": "Operating on push",
+          "type": "string",
+          "default": null,
+          "optional": false,
+          "validation": ".",
+          "maxlength": 256
+        },
+        "user": {
+          "prompt": "User",
+          "description": "User to run as",
+          "type": "string",
+          "default": null,
+          "optional": true,
+          "validation": "\\w+",
+          "maxlength": 32
+        }
+      },
+      "output": {
+        "path": {
+          "description": "Operating on push",
+          "display_as": "Path",
+          "default": null
+        },
+        "output": {
+          "description": "Output from git",
+          "display_as": "Output",
+          "default": null
+        },
+        "error": {
+          "description": "Error from git",
+          "display_as": "Errors",
+          "default": null
+        }
+      },
+      "display": "always",
+      "description": "Push "
+    },
+    {
+      "action": "status",
+      "input": {
+        "path": {
+          "prompt": "Module path",
+          "description": "Operating on status",
+          "type": "string",
+          "default": null,
+          "optional": false,
+          "validation": ".",
+          "maxlength": 256
+        },
+        "user": {
+          "prompt": "User",
+          "description": "User to run as",
+          "type": "string",
+          "default": null,
+          "optional": true,
+          "validation": "\\w+",
+          "maxlength": 32
+        }
+      },
+      "output": {
+        "path": {
+          "description": "Operating on status",
+          "display_as": "Path",
+          "default": null
+        },
+        "output": {
+          "description": "Output from git",
+          "display_as": "Output",
+          "default": null
+        },
+        "error": {
+          "description": "Error from git",
+          "display_as": "Errors",
+          "default": null
+        }
+      },
+      "display": "always",
+      "description": "Status "
+    },
+    {
+      "action": "sync",
+      "input": {
+        "user": {
+          "prompt": "User",
+          "description": "User to run as",
+          "type": "string",
+          "default": null,
+          "optional": true,
+          "validation": "\\w+",
+          "maxlength": 32
+        }
+      },
+      "output": {
+        "output": {
+          "description": "Output from git",
+          "display_as": "Output",
+          "default": null
+        },
+        "error": {
+          "description": "Error from git",
+          "display_as": "Errors",
+          "default": null
+        }
+      },
+      "display": "always",
+      "description": "Sync "
+    },
+    {
+      "action": "synchronize",
+      "input": {
+        "user": {
+          "prompt": "User",
+          "description": "User to run as",
+          "type": "string",
+          "default": null,
+          "optional": true,
+          "validation": "\\w+",
+          "maxlength": 32
+        }
+      },
+      "output": {
+        "output": {
+          "description": "Output from git",
+          "display_as": "Output",
+          "default": null
+        },
+        "error": {
+          "description": "Error from git",
+          "display_as": "Errors",
+          "default": null
+        }
+      },
+      "display": "always",
+      "description": "Synchronize "
+    }
+  ]
+}

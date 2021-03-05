@@ -95,12 +95,7 @@ class r10k::params {
     #FOSS 4 or greater specific settings
     # r10k configuration
 
-    $module_path     = '/opt/puppetlabs/puppet/code/modules'
-
-    # Mcollective configuration dynamic
-    $mc_service_name = 'mcollective'
-    $plugins_dir     = '/opt/puppetlabs/puppet/lib/ruby/vendor_ruby/mcollective'
-    $modulepath      = undef
+    $modulepath = "${r10k_basedir}/\$environment/modules"
 
     # webhook
     $webhook_user                  = 'puppet'
@@ -119,15 +114,6 @@ class r10k::params {
 
   # prerun_command in puppet.conf
   $pre_postrun_command = "${r10k_binary} deploy environment -p"
-
-  # Mcollective configuration static
-  $mc_agent_name       = "${module_name}.rb"
-  $mc_agent_ddl_name   = "${module_name}.ddl"
-  $mc_app_name         = "${module_name}.rb"
-  $mc_agent_path       = "${plugins_dir}/agent"
-  $mc_application_path = "${plugins_dir}/application"
-  $mc_http_proxy       = undef
-  $mc_git_ssl_no_verify = 0
 
   # Webhook configuration information
   $webhook_bind_address          = '*'
