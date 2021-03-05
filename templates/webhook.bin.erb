@@ -166,12 +166,13 @@ class Server < Sinatra::Base
 
     # Iterate the data structure to determine what's should be deployed
     branch = (
-        data['ref']                                          ||  # github & gitlab
-        data['refChanges'][0]['refId']            rescue nil ||  # stash
-        data['push']['changes'][0]['new']['name'] rescue nil ||  # bitbucket
-        data['changes'][0]['ref']['displayId']    rescue nil ||  # bitbucket server native
-        data['resource']['refUpdates'][0]['name'] rescue nil ||  # TFS/VisualStudio-Git
-        data['repository']['default_branch']                     # github tagged release; no ref.
+        data['ref']                                               ||  # github & gitlab
+        data['refChanges'][0]['refId']                 rescue nil ||  # stash
+        data['push']['changes'][0]['new']['name']      rescue nil ||  # bitbucket
+        data['changes'][0]['ref']['displayId']         rescue nil ||  # bitbucket server repository event
+        data['pullRequest']['fromRef']['displayId']    rescue nil ||  # bitbucket server pull request event
+        data['resource']['refUpdates'][0]['name']      rescue nil ||  # TFS/VisualStudio-Git
+        data['repository']['default_branch']                          # github tagged release; no ref.
       ).sub('refs/heads/', '') rescue nil
 
     # If prefix is enabled in our config file, determine what the prefix should be
