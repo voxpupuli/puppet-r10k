@@ -118,7 +118,6 @@ class r10k::params {
   # Webhook configuration information
   $webhook_bind_address          = '*'
   $webhook_port                  = '8088'
-  $webhook_access_logfile        = '/var/log/webhook/access.log'
   $webhook_client_cfg            = '/var/lib/peadmin/.mcollective'
   $webhook_default_branch        = 'production'
   $webhook_use_mco_ruby          = false

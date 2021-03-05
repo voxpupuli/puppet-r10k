@@ -14,7 +14,7 @@ class r10k::webhook::config (
   $pass                                 = $r10k::params::webhook_pass,
   $bind_address                         = $r10k::params::webhook_bind_address,
   $port                                 = $r10k::params::webhook_port,
-  $access_logfile                       = $r10k::params::webhook_access_logfile,
+  Variant[Stdlib::Absolutepath, Enum['stderr']] $access_logfile = '/var/log/webhook/access.log',
   $client_cfg                           = $r10k::params::webhook_client_cfg,
   $default_branch                       = $r10k::params::webhook_default_branch,
   $use_mco_ruby                         = $r10k::params::webhook_use_mco_ruby,
