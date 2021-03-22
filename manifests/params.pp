@@ -3,7 +3,7 @@ class r10k::params {
   $package_name           = ''
   $version                = 'installed'
   $manage_modulepath      = false
-  $manage_ruby_dependency = 'declare'
+  $manage_ruby_dependency = 'ignore'
 
   $provider = $facts['os']['name'] ? {
     'Archlinux' => 'gem',
