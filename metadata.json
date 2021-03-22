@@ -61,7 +61,7 @@
     },
     {
       "name": "puppetlabs/inifile",
-      "version_requirement": ">= 1.4.1 < 5.0.0"
+      "version_requirement": ">= 1.4.1 < 6.0.0"
     },
     {
       "name": "puppetlabs/vcsrepo",
