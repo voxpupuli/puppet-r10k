@@ -49,7 +49,7 @@ class { 'r10k':
   sources => {
     'webteam' => {
       'remote'  => 'ssh://git@github.com/webteam/somerepo.git',
-      'basedir' => "${::settings::confdir}/environments",
+      'basedir' => "${::settings::codedir}/environments",
       'prefix'  => true,
     },
     'secteam' => {
