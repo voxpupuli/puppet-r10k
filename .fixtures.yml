@@ -1,20 +1,16 @@
 fixtures:
   repositories:
-    stdlib:  "https://github.com/puppetlabs/puppetlabs-stdlib.git"
-    ruby:    "https://github.com/puppetlabs/puppetlabs-ruby.git"
-    pe_gem:  "https://github.com/puppetlabs/puppetlabs-pe_gem.git"
-    inifile: "https://github.com/puppetlabs/puppetlabs-inifile.git"
-    vcsrepo: "https://github.com/puppetlabs/puppetlabs-vcsrepo.git"
-    git:     "https://github.com/puppetlabs/puppetlabs-git.git"
-    mcollective: "https://github.com/choria-io/puppet-mcollective.git"
-    choria: "https://github.com/choria-io/puppet-choria.git"
-    cron_core:
-      repo: "https://github.com/puppetlabs/puppetlabs-cron_core.git"
-      puppet_version: ">= 6.0.0"
-    yumrepo_core:
-      repo: "https://github.com/puppetlabs/puppetlabs-yumrepo_core.git"
-      puppet_version: ">= 6.0.0"
-    apt: "https://github.com/puppetlabs/puppetlabs-apt"
+    stdlib: https://github.com/puppetlabs/puppetlabs-stdlib.git
+    ruby: https://github.com/puppetlabs/puppetlabs-ruby.git
+    pe_gem: https://github.com/puppetlabs/puppetlabs-pe_gem.git
+    inifile: https://github.com/puppetlabs/puppetlabs-inifile.git
+    vcsrepo: https://github.com/puppetlabs/puppetlabs-vcsrepo.git
+    git: https://github.com/puppetlabs/puppetlabs-git.git
+    mcollective: https://github.com/choria-io/puppet-mcollective.git
+    choria: https://github.com/choria-io/puppet-choria.git
+    apt: https://github.com/puppetlabs/puppetlabs-apt.git
+    cron_core: https://github.com/puppetlabs/puppetlabs-cron_core.git
+    yumrepo_core: https://github.com/puppetlabs/puppetlabs-yumrepo_core.git
   forge_modules:
     mcollective_choria: "choria/mcollective_choria"
     mcollective_agent_puppet: "choria/mcollective_agent_puppet"
