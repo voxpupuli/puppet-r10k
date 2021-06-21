@@ -4,7 +4,37 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v9.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v9.0.0) (2020-07-28)
+## [v10.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v10.0.0) (2021-06-21)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v9.0.0...v10.0.0)
+
+**Breaking changes:**
+
+- Migrate r10k-mcollective to choria [\#431](https://github.com/voxpupuli/puppet-r10k/issues/431)
+- make puppetlabs/ruby optional [\#553](https://github.com/voxpupuli/puppet-r10k/pull/553) ([bastelfreak](https://github.com/bastelfreak))
+- Drop Puppet 5 support; require Puppet 6.1.0 or newer [\#549](https://github.com/voxpupuli/puppet-r10k/pull/549) ([bastelfreak](https://github.com/bastelfreak))
+- Update r10k mcollective agent to work with Choria [\#548](https://github.com/voxpupuli/puppet-r10k/pull/548) ([treydock](https://github.com/treydock))
+- fix: avoid using deprecated gem options [\#545](https://github.com/voxpupuli/puppet-r10k/pull/545) ([johanfleury](https://github.com/johanfleury))
+- Drop EOL EL6 support [\#543](https://github.com/voxpupuli/puppet-r10k/pull/543) ([ekohl](https://github.com/ekohl))
+
+**Implemented enhancements:**
+
+- Enable Puppet 7 support [\#550](https://github.com/voxpupuli/puppet-r10k/pull/550) ([bastelfreak](https://github.com/bastelfreak))
+- webhook config: allow access\_log to be nil by using special value "stderr" [\#547](https://github.com/voxpupuli/puppet-r10k/pull/547) ([kenyon](https://github.com/kenyon))
+
+**Closed issues:**
+
+- CLI arguments --no-ri and --no-rdoc have been deprecated since Ruby 2.6.0 [\#544](https://github.com/voxpupuli/puppet-r10k/issues/544)
+
+**Merged pull requests:**
+
+- puppetlabs/vcsrepo: Allow 5.x [\#558](https://github.com/voxpupuli/puppet-r10k/pull/558) ([bastelfreak](https://github.com/bastelfreak))
+- Use a more logical example for basedir in the example code. [\#554](https://github.com/voxpupuli/puppet-r10k/pull/554) ([zipkid](https://github.com/zipkid))
+- stdlib, inifile, vcsrepo: allow latest versions [\#552](https://github.com/voxpupuli/puppet-r10k/pull/552) ([bastelfreak](https://github.com/bastelfreak))
+- Add support for FreeBSD package provider [\#546](https://github.com/voxpupuli/puppet-r10k/pull/546) ([xaque208](https://github.com/xaque208))
+- Added bitbucket webhook support for pull request event [\#540](https://github.com/voxpupuli/puppet-r10k/pull/540) ([magarvo](https://github.com/magarvo))
+
+## [v9.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v9.0.0) (2020-08-15)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v8.3.0...v9.0.0)
 
