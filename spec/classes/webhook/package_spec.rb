@@ -24,7 +24,7 @@ describe 'r10k::webhook::package', type: :class do
 
         provider = case facts[:os]['name']
                    when 'Archlinux'
-                     'gem'
+                     'pacman'
                    else
                      'puppet_gem'
                    end

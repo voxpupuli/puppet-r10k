@@ -6,7 +6,7 @@ class r10k::params {
   $manage_ruby_dependency = 'ignore'
 
   $provider = $facts['os']['name'] ? {
-    'Archlinux' => 'gem',
+    'Archlinux' => 'pacman',
     default     => 'puppet_gem',
   }
 
