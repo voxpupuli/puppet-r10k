@@ -10,10 +10,7 @@ User=<%= @user %>
 TimeoutStartSec=90
 TimeoutStopSec=30
 RestartSec=10000
-
 ExecStart=/usr/local/bin/webhook
-
-StandardOutput=syslog
 
 [Install]
 WantedBy=multi-user.target
