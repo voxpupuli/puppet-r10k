@@ -12,7 +12,7 @@ describe 'System Ruby with No SSL, Not protected, No mcollective' do
             enable_ssl      => false,
             protected       => false,
             use_mcollective => false,
-            notify     => Service['webhook.config'],
+            notify     => Service['webhook.service'],
           }
 
           class {'r10k::webhook':
