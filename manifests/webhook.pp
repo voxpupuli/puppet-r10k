@@ -5,7 +5,7 @@ class r10k::webhook (
   $group             = $r10k::params::webhook_group,
   $background        = $r10k::params::webhook_background,
   $bin_template      = $r10k::params::webhook_bin_template,
-  $service_template  = $r10k::params::webhook_service_template,
+  $service_template  = 'webhook.service.epp',
   $service_file      = $r10k::params::webhook_service_file,
   $service_file_mode = $r10k::params::webhook_service_file_mode,
   $use_mcollective   = $r10k::params::webhook_use_mcollective,
@@ -48,7 +48,7 @@ class r10k::webhook (
     ensure => $ensure_file,
     owner  => $user,
     group  => $group,
-    before => Service['webhook'],
+    before => Service['webhook.service'],
   }
 
   file { '/var/log/webhook':
@@ -56,22 +56,14 @@ class r10k::webhook (
     owner  => $user,
     group  => $group,
     force  => $ensure,
-    before => Service['webhook'],
+    before => Service['webhook.service'],
   }
 
   file { '/var/run/webhook':
     ensure => $ensure_directory,
     owner  => $user,
     group  => $group,
-    before => Service['webhook'],
-  }
-
-  file { 'webhook_init_script':
-    ensure  => $ensure_file,
-    content => template("r10k/${service_template}"),
-    path    => $service_file,
-    mode    => $service_file_mode,
-    notify  => Service['webhook'],
+    before => Service['webhook.service'],
   }
 
   file { 'webhook_bin':
@@ -79,12 +71,14 @@ class r10k::webhook (
     content => template($bin_template),
     path    => '/usr/local/bin/webhook',
     mode    => '0755',
-    notify  => Service['webhook'],
+    notify  => Service['webhook.service'],
   }
 
-  service { 'webhook':
-    ensure => $ensure_service,
-    enable => $ensure,
+  systemd::unit_file { 'webhook.service':
+    ensure  => $ensure_file,
+    content => epp("${module_name}/${service_template}", { 'user' => $user }),
+    enable  => $ensure,
+    active  => $ensure,
   }
 
   # We don't remove the packages/ gem as
@@ -106,7 +100,7 @@ class r10k::webhook (
         group   => 'peadmin',
         mode    => '0644',
         content => file("${r10k::params::puppetconf_path}/ssl/certs/pe-internal-peadmin-mcollective-client.pem",'/dev/null'),
-        notify  => Service['webhook'],
+        notify  => Service['webhook.service'],
       }
     }
   }

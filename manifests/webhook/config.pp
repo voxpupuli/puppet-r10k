@@ -117,7 +117,7 @@ class r10k::webhook::config (
     mode    => $configfile_mode,
     path    => $configfile,
     content => template($yaml_template),
-    notify  => Service['webhook'],
+    notify  => Service['webhook.service'],
   }
 
   if $manage_symlink {

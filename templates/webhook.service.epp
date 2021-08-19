@@ -1,3 +1,5 @@
+<%- | String[1] $user | -%>
+# THIS FILE IS MANAGED BY PUPPET
 [Unit]
 Description=R10K Webhook Service
 After=syslog.target network.target
@@ -6,7 +8,7 @@ After=syslog.target network.target
 Type=simple
 EnvironmentFile=-/etc/sysconfig/webhook
 RuntimeDirectory=webhook
-User=<%= @user %>
+User=<%= $user %>
 TimeoutStartSec=90
 TimeoutStopSec=30
 RestartSec=10000

@@ -40,7 +40,7 @@ describe 'Prefix Enabled,System Ruby with No SSL, Not protected, No mcollective'
         prefix          => true,
         prefix_command  => '/usr/local/bin/prefix_command.rb',
         require         => File['/usr/local/bin/prefix_command.rb'],
-        notify          => Service['webhook'],
+        notify          => Service['webhook.service'],
       }
       class {'r10k::webhook':
         require => Class['r10k::webhook::config'],

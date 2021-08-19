@@ -10,7 +10,7 @@ class r10k::webhook::package (
     package { 'sinatra':
       ensure   => $sinatra_version,
       provider => $provider,
-      notify   => Service['webhook'],
+      notify   => Service['webhook.service'],
     }
   }
 
@@ -19,7 +19,7 @@ class r10k::webhook::package (
       package { 'webrick':
         ensure   => $webrick_version,
         provider => $provider,
-        notify   => Service['webhook'],
+        notify   => Service['webhook.service'],
       }
     }
 
@@ -27,7 +27,7 @@ class r10k::webhook::package (
       package { 'json':
         ensure   => installed,
         provider => $provider,
-        notify   => Service['webhook'],
+        notify   => Service['webhook.service'],
       }
     }
   }
