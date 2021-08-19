@@ -24,7 +24,7 @@ describe 'r10k::webhook::config', type: :class do
             owner:  'root',
             group:  'root',
             mode:   '0644',
-            notify: 'Service[webhook]'
+            notify: 'Service[webhook.service]'
           )
         end
         content = '---
@@ -77,7 +77,7 @@ user: "peadmin"
             owner:  'root',
             group:  'root',
             mode:   '0644',
-            notify: 'Service[webhook]'
+            notify: 'Service[webhook.service]'
           )
         end
         content = '---
@@ -140,7 +140,7 @@ user: "peadmin"
             owner:  'root',
             group:  'root',
             mode:   '0644',
-            notify: 'Service[webhook]'
+            notify: 'Service[webhook.service]'
           )
         end
 
@@ -185,7 +185,7 @@ user: "puppet"
             owner:  'root',
             group:  'root',
             mode:   '0644',
-            notify: 'Service[webhook]'
+            notify: 'Service[webhook.service]'
           )
         end
 
@@ -230,7 +230,7 @@ user: "puppet"
             owner:  'root',
             group:  'root',
             mode:   '0644',
-            notify: 'Service[webhook]'
+            notify: 'Service[webhook.service]'
           )
         end
         content = '---
@@ -275,7 +275,7 @@ user: "puppet"
             owner:  'root',
             group:  'root',
             mode:   '0644',
-            notify: 'Service[webhook]'
+            notify: 'Service[webhook.service]'
           )
         end
         content = '---
@@ -320,7 +320,7 @@ user: "puppet"
             owner:  'root',
             group:  'root',
             mode:   '0644',
-            notify: 'Service[webhook]'
+            notify: 'Service[webhook.service]'
           )
         end
         content = '---
@@ -363,7 +363,7 @@ user: "puppet"
             owner:  'root',
             group:  'root',
             mode:   '0644',
-            notify: 'Service[webhook]'
+            notify: 'Service[webhook.service]'
           )
         end
         content = '---
@@ -408,7 +408,7 @@ user: "puppet"
             owner:  'root',
             group:  'root',
             mode:   '0644',
-            notify: 'Service[webhook]'
+            notify: 'Service[webhook.service]'
           )
         end
         content = '---
@@ -453,7 +453,7 @@ user: "puppet"
             owner:  'root',
             group:  'root',
             mode:   '0644',
-            notify: 'Service[webhook]'
+            notify: 'Service[webhook.service]'
           )
         end
         content = '---
@@ -521,7 +521,7 @@ user: "puppet"
             owner:  'r10k',
             group:  'r10k',
             mode:   '0600',
-            notify: 'Service[webhook]'
+            notify: 'Service[webhook.service]'
           )
         end
       end
@@ -540,7 +540,7 @@ user: "puppet"
             owner:  'root',
             group:  'root',
             mode:   '0644',
-            notify: 'Service[webhook]'
+            notify: 'Service[webhook.service]'
           )
         end
         content = '---
