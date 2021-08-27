@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v10.1.1](https://github.com/voxpupuli/puppet-r10k/tree/v10.1.1) (2021-08-27)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v10.1.0...v10.1.1)
+
+**Fixed bugs:**
+
+- Manage unit file via systemd::unit\_file [\#566](https://github.com/voxpupuli/puppet-r10k/pull/566) ([bastelfreak](https://github.com/bastelfreak))
+- Remove explicit StandardOutput from webhook.service [\#564](https://github.com/voxpupuli/puppet-r10k/pull/564) ([kenyon](https://github.com/kenyon))
+
+**Merged pull requests:**
+
+- Allow up-to-date dependencies [\#567](https://github.com/voxpupuli/puppet-r10k/pull/567) ([smortex](https://github.com/smortex))
+
 ## [v10.1.0](https://github.com/voxpupuli/puppet-r10k/tree/v10.1.0) (2021-08-03)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v10.0.0...v10.1.0)
