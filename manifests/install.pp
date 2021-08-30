@@ -13,7 +13,7 @@ class r10k::install (
   if $package_name == '' {
     case $provider {
       'openbsd': {
-        if (versioncmp("${::kernelversion}", '5.8') < 0) { #lint:ignore:only_variable_string
+        if (versioncmp("${facts['kernelversion']}", '5.8') < 0) { #lint:ignore:only_variable_string
           $real_package_name = 'ruby21-r10k'
         } else {
           $real_package_name = 'ruby22-r10k'
