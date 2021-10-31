@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper_acceptance'
 require 'openssl'
 
@@ -22,9 +24,11 @@ describe 'GitLab Secret Token Enabled, System Ruby with No SSL, Not protected, N
     it 'applies with no errors' do
       apply_manifest(pp, catch_failures: true)
     end
+
     it 'is idempotent' do
       apply_manifest(pp, catch_changes: true)
     end
+
     describe service('webhook') do
       it { is_expected.to be_enabled }
       it { is_expected.to be_running }
@@ -38,6 +42,7 @@ describe 'GitLab Secret Token Enabled, System Ruby with No SSL, Not protected, N
         its(:exit_status) { is_expected.to eq 0 }
       end
     end
+
     context 'supports Gitlab style payloads via payload end point with token in header' do
       token = 'secret'
 

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 describe 'r10k::webhook::config', type: :class do
   on_supported_os.each do |os, facts|
-    context "on #{os} " do
+    context "on #{os}" do
       let :facts do
         facts
       end
@@ -18,15 +20,16 @@ describe 'r10k::webhook::config', type: :class do
         end
 
         it do
-          is_expected.to contain_file('webhook.yaml').with(
-            path:   '/etc/webhook.yaml',
+          expect(subject).to contain_file('webhook.yaml').with(
+            path: '/etc/webhook.yaml',
             ensure: 'file',
-            owner:  'root',
-            group:  'root',
-            mode:   '0644',
+            owner: 'root',
+            group: 'root',
+            mode: '0644',
             notify: 'Service[webhook.service]'
           )
         end
+
         content = '---
 access_logfile: "/var/log/webhook/access.log"
 allow_uppercase: true
@@ -71,15 +74,16 @@ user: "peadmin"
         end
 
         it do
-          is_expected.to contain_file('webhook.yaml').with(
-            path:   '/etc/webhook.yaml',
+          expect(subject).to contain_file('webhook.yaml').with(
+            path: '/etc/webhook.yaml',
             ensure: 'file',
-            owner:  'root',
-            group:  'root',
-            mode:   '0644',
+            owner: 'root',
+            group: 'root',
+            mode: '0644',
             notify: 'Service[webhook.service]'
           )
         end
+
         content = '---
 access_logfile: "/var/log/webhook/access.log"
 allow_uppercase: true
@@ -125,21 +129,21 @@ user: "peadmin"
         end
 
         it do
-          is_expected.to contain_file('webhook.yaml').with(
+          expect(subject).to contain_file('webhook.yaml').with(
             ensure: 'absent',
-            path:   '/etc/webhook.yaml'
+            path: '/etc/webhook.yaml'
           )
         end
       end
 
       context 'FOSS with defaults' do
         it do
-          is_expected.to contain_file('webhook.yaml').with(
-            path:   '/etc/webhook.yaml',
+          expect(subject).to contain_file('webhook.yaml').with(
+            path: '/etc/webhook.yaml',
             ensure: 'file',
-            owner:  'root',
-            group:  'root',
-            mode:   '0644',
+            owner: 'root',
+            group: 'root',
+            mode: '0644',
             notify: 'Service[webhook.service]'
           )
         end
@@ -179,12 +183,12 @@ user: "puppet"
         end
 
         it do
-          is_expected.to contain_file('webhook.yaml').with(
-            path:   '/etc/webhook.yaml',
+          expect(subject).to contain_file('webhook.yaml').with(
+            path: '/etc/webhook.yaml',
             ensure: 'file',
-            owner:  'root',
-            group:  'root',
-            mode:   '0644',
+            owner: 'root',
+            group: 'root',
+            mode: '0644',
             notify: 'Service[webhook.service]'
           )
         end
@@ -224,15 +228,16 @@ user: "puppet"
         end
 
         it do
-          is_expected.to contain_file('webhook.yaml').with(
-            path:   '/etc/webhook.yaml',
+          expect(subject).to contain_file('webhook.yaml').with(
+            path: '/etc/webhook.yaml',
             ensure: 'file',
-            owner:  'root',
-            group:  'root',
-            mode:   '0644',
+            owner: 'root',
+            group: 'root',
+            mode: '0644',
             notify: 'Service[webhook.service]'
           )
         end
+
         content = '---
 access_logfile: "/var/log/webhook/access.log"
 allow_uppercase: true
@@ -269,15 +274,16 @@ user: "puppet"
         end
 
         it do
-          is_expected.to contain_file('webhook.yaml').with(
-            path:   '/etc/webhook.yaml',
+          expect(subject).to contain_file('webhook.yaml').with(
+            path: '/etc/webhook.yaml',
             ensure: 'file',
-            owner:  'root',
-            group:  'root',
-            mode:   '0644',
+            owner: 'root',
+            group: 'root',
+            mode: '0644',
             notify: 'Service[webhook.service]'
           )
         end
+
         content = '---
 access_logfile: "/var/log/webhook/access.log"
 allow_uppercase: true
@@ -314,15 +320,16 @@ user: "puppet"
         end
 
         it do
-          is_expected.to contain_file('webhook.yaml').with(
-            path:   '/etc/webhook.yaml',
+          expect(subject).to contain_file('webhook.yaml').with(
+            path: '/etc/webhook.yaml',
             ensure: 'file',
-            owner:  'root',
-            group:  'root',
-            mode:   '0644',
+            owner: 'root',
+            group: 'root',
+            mode: '0644',
             notify: 'Service[webhook.service]'
           )
         end
+
         content = '---
 allow_uppercase: true
 bind_address: "*"
@@ -357,15 +364,16 @@ user: "puppet"
         end
 
         it do
-          is_expected.to contain_file('webhook.yaml').with(
-            path:   '/etc/webhook.yaml',
+          expect(subject).to contain_file('webhook.yaml').with(
+            path: '/etc/webhook.yaml',
             ensure: 'file',
-            owner:  'root',
-            group:  'root',
-            mode:   '0644',
+            owner: 'root',
+            group: 'root',
+            mode: '0644',
             notify: 'Service[webhook.service]'
           )
         end
+
         content = '---
 access_logfile: "/var/log/webhook/access.log"
 allow_uppercase: true
@@ -402,15 +410,16 @@ user: "puppet"
         end
 
         it do
-          is_expected.to contain_file('webhook.yaml').with(
-            path:   '/etc/webhook.yaml',
+          expect(subject).to contain_file('webhook.yaml').with(
+            path: '/etc/webhook.yaml',
             ensure: 'file',
-            owner:  'root',
-            group:  'root',
-            mode:   '0644',
+            owner: 'root',
+            group: 'root',
+            mode: '0644',
             notify: 'Service[webhook.service]'
           )
         end
+
         content = '---
 access_logfile: "/var/log/webhook/access.log"
 allow_uppercase: true
@@ -447,15 +456,16 @@ user: "puppet"
         end
 
         it do
-          is_expected.to contain_file('webhook.yaml').with(
-            path:   '/etc/webhook.yaml',
+          expect(subject).to contain_file('webhook.yaml').with(
+            path: '/etc/webhook.yaml',
             ensure: 'file',
-            owner:  'root',
-            group:  'root',
-            mode:   '0644',
+            owner: 'root',
+            group: 'root',
+            mode: '0644',
             notify: 'Service[webhook.service]'
           )
         end
+
         content = '---
 access_logfile: "/var/log/webhook/access.log"
 allow_uppercase: true
@@ -492,15 +502,15 @@ user: "puppet"
         end
         let :facts do
           facts.merge(
-            is_pe:           'true',
+            is_pe: 'true',
             pe_server_version: '2015.3.1'
           )
         end
 
         it do
-          is_expected.to contain_file('webhook.yaml').with(
+          expect(subject).to contain_file('webhook.yaml').with(
             ensure: 'absent',
-            path:   '/etc/webhook.yaml'
+            path: '/etc/webhook.yaml'
           )
         end
       end
@@ -510,17 +520,17 @@ user: "puppet"
           {
             configfile_owner: 'r10k',
             configfile_group: 'r10k',
-            configfile_mode:  '0600'
+            configfile_mode: '0600'
           }
         end
 
         it do
-          is_expected.to contain_file('webhook.yaml').with(
-            path:   '/etc/webhook.yaml',
+          expect(subject).to contain_file('webhook.yaml').with(
+            path: '/etc/webhook.yaml',
             ensure: 'file',
-            owner:  'r10k',
-            group:  'r10k',
-            mode:   '0600',
+            owner: 'r10k',
+            group: 'r10k',
+            mode: '0600',
             notify: 'Service[webhook.service]'
           )
         end
@@ -534,15 +544,16 @@ user: "puppet"
         end
 
         it do
-          is_expected.to contain_file('webhook.yaml').with(
-            path:   '/etc/webhook.yaml',
+          expect(subject).to contain_file('webhook.yaml').with(
+            path: '/etc/webhook.yaml',
             ensure: 'file',
-            owner:  'root',
-            group:  'root',
-            mode:   '0644',
+            owner: 'root',
+            group: 'root',
+            mode: '0644',
             notify: 'Service[webhook.service]'
           )
         end
+
         content = '---
 access_logfile: "/var/log/webhook/access.log"
 allow_uppercase: true

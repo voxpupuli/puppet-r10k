@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Facter.add(:r10k_path) do
   confine :kernel => :linux # rubocop:disable Style/HashSyntax
   setcode do
