@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 describe 'r10k::webhook::package', type: :class do
   on_supported_os.each do |os, facts|
-    context "on #{os} " do
+    context "on #{os}" do
       let :facts do
         facts
       end
@@ -33,10 +35,11 @@ describe 'r10k::webhook::package', type: :class do
         it { is_expected.not_to contain_package('webrick') }
         it { is_expected.not_to contain_package('json') }
       end
+
       context 'Puppet FOSS 6' do
         let :facts do
           facts.merge(
-            is_pe:         false,
+            is_pe: false,
             puppetversion: '6.24.0'
           )
         end
@@ -46,10 +49,11 @@ describe 'r10k::webhook::package', type: :class do
         it { is_expected.to contain_package('webrick').with(ensure: 'installed') }
         it { is_expected.to contain_package('json').with(ensure: 'installed') }
       end
+
       context 'Puppet FOSS 7' do
         let :facts do
           facts.merge(
-            is_pe:         false,
+            is_pe: false,
             puppetversion: '7.10.0'
           )
         end

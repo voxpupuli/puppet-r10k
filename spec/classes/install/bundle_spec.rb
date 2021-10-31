@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 describe 'r10k::install::bundle', type: :class do
   on_supported_os.each do |os, facts|
-    context "on #{os} " do
+    context "on #{os}" do
       let :facts do
         facts
       end
@@ -12,26 +14,28 @@ describe 'r10k::install::bundle', type: :class do
         end
 
         it do
-          is_expected.to contain_package('r10k-bundle').with(
-            ensure:   'installed',
-            name:     'bundler',
+          expect(subject).to contain_package('r10k-bundle').with(
+            ensure: 'installed',
+            name: 'bundler',
             provider: 'gem'
           )
         end
+
         it do
-          is_expected.to contain_vcsrepo('r10k-r10k-github').with(
-            ensure:   'latest',
+          expect(subject).to contain_vcsrepo('r10k-r10k-github').with(
+            ensure: 'latest',
             provider: 'git',
-            path:     '/tmp/r10k',
-            source:   'https://github.com/adrienthebo/r10k.git',
+            path: '/tmp/r10k',
+            source: 'https://github.com/adrienthebo/r10k.git',
             revision: 'master'
           )
         end
+
         it do
-          is_expected.to contain_exec('r10k-install-via-bundle').with(
+          expect(subject).to contain_exec('r10k-install-via-bundle').with(
             command: 'bundle && bundle install --path /opt/ --binstubs /usr/local/bin/',
-            cwd:     '/tmp/r10k',
-            unless:  'bundle list | grep -q " r10k "'
+            cwd: '/tmp/r10k',
+            unless: 'bundle list | grep -q " r10k "'
           )
         end
       end
@@ -40,7 +44,7 @@ describe 'r10k::install::bundle', type: :class do
         let :params do
           {
             revision: 'new_feature',
-            source:   'https://github.com/acidprime/r10k-fork.git'
+            source: 'https://github.com/acidprime/r10k-fork.git'
           }
         end
         let :facts do
@@ -48,26 +52,28 @@ describe 'r10k::install::bundle', type: :class do
         end
 
         it do
-          is_expected.to contain_package('r10k-bundle').with(
-            ensure:   'installed',
-            name:     'bundler',
+          expect(subject).to contain_package('r10k-bundle').with(
+            ensure: 'installed',
+            name: 'bundler',
             provider: 'gem'
           )
         end
+
         it do
-          is_expected.to contain_vcsrepo('r10k-r10k-github').with(
-            ensure:   'latest',
+          expect(subject).to contain_vcsrepo('r10k-r10k-github').with(
+            ensure: 'latest',
             provider: 'git',
-            path:     '/tmp/r10k',
-            source:   'https://github.com/acidprime/r10k-fork.git',
+            path: '/tmp/r10k',
+            source: 'https://github.com/acidprime/r10k-fork.git',
             revision: 'new_feature'
           )
         end
+
         it do
-          is_expected.to contain_exec('r10k-install-via-bundle').with(
+          expect(subject).to contain_exec('r10k-install-via-bundle').with(
             command: 'bundle && bundle install --path /opt/ --binstubs /usr/local/bin/',
-            cwd:     '/tmp/r10k',
-            unless:  'bundle list | grep -q " r10k "'
+            cwd: '/tmp/r10k',
+            unless: 'bundle list | grep -q " r10k "'
           )
         end
       end

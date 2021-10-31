@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 version = '2.0.0'
 
 describe 'r10k::install::gem', type: :class do
   on_supported_os.each do |os, facts|
-    context "on #{os} " do
+    context "on #{os}" do
       let :facts do
         facts
       end
@@ -13,7 +15,7 @@ describe 'r10k::install::gem', type: :class do
         let :params do
           {
             manage_ruby_dependency: 'declare',
-            version:                version
+            version: version
           }
         end
 
@@ -24,7 +26,7 @@ describe 'r10k::install::gem', type: :class do
           let :params do
             {
               manage_ruby_dependency: 'include',
-              version:                version
+              version: version
             }
           end
 
@@ -36,7 +38,7 @@ describe 'r10k::install::gem', type: :class do
           let :params do
             {
               manage_ruby_dependency: 'ignore',
-              version:                version
+              version: version
             }
           end
 

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 describe 'r10k::config', type: :class do
   on_supported_os.each do |os, facts|
-    context "on #{os} " do
+    context "on #{os}" do
       let :facts do
         facts
       end
@@ -13,22 +15,23 @@ describe 'r10k::config', type: :class do
       context 'modified file locations and ownership' do
         let :params do
           {
-            configfile:        '/etc/r10k.yaml',
-            cachedir:          '/var/cache/r10k',
+            configfile: '/etc/r10k.yaml',
+            cachedir: '/var/cache/r10k',
             manage_modulepath: false,
-            root_user:         'root',
-            root_group:        'root'
+            root_user: 'root',
+            root_group: 'root'
           }
         end
 
         it { is_expected.to contain_class('r10k::params') }
+
         it do
-          is_expected.to contain_file('r10k.yaml').with(
+          expect(subject).to contain_file('r10k.yaml').with(
             ensure: 'file',
-            owner:  'root',
-            group:  'root',
-            mode:   '0644',
-            path:   '/etc/r10k.yaml'
+            owner: 'root',
+            group: 'root',
+            mode: '0644',
+            path: '/etc/r10k.yaml'
           )
         end
       end
@@ -41,9 +44,9 @@ describe 'r10k::config', type: :class do
         end
 
         it do
-          is_expected.to contain_file('symlink_r10k.yaml').with(
+          expect(subject).to contain_file('symlink_r10k.yaml').with(
             ensure: 'link',
-            path:   '/etc/r10k.yaml',
+            path: '/etc/r10k.yaml',
             target: '/etc/puppetlabs/r10k/r10k.yaml'
           )
         end
@@ -81,22 +84,22 @@ describe 'r10k::config', type: :class do
           }
         end
 
-        it { is_expected.to contain_file('r10k.yaml').with_content(%r{forge:\n.*baseurl: https:\/\/forgeapi\.puppetlabs\.com\n.*proxy: https:\/\/proxy\.example\.com:3128\n}) }
+        it { is_expected.to contain_file('r10k.yaml').with_content(%r{forge:\n.*baseurl: https://forgeapi\.puppetlabs\.com\n.*proxy: https://proxy\.example\.com:3128\n}) }
       end
 
       context 'with optional parameter postrun specified with array of system call "/usr/bin/curl -F deploy=done http://my-app.site/endpoint"' do
         let :params do
           {
-            configfile:         '/etc/r10k.yaml',
-            cachedir:           '/var/cache/r10k',
-            manage_modulepath:  false,
-            postrun:            ['/usr/bin/curl', '-F', 'deploy=done', 'http://my-app.site/endpoint'],
-            root_user:         'root',
-            root_group:        'root'
+            configfile: '/etc/r10k.yaml',
+            cachedir: '/var/cache/r10k',
+            manage_modulepath: false,
+            postrun: ['/usr/bin/curl', '-F', 'deploy=done', 'http://my-app.site/endpoint'],
+            root_user: 'root',
+            root_group: 'root'
           }
         end
 
-        it { is_expected.to contain_file('r10k.yaml').with_content(%r{^.*:postrun: \[\"/usr/bin/curl\", \"-F\", \"deploy=done\", \"http://my-app\.site/endpoint\"\]\n.*$}) }
+        it { is_expected.to contain_file('r10k.yaml').with_content(%r{^.*:postrun: \["/usr/bin/curl", "-F", "deploy=done", "http://my-app\.site/endpoint"\]\n.*$}) }
       end
 
       context 'with empty proxy' do
@@ -108,6 +111,7 @@ describe 'r10k::config', type: :class do
 
         it { is_expected.to contain_file('r10k.yaml').without_content(%r{^:proxy: .*$}) }
       end
+
       context 'with proxy' do
         let :params do
           {
@@ -127,6 +131,7 @@ describe 'r10k::config', type: :class do
 
         it { is_expected.to contain_file('r10k.yaml').without_content(%r{^:pool_size: .*$}) }
       end
+
       context 'with pool_size' do
         let :params do
           {

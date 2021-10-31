@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 describe 'r10k::mcollective', type: :class do
   on_supported_os.each do |os, facts|
-    context "on #{os} " do
+    context "on #{os}" do
       let :facts do
         facts
       end
@@ -9,8 +11,9 @@ describe 'r10k::mcollective', type: :class do
       context 'With defaults' do
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_class('r10k::params') }
+
         it do
-          is_expected.to contain_mcollective__module_plugin('mcollective_agent_r10k').with(
+          expect(subject).to contain_mcollective__module_plugin('mcollective_agent_r10k').with(
             ensure: 'present',
             server: 'true',
             client: 'true',

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'puppet'
 Facter.add('r10k_environment') do
   setcode do

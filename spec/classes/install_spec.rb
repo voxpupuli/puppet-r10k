@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 version = '2.0.0'
 
 describe 'r10k::install' do
   on_supported_os.each do |os, facts|
-    context "on #{os} " do
+    context "on #{os}" do
       let :facts do
         facts
       end
@@ -12,20 +14,21 @@ describe 'r10k::install' do
       context 'with gem provider' do
         let :params do
           {
-            install_options:        '',
-            keywords:               '',
+            install_options: '',
+            keywords: '',
             manage_ruby_dependency: 'declare',
-            package_name:           'r10k',
-            provider:               'gem',
-            version:                version,
-            puppet_master:          true
+            package_name: 'r10k',
+            provider: 'gem',
+            version: version,
+            puppet_master: true
           }
         end
 
         it { is_expected.to contain_class('r10k::install::gem').with(version: version) }
+
         it do
-          is_expected.to contain_package('r10k').with(
-            ensure:   version,
+          expect(subject).to contain_package('r10k').with(
+            ensure: version,
             provider: 'gem'
           )
         end
@@ -35,19 +38,19 @@ describe 'r10k::install' do
         let :params do
           {
             manage_ruby_dependency: 'include',
-            package_name:           'r10k',
-            provider:               'gem',
-            version:                version,
-            keywords:               '',
-            install_options:        [],
-            puppet_master:          true
+            package_name: 'r10k',
+            provider: 'gem',
+            version: version,
+            keywords: '',
+            install_options: [],
+            puppet_master: true
           }
         end
 
         it do
-          is_expected.to contain_package('r10k').with(
-            ensure:          version,
-            provider:        'gem',
+          expect(subject).to contain_package('r10k').with(
+            ensure: version,
+            provider: 'gem',
             install_options: ['--no-document']
           )
         end
@@ -57,19 +60,19 @@ describe 'r10k::install' do
         let :params do
           {
             manage_ruby_dependency: 'include',
-            package_name:           'r10k',
-            provider:               'gem',
-            version:                version,
-            keywords:               '',
-            install_options:        ['BOGON'],
-            puppet_master:          true
+            package_name: 'r10k',
+            provider: 'gem',
+            version: version,
+            keywords: '',
+            install_options: ['BOGON'],
+            puppet_master: true
           }
         end
 
         it do
-          is_expected.to contain_package('r10k').with(
-            ensure:          version,
-            provider:        'gem',
+          expect(subject).to contain_package('r10k').with(
+            ensure: version,
+            provider: 'gem',
             install_options: ['BOGON']
           )
         end
@@ -78,19 +81,20 @@ describe 'r10k::install' do
       context 'with puppet_gem provider' do
         let :params do
           {
-            package_name:           'r10k',
-            version:                version,
-            provider:               'puppet_gem',
-            keywords:               '',
+            package_name: 'r10k',
+            version: version,
+            provider: 'puppet_gem',
+            keywords: '',
             manage_ruby_dependency: 'declare',
-            install_options:        ''
+            install_options: ''
           }
         end
 
         it { is_expected.to contain_class('r10k::install::puppet_gem') }
+
         it do
-          is_expected.to contain_package('r10k').with(
-            ensure:   version,
+          expect(subject).to contain_package('r10k').with(
+            ensure: version,
             provider: 'puppet_gem'
           )
         end
@@ -100,11 +104,11 @@ describe 'r10k::install' do
         let :params do
           {
             manage_ruby_dependency: 'declare',
-            install_options:        '',
-            package_name:           'r10k',
-            provider:               'puppet_gem',
-            version:                version,
-            keywords:               ''
+            install_options: '',
+            package_name: 'r10k',
+            provider: 'puppet_gem',
+            version: version,
+            keywords: ''
           }
         end
         let :facts do
@@ -114,16 +118,16 @@ describe 'r10k::install' do
         end
 
         it do
-          is_expected.to contain_package('r10k').with(
-            ensure:   version,
+          expect(subject).to contain_package('r10k').with(
+            ensure: version,
             provider: 'puppet_gem'
           )
         end
 
         it do
-          is_expected.to contain_file('/usr/bin/r10k').with(
-            ensure:  'link',
-            target:  '/opt/puppetlabs/puppet/bin/r10k',
+          expect(subject).to contain_file('/usr/bin/r10k').with(
+            ensure: 'link',
+            target: '/opt/puppetlabs/puppet/bin/r10k',
             require: 'Package[r10k]'
           )
         end
@@ -133,22 +137,23 @@ describe 'r10k::install' do
         let :params do
           {
             manage_ruby_dependency: 'include',
-            package_name:           'r10k',
-            provider:               'gem',
-            version:                version,
-            keywords:               '',
-            gem_source:             'https://some.alternate.source.com/',
-            install_options:        [],
-            puppet_master:          true
+            package_name: 'r10k',
+            provider: 'gem',
+            version: version,
+            keywords: '',
+            gem_source: 'https://some.alternate.source.com/',
+            install_options: [],
+            puppet_master: true
           }
         end
 
         it { is_expected.to contain_class('r10k::install::gem') }
+
         it do
-          is_expected.to contain_package('r10k').with(
-            ensure:   version,
+          expect(subject).to contain_package('r10k').with(
+            ensure: version,
             provider: 'gem',
-            source:   'https://some.alternate.source.com/'
+            source: 'https://some.alternate.source.com/'
           )
         end
       end
@@ -156,13 +161,13 @@ describe 'r10k::install' do
       context 'with bundle provider' do
         let :params do
           {
-            package_name:           'r10k',
-            version:                version,
-            provider:               'bundle',
+            package_name: 'r10k',
+            version: version,
+            provider: 'bundle',
             manage_ruby_dependency: 'declare',
-            keywords:               '',
-            install_options:        '',
-            puppet_master:          true
+            keywords: '',
+            install_options: '',
+            puppet_master: true
           }
         end
 

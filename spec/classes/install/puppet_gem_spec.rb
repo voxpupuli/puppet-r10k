@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 describe 'r10k::install::puppet_gem', type: :class do
   on_supported_os.each do |os, facts|
-    context "on #{os} " do
+    context "on #{os}" do
       let :facts do
         facts
       end
@@ -12,9 +14,9 @@ describe 'r10k::install::puppet_gem', type: :class do
 
       context 'with defaults' do
         it do
-          is_expected.to contain_file('/usr/bin/r10k').with(
-            ensure:  'link',
-            target:  '/opt/puppetlabs/puppet/bin/r10k',
+          expect(subject).to contain_file('/usr/bin/r10k').with(
+            ensure: 'link',
+            target: '/opt/puppetlabs/puppet/bin/r10k',
             require: 'Package[r10k]'
           )
         end

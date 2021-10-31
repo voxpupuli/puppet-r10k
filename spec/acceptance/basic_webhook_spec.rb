@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper_acceptance'
 
 describe 'System Ruby with No SSL, Not protected, No mcollective' do
@@ -28,22 +30,28 @@ describe 'System Ruby with No SSL, Not protected, No mcollective' do
         it { is_expected.to be_enabled }
         it { is_expected.to be_running }
       end
+
+      # rubocop:disable RSpec/RepeatedExampleGroupBody
       describe command('/usr/bin/curl -d \'{ "repository": { "name": "puppetlabs-stdlib" } }\' -H "Accept: application/json" "http://localhost:8088/module" -k -q') do
         its(:stdout) { is_expected.not_to match %r{.*You shall not pass.*} }
         its(:exit_status) { is_expected.to eq 0 }
       end
+
       describe command('/usr/bin/curl -X POST -d \'{ "repository": { "full_name": "puppetlabs/puppetlabs-stdlib", "name": "PuppetLabs : StdLib" } }\' "http://localhost:8088/module" -k -q') do
         its(:stdout) { is_expected.not_to match %r{.*You shall not pass.*} }
         its(:exit_status) { is_expected.to eq 0 }
       end
+
       describe command('/usr/bin/curl -d \'{ "ref": "refs/heads/production" }\' -H "Accept: application/json" "http://localhost:8088/payload" -k -q') do
         its(:stdout) { is_expected.not_to match %r{.*You shall not pass.*} }
         its(:exit_status) { is_expected.to eq 0 }
       end
+
       describe command('/usr/bin/curl -X POST -d \'%7b%22ref%22%3a%22maste%r22%7d\' "http://localhost:8088/payload" -q') do
         its(:stdout) { is_expected.not_to match %r{.*You shall not pass.*} }
         its(:exit_status) { is_expected.to eq 0 }
       end
+
       describe command('/usr/bin/curl -X POST -d \'{ "push": { "changes": [ { "new": { "name": "production" } } ] } }\' "http://localhost:8088/payload" -q') do
         its(:stdout) { is_expected.not_to match %r{.*You shall not pass.*} }
         its(:exit_status) { is_expected.to eq 0 }
@@ -61,5 +69,6 @@ describe 'System Ruby with No SSL, Not protected, No mcollective' do
       #        end
       #      end
     end
+    # rubocop:enable RSpec/RepeatedExampleGroupBody
   end
 end
