@@ -21,6 +21,6 @@ class r10k::install::bundle (
     cwd     => '/tmp/r10k',
     require => [Package["${module_name}-bundle"], Vcsrepo["${module_name}-r10k-github"]],
     unless  => 'bundle list | grep -q " r10k "',
-    path    => $::path,
+    path    => $::facts['path'],
   }
 }
