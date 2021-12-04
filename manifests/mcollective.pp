@@ -4,6 +4,7 @@ class r10k::mcollective (
   $server            = true,
   $client            = true,
   $http_proxy        = '',
+  $policies          = [],
 ) inherits r10k::params {
   include mcollective
   mcollective::module_plugin { 'mcollective_agent_r10k':
@@ -24,5 +25,6 @@ class r10k::mcollective (
     client_files  => [
       'application/r10k.rb',
     ],
+    policies      => $policies,
   }
 }
