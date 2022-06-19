@@ -21,7 +21,7 @@ describe 'r10k', type: :class do
         it { is_expected.not_to contain_class('r10k::mcollective') }
       end
 
-      context 'with mcollective' do
+      context 'with mcollective', if: facts[:os]['name'] != 'Gentoo' do
         let :params do
           {
             mcollective: true

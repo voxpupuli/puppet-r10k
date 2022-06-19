@@ -11,7 +11,9 @@ describe 'r10k::install' do
         facts
       end
 
-      context 'with gem provider' do
+      # This install method uses the archived puppetlabs/ruby module
+      # It doesn't support Gentoo
+      context 'with gem provider', if: facts[:os]['name'] != 'Gentoo' do
         let :params do
           {
             install_options: '',
@@ -34,7 +36,7 @@ describe 'r10k::install' do
         end
       end
 
-      context 'with gem with empty install_options' do
+      context 'with gem with empty install_options', if: facts[:os]['name'] != 'Gentoo' do
         let :params do
           {
             manage_ruby_dependency: 'include',
@@ -56,7 +58,7 @@ describe 'r10k::install' do
         end
       end
 
-      context 'with gem with populated install_options' do
+      context 'with gem with populated install_options', if: facts[:os]['name'] != 'Gentoo' do
         let :params do
           {
             manage_ruby_dependency: 'include',
@@ -133,7 +135,7 @@ describe 'r10k::install' do
         end
       end
 
-      context 'with defaults and source specified' do
+      context 'with defaults and source specified', if: facts[:os]['name'] != 'Gentoo' do
         let :params do
           {
             manage_ruby_dependency: 'include',

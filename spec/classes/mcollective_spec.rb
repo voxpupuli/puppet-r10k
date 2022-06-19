@@ -8,7 +8,8 @@ describe 'r10k::mcollective', type: :class do
         facts
       end
 
-      context 'With defaults' do
+      # Gentoo has no choria package and upstream doesn't offer a 3rd party repo
+      context 'With defaults', if: facts[:os]['name'] != 'Gentoo' do
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_class('r10k::params') }
 
@@ -35,7 +36,7 @@ describe 'r10k::mcollective', type: :class do
         end
       end
 
-      context 'Removing the mcollective agent & application' do
+      context 'Removing the mcollective agent & application', if: facts[:os]['name'] != 'Gentoo' do
         let :params do
           {
             ensure: 'absent'

@@ -29,7 +29,7 @@ class r10k::install (
     'bundle': {
       include r10k::install::bundle
     }
-    'puppet_gem', 'gem', 'openbsd', 'pkgng', 'pacman': {
+    'puppet_gem', 'gem', 'openbsd', 'pkgng', 'pacman', 'portage': {
       if $provider == 'gem' {
         class { 'r10k::install::gem':
           manage_ruby_dependency => $manage_ruby_dependency,
