@@ -7,6 +7,7 @@ class r10k::params {
 
   $provider = $facts['os']['name'] ? {
     'Archlinux' => 'pacman',
+    'Gentoo'    => 'portage',
     default     => 'puppet_gem',
   }
 

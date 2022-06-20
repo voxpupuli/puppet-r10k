@@ -37,6 +37,9 @@
     },
     {
       "operatingsystem": "Archlinux"
+    },
+    {
+      "operatingsystem": "Gentoo"
     }
   ],
   "project_page": "https://github.com/voxpupuli/puppet-r10k",
