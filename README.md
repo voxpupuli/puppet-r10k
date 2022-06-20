@@ -697,6 +697,16 @@ curl -d '
   }' http://puppet-master.example:8088/payload
 ```
 
+If you are utilizing environment prefixes, you'll need to specify the full environment title (including the prefix) in the 'ref' parameter:
+
+```bash
+curl -d '
+  {
+    "repository": {"name": "bar", "owner": {"login": "foo"}},
+    "ref": "bar_production"
+  }' http://puppet-master.example:8088/payload
+```
+
 ### Troubleshooting
 
 If you're not sure whether your webhook setup works:
