@@ -3,7 +3,7 @@
 require 'spec_helper_acceptance'
 require 'openssl'
 
-describe 'BitBucket Secret Enabled, System Ruby with No SSL, Not protected, No mcollective' do
+describe 'BitBucket Secret Enabled, System Ruby with No SSL, Not protected, No mcollective', unless: default[:platform] =~ %r{archlinux} do
   context 'default parameters' do
     pp = %(
       class { 'r10k':

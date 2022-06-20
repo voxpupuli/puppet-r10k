@@ -2,7 +2,7 @@
 
 require 'spec_helper_acceptance'
 
-describe 'Prefix Enabled,System Ruby with No SSL, Not protected, No mcollective' do
+describe 'Prefix Enabled,System Ruby with No SSL, Not protected, No mcollective', unless: default[:platform] =~ %r{archlinux} do
   context 'default parameters' do
     pp = %(
       file {'/usr/local/bin/prefix_command.rb':
