@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v10.2.0](https://github.com/voxpupuli/puppet-r10k/tree/v10.2.0) (2022-06-20)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v10.1.1...v10.2.0)
+
+**Implemented enhancements:**
+
+- Add Gentoo support [\#576](https://github.com/voxpupuli/puppet-r10k/pull/576) ([bastelfreak](https://github.com/bastelfreak))
+- Allow defining mcollective policies on the r10k agent [\#572](https://github.com/voxpupuli/puppet-r10k/pull/572) ([optiz0r](https://github.com/optiz0r))
+
+**Closed issues:**
+
+- Docs wrong for mcollective "deploy" command? [\#573](https://github.com/voxpupuli/puppet-r10k/issues/573)
+- Enhancement Request: Support ignore\_branch\_prefixes in config hash / seperate [\#556](https://github.com/voxpupuli/puppet-r10k/issues/556)
+
+**Merged pull requests:**
+
+- Arch Linux: Disable acceptance tests for webhook [\#577](https://github.com/voxpupuli/puppet-r10k/pull/577) ([bastelfreak](https://github.com/bastelfreak))
+- Fix mco r10k deploy command in docs to match actual behaviour [\#574](https://github.com/voxpupuli/puppet-r10k/pull/574) ([optiz0r](https://github.com/optiz0r))
+- puppet-lint: fix top\_scope\_facts warnings [\#569](https://github.com/voxpupuli/puppet-r10k/pull/569) ([bastelfreak](https://github.com/bastelfreak))
+- Add additional curl example for environment prefixes [\#508](https://github.com/voxpupuli/puppet-r10k/pull/508) ([DLeich](https://github.com/DLeich))
+
 ## [v10.1.1](https://github.com/voxpupuli/puppet-r10k/tree/v10.1.1) (2021-08-27)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v10.1.0...v10.1.1)
