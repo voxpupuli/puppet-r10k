@@ -2,7 +2,7 @@
 
 require 'spec_helper_acceptance'
 
-describe 'System Ruby with No SSL, Not protected, No mcollective' do
+describe 'System Ruby with No SSL, Not protected, No mcollective', unless: default[:platform] =~ %r{archlinux} do
   context 'with basics parameters' do
     hosts_as('agent').each do |agent|
       it 'applies with no errors and idempotently' do
