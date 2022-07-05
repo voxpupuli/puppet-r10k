@@ -15,7 +15,7 @@ class r10k::params {
   $sources                = undef
   $puppet_master          = true
   $proxy                  = undef
-  $pool_size              = undef
+  $pool_size              = $facts['processors']['count']
   $gem_source             = undef
 
   if 'puppet_environment' in $facts {
