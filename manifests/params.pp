@@ -33,7 +33,7 @@ class r10k::params {
   $forge_settings            = {}
   $deploy_settings           = {}
   # Git configuration
-  $git_server = $::settings::ca_server #lint:ignore:top_scope_facts
+  $git_server = $settings::ca_server #lint:ignore:top_scope_facts
   $repo_path  = '/var/repos'
   $remote     = "ssh://${git_server}${repo_path}/modules.git"
 
