@@ -33,7 +33,7 @@ class r10k::params {
   $forge_settings            = {}
   $deploy_settings           = {}
   # Git configuration
-  $git_server = $::settings::ca_server #lint:ignore:top_scope_facts
+  $git_server = $settings::ca_server #lint:ignore:top_scope_facts
   $repo_path  = '/var/repos'
   $remote     = "ssh://${git_server}${repo_path}/modules.git"
 
@@ -155,6 +155,8 @@ class r10k::params {
   $webhook_mco_arguments         = undef
   if $facts['pe_server_version'] == '2016.4.2' {
     $webhook_sinatra_version       = '~> 1.0'
+  } elsif versioncmp(fact('ruby.version'), '2.6.0') < 0 {
+    $webhook_sinatra_version       = '~> 2.0'
   } else {
     $webhook_sinatra_version       = 'installed'
   }
