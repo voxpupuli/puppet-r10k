@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [Unreleased](https://github.com/voxpupuli/puppet-r10k/tree/HEAD)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v10.2.0...HEAD)
+
+**Implemented enhancements:**
+
+- Add RHEL8 support. [\#582](https://github.com/voxpupuli/puppet-r10k/pull/582) ([marcteale](https://github.com/marcteale))
+- pool\_size: default to amount of CPU cores [\#579](https://github.com/voxpupuli/puppet-r10k/pull/579) ([bastelfreak](https://github.com/bastelfreak))
+
+**Fixed bugs:**
+
+- Fix webhook setup when using older Puppet/Ruby [\#581](https://github.com/voxpupuli/puppet-r10k/pull/581) ([smortex](https://github.com/smortex))
+
 ## [v10.2.0](https://github.com/voxpupuli/puppet-r10k/tree/v10.2.0) (2022-06-20)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v10.1.1...v10.2.0)
@@ -540,9 +553,9 @@ These should not affect the functionality of the module.
 
 - Rename CHANGELOG.md [\#301](https://github.com/voxpupuli/puppet-r10k/pull/301) ([rnelson0](https://github.com/rnelson0))
 - Fixes Puppet 4 path for webhook [\#295](https://github.com/voxpupuli/puppet-r10k/pull/295) ([andrewwippler](https://github.com/andrewwippler))
-- Update config\_version.sh [\#291](https://github.com/voxpupuli/puppet-r10k/pull/291) ([solsglasses](https://github.com/solsglasses))
+- Update config\_version.sh [\#291](https://github.com/voxpupuli/puppet-r10k/pull/291) ([LinguineCode](https://github.com/LinguineCode))
 - Fix testing [\#288](https://github.com/voxpupuli/puppet-r10k/pull/288) ([ghoneycutt](https://github.com/ghoneycutt))
-- Duplicate certpath key [\#287](https://github.com/voxpupuli/puppet-r10k/pull/287) ([solsglasses](https://github.com/solsglasses))
+- Duplicate certpath key [\#287](https://github.com/voxpupuli/puppet-r10k/pull/287) ([LinguineCode](https://github.com/LinguineCode))
 - unbreak on OS where root group != 'root' [\#279](https://github.com/voxpupuli/puppet-r10k/pull/279) ([buzzdeee](https://github.com/buzzdeee))
 - Add support for custom permissions and ownership of webhooks.yaml [\#278](https://github.com/voxpupuli/puppet-r10k/pull/278) ([elconas](https://github.com/elconas))
 - add curl example to readme [\#274](https://github.com/voxpupuli/puppet-r10k/pull/274) ([jessereynolds](https://github.com/jessereynolds))

@@ -772,79 +772,9 @@ class { 'r10k::webhook::config':
 
 ## Reference
 
-#### Class: `r10k`
-This is the main public class to be declared , handingly installation and configuration declarations
+See
+[REFERENCE.md](https://github.com/voxpupuli/puppet-r10k/blob/master/REFERENCE.md)
 
-**Parameters within `r10k`:**
-
-##### `remote`
-A string to be passed in as the source with a hardcode prefix of `puppet`
-
-##### `sources`
-A hash of all sources, this gets read out into the file as yaml. Must not be declared with `remote`
-
-##### `cachedir`
-A single string setting the `r10k.yaml` configuration value of the same name
-
-##### `configfile`
-A path to the configuration file to manage. Be aware Puppet Enterprise 4.0 and higher may conflict if you manage `/etc/puppetlabs/puppet/r10k.yaml`
-
-##### `version`
-A value passed to the package resource for managing the gem version
-
-##### `modulepath`
-Deprecated: for older [configfile](https://docs.puppetlabs.com/puppet/latest/reference/environments_classic.html) environments configuration of modulepath in puppet.conf
-
-##### `manage_modulepath`
-Deprecated: declare a resource for managing `modulepath` in Puppet.conf
-
-##### `manage_ruby_dependency`
-When using system ruby , options on how to declare
-
-##### `proxy`
-A string setting the`r10k.yaml` configuration value of the same name
-
-##### `gem_source`
-An optional string specifying location to retrieve gem
-
-##### `pool_size`
-Integer defining how many threads should be spawn while updating modules. Only available for r10k >= 3.3.0.
-
-##### `r10k_basedir`
-This module requires the [puppetlabs-ruby](https://github.com/puppetlabs/puppetlabs-ruby.git) module. In the event that your environment already includes
-the module with some customization, you can use the `manage_ruby_dependency`
-parameter to adjust how this module expresses that requirement.
-The supported values are `include`,`declare`, or `ignore`. The values' behavior
-is outlined below:
-
-  * *declare* **default** This will explicitly declare the ruby module.
-    Additional declarations of the ruby module will result in an inability to
-    compile a catalog.
-
-  * *include* This will simply include the ruby module. When combined with class
-    ordering, this will permit the user to manage the instantiation of the ruby module elsewhere, potentially with non-standard parameter values.
-
-  * *ignore* This will assume that ruby is handled via some other mechanism than
-    a puppet module named `ruby`. It is left to the user to insure the
-    requirement be met.
-##### `package_name`
-The name of the package to be installed via the provider
-
-##### `provider`
-The supported installation modes for this module
-
-* bundle
-* puppet_gem
-* gem
-
-##### `install_options`
-Options to pass to the `provider` declaration
-
-##### `mcollective`
-Install mcollective application and agents. This does NOT configure mcollective automatically
-
-##### `manage_configfile_symlink`
-Manage a symlink to the configuration file, for systems installed in weird file system configurations
 
 ##### `git_settings`
 This is the `git:` key in r10k, it accepts a hash that can be used to configure
@@ -890,13 +820,6 @@ This is the `deploy:` key in r10k, it accepts a hash that contains setting that 
       deploy_settings => $deploy_settings,
     }
 ```
-
-##### `configfile_symlink`
-boolean if to manage symlink
-
-##### `include_prerun_command`
-Deprecated: Add [prerun_command](https://docs.puppetlabs.com/references/latest/configuration.html#preruncommand) to puppet.conf to run r10k when the agent on the master runs.
-Suggest instead declaring `r10k::postrun_command ` as that will run after the agent runs which prevents r10k from stopping configuration management of masters from occurring as it does with `prerun_command`s
 
 ##### `include_postrun_command`
 ```
