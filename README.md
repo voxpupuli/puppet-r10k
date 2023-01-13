@@ -152,6 +152,19 @@ _Note: It is recommended you migrate to using the `pe_r10k` module which is basi
 a clone of this modules features and file tickets for anything missing._
 
 
+### Regenerating types for changed environments
+
+A trivial script is provided to regenerate types for environment isolation:
+
+```puppet
+class { 'r10k':
+  remote  => 'git@github.com:someuser/puppet.git',
+  postrun => [ '/usr/libexec/generate-puppet-types.sh', '$modifiedenvs' ]
+  provide_generate_types_script => true,
+```
+
+r10k will automatically replace `$modifiedenvs` with any changed environment names.
+
 ### Using an internal gem server
 
 Depending on implementation requirements, there are two ways to use alternate gem sources.

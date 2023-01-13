@@ -40,6 +40,10 @@ class r10k::params {
   # Gentoo specific values
   $gentoo_keywords = ''
 
+  # A script to trivially regenerate types for changed environments
+  $provide_generate_types_script = false
+  $generate_types_script_location = '/usr/libexec/generate-puppet-types.sh'
+
   # Include the mcollective agent
   $mcollective = false
 

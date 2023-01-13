@@ -9,6 +9,8 @@ class r10k::install (
   $puppet_master = true,
   $is_pe_server = $r10k::params::is_pe_server,
   Optional[String[1]] $gem_source = undef,
+  Boolean $generate_types_script_location = $r10k::params::provide_generate_types_script,
+  Stdlib::Absolutepath $generate_types_script_location = $r10k::params::generate_types_script_location,
 ) inherits r10k::params {
   if $package_name == '' {
     case $provider {
@@ -63,5 +65,11 @@ class r10k::install (
       }
     }
     default: { fail("${module_name}: ${provider} is not supported. Valid values are: 'gem', 'puppet_gem', 'bundle', 'openbsd'") }
+  }
+
+  if $provide_generate_types_script {
+    class { 'r10k::gen_types_script':
+      generate_types_script_location => $generate_types_script_location,
+    }
   }
 }

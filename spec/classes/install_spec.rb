@@ -34,6 +34,7 @@ describe 'r10k::install' do
             provider: 'gem'
           )
         end
+        it { is_expected.not_to contain_file('/usr/libexec/generate-puppet-types.sh') }
       end
 
       context 'with gem with empty install_options', if: facts[:os]['name'] != 'Gentoo' do
@@ -56,6 +57,7 @@ describe 'r10k::install' do
             install_options: ['--no-document']
           )
         end
+        it { is_expected.not_to contain_file('/usr/libexec/generate-puppet-types.sh') }
       end
 
       context 'with gem with populated install_options', if: facts[:os]['name'] != 'Gentoo' do
@@ -78,6 +80,7 @@ describe 'r10k::install' do
             install_options: ['BOGON']
           )
         end
+        it { is_expected.not_to contain_file('/usr/libexec/generate-puppet-types.sh') }
       end
 
       context 'with puppet_gem provider' do
@@ -100,6 +103,7 @@ describe 'r10k::install' do
             provider: 'puppet_gem'
           )
         end
+        it { is_expected.not_to contain_file('/usr/libexec/generate-puppet-types.sh') }
       end
 
       context 'with puppet_gem on Puppet FOSS 4.2.1' do
@@ -133,6 +137,7 @@ describe 'r10k::install' do
             require: 'Package[r10k]'
           )
         end
+        it { is_expected.not_to contain_file('/usr/libexec/generate-puppet-types.sh') }
       end
 
       context 'with defaults and source specified', if: facts[:os]['name'] != 'Gentoo' do
@@ -158,6 +163,7 @@ describe 'r10k::install' do
             source: 'https://some.alternate.source.com/'
           )
         end
+        it { is_expected.not_to contain_file('/usr/libexec/generate-puppet-types.sh') }
       end
 
       context 'with bundle provider' do
@@ -175,6 +181,7 @@ describe 'r10k::install' do
 
         it { is_expected.to contain_class('r10k::install::bundle') }
         it { is_expected.not_to contain_package('r10k') }
+        it { is_expected.not_to contain_file('/usr/libexec/generate-puppet-types.sh') }
       end
     end
   end

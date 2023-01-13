@@ -25,6 +25,8 @@ class r10k (
   Optional[Integer[1]] $pool_size                             = $r10k::params::pool_size,
   Optional[String[1]] $gem_source                             = $r10k::params::gem_source,
   $root_group                                                 = $r10k::params::root_group,
+  Boolean $provide_generate_types_script                      = $r10k::params::provide_generate_types_script,
+  Stdlib::Absolutepath $generate_types_script_location        = $r10k::params::generate_types_script_location,
   $postrun                                                    = undef,
   Boolean $include_prerun_command                             = false,
   Boolean $include_postrun_command                            = false,
@@ -46,14 +48,16 @@ class r10k (
   }
 
   class { 'r10k::install':
-    install_options        => $install_options,
-    keywords               => $gentoo_keywords,
-    manage_ruby_dependency => $manage_ruby_dependency,
-    package_name           => $package_name,
-    provider               => $provider,
-    gem_source             => $gem_source,
-    version                => $version,
-    puppet_master          => $puppet_master,
+    install_options                => $install_options,
+    keywords                       => $gentoo_keywords,
+    manage_ruby_dependency         => $manage_ruby_dependency,
+    package_name                   => $package_name,
+    provider                       => $provider,
+    gem_source                     => $gem_source,
+    version                        => $version,
+    puppet_master                  => $puppet_master,
+    provide_generate_types_script  => $provide_generate_types_script,
+    generate_types_script_location => $generate_types_script_location,
   }
 
   class { 'r10k::config':
