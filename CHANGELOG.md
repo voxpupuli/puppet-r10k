@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v10.3.0](https://github.com/voxpupuli/puppet-r10k/tree/v10.3.0) (2023-01-27)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v10.2.0...v10.3.0)
+
+**Implemented enhancements:**
+
+- \(Feature\) Should be installable with the MCollective module [\#46](https://github.com/voxpupuli/puppet-r10k/issues/46)
+- bump puppet/systemd to \< 5.0.0 [\#587](https://github.com/voxpupuli/puppet-r10k/pull/587) ([jhoblitt](https://github.com/jhoblitt))
+- Add RHEL8 support. [\#582](https://github.com/voxpupuli/puppet-r10k/pull/582) ([marcteale](https://github.com/marcteale))
+- pool\_size: default to amount of CPU cores [\#579](https://github.com/voxpupuli/puppet-r10k/pull/579) ([bastelfreak](https://github.com/bastelfreak))
+
+**Fixed bugs:**
+
+- Fix webhook setup when using older Puppet/Ruby [\#581](https://github.com/voxpupuli/puppet-r10k/pull/581) ([smortex](https://github.com/smortex))
+
 ## [v10.2.0](https://github.com/voxpupuli/puppet-r10k/tree/v10.2.0) (2022-06-20)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v10.1.1...v10.2.0)
@@ -77,7 +92,7 @@ These should not affect the functionality of the module.
 - puppetlabs/vcsrepo: Allow 5.x [\#558](https://github.com/voxpupuli/puppet-r10k/pull/558) ([bastelfreak](https://github.com/bastelfreak))
 - Use a more logical example for basedir in the example code. [\#554](https://github.com/voxpupuli/puppet-r10k/pull/554) ([zipkid](https://github.com/zipkid))
 - stdlib, inifile, vcsrepo: allow latest versions [\#552](https://github.com/voxpupuli/puppet-r10k/pull/552) ([bastelfreak](https://github.com/bastelfreak))
-- Add support for FreeBSD package provider [\#546](https://github.com/voxpupuli/puppet-r10k/pull/546) ([xaque208](https://github.com/xaque208))
+- Add support for FreeBSD package provider [\#546](https://github.com/voxpupuli/puppet-r10k/pull/546) ([zachfi](https://github.com/zachfi))
 - Added bitbucket webhook support for pull request event [\#540](https://github.com/voxpupuli/puppet-r10k/pull/540) ([magarvo](https://github.com/magarvo))
 
 ## [v9.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v9.0.0) (2020-08-15)
@@ -540,9 +555,9 @@ These should not affect the functionality of the module.
 
 - Rename CHANGELOG.md [\#301](https://github.com/voxpupuli/puppet-r10k/pull/301) ([rnelson0](https://github.com/rnelson0))
 - Fixes Puppet 4 path for webhook [\#295](https://github.com/voxpupuli/puppet-r10k/pull/295) ([andrewwippler](https://github.com/andrewwippler))
-- Update config\_version.sh [\#291](https://github.com/voxpupuli/puppet-r10k/pull/291) ([solsglasses](https://github.com/solsglasses))
+- Update config\_version.sh [\#291](https://github.com/voxpupuli/puppet-r10k/pull/291) ([LinguineCode](https://github.com/LinguineCode))
 - Fix testing [\#288](https://github.com/voxpupuli/puppet-r10k/pull/288) ([ghoneycutt](https://github.com/ghoneycutt))
-- Duplicate certpath key [\#287](https://github.com/voxpupuli/puppet-r10k/pull/287) ([solsglasses](https://github.com/solsglasses))
+- Duplicate certpath key [\#287](https://github.com/voxpupuli/puppet-r10k/pull/287) ([LinguineCode](https://github.com/LinguineCode))
 - unbreak on OS where root group != 'root' [\#279](https://github.com/voxpupuli/puppet-r10k/pull/279) ([buzzdeee](https://github.com/buzzdeee))
 - Add support for custom permissions and ownership of webhooks.yaml [\#278](https://github.com/voxpupuli/puppet-r10k/pull/278) ([elconas](https://github.com/elconas))
 - add curl example to readme [\#274](https://github.com/voxpupuli/puppet-r10k/pull/274) ([jessereynolds](https://github.com/jessereynolds))
@@ -960,7 +975,7 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- Check for variations of $is\_pe [\#97](https://github.com/voxpupuli/puppet-r10k/pull/97) ([xaque208](https://github.com/xaque208))
+- Check for variations of $is\_pe [\#97](https://github.com/voxpupuli/puppet-r10k/pull/97) ([zachfi](https://github.com/zachfi))
 
 ## [v2.3.2](https://github.com/voxpupuli/puppet-r10k/tree/v2.3.2) (2014-11-20)
 
@@ -968,7 +983,7 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- Replaced references to type\(\) function with is\_string\(\) for Puppet 3.7.x... [\#96](https://github.com/voxpupuli/puppet-r10k/pull/96) ([xaque208](https://github.com/xaque208))
+- Replaced references to type\(\) function with is\_string\(\) for Puppet 3.7.x... [\#96](https://github.com/voxpupuli/puppet-r10k/pull/96) ([zachfi](https://github.com/zachfi))
 
 ## [v2.3.1](https://github.com/voxpupuli/puppet-r10k/tree/v2.3.1) (2014-11-11)
 
@@ -987,7 +1002,7 @@ These should not affect the functionality of the module.
 
 - Change install\_options to undef [\#88](https://github.com/voxpupuli/puppet-r10k/pull/88) ([binford2k](https://github.com/binford2k))
 - Fix tests for manage\_ruby\_dependency =\> 'include' [\#86](https://github.com/voxpupuli/puppet-r10k/pull/86) ([gsarjeant](https://github.com/gsarjeant))
-- Allow for non-linux [\#83](https://github.com/voxpupuli/puppet-r10k/pull/83) ([xaque208](https://github.com/xaque208))
+- Allow for non-linux [\#83](https://github.com/voxpupuli/puppet-r10k/pull/83) ([zachfi](https://github.com/zachfi))
 - Update CHANGELOG [\#82](https://github.com/voxpupuli/puppet-r10k/pull/82) ([ghoneycutt](https://github.com/ghoneycutt))
 - bumped version 1.3.4 [\#81](https://github.com/voxpupuli/puppet-r10k/pull/81) ([kennyg](https://github.com/kennyg))
 
@@ -1138,7 +1153,7 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- Update config.pp [\#32](https://github.com/voxpupuli/puppet-r10k/pull/32) ([xaque208](https://github.com/xaque208))
+- Update config.pp [\#32](https://github.com/voxpupuli/puppet-r10k/pull/32) ([zachfi](https://github.com/zachfi))
 - add ability to include mcollective agent through main class [\#30](https://github.com/voxpupuli/puppet-r10k/pull/30) ([jlambert121](https://github.com/jlambert121))
 - The gem is called 'bundler' [\#27](https://github.com/voxpupuli/puppet-r10k/pull/27) ([glarizza](https://github.com/glarizza))
 - Bump to 0.0.10 [\#26](https://github.com/voxpupuli/puppet-r10k/pull/26) ([glarizza](https://github.com/glarizza))
