@@ -107,7 +107,7 @@ sshkey { 'your.internal.gitlab.server.com':
   key    => '...+dffsfHQ==',
 }
 
-# Resource git_webhook is provided by https://forge.puppet.com/abrader/gms
+# Resource git_webhook is provided by https://github.com/bjvrielink/abrader-gms/tree/fixup
 git_deploy_key { 'add_deploy_key_to_puppet_control':
   ensure       => present,
   name         => $::fqdn,
@@ -322,7 +322,7 @@ class {'r10k::webhook':
 
 # Add webhook to control repository ( the repo where the Puppetfile lives )
 #
-# Resource git_webhook is provided by https://forge.puppet.com/abrader/gms
+# Resource git_webhook is provided by https://github.com/bjvrielink/abrader-gms/tree/fixup
 git_webhook { 'web_post_receive_webhook' :
   ensure       => present,
   webhook_url  => 'http://master.of.masters:8088/payload',
@@ -340,7 +340,7 @@ git_webhook { 'web_post_receive_webhook' :
 # The module name is determined from the repo name , i.e. <puppet-><module_name>
 # All characters with left and including any hyphen are removed i.e. <puppet->
 #
-# Resource git_webhook is provided by https://forge.puppet.com/abrader/gms
+# Resource git_webhook is provided by https://github.com/bjvrielink/abrader-gms/tree/fixup
 git_webhook { 'web_post_receive_webhook_for_module' :
   ensure       => present,
   webhook_url  => 'http://master.of.masters:8088/module',
@@ -374,7 +374,7 @@ class {'r10k::webhook':
 
 # Add webhook to control repository ( the repo where the Puppetfile lives )
 #
-# Resource git_webhook is provided by https://forge.puppet.com/abrader/gms
+# Resource git_webhook is provided by https://github.com/bjvrielink/abrader-gms/tree/fixup
 git_webhook { 'web_post_receive_webhook' :
   ensure             => present,
   webhook_url        => 'https://puppet:puppet@hole.in.firewall:8088/payload',
@@ -392,7 +392,7 @@ git_webhook { 'web_post_receive_webhook' :
 # The module name is determined from the repo name , i.e. <puppet-><module_name>
 # All characters with left and including any hyphen are removed i.e. <puppet->
 #
-# Resource git_webhook is provided by https://forge.puppet.com/abrader/gms
+# Resource git_webhook is provided by https://github.com/bjvrielink/abrader-gms/tree/fixup
 git_webhook { 'web_post_receive_webhook_for_module' :
   ensure       => present,
   webhook_url  => 'https://puppet:puppet@hole.in.firewall:8088/module',
@@ -560,7 +560,7 @@ class {'r10k::webhook':
 }
 # Deploy this webhook to your local gitlab server for the puppet/control repo.
 #
-# Resource git_webhook is provided by https://forge.puppet.com/abrader/gms
+# Resource git_webhook is provided by https://github.com/bjvrielink/abrader-gms/tree/fixup
 git_webhook { 'web_post_receive_webhook' :
   ensure       => present,
   webhook_url  => 'https://puppet:puppet@master.of.masters:8088/payload',
