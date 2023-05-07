@@ -110,7 +110,7 @@ sshkey { 'your.internal.gitlab.server.com':
 # Resource git_webhook is provided by https://github.com/bjvrielink/abrader-gms/tree/fixup
 git_deploy_key { 'add_deploy_key_to_puppet_control':
   ensure       => present,
-  name         => $::fqdn,
+  name         => $facts['networking']['fqdn'],
   path         => '/root/.ssh/id_dsa.pub',
   token        => hiera('gitlab_api_token'),
   project_name => 'puppet/control',
@@ -417,7 +417,7 @@ Enable the webhook over the repository settings `External Async Post Receive Hoo
 # Add deploy key
 git_deploy_key { 'add_deploy_key_to_puppet_control':
   ensure       => present,
-  name         => $::fqdn,
+  name         => $facts['networking']['fqdn'],
   path         => '/root/.ssh/id_rsa.pub',
   username     => 'api',
   password     => 'pass',
