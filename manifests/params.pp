@@ -4,6 +4,8 @@ class r10k::params {
   $version                = 'installed'
   $manage_modulepath      = false
   $manage_ruby_dependency = 'ignore'
+  $root_user              = 'root'
+  $root_group             = 'root'
 
   $provider = $facts['os']['name'] ? {
     'Archlinux' => 'pacman',
@@ -26,6 +28,7 @@ class r10k::params {
   $r10k_cache_dir            = "${facts['puppet_vardir']}/r10k"
   $r10k_config_file          = '/etc/puppetlabs/r10k/r10k.yaml'
   $r10k_binary               = 'r10k'
+  $pre_postrun_command       = "${r10k_binary} deploy environment -p"
   $puppetconf_path           = '/etc/puppetlabs/puppet'
   $manage_configfile_symlink = false
   $configfile_symlink        = '/etc/r10k.yaml'
@@ -61,13 +64,13 @@ class r10k::params {
   if fact('is_pe') == true or fact('is_pe') == 'true' {
     # < PE 4
     $is_pe_server      = true
-  } elsif is_function_available('pe_compiling_server_version') {
-    # >= PE 4
-    $is_pe_server      = true
+    $pe_module_path = '/opt/puppetlabs/puppet/modules'
+    $modulepath = "${r10k_basedir}/\$environment/modules:${pe_module_path}"
   }
   else {
     # FOSS
     $is_pe_server      = false
+    $modulepath = "${r10k_basedir}/\$environment/modules"
   }
 
   # Webhook Go parameters

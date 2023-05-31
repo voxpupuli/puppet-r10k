@@ -28,8 +28,11 @@ describe 'r10k::webhook' do
             user: 'puppet',
             password: 'puppet',
             port: 4000,
+            tls: {
+              enabled: false,
+            }
           },
-          r10k_settings: {
+          r10k: {
             command_path: '/opt/puppetlabs/puppet/bin/r10k',
             config_path: '/etc/puppetlabs/r10k/r10k.yaml',
             default_branch: 'production',
@@ -40,10 +43,36 @@ describe 'r10k::webhook' do
           }
         }
       end
-      if os == 'archlinux-rolling-x86_64' || os == 'gentoo-2-x86_64'
+
+      content = '---
+server:
+  protected: true
+  user: puppet
+  password: puppet
+  port: 4000
+  tls:
+    enabled: false
+chatops:
+  enabled: false
+r10k:
+  command_path: "/opt/puppetlabs/puppet/bin/r10k"
+  config_path: "/etc/puppetlabs/r10k/r10k.yaml"
+  default_branch: production
+  allow_uppercase: false
+  verbose: true
+  deploy_modules: true
+  generate_types: true
+'
+      if %w[archlinux-rolling-x86_64 gentoo-2-x86_64].include?(os)
         it { is_expected.not_to compile }
       else
         it { is_expected.to compile }
+        it { is_expected.to contain_class('r10k::webhook::package') }
+        it { is_expected.to contain_class('r10k::webhook::service') }
+        it { is_expected.to contain_class('r10k::webhook::config') }
+        it { is_expected.to contain_package('webhook-go').with_ensure('present') }
+        it { is_expected.to contain_service('webhook').with_ensure('running') }
+        it { is_expected.to contain_file('webhook.yml').with_content(content) }
       end
     end
   end

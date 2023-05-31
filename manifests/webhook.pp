@@ -31,7 +31,7 @@ class r10k::webhook (
     port      => $r10k::params::webhook_port,
     tls       => $tls,
   },
-  R10k::Webhook::Config::R10k $r10k_settings = {
+  R10k::Webhook::Config::R10k $r10k = {
     command_path    => $r10k::params::webhook_r10k_command_path,
     config_path     => $r10k::params::webhook_r10k_config_path,
     default_branch  => $r10k::params::webhook_r10k_default_branch,
@@ -44,7 +44,7 @@ class r10k::webhook (
   R10k::Webhook::Config $config              = {
     server  => $server,
     chatops => $chatops,
-    r10k    => $r10k_settings,
+    r10k    => $r10k,
   },
 ) {
   contain r10k::webhook::package

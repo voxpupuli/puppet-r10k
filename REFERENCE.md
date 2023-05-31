@@ -17,6 +17,18 @@
 * [`r10k::params`](#r10k--params): Reasonable defaults for all classes
 * [`r10k::postrun_command`](#r10k--postrun_command): This class will configure r10k to run as part of the masters agent run
 * [`r10k::prerun_command`](#r10k--prerun_command): This class will configure r10k to run as part of the masters agent run
+* [`r10k::webhook`](#r10k--webhook): Class: r10k::webhook
+* [`r10k::webhook::config`](#r10k--webhook--config): Class: r10k::webhook::config
+* [`r10k::webhook::package`](#r10k--webhook--package): Class: r10k::webhook::package
+* [`r10k::webhook::service`](#r10k--webhook--service): Class: r10k::webhook::service
+
+### Data types
+
+* [`R10k::Webhook::Config`](#R10k--Webhook--Config)
+* [`R10k::Webhook::Config::Chatops`](#R10k--Webhook--Config--Chatops)
+* [`R10k::Webhook::Config::R10k`](#R10k--Webhook--Config--R10k)
+* [`R10k::Webhook::Config::Server`](#R10k--Webhook--Config--Server)
+* [`R10k::Webhook::Config::Server::Tls`](#R10k--Webhook--Config--Server--Tls)
 
 ### Tasks
 
@@ -823,6 +835,265 @@ Data type: `Enum['present', 'absent']`
 
 
 Default value: `'present'`
+
+### <a name="r10k--webhook"></a>`r10k::webhook`
+
+Class: r10k::webhook
+
+#### Parameters
+
+The following parameters are available in the `r10k::webhook` class:
+
+* [`ensure`](#-r10k--webhook--ensure)
+* [`version`](#-r10k--webhook--version)
+* [`service_ensure`](#-r10k--webhook--service_ensure)
+* [`service_enabled`](#-r10k--webhook--service_enabled)
+* [`config_ensure`](#-r10k--webhook--config_ensure)
+* [`config_path`](#-r10k--webhook--config_path)
+* [`chatops`](#-r10k--webhook--chatops)
+* [`tls`](#-r10k--webhook--tls)
+* [`server`](#-r10k--webhook--server)
+* [`r10k`](#-r10k--webhook--r10k)
+* [`config`](#-r10k--webhook--config)
+
+##### <a name="-r10k--webhook--ensure"></a>`ensure`
+
+Data type: `Boolean`
+
+
+
+Default value: `$r10k::params::webhook_ensure`
+
+##### <a name="-r10k--webhook--version"></a>`version`
+
+Data type: `String`
+
+
+
+Default value: `$r10k::params::webhook_version`
+
+##### <a name="-r10k--webhook--service_ensure"></a>`service_ensure`
+
+Data type:
+
+```puppet
+Variant[
+    Enum['running', 'stopped'],
+    Boolean
+  ]
+```
+
+
+
+Default value: `$r10k::params::webhook_service_ensure`
+
+##### <a name="-r10k--webhook--service_enabled"></a>`service_enabled`
+
+Data type: `Boolean`
+
+
+
+Default value: `$r10k::params::webhook_service_enabled`
+
+##### <a name="-r10k--webhook--config_ensure"></a>`config_ensure`
+
+Data type: `String`
+
+
+
+Default value: `'file'`
+
+##### <a name="-r10k--webhook--config_path"></a>`config_path`
+
+Data type: `String`
+
+
+
+Default value: `'/etc/voxpupuli/webhook.yml'`
+
+##### <a name="-r10k--webhook--chatops"></a>`chatops`
+
+Data type: `R10k::Webhook::Config::ChatOps`
+
+
+
+Default value:
+
+```puppet
+{
+    enabled    => $r10k::params::webhook_chatops_enabled,
+    service    => $r10k::params::webhook_chatops_service,
+    channel    => $r10k::params::webhook_chatops_channel,
+    user       => $r10k::params::webhook_chatops_user,
+    auth_token => $r10k::params::webhook_chatops_token,
+    server_uri => $r10k::params::webhook_chatops_uri,
+  }
+```
+
+##### <a name="-r10k--webhook--tls"></a>`tls`
+
+Data type: `R10k::Webhook::Config::Server::Tls`
+
+
+
+Default value:
+
+```puppet
+{
+    enabled     => $r10k::params::webhook_tls_enabled,
+    certificate => $r10k::params::webhook_tls_cert_path,
+    key         => $r10k::params::webhook_tls_key_path,
+  }
+```
+
+##### <a name="-r10k--webhook--server"></a>`server`
+
+Data type: `R10k::Webhook::Config::Server`
+
+
+
+Default value:
+
+```puppet
+{
+    protected => $r10k::params::webhook_protected,
+    user      => $r10k::params::webhook_user,
+    password  => $r10k::params::webhook_password,
+    port      => $r10k::params::webhook_port,
+    tls       => $tls,
+  }
+```
+
+##### <a name="-r10k--webhook--r10k"></a>`r10k`
+
+Data type: `R10k::Webhook::Config::R10k`
+
+
+
+Default value:
+
+```puppet
+{
+    command_path    => $r10k::params::webhook_r10k_command_path,
+    config_path     => $r10k::params::webhook_r10k_config_path,
+    default_branch  => $r10k::params::webhook_r10k_default_branch,
+    prefix          => $r10k::params::webhook_r10k_branch_prefix,
+    allow_uppercase => $r10k::params::webhook_r10k_allow_uppercase,
+    verbose         => $r10k::params::webhook_r10k_verbose,
+    deploy_modules  => $r10k::params::webhook_r10k_deploy_modules,
+    generate_types  => $r10k::params::webhook_r10k_generate_types,
+  }
+```
+
+##### <a name="-r10k--webhook--config"></a>`config`
+
+Data type: `R10k::Webhook::Config`
+
+
+
+Default value:
+
+```puppet
+{
+    server  => $server,
+    chatops => $chatops,
+    r10k    => $r10k,
+  }
+```
+
+### <a name="r10k--webhook--config"></a>`r10k::webhook::config`
+
+Class: r10k::webhook::config
+
+### <a name="r10k--webhook--package"></a>`r10k::webhook::package`
+
+Class: r10k::webhook::package
+
+### <a name="r10k--webhook--service"></a>`r10k::webhook::service`
+
+Class: r10k::webhook::service
+
+## Data types
+
+### <a name="R10k--Webhook--Config"></a>`R10k::Webhook::Config`
+
+The R10k::Webhook::Config data type.
+
+Alias of
+
+```puppet
+Struct[{
+    server  => Optional[R10k::Webhook::Config::Server],
+    chatops => Optional[R10k::Webhook::Config::Chatops],
+    r10k    => Optional[R10k::Webhook::Config::R10k],
+}]
+```
+
+### <a name="R10k--Webhook--Config--Chatops"></a>`R10k::Webhook::Config::Chatops`
+
+The R10k::Webhook::Config::Chatops data type.
+
+Alias of
+
+```puppet
+Struct[{
+    enabled    => Boolean,
+    service    => Optional[Enum['slack', 'rocketchat']],
+    channel    => Optional[String[1]],
+    user       => Optional[String[1]],
+    auth_token => Optional[String[1]],
+    server_uri => Optional[String[1]],
+}]
+```
+
+### <a name="R10k--Webhook--Config--R10k"></a>`R10k::Webhook::Config::R10k`
+
+The R10k::Webhook::Config::R10k data type.
+
+Alias of
+
+```puppet
+Struct[{
+    command_path    => Optional[Stdlib::Absolutepath],
+    config_path     => Optional[Stdlib::Absolutepath],
+    default_branch  => Optional[String[1]],
+    prefix          => Optional[String[1]],
+    allow_uppercase => Optional[Boolean],
+    verbose         => Optional[Boolean],
+    deploy_modules  => Optional[Boolean],
+    generate_types  => Optional[Boolean],
+}]
+```
+
+### <a name="R10k--Webhook--Config--Server"></a>`R10k::Webhook::Config::Server`
+
+The R10k::Webhook::Config::Server data type.
+
+Alias of
+
+```puppet
+Struct[{
+    protected => Boolean,
+    user      => Optional[String[1]],
+    password  => Optional[String[1]],
+    port      => Optional[Stdlib::Port],
+    tls       => Optional[R10k::Webhook::Config::Server::Tls],
+}]
+```
+
+### <a name="R10k--Webhook--Config--Server--Tls"></a>`R10k::Webhook::Config::Server::Tls`
+
+The R10k::Webhook::Config::Server::Tls data type.
+
+Alias of
+
+```puppet
+Struct[{
+    enabled     => Boolean,
+    certificate => Optional[Stdlib::Absolutepath],
+    key         => Optional[Stdlib::Absolutepath],
+}]
+```
 
 ## Tasks
 
