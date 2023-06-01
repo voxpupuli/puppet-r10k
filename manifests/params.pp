@@ -75,7 +75,7 @@ class r10k::params {
 
   # Webhook Go parameters
   $webhook_protected = true
-  $webhook_version = '2.0.1'
+  $webhook_version = '2.1.0'
   $webhook_user = 'puppet'
   $webhook_password = 'puppet'
   $webhook_port = 4000
