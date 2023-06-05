@@ -11,10 +11,8 @@ fixtures:
     systemd: https://github.com/voxpupuli/puppet-systemd.git
     vcsrepo: https://github.com/puppetlabs/puppetlabs-vcsrepo.git
     yumrepo_core: https://github.com/puppetlabs/puppetlabs-yumrepo_core.git
+    stdlib: https://github.com/puppetlabs/puppetlabs-stdlib.git
   forge_modules:
-    stdlib:
-      repo: "puppetlabs/stdlib"
-      ref: "8.6.0"
     mcollective_agent_filemgr: "choria/mcollective_agent_filemgr"
     mcollective_agent_package: "choria/mcollective_agent_package"
     mcollective_agent_puppet: "choria/mcollective_agent_puppet"
