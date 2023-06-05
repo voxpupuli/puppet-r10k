@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v11.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v11.0.0) (2023-06-05)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v10.3.0...v11.0.0)
+
+**Breaking changes:**
+
+- Delete legacy webhook [\#595](https://github.com/voxpupuli/puppet-r10k/pull/595) ([bastelfreak](https://github.com/bastelfreak))
+- Remove old webhook code in preparation for webhook-go being added [\#594](https://github.com/voxpupuli/puppet-r10k/pull/594) ([dhollinger](https://github.com/dhollinger))
+- Drop Puppet 6 support [\#592](https://github.com/voxpupuli/puppet-r10k/pull/592) ([bastelfreak](https://github.com/bastelfreak))
+- modulesync 5.5.0; Drop EoL Ubuntu 16.04 [\#584](https://github.com/voxpupuli/puppet-r10k/pull/584) ([bastelfreak](https://github.com/bastelfreak))
+
+**Merged pull requests:**
+
+- puppetlabs/stdlib: Allow 9.x [\#599](https://github.com/voxpupuli/puppet-r10k/pull/599) ([bastelfreak](https://github.com/bastelfreak))
+- README: Don't use top level facts in examples [\#596](https://github.com/voxpupuli/puppet-r10k/pull/596) ([Geod24](https://github.com/Geod24))
+- Change README.md dependency on \(abandoned\) abrader/gms to bjvrielink/gms [\#593](https://github.com/voxpupuli/puppet-r10k/pull/593) ([bschonec](https://github.com/bschonec))
+- update module to work with webhook-go [\#590](https://github.com/voxpupuli/puppet-r10k/pull/590) ([dhollinger](https://github.com/dhollinger))
+
 ## [v10.3.0](https://github.com/voxpupuli/puppet-r10k/tree/v10.3.0) (2023-01-27)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v10.2.0...v10.3.0)
