@@ -299,25 +299,25 @@ This will remove the mcollective agent/application and ddl files from disk. This
 ![alt tag](https://gist.githubusercontent.com/acidprime/be25026c11a76bf3e7fb/raw/44df86181c3e5d14242a1b1f4281bf24e9c48509/webhook.gif)
 For version control systems that use web driven post-receive processes you can use the example webhook included in this module.
 When the webhook receives the post-receive event, it will synchronize environments on your puppet masters.
-The webhook uses mcollective for multi-master synchronization and the `peadmin` user from Puppet Enterprise by default.
 These settings are all configurable for your specific use case, as shown below in these configuration examples.
+
+**NOTE: MCollective and Bolt aren't currently supported with Webhook Go. This will be addressed in a future release of Webhook Go, but is an issue related to the complex nature of Bolt and MCollective/Choria commands that cause issues with the way Go executes shell commands.**
 
 ### Webhook Github Enterprise - Non Authenticated
 This is an example of using the webhook without authentication.
 The `git_webhook` type will use the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want to automate the addition of the webhook to the repo.
 
 ```puppet
-# Required unless you disable mcollective
-include r10k::mcollective
-# Internal webhooks often don't need authentication and ssl
-# Change the url below if this is changed
+# Instead of running via mco, run r10k directly
 class {'r10k::webhook::config':
-  enable_ssl     => false,
-  protected      => false,
+  use_mcollective => false,
 }
 
 class {'r10k::webhook':
-  require => Class['r10k::webhook::config'],
+  ensure         => true,
+  server         => {
+    protected => false,
+  },
 }
 
 # Add webhook to control repository ( the repo where the Puppetfile lives )
@@ -356,20 +356,24 @@ This is an example of using the webhook with authentication.
 The `git_webhook` type will use the [api token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) to add the webhook to the "control" repo that contains your puppetfile. This is typically useful when you want to automate the addition of the webhook to the repo.
 
 ```puppet
-# Required unless you disable mcollective
-include r10k::mcollective
+# Instead of running via mco, run r10k directly
+class {'r10k::webhook::config':
+  use_mcollective => false,
+}
 
 # External webhooks often need authentication and ssl and authentication
 # Change the url below if this is changed
 
-class {'r10k::webhook::config':
-  enable_ssl => true,
-  protected  => true,
-  notify     => Service['webhook'],
-}
-
 class {'r10k::webhook':
-  require => Class['r10k::webhook::config'],
+  ensure => true,
+  server => {
+      protected => true,
+  },
+  tls    => {
+      enabled     => true,
+      certificate => '/path/to/ssl/certificate',
+      key         => '/path/to/ssl/key',
+  },
 }
 
 # Add webhook to control repository ( the repo where the Puppetfile lives )
@@ -441,185 +445,21 @@ git_webhook { 'web_post_receive_webhook' :
 }
 ```
 
-### GitHub Secret Support
-GitHub webhooks allow the use of a secret value that gets hashed against the payload to pass a
-signature in the request X-Hub-Signature header. To support the secret with the webhook do the
-following type of configuration.
-
-```puppet
-class { 'r10k::webhook::config':
-  protected     => false,
-  github_secret => 'THISISTHEGITHUBWEBHOOKSECRET',
-}
-
-class { 'r10k::webhook':
-  require => Class['r10k::webhook::config'],
-}
-```
-
-### GitLab Token Support
-GitLab webhooks [allow the use](https://gitlab.com/help/user/project/integrations/webhooks#secret-token)
-of a secret token value that gets sent in the header of the HTTP request. To have the webhook receiver
-verify the secret token value and perform the operation only if the sent value matches the configured
-value, use the following type of configuration:
-
-```puppet
-class { 'r10k::webhook::config':
-  protected        => false,
-  gitlab_token     => 'THISISTHEGITLABWEBHOOKSECRET',
-}
-
-class { 'r10k::webhook':
-  require => Class['r10k::webhook::config'],
-}
-```
-
-### BitBucket Server Secret Support
-BitBucket webhooks allow the use of a secret value that gets hashed against the payload to pass a
-signature in the request X-Hub-Signature header. To support the secret with the webhook do the
-following type of configuration.
-
-```puppet
-class { 'r10k::webhook::config':
-  protected        => false,
-  bitbucket_secret => 'THISISTHEBITBUCKETWEBHOOKSECRET',
-}
-
-class { 'r10k::webhook':
-  require => Class['r10k::webhook::config'],
-}
-```
-
 ### Webhook - remove webhook init script and config file.
 For use when moving to Code Manager, or other solutions, and the webhook should be removed.
 ```puppet
-class {'r10k::webhook::config':
-  ensure => false,
-}
-
 class {'r10k::webhook':
   ensure => false,
-}
-```
-
-### Running without mcollective
-If you have only a single master, you may want to have the webhook run r10k directly rather then as peadmin via mcollective.
-This requires you to run as the user that can perform `r10k` commands which is typically root.
-The peadmin certificate no longer is managed or required.
-
-
-```puppet
-# Instead of running via mco, run r10k directly
-class {'r10k::webhook::config':
-  use_mcollective => false,
-}
-
-# The hook needs to run as root when not running using mcollective
-# It will issue r10k deploy environment <branch_from_gitlab_payload> -p
-# When git pushes happen.
-class {'r10k::webhook':
-  use_mcollective => false,
-  user            => 'root',
-  group           => '0',
-  require         => Class['r10k::webhook::config'],
 }
 ```
 
 ### Webhook Prefix Example
 
-The following is an example of declaring the webhook when r10k [prefixing](#prefixes) are enabled.
-
-#### prefix_command.rb
-This script is fed the github/gitlab payload in via stdin.
-This script is meant to return the prefix as its output.
-This is needed as the payload does not contain the r10k prefix.
-The simplest way to determine the prefix is to use the remote url in the payload and find the respective key in r10k.yaml.
-An example prefix command is located in this repo [here](https://github.com/voxpupuli/puppet-r10k/blob/master/files/prefix_command.rb).
-Note that you may need to modify this script depending on your remote configuration to use one of the various remote styles.
-
-```puppet
-file {'/usr/local/bin/prefix_command.rb':
-  ensure => file,
-  mode   => '0755',
-  owner  => 'root',
-  group  => '0',
-  source => 'puppet:///modules/r10k/prefix_command.rb',
-}
-
-# Required unless you disable mcollective
-include r10k::mcollective
-
-class {'r10k::webhook::config':
-  prefix         => true,
-  prefix_command => '/usr/local/bin/prefix_command.rb',
-  require        => File['/usr/local/bin/prefix_command.rb'],
-}
-
-class {'r10k::webhook':
-  require => Class['r10k::webhook::config'],
-}
-# Deploy this webhook to your local gitlab server for the puppet/control repo.
-#
-# Resource git_webhook is provided by https://github.com/bjvrielink/abrader-gms/tree/fixup
-git_webhook { 'web_post_receive_webhook' :
-  ensure       => present,
-  webhook_url  => 'https://puppet:puppet@master.of.masters:8088/payload',
-  token        =>  hiera('gitlab_api_token'),
-  project_name => 'puppet/control',
-  server_url   => 'http://your.internal.gitlab.com',
-  provider     => 'gitlab',
-}
-
-```
+Prefixing the command is currently not supported in Webhook Go. This support is expected to be added with a later release.
 
 ### Webhook FOSS support with MCollective
 
-Currently the webhook relies on existing certificates for its ssl configuration.
-See this following [ticket](https://github.com/voxpupuli/puppet-r10k/issues/140) for more information.
-Until then, its possible to re-use you existing FOSS mcollective certificates.
-
-Here is an working example on  Ubuntu 14.04.2 LTS
-
-```puppet
-class { 'r10k::webhook::config':
-  public_key_path  => '/etc/mcollective/server_public.pem',  # Mandatory for FOSS
-  private_key_path => '/etc/mcollective/server_private.pem', # Mandatory for FOSS
-}
-
-class { 'r10k::webhook':
-  user    => 'puppet',                                       # Mandatory for FOSS
-  group   => 'puppet',                                       # Mandatory for FOSS
-}
-```
-
-### Webhook FOSS support without MCollective
-Some instances may require the user/group `root/root` (Linux) or `root/wheel` (BSD).
-Verify that the specified user has the permissions to run `r10k` commands.
-```puppet
-class { 'r10k::webhook::config':
-  use_mcollective  => false,
-  public_key_path  => '/etc/mcollective/server_public.pem',  # Mandatory even when use_mcollective is false
-  private_key_path => '/etc/mcollective/server_private.pem', # Mandatory even when use_mcollective is false
-}
-
-class { 'r10k::webhook':
-  user    => 'root',                                       # Mandatory for FOSS
-  group   => 'root',                                       # Mandatory for FOSS
-}
-```
-
-### Webhook FOSS support using OS Ruby
-Some OS bring r10k as OS installation package. In this case you want to be able to set the ruby interpreter explizitly.
-```puppet
-class { 'r10k::webhook':
-  ruby_bin => '/usr/bin/ruby',
-}
-```
-
-### Webhook sinatra gem installation
-
-By default, the `r10k::webhook::package` class uses the `puppet_gem` provider to install the latest version of sinatra.
-If you are overriding `r10k::webhook::package::provider`, you will also need to override `r10k::webhook::package::sinatra_version`.
+MCollective is currently unsupported by Webhook Go. This is expected to be added in a future release and documentation will be updated for that then.
 
 ### Webhook Slack notifications
 
@@ -637,17 +477,18 @@ To get the Slack webhook URL you need to:
 Then configure the webhook to add your Slack Webhook URL.
 
 ```puppet
-class { 'r10k::webhook::config':
+class { 'r10k::webhook':
   . . .
-  slack_webhook   => 'http://slack.webhook/webhook', # mandatory for usage
-  slack_channel   => '#channel', # defaults to #default
-  slack_username  => 'r10k', # the username to use
-  slack_proxy_url => 'http://proxy.example.com:3128', # Optional.  Defaults to undef.
-  slack_icon      => 'unicorn_face' # Optional. Defaults to undef.
-}
+  chatops => {
+      enabled    => true,
+      service    => 'slack',
+      server_uri => 'http://slack.webhook/webhook', # mandatory for usage
+      channel    => '#channel', # defaults to #default
+      user       => 'r10k', # the username to use
+      auth_token => "SLACKAUTHTOKEN",
+    }
+  }
 ```
-
-Note that slack icon names should omit the opening and closing colons (`:`).
 
 ### Webhook Rocket.Chat notifications
 
@@ -667,11 +508,16 @@ To get the Rocket.Chat incoming webhook URL you need to:
 Then configure the webhook to add your Rocket.Chat Webhook URL.
 
 ```puppet
-class { 'r10k::webhook::config':
+class { 'r10k::webhook':
   . . .
-  rocketchat_webhook  => <your incoming webhook URL>,  # mandatory for usage
-  rocketchat_username => 'username', # defaults to r10k
-  rocketchat_channel  => '#channel', # defaults to #r10k
+  chatops => {
+    enabled    => true,
+    service    => 'rocketchat',
+    server_uri => '<your incoming webhook URL>',
+    user       => 'username',
+    channel    => '#channel',
+    auth_token => 'ROCKETCHATAUTHTOKEN',
+  }
 }
 ```
 
@@ -680,8 +526,11 @@ class { 'r10k::webhook::config':
 The default branch of the controlrepo is commonly called `production`. This value can be overridden if you use another default branch name, such as `master`.
 
 ```puppet
-class { 'r10k::webhook::config':
-  default_branch => 'master',    # Optional. Defaults to 'production'
+class { 'r10k::webhook':
+  ensure => true,
+  r10k   => {
+    default_branch => 'master', # Optional. Defaults to 'production'
+  },
 }
 ```
 
@@ -694,7 +543,7 @@ curl -d '
   {
     "repository": {"name": "foo", "owner": {"login": "foo"}},
     "ref": "production"
-  }' http://puppet-master.example:8088/payload
+  }' http://puppet-master.example:4000/api/v1/r10k/environment
 ```
 
 If you are utilizing environment prefixes, you'll need to specify the full environment title (including the prefix) in the 'ref' parameter:
@@ -704,7 +553,7 @@ curl -d '
   {
     "repository": {"name": "bar", "owner": {"login": "foo"}},
     "ref": "bar_production"
-  }' http://puppet-master.example:8088/payload
+  }' http://puppet-master.example:4000/api/v1/r10k/environment
 ```
 
 ### Troubleshooting
@@ -717,15 +566,9 @@ If you're not sure whether your webhook setup works:
   Example output if successful:
 
 ``` bash
-$ tail -f /var/log/webhook/access.log
+$ journalctl -f -u webhook-go.service
 ...
-[2015-05-03 13:01:45] DEBUG Rack::Handler::WEBrick is mounted on /.
-[2015-05-03 13:01:45] INFO  WEBrick::HTTPServer#start: pid=7185 port=8088
-[2015-05-03 13:02:46] DEBUG accept: 192.30.252.46:39379
-[2015-05-03 13:02:46] DEBUG Rack::Handler::WEBrick is invoked.
-[2015-05-03 13:02:46] INFO  authenticated: puppet
-[2015-05-03 13:02:46] INFO  message: triggered: r10k deploy environment test_webhook -pv ...
-...
+Jun 05 11:24:54 pop-os systemd[1]: Started Puppet Deployment API Server....
 ```
 
 ### Docker
@@ -736,39 +579,13 @@ The following is an example of declaring the webhook without a background mode
 
 ```puppet
 class { 'r10k::webhook':
-  . . .
-  background  => false
+  ensure => false,
 }
 ```
 
 ### Ignore deploying some environments
 
-If you need to configure webhook to not trigger r10k when changes pushed in some branch or repository, you can list them in
-`r10k::webhook::config::ignore_environments` parameter as array.
-There is an ability to specify it as a regular expression by enclosing it in forward slashes.
-
-Here is an example where the test branch in dev repository and all branches in all repositories that includes the word 'feature'
-in names will be skipped:
-
-```puppet
-class { 'r10k::webhook::config':
-  . . .
-  prefix               => ':repo',
-  ignore_environments  => ['dev_test', '/.*feature.*/']
-}
-```
-
-### Passing extra arguments to mco command
-
-You can pass some additional arguments to mco command like `--no-progress` or `--timeout 60` or any others by specifying them
-in the `r10k::webhook::config::mco_arguments` parameter as string:
-
-```puppet
-class { 'r10k::webhook::config':
-  . . .
-  mco_arguments  => '--no-progress'
-}
-```
+Webhook Go does not support this yet, but will in the future.
 
 ## Reference
 
