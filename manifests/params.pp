@@ -74,14 +74,15 @@ class r10k::params {
   }
 
   # Webhook Go parameters
+  $webhook_ensure = false
   $webhook_protected = true
   $webhook_version = '2.1.0'
   $webhook_user = 'puppet'
   $webhook_password = 'puppet'
   $webhook_port = 4000
   $webhook_tls_enabled = false
-  $webhook_tls_cert = ''
-  $webhook_tls_key = ''
+  $webhook_tls_cert_path = undef
+  $webhook_tls_key_path = undef
   $webhook_chatops_enabled = false
   $webhook_chatops_service = ''
   $webhook_chatops_channel = ''

@@ -18,10 +18,12 @@ describe 'r10k::webhook' do
           config_ensure: 'file',
           config_path: '/etc/voxpupuli/webhook.yml',
           chatops: {
-            enabled: false,
-          },
-          tls: {
-            enabled: false,
+            enabled: true,
+            service: 'slack',
+            channel: '#channel',
+            user: 'root',
+            auth_token: 'ABCDEF123456789',
+            server_uri: 'https://webhook.slack.com/endpoint',
           },
           server: {
             protected: true,
@@ -29,8 +31,10 @@ describe 'r10k::webhook' do
             password: 'puppet',
             port: 4000,
             tls: {
-              enabled: false,
-            }
+              enabled: true,
+              certificate: '/path/to/cert',
+              key: '/path/to/key',
+            },
           },
           r10k: {
             command_path: '/opt/puppetlabs/puppet/bin/r10k',
@@ -51,9 +55,16 @@ server:
   password: puppet
   port: 4000
   tls:
-    enabled: false
+    enabled: true
+    certificate: "/path/to/cert"
+    key: "/path/to/key"
 chatops:
-  enabled: false
+  enabled: true
+  service: slack
+  channel: "#channel"
+  user: root
+  auth_token: ABCDEF123456789
+  server_uri: https://webhook.slack.com/endpoint
 r10k:
   command_path: "/opt/puppetlabs/puppet/bin/r10k"
   config_path: "/etc/puppetlabs/r10k/r10k.yaml"
