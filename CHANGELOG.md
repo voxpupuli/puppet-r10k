@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v11.0.1](https://github.com/voxpupuli/puppet-r10k/tree/v11.0.1) (2023-06-08)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v11.0.0...v11.0.1)
+
+**Merged pull requests:**
+
+- update webhook code with some basic fixes [\#603](https://github.com/voxpupuli/puppet-r10k/pull/603) ([dhollinger](https://github.com/dhollinger))
+
 ## [v11.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v11.0.0) (2023-06-05)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v10.3.0...v11.0.0)
@@ -17,7 +25,11 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
+- puppetlabs/vcsrepo: Allow 6.x [\#602](https://github.com/voxpupuli/puppet-r10k/pull/602) ([bastelfreak](https://github.com/bastelfreak))
+- puppet/systemd: Allow 5.x [\#601](https://github.com/voxpupuli/puppet-r10k/pull/601) ([bastelfreak](https://github.com/bastelfreak))
+- puppetlabs/inifile: Allow 6.x [\#600](https://github.com/voxpupuli/puppet-r10k/pull/600) ([bastelfreak](https://github.com/bastelfreak))
 - puppetlabs/stdlib: Allow 9.x [\#599](https://github.com/voxpupuli/puppet-r10k/pull/599) ([bastelfreak](https://github.com/bastelfreak))
+- Release 11.0.0 [\#598](https://github.com/voxpupuli/puppet-r10k/pull/598) ([dhollinger](https://github.com/dhollinger))
 - README: Don't use top level facts in examples [\#596](https://github.com/voxpupuli/puppet-r10k/pull/596) ([Geod24](https://github.com/Geod24))
 - Change README.md dependency on \(abandoned\) abrader/gms to bjvrielink/gms [\#593](https://github.com/voxpupuli/puppet-r10k/pull/593) ([bschonec](https://github.com/bschonec))
 - update module to work with webhook-go [\#590](https://github.com/voxpupuli/puppet-r10k/pull/590) ([dhollinger](https://github.com/dhollinger))
