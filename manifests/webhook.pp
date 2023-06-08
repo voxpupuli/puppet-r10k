@@ -46,7 +46,7 @@ class r10k::webhook (
     chatops => $chatops,
     r10k    => $r10k,
   },
-) {
+) inherits r10k::params {
   contain r10k::webhook::package
   contain r10k::webhook::config
   contain r10k::webhook::service
