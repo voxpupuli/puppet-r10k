@@ -82,7 +82,7 @@ r10k:
         it { is_expected.to contain_class('r10k::webhook::service') }
         it { is_expected.to contain_class('r10k::webhook::config') }
         it { is_expected.to contain_package('webhook-go').with_ensure('present') }
-        it { is_expected.to contain_service('webhook').with_ensure('running') }
+        it { is_expected.to contain_service('webhook-go').with_ensure('running') }
         it { is_expected.to contain_file('webhook.yml').with_content(content) }
       end
     end
