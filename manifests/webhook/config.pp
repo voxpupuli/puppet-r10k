@@ -8,5 +8,6 @@ class r10k::webhook::config (
     path    => $r10k::webhook::config_path,
     content => to_yaml($r10k::webhook::config),
     notify  => Service['webhook-go'],
+    require => Package['webhook-go'],
   }
 }
