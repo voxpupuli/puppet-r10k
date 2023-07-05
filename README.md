@@ -708,6 +708,27 @@ This is the `deploy:` key in r10k, it accepts a hash that contains setting that 
     }
 ```
 
+##### `log_settings`
+This is the `logging:` key in r10k, it accepts a hash that contains settings for logging parameters.
+
+```puppet
+    $log_settings = {
+      outputs      => [
+        type       => 'file',
+        level      => 'warn',
+        parameters => {
+          filename => '/var/log/r10k.log',
+          trunc    => true,
+        }
+      ]
+    }
+
+    class {'r10k':
+      remote       => 'git@github.com:acidprime/puppet.git',
+      log_settings => $log_settings,
+    }
+```
+
 ##### `configfile_symlink`
 boolean if to manage symlink
 

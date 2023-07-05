@@ -39,3 +39,6 @@
 <% if @pool_size -%>
 :pool_size: <%= @pool_size %>
 <% end -%>
+<% if !@log_settings.empty? -%>
+<%= settings_to_yaml('logging', @log_settings) %>
+<% end -%>

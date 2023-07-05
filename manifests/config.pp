@@ -21,6 +21,8 @@
 #   Location of symlink that points to configfile. Default: /etc/r10k.yaml
 # * [*forge_settings*]
 #   Hash containing settings for downloading modules from the Puppet Forge.
+# * [*log_settings*]
+#   Hash containing settings for logging parameters.
 # * [*proxy*]
 #   String containing proxy setting for r10k.yaml.
 #   Default: undef
@@ -64,6 +66,7 @@ class r10k::config (
   Hash $git_settings                        = $r10k::params::git_settings,
   Hash $forge_settings                      = $r10k::params::forge_settings,
   Hash $deploy_settings                     = $r10k::params::deploy_settings,
+  Hash $log_settings                        = $r10k::params::log_settings,
   Optional[Array] $postrun                  = undef,
   $root_user                                = $r10k::params::root_user,
   $root_group                               = $r10k::params::root_group,

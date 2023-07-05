@@ -35,6 +35,7 @@ class r10k::params {
   $git_settings              = {}
   $forge_settings            = {}
   $deploy_settings           = {}
+  $log_settings              = {}
   # Git configuration
   $git_server = $settings::ca_server #lint:ignore:top_scope_facts
   $repo_path  = '/var/repos'
