@@ -6,8 +6,9 @@
 
 ### Classes
 
+#### Public Classes
+
 * [`r10k`](#r10k): This class configures r10k
-* [`r10k::config`](#r10k--config): == Class: r10k::config  Set up the root r10k config file (/etc/r10k.yaml).  === Parameters  * [*cachedir*]   Path to a directory to be used b
 * [`r10k::install`](#r10k--install): This class is used by the ruby or pe_ruby class
 * [`r10k::install::bundle`](#r10k--install--bundle): This class installs the r10k bundle
 * [`r10k::install::gem`](#r10k--install--gem): Install the r10k gem using system ruby
@@ -21,6 +22,10 @@
 * [`r10k::webhook::config`](#r10k--webhook--config): Class: r10k::webhook::config
 * [`r10k::webhook::package`](#r10k--webhook--package): Class: r10k::webhook::package
 * [`r10k::webhook::service`](#r10k--webhook--service): Class: r10k::webhook::service
+
+#### Private Classes
+
+* `r10k::config`: Set up the root r10k config file (/etc/r10k.yaml).
 
 ### Data types
 
@@ -44,9 +49,15 @@ This class configures r10k
 
 The following parameters are available in the `r10k` class:
 
-* [`remote`](#-r10k--remote)
-* [`sources`](#-r10k--sources)
 * [`cachedir`](#-r10k--cachedir)
+* [`sources`](#-r10k--sources)
+* [`postrun`](#-r10k--postrun)
+* [`manage_configfile_symlink`](#-r10k--manage_configfile_symlink)
+* [`configfile_symlink`](#-r10k--configfile_symlink)
+* [`forge_settings`](#-r10k--forge_settings)
+* [`proxy`](#-r10k--proxy)
+* [`pool_size`](#-r10k--pool_size)
+* [`remote`](#-r10k--remote)
 * [`configfile`](#-r10k--configfile)
 * [`version`](#-r10k--version)
 * [`puppet_master`](#-r10k--puppet_master)
@@ -59,19 +70,78 @@ The following parameters are available in the `r10k` class:
 * [`gentoo_keywords`](#-r10k--gentoo_keywords)
 * [`install_options`](#-r10k--install_options)
 * [`mcollective`](#-r10k--mcollective)
-* [`manage_configfile_symlink`](#-r10k--manage_configfile_symlink)
-* [`configfile_symlink`](#-r10k--configfile_symlink)
 * [`git_settings`](#-r10k--git_settings)
-* [`forge_settings`](#-r10k--forge_settings)
 * [`deploy_settings`](#-r10k--deploy_settings)
 * [`root_user`](#-r10k--root_user)
-* [`proxy`](#-r10k--proxy)
-* [`pool_size`](#-r10k--pool_size)
 * [`gem_source`](#-r10k--gem_source)
 * [`root_group`](#-r10k--root_group)
-* [`postrun`](#-r10k--postrun)
 * [`include_prerun_command`](#-r10k--include_prerun_command)
 * [`include_postrun_command`](#-r10k--include_postrun_command)
+* [`puppetconf_path`](#-r10k--puppetconf_path)
+
+##### <a name="-r10k--cachedir"></a>`cachedir`
+
+Data type: `Any`
+
+Path to a directory to be used by r10k for caching data
+
+Default value: `$r10k::params::r10k_cache_dir`
+
+##### <a name="-r10k--sources"></a>`sources`
+
+Data type: `Optional[Hash]`
+
+Hash containing data sources to be used by r10k to create dynamic Puppet environments
+
+Default value: `$r10k::params::sources`
+
+##### <a name="-r10k--postrun"></a>`postrun`
+
+Data type: `Optional[Array[String[1]]]`
+
+Array containing the parts of a system call Example: ['/usr/bin/curl', '-F', 'deploy=done', 'http://my-app.site/endpoint']
+
+Default value: `undef`
+
+##### <a name="-r10k--manage_configfile_symlink"></a>`manage_configfile_symlink`
+
+Data type: `Boolean`
+
+determine if a symlink to the r10k config file is to be managed
+
+Default value: `$r10k::params::manage_configfile_symlink`
+
+##### <a name="-r10k--configfile_symlink"></a>`configfile_symlink`
+
+Data type: `Stdlib::Absolutepath`
+
+Location of symlink that points to configfile
+
+Default value: `$r10k::params::configfile_symlink`
+
+##### <a name="-r10k--forge_settings"></a>`forge_settings`
+
+Data type: `Optional[Hash]`
+
+Hash containing settings for downloading modules from the Puppet Forge
+
+Default value: `$r10k::params::forge_settings`
+
+##### <a name="-r10k--proxy"></a>`proxy`
+
+Data type: `Optional[String[1]]`
+
+String containing proxy setting for r10k.yaml
+
+Default value: `$r10k::params::proxy`
+
+##### <a name="-r10k--pool_size"></a>`pool_size`
+
+Data type: `Optional[Integer[1]]`
+
+Integer defining how many threads should be spawn while updating modules
+
+Default value: `$r10k::params::pool_size`
 
 ##### <a name="-r10k--remote"></a>`remote`
 
@@ -80,22 +150,6 @@ Data type: `Any`
 
 
 Default value: `$r10k::params::remote`
-
-##### <a name="-r10k--sources"></a>`sources`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::sources`
-
-##### <a name="-r10k--cachedir"></a>`cachedir`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::r10k_cache_dir`
 
 ##### <a name="-r10k--configfile"></a>`configfile`
 
@@ -131,7 +185,7 @@ Default value: `$r10k::params::modulepath`
 
 ##### <a name="-r10k--manage_modulepath"></a>`manage_modulepath`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -147,7 +201,7 @@ Default value: `$r10k::params::manage_ruby_dependency`
 
 ##### <a name="-r10k--r10k_basedir"></a>`r10k_basedir`
 
-Data type: `Any`
+Data type: `Stdlib::Absolutepath`
 
 
 
@@ -193,22 +247,6 @@ Data type: `Any`
 
 Default value: `$r10k::params::mcollective`
 
-##### <a name="-r10k--manage_configfile_symlink"></a>`manage_configfile_symlink`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::manage_configfile_symlink`
-
-##### <a name="-r10k--configfile_symlink"></a>`configfile_symlink`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::configfile_symlink`
-
 ##### <a name="-r10k--git_settings"></a>`git_settings`
 
 Data type: `Optional[Hash]`
@@ -216,14 +254,6 @@ Data type: `Optional[Hash]`
 
 
 Default value: `$r10k::params::git_settings`
-
-##### <a name="-r10k--forge_settings"></a>`forge_settings`
-
-Data type: `Optional[Hash]`
-
-
-
-Default value: `$r10k::params::forge_settings`
 
 ##### <a name="-r10k--deploy_settings"></a>`deploy_settings`
 
@@ -241,22 +271,6 @@ Data type: `Any`
 
 Default value: `$r10k::params::root_user`
 
-##### <a name="-r10k--proxy"></a>`proxy`
-
-Data type: `Optional[String[1]]`
-
-
-
-Default value: `$r10k::params::proxy`
-
-##### <a name="-r10k--pool_size"></a>`pool_size`
-
-Data type: `Optional[Integer[1]]`
-
-
-
-Default value: `$r10k::params::pool_size`
-
 ##### <a name="-r10k--gem_source"></a>`gem_source`
 
 Data type: `Optional[String[1]]`
@@ -272,14 +286,6 @@ Data type: `Any`
 
 
 Default value: `$r10k::params::root_group`
-
-##### <a name="-r10k--postrun"></a>`postrun`
-
-Data type: `Optional[Array[String[1]]]`
-
-
-
-Default value: `undef`
 
 ##### <a name="-r10k--include_prerun_command"></a>`include_prerun_command`
 
@@ -297,228 +303,13 @@ Data type: `Boolean`
 
 Default value: `false`
 
-### <a name="r10k--config"></a>`r10k::config`
-
-== Class: r10k::config
-
-Set up the root r10k config file (/etc/r10k.yaml).
-
-=== Parameters
-
-* [*cachedir*]
-  Path to a directory to be used by r10k for caching data.
-  Default: /var/cache/r10k
-* [*sources*]
-  Hash containing data sources to be used by r10k to create dynamic Puppet
-  environments. Default: {}
-* [*postrun*]
-  **Optional:** Array containing the parts of a system call.
-  Example: ['/usr/bin/curl', '-F', 'deploy=done', 'http://my-app.site/endpoint']
-  Default: undef
-* [*manage_configfile_symlink*]
-  Boolean to determine if a symlink to the r10k config file is to be managed.
-  Default: false
-* [*configfile_symlink*]
-  Location of symlink that points to configfile. Default: /etc/r10k.yaml
-* [*forge_settings*]
-  Hash containing settings for downloading modules from the Puppet Forge.
-* [*proxy*]
-  String containing proxy setting for r10k.yaml.
-  Default: undef
-* [*pool_size*]
-  Integer defining how many threads should be spawn while updating modules. Only available for r10k >= 3.3.0.
-  Default: undef
-
-=== Examples
-
- class { 'r10k::config':
-   sources => {
-     'somename' => {
-       'remote'  => 'ssh://git@github.com/someuser/somerepo.git',
-       'basedir' => "${::settings::confdir}/environments"
-     },
-     'someothername' => {
-       'remote'  => 'ssh://git@github.com/someuser/someotherrepo.git',
-       'basedir' => '/some/other/basedir'
-     },
-   },
- }
-
-== Documentation
-
-* https://github.com/adrienthebo/r10k#dynamic-environment-configuration
-
-=== Authors
-
-Charlie Sharpsteen <source@sharpsteen.net>
-Zack Smith <zack@puppetlabs.com>
-
-#### Parameters
-
-The following parameters are available in the `r10k::config` class:
-
-* [`configfile`](#-r10k--config--configfile)
-* [`cachedir`](#-r10k--config--cachedir)
-* [`sources`](#-r10k--config--sources)
-* [`modulepath`](#-r10k--config--modulepath)
-* [`remote`](#-r10k--config--remote)
-* [`manage_modulepath`](#-r10k--config--manage_modulepath)
-* [`r10k_basedir`](#-r10k--config--r10k_basedir)
-* [`manage_configfile_symlink`](#-r10k--config--manage_configfile_symlink)
-* [`configfile_symlink`](#-r10k--config--configfile_symlink)
-* [`git_settings`](#-r10k--config--git_settings)
-* [`forge_settings`](#-r10k--config--forge_settings)
-* [`deploy_settings`](#-r10k--config--deploy_settings)
-* [`postrun`](#-r10k--config--postrun)
-* [`root_user`](#-r10k--config--root_user)
-* [`root_group`](#-r10k--config--root_group)
-* [`puppetconf_path`](#-r10k--config--puppetconf_path)
-* [`proxy`](#-r10k--config--proxy)
-* [`pool_size`](#-r10k--config--pool_size)
-
-##### <a name="-r10k--config--configfile"></a>`configfile`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::r10k_config_file`
-
-##### <a name="-r10k--config--cachedir"></a>`cachedir`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::r10k_cache_dir`
-
-##### <a name="-r10k--config--sources"></a>`sources`
-
-Data type: `Optional[Hash]`
-
-
-
-Default value: `$r10k::params::sources`
-
-##### <a name="-r10k--config--modulepath"></a>`modulepath`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::modulepath`
-
-##### <a name="-r10k--config--remote"></a>`remote`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::remote`
-
-##### <a name="-r10k--config--manage_modulepath"></a>`manage_modulepath`
-
-Data type: `Boolean`
-
-
-
-Default value: `$r10k::params::manage_modulepath`
-
-##### <a name="-r10k--config--r10k_basedir"></a>`r10k_basedir`
-
-Data type: `Stdlib::Absolutepath`
-
-
-
-Default value: `$r10k::params::r10k_basedir`
-
-##### <a name="-r10k--config--manage_configfile_symlink"></a>`manage_configfile_symlink`
-
-Data type: `Boolean`
-
-
-
-Default value: `$r10k::params::manage_configfile_symlink`
-
-##### <a name="-r10k--config--configfile_symlink"></a>`configfile_symlink`
-
-Data type: `Stdlib::Absolutepath`
-
-
-
-Default value: `$r10k::params::configfile_symlink`
-
-##### <a name="-r10k--config--git_settings"></a>`git_settings`
-
-Data type: `Optional[Hash]`
-
-
-
-Default value: `$r10k::params::git_settings`
-
-##### <a name="-r10k--config--forge_settings"></a>`forge_settings`
-
-Data type: `Optional[Hash]`
-
-
-
-Default value: `$r10k::params::forge_settings`
-
-##### <a name="-r10k--config--deploy_settings"></a>`deploy_settings`
-
-Data type: `Hash`
-
-
-
-Default value: `$r10k::params::deploy_settings`
-
-##### <a name="-r10k--config--postrun"></a>`postrun`
-
-Data type: `Optional[Array[String[1]]]`
-
-
-
-Default value: `$r10k::params::postrun`
-
-##### <a name="-r10k--config--root_user"></a>`root_user`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::root_user`
-
-##### <a name="-r10k--config--root_group"></a>`root_group`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::root_group`
-
-##### <a name="-r10k--config--puppetconf_path"></a>`puppetconf_path`
+##### <a name="-r10k--puppetconf_path"></a>`puppetconf_path`
 
 Data type: `Stdlib::Absolutepath`
 
 
 
 Default value: `$r10k::params::puppetconf_path`
-
-##### <a name="-r10k--config--proxy"></a>`proxy`
-
-Data type: `Optional[String[1]]`
-
-
-
-Default value: `$r10k::params::proxy`
-
-##### <a name="-r10k--config--pool_size"></a>`pool_size`
-
-Data type: `Optional[Integer[1]]`
-
-
-
-Default value: `$r10k::params::pool_size`
 
 ### <a name="r10k--install"></a>`r10k::install`
 

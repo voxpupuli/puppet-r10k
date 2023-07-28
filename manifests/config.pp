@@ -1,132 +1,71 @@
-# == Class: r10k::config
 #
-# Set up the root r10k config file (/etc/r10k.yaml).
+# @summary Set up the root r10k config file (/etc/r10k.yaml).
 #
-# === Parameters
+# @see https://github.com/adrienthebo/r10k#dynamic-environment-configuration
 #
-# * [*cachedir*]
-#   Path to a directory to be used by r10k for caching data.
-#   Default: /var/cache/r10k
-# * [*sources*]
-#   Hash containing data sources to be used by r10k to create dynamic Puppet
-#   environments. Default: {}
-# * [*postrun*]
-#   **Optional:** Array containing the parts of a system call.
-#   Example: ['/usr/bin/curl', '-F', 'deploy=done', 'http://my-app.site/endpoint']
-#   Default: undef
-# * [*manage_configfile_symlink*]
-#   Boolean to determine if a symlink to the r10k config file is to be managed.
-#   Default: false
-# * [*configfile_symlink*]
-#   Location of symlink that points to configfile. Default: /etc/r10k.yaml
-# * [*forge_settings*]
-#   Hash containing settings for downloading modules from the Puppet Forge.
-# * [*proxy*]
-#   String containing proxy setting for r10k.yaml.
-#   Default: undef
-# * [*pool_size*]
-#   Integer defining how many threads should be spawn while updating modules. Only available for r10k >= 3.3.0.
-#   Default: undef
+# @api private
 #
-# === Examples
+# @author Charlie Sharpsteen <source@sharpsteen.net>
+# @author Zack Smith <zack@puppetlabs.com>
 #
-#  class { 'r10k::config':
-#    sources => {
-#      'somename' => {
-#        'remote'  => 'ssh://git@github.com/someuser/somerepo.git',
-#        'basedir' => "${::settings::confdir}/environments"
-#      },
-#      'someothername' => {
-#        'remote'  => 'ssh://git@github.com/someuser/someotherrepo.git',
-#        'basedir' => '/some/other/basedir'
-#      },
-#    },
-#  }
-#
-# == Documentation
-#
-# * https://github.com/adrienthebo/r10k#dynamic-environment-configuration
-#
-# === Authors
-#
-# Charlie Sharpsteen <source@sharpsteen.net>
-# Zack Smith <zack@puppetlabs.com>
-class r10k::config (
-  $configfile                               = $r10k::params::r10k_config_file,
-  $cachedir                                 = $r10k::params::r10k_cache_dir,
-  Optional[Hash] $sources                   = $r10k::params::sources,
-  $modulepath                               = $r10k::params::modulepath,
-  $remote                                   = $r10k::params::remote,
-  Boolean $manage_modulepath                = $r10k::params::manage_modulepath,
-  Stdlib::Absolutepath $r10k_basedir        = $r10k::params::r10k_basedir,
-  Boolean $manage_configfile_symlink        = $r10k::params::manage_configfile_symlink,
-  Stdlib::Absolutepath $configfile_symlink  = $r10k::params::configfile_symlink,
-  Optional[Hash] $git_settings              = $r10k::params::git_settings,
-  Optional[Hash] $forge_settings            = $r10k::params::forge_settings,
-  Hash $deploy_settings                     = $r10k::params::deploy_settings,
-  Optional[Array[String[1]]] $postrun       = $r10k::params::postrun,
-  $root_user                                = $r10k::params::root_user,
-  $root_group                               = $r10k::params::root_group,
-  Stdlib::Absolutepath $puppetconf_path     = $r10k::params::puppetconf_path,
-  Optional[String[1]] $proxy                = $r10k::params::proxy,
-  Optional[Integer[1]] $pool_size           = $r10k::params::pool_size,
-) inherits r10k::params {
-  if $sources == undef {
+class r10k::config {
+  assert_private()
+  if $r10k::sources {
+    $r10k_sources = $r10k::sources
+    $source_keys = keys($r10k_sources)
+  } else {
     $r10k_sources  = {
       'puppet' => {
-        'basedir' => $r10k_basedir,
-        'remote'  => $remote,
+        'basedir' => $r10k::r10k_basedir,
+        'remote'  => $r10k::remote,
       },
     }
     $source_keys = keys($r10k_sources)
-  } else {
-    $r10k_sources = $sources
-    $source_keys = keys($r10k_sources)
   }
 
-  if $configfile == '/etc/puppetlabs/r10k/r10k.yaml' {
+  if $r10k::configfile == '/etc/puppetlabs/r10k/r10k.yaml' {
     file { '/etc/puppetlabs/r10k':
       ensure => 'directory',
-      owner  => $root_user,
-      group  => $root_group,
+      owner  => $r10k::root_user,
+      group  => $r10k::root_group,
       mode   => '0755',
     }
   }
 
   $config = {
-    'pool_size' => $pool_size,
-    'proxy'     => $proxy,
-    'forge'     => $forge_settings,
-    'git'       => $git_settings,
-    'deploy'    => $deploy_settings,
-    'cachedir'  => $cachedir,
-    'postrun'   => $postrun,
+    'pool_size' => $r10k::pool_size,
+    'proxy'     => $r10k::proxy,
+    'forge'     => $r10k::forge_settings,
+    'git'       => $r10k::git_settings,
+    'deploy'    => $r10k::deploy_settings,
+    'cachedir'  => $r10k::cachedir,
+    'postrun'   => $r10k::postrun,
     'sources'   => $r10k_sources,
   }.delete_undef_values
   file { 'r10k.yaml':
     ensure  => file,
-    owner   => $root_user,
-    group   => $root_group,
+    owner   => $r10k::root_user,
+    group   => $r10k::root_group,
     mode    => '0644',
-    path    => $configfile,
+    path    => $r10k::configfile,
     content => stdlib::to_yaml($config),
   }
 
-  if $manage_configfile_symlink {
+  if $r10k::manage_configfile_symlink {
     file { 'symlink_r10k.yaml':
       ensure => 'link',
-      path   => $configfile_symlink,
-      target => $configfile,
+      path   => $r10k::configfile_symlink,
+      target => $r10k::configfile,
     }
   }
 
-  if $manage_modulepath {
+  if $r10k::manage_modulepath {
     ini_setting { 'R10k Modulepath':
       ensure  => present,
-      path    => "${puppetconf_path}/puppet.conf",
+      path    => "${r10k::puppetconf_path}/puppet.conf",
       section => 'main',
       setting => 'modulepath',
-      value   => $modulepath,
+      value   => $r10k::modulepath,
     }
   }
 }
