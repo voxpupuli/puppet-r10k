@@ -475,11 +475,11 @@ Default value: `$r10k::params::deploy_settings`
 
 ##### <a name="-r10k--config--postrun"></a>`postrun`
 
-Data type: `Optional[Array]`
+Data type: `Array[String[1]]`
 
 
 
-Default value: `undef`
+Default value: `$r10k::params::postrun`
 
 ##### <a name="-r10k--config--root_user"></a>`root_user`
 

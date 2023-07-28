@@ -64,7 +64,7 @@ class r10k::config (
   Hash $git_settings                        = $r10k::params::git_settings,
   Hash $forge_settings                      = $r10k::params::forge_settings,
   Hash $deploy_settings                     = $r10k::params::deploy_settings,
-  Optional[Array] $postrun                  = undef,
+  Array[String[1]] $postrun                 = $r10k::params::postrun,
   $root_user                                = $r10k::params::root_user,
   $root_group                               = $r10k::params::root_group,
   Stdlib::Absolutepath $puppetconf_path     = $r10k::params::puppetconf_path,
