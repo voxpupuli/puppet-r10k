@@ -1,5 +1,7 @@
 # Reasonable defaults for all classes
 class r10k::params {
+  $postrun                = []
+  $r10k_yaml_template     = 'r10k/r10k.yaml.erb'
   $package_name           = ''
   $version                = 'installed'
   $manage_modulepath      = false

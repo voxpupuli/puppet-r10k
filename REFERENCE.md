@@ -475,11 +475,11 @@ Default value: `$r10k::params::deploy_settings`
 
 ##### <a name="-r10k--config--postrun"></a>`postrun`
 
-Data type: `Optional[Array]`
+Data type: `Array[String[1]]`
 
 
 
-Default value: `undef`
+Default value: `$r10k::params::postrun`
 
 ##### <a name="-r10k--config--root_user"></a>`root_user`
 
@@ -527,7 +527,7 @@ Data type: `String`
 
 
 
-Default value: `'r10k/r10k.yaml.erb'`
+Default value: `$r10k::params::r10k_yaml_template`
 
 ### <a name="r10k--install"></a>`r10k::install`
 

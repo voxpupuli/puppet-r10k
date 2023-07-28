@@ -64,13 +64,13 @@ class r10k::config (
   Hash $git_settings                        = $r10k::params::git_settings,
   Hash $forge_settings                      = $r10k::params::forge_settings,
   Hash $deploy_settings                     = $r10k::params::deploy_settings,
-  Optional[Array] $postrun                  = undef,
+  Array[String[1]] $postrun                 = $r10k::params::postrun,
   $root_user                                = $r10k::params::root_user,
   $root_group                               = $r10k::params::root_group,
   Stdlib::Absolutepath $puppetconf_path     = $r10k::params::puppetconf_path,
   Optional[String[1]] $proxy                = $r10k::params::proxy,
   Optional[Integer[1]] $pool_size           = $r10k::params::pool_size,
-  String $r10k_yaml_template                = 'r10k/r10k.yaml.erb',
+  String $r10k_yaml_template                = $r10k::params::r10k_yaml_template,
 ) inherits r10k::params {
   if $sources == undef {
     $r10k_sources  = {
