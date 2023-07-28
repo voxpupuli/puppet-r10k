@@ -29,7 +29,7 @@ class r10k::params {
   $r10k_cache_dir            = "${facts['puppet_vardir']}/r10k"
   $r10k_config_file          = '/etc/puppetlabs/r10k/r10k.yaml'
   $r10k_binary               = 'r10k'
-  $pre_postrun_command       = "${r10k_binary} deploy environment -p"
+  $pre_postrun_command       = "${r10k_binary} deploy environment --modules"
   $puppetconf_path           = '/etc/puppetlabs/puppet'
   $manage_configfile_symlink = false
   $configfile_symlink        = '/etc/r10k.yaml'

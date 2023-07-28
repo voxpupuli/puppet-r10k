@@ -65,7 +65,7 @@ describe 'r10k::prerun_command', type: :class do
               ensure: 'present',
               section: 'agent',
               setting: 'prerun_command',
-              value: 'r10k deploy environment -p'
+              value: 'r10k deploy environment --modules'
             )
           end
         end

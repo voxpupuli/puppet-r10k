@@ -65,7 +65,7 @@ describe 'r10k::postrun_command', type: :class do
               ensure: 'present',
               section: 'agent',
               setting: 'postrun_command',
-              value: 'r10k deploy environment -p'
+              value: 'r10k deploy environment --modules'
             )
           end
         end
