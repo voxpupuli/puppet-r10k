@@ -55,7 +55,7 @@ describe 'r10k::config', type: :class do
       context 'Managing r10k with rugged turned on via git_settings' do
         let :params do
           {
-            git_settings: { 'provider' => 'rugged', 'private_key' => '/root/.ssh/id_dsa' }
+            git_settings: { 'private_key' => '/root/.ssh/id_dsa', 'provider' => 'rugged' }
           }
         end
 
@@ -80,7 +80,7 @@ describe 'r10k::config', type: :class do
       context 'manage forge settings of r10k via forge_settings' do
         let :params do
           {
-            forge_settings: { 'proxy' => 'https://proxy.example.com:3128', 'baseurl' => 'https://forgeapi.puppetlabs.com' }
+            forge_settings: { 'baseurl' => 'https://forgeapi.puppetlabs.com', 'proxy' => 'https://proxy.example.com:3128' }
           }
         end
 
@@ -99,7 +99,7 @@ describe 'r10k::config', type: :class do
           }
         end
 
-        it { is_expected.to contain_file('r10k.yaml').with_content(%r{^.*:postrun: \["/usr/bin/curl", "-F", "deploy=done", "http://my-app\.site/endpoint"\]\n.*$}) }
+        it { is_expected.to contain_file('r10k.yaml').with_content(%r{^postrun:\n.*"/usr/bin/curl"\n.*"-F"\n.*deploy=done\n.*http://my-app\.site/endpoint\n}) }
       end
 
       context 'with empty proxy' do
@@ -109,7 +109,7 @@ describe 'r10k::config', type: :class do
           }
         end
 
-        it { is_expected.to contain_file('r10k.yaml').without_content(%r{^:proxy: .*$}) }
+        it { is_expected.to contain_file('r10k.yaml').without_content(%r{^proxy: .*$}) }
       end
 
       context 'with proxy' do
@@ -119,7 +119,7 @@ describe 'r10k::config', type: :class do
           }
         end
 
-        it { is_expected.to contain_file('r10k.yaml').with_content(%r{^:proxy: https://proxy.local:8080$}) }
+        it { is_expected.to contain_file('r10k.yaml').with_content(%r{^proxy: https://proxy.local:8080$}) }
       end
 
       context 'with pool_size' do
@@ -129,7 +129,7 @@ describe 'r10k::config', type: :class do
           }
         end
 
-        it { is_expected.to contain_file('r10k.yaml').with_content(%r{^:pool_size: 5$}) }
+        it { is_expected.to contain_file('r10k.yaml').with_content(%r{^pool_size: 5$}) }
       end
     end
   end
