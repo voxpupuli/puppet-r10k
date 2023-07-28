@@ -527,7 +527,7 @@ Data type: `String`
 
 
 
-Default value: `'r10k/r10k.yaml.erb'`
+Default value: `$r10k::params::r10k_yaml_template`
 
 ### <a name="r10k--install"></a>`r10k::install`
 
