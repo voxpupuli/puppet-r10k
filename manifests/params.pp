@@ -35,7 +35,7 @@ class r10k::params {
   $configfile_symlink        = '/etc/r10k.yaml'
   $git_settings              = undef
   $forge_settings            = undef
-  $deploy_settings           = undef
+  $deploy_settings           = { 'generate_types' => true, 'exclude_spec' => true, }
   # Git configuration
   $git_server = $settings::ca_server #lint:ignore:top_scope_facts
   $repo_path  = '/var/repos'

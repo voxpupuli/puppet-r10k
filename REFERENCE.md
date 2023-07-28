@@ -227,7 +227,7 @@ Default value: `$r10k::params::forge_settings`
 
 ##### <a name="-r10k--deploy_settings"></a>`deploy_settings`
 
-Data type: `Optional[Hash]`
+Data type: `Hash`
 
 
 
@@ -466,7 +466,7 @@ Default value: `$r10k::params::forge_settings`
 
 ##### <a name="-r10k--config--deploy_settings"></a>`deploy_settings`
 
-Data type: `Optional[Hash]`
+Data type: `Hash`
 
 
 

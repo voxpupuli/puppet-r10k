@@ -19,7 +19,7 @@ class r10k (
   $configfile_symlink                                         = $r10k::params::configfile_symlink,
   Optional[Hash] $git_settings                                = $r10k::params::git_settings,
   Optional[Hash] $forge_settings                              = $r10k::params::forge_settings,
-  Optional[Hash] $deploy_settings                             = $r10k::params::deploy_settings,
+  Hash $deploy_settings                                       = $r10k::params::deploy_settings,
   $root_user                                                  = $r10k::params::root_user,
   Optional[String[1]] $proxy                                  = $r10k::params::proxy,
   Optional[Integer[1]] $pool_size                             = $r10k::params::pool_size,
