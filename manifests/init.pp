@@ -1,22 +1,31 @@
-# This class configures r10k
+# @summary This class configures r10k
+#
+# @param cachedir Path to a directory to be used by r10k for caching data
+# @param sources Hash containing data sources to be used by r10k to create dynamic Puppet environments
+# @param postrun Array containing the parts of a system call Example: ['/usr/bin/curl', '-F', 'deploy=done', 'http://my-app.site/endpoint']
+# @param manage_configfile_symlink determine if a symlink to the r10k config file is to be managed
+# @param configfile_symlink Location of symlink that points to configfile
+# @param forge_settings Hash containing settings for downloading modules from the Puppet Forge
+# @param proxy String containing proxy setting for r10k.yaml
+# @param pool_size Integer defining how many threads should be spawn while updating modules
 class r10k (
   $remote                                                     = $r10k::params::remote,
-  $sources                                                    = $r10k::params::sources,
+  Optional[Hash] $sources                                     = $r10k::params::sources,
   $cachedir                                                   = $r10k::params::r10k_cache_dir,
   $configfile                                                 = $r10k::params::r10k_config_file,
   $version                                                    = $r10k::params::version,
   $puppet_master                                              = $r10k::params::puppet_master,
   $modulepath                                                 = $r10k::params::modulepath,
-  $manage_modulepath                                          = $r10k::params::manage_modulepath,
+  Boolean $manage_modulepath                                  = $r10k::params::manage_modulepath,
   Enum['include','declare','ignore'] $manage_ruby_dependency  = $r10k::params::manage_ruby_dependency,
-  $r10k_basedir                                               = $r10k::params::r10k_basedir,
+  Stdlib::Absolutepath $r10k_basedir                          = $r10k::params::r10k_basedir,
   $package_name                                               = $r10k::params::package_name,
   $provider                                                   = $r10k::params::provider,
   $gentoo_keywords                                            = $r10k::params::gentoo_keywords,
   $install_options                                            = $r10k::params::install_options,
   $mcollective                                                = $r10k::params::mcollective,
-  $manage_configfile_symlink                                  = $r10k::params::manage_configfile_symlink,
-  $configfile_symlink                                         = $r10k::params::configfile_symlink,
+  Boolean $manage_configfile_symlink                          = $r10k::params::manage_configfile_symlink,
+  Stdlib::Absolutepath $configfile_symlink                    = $r10k::params::configfile_symlink,
   Optional[Hash] $git_settings                                = $r10k::params::git_settings,
   Optional[Hash] $forge_settings                              = $r10k::params::forge_settings,
   Hash $deploy_settings                                       = $r10k::params::deploy_settings,
@@ -28,6 +37,7 @@ class r10k (
   Optional[Array[String[1]]] $postrun                         = undef,
   Boolean $include_prerun_command                             = false,
   Boolean $include_postrun_command                            = false,
+  Stdlib::Absolutepath $puppetconf_path                       = $r10k::params::puppetconf_path,
 ) inherits r10k::params {
   # Check if user is declaring both classes
   # Other classes like r10k::webhook is supported but
@@ -56,25 +66,7 @@ class r10k (
     puppet_master          => $puppet_master,
   }
 
-  class { 'r10k::config':
-    cachedir                  => $cachedir,
-    configfile                => $configfile,
-    sources                   => $sources,
-    modulepath                => $modulepath,
-    remote                    => $remote,
-    manage_modulepath         => $manage_modulepath,
-    r10k_basedir              => $r10k_basedir,
-    manage_configfile_symlink => $manage_configfile_symlink,
-    configfile_symlink        => $configfile_symlink,
-    git_settings              => $git_settings,
-    forge_settings            => $forge_settings,
-    deploy_settings           => $deploy_settings,
-    postrun                   => $postrun,
-    root_user                 => $root_user,
-    root_group                => $root_group,
-    proxy                     => $proxy,
-    pool_size                 => $pool_size,
-  }
+  contain r10k::config
 
   if $mcollective {
     class { 'r10k::mcollective': }
