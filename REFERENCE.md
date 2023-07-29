@@ -81,11 +81,11 @@ The following parameters are available in the `r10k` class:
 
 ##### <a name="-r10k--cachedir"></a>`cachedir`
 
-Data type: `Any`
+Data type: `Stdlib::Absolutepath`
 
 Path to a directory to be used by r10k for caching data
 
-Default value: `$r10k::params::r10k_cache_dir`
+Default value: `"${facts['puppet_vardir']}/r10k"`
 
 ##### <a name="-r10k--sources"></a>`sources`
 
@@ -93,7 +93,7 @@ Data type: `Optional[Hash]`
 
 Hash containing data sources to be used by r10k to create dynamic Puppet environments
 
-Default value: `$r10k::params::sources`
+Default value: `undef`
 
 ##### <a name="-r10k--postrun"></a>`postrun`
 
@@ -109,7 +109,7 @@ Data type: `Boolean`
 
 determine if a symlink to the r10k config file is to be managed
 
-Default value: `$r10k::params::manage_configfile_symlink`
+Default value: `false`
 
 ##### <a name="-r10k--configfile_symlink"></a>`configfile_symlink`
 
@@ -117,7 +117,7 @@ Data type: `Stdlib::Absolutepath`
 
 Location of symlink that points to configfile
 
-Default value: `$r10k::params::configfile_symlink`
+Default value: `'/etc/r10k.yaml'`
 
 ##### <a name="-r10k--forge_settings"></a>`forge_settings`
 
@@ -125,7 +125,7 @@ Data type: `Optional[Hash]`
 
 Hash containing settings for downloading modules from the Puppet Forge
 
-Default value: `$r10k::params::forge_settings`
+Default value: `undef`
 
 ##### <a name="-r10k--proxy"></a>`proxy`
 
@@ -133,15 +133,15 @@ Data type: `Optional[String[1]]`
 
 String containing proxy setting for r10k.yaml
 
-Default value: `$r10k::params::proxy`
+Default value: `undef`
 
 ##### <a name="-r10k--pool_size"></a>`pool_size`
 
-Data type: `Optional[Integer[1]]`
+Data type: `Integer[1]`
 
 Integer defining how many threads should be spawn while updating modules
 
-Default value: `$r10k::params::pool_size`
+Default value: `$facts['processors']['count']`
 
 ##### <a name="-r10k--remote"></a>`remote`
 
@@ -153,11 +153,11 @@ Default value: `$r10k::params::remote`
 
 ##### <a name="-r10k--configfile"></a>`configfile`
 
-Data type: `Any`
+Data type: `Stdlib::Absolutepath`
 
 
 
-Default value: `$r10k::params::r10k_config_file`
+Default value: `'/etc/puppetlabs/r10k/r10k.yaml'`
 
 ##### <a name="-r10k--version"></a>`version`
 
@@ -225,19 +225,19 @@ Default value: `$r10k::params::provider`
 
 ##### <a name="-r10k--gentoo_keywords"></a>`gentoo_keywords`
 
-Data type: `Any`
+Data type: `String`
 
 
 
-Default value: `$r10k::params::gentoo_keywords`
+Default value: `''`
 
 ##### <a name="-r10k--install_options"></a>`install_options`
 
-Data type: `Any`
+Data type: `Variant[Array,String]`
 
 
 
-Default value: `$r10k::params::install_options`
+Default value: `[]`
 
 ##### <a name="-r10k--mcollective"></a>`mcollective`
 
@@ -253,7 +253,7 @@ Data type: `Optional[Hash]`
 
 
 
-Default value: `$r10k::params::git_settings`
+Default value: `undef`
 
 ##### <a name="-r10k--deploy_settings"></a>`deploy_settings`
 
@@ -261,7 +261,7 @@ Data type: `Hash`
 
 
 
-Default value: `$r10k::params::deploy_settings`
+Default value: `{ 'generate_types' => true, 'exclude_spec' => true, }`
 
 ##### <a name="-r10k--root_user"></a>`root_user`
 
@@ -277,7 +277,7 @@ Data type: `Optional[String[1]]`
 
 
 
-Default value: `$r10k::params::gem_source`
+Default value: `undef`
 
 ##### <a name="-r10k--root_group"></a>`root_group`
 
