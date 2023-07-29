@@ -16,35 +16,20 @@ class r10k::params {
     default     => 'puppet_gem',
   }
 
-  $install_options        = []
-  $sources                = undef
   $puppet_master          = true
-  $proxy                  = undef
-  $pool_size              = $facts['processors']['count']
-  $gem_source             = undef
 
   if 'puppet_environment' in $facts {
     $r10k_basedir            = $facts['puppet_environmentpath']
   } else {
     $r10k_basedir            = '/etc/puppetlabs/code/environments'
   }
-  $r10k_cache_dir            = "${facts['puppet_vardir']}/r10k"
-  $r10k_config_file          = '/etc/puppetlabs/r10k/r10k.yaml'
   $r10k_binary               = 'r10k'
   $pre_postrun_command       = "${r10k_binary} deploy environment --modules"
   $puppetconf_path           = '/etc/puppetlabs/puppet'
-  $manage_configfile_symlink = false
-  $configfile_symlink        = '/etc/r10k.yaml'
-  $git_settings              = undef
-  $forge_settings            = undef
-  $deploy_settings           = { 'generate_types' => true, 'exclude_spec' => true, }
   # Git configuration
   $git_server = $settings::ca_server #lint:ignore:top_scope_facts
   $repo_path  = '/var/repos'
   $remote     = "ssh://${git_server}${repo_path}/modules.git"
-
-  # Gentoo specific values
-  $gentoo_keywords = ''
 
   # Include the mcollective agent
   $mcollective = false
@@ -93,7 +78,7 @@ class r10k::params {
   $webhook_chatops_token = ''
   $webhook_chatops_uri = ''
   $webhook_r10k_command_path = "/opt/puppetlabs/puppet/bin/${r10k_binary}"
-  $webhook_r10k_config_path = $r10k_config_file
+  $webhook_r10k_config_path = '/etc/puppetlabs/r10k/r10k.yaml'
   $webhook_r10k_default_branch = 'production'
   $webhook_r10k_branch_prefix = ''
   $webhook_r10k_allow_uppercase = false
