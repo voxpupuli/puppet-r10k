@@ -63,7 +63,7 @@ class r10k::config (
   Stdlib::Absolutepath $configfile_symlink  = $r10k::params::configfile_symlink,
   Optional[Hash] $git_settings              = $r10k::params::git_settings,
   Optional[Hash] $forge_settings            = $r10k::params::forge_settings,
-  Optional[Hash] $deploy_settings           = $r10k::params::deploy_settings,
+  Hash $deploy_settings                     = $r10k::params::deploy_settings,
   Optional[Array[String[1]]] $postrun       = $r10k::params::postrun,
   $root_user                                = $r10k::params::root_user,
   $root_group                               = $r10k::params::root_group,
