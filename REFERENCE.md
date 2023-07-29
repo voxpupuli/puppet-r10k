@@ -211,7 +211,7 @@ Default value: `$r10k::params::configfile_symlink`
 
 ##### <a name="-r10k--git_settings"></a>`git_settings`
 
-Data type: `Hash`
+Data type: `Optional[Hash]`
 
 
 
@@ -219,7 +219,7 @@ Default value: `$r10k::params::git_settings`
 
 ##### <a name="-r10k--forge_settings"></a>`forge_settings`
 
-Data type: `Hash`
+Data type: `Optional[Hash]`
 
 
 
@@ -227,7 +227,7 @@ Default value: `$r10k::params::forge_settings`
 
 ##### <a name="-r10k--deploy_settings"></a>`deploy_settings`
 
-Data type: `Hash`
+Data type: `Optional[Hash]`
 
 
 
@@ -275,7 +275,7 @@ Default value: `$r10k::params::root_group`
 
 ##### <a name="-r10k--postrun"></a>`postrun`
 
-Data type: `Any`
+Data type: `Optional[Array[String[1]]]`
 
 
 
@@ -375,7 +375,6 @@ The following parameters are available in the `r10k::config` class:
 * [`puppetconf_path`](#-r10k--config--puppetconf_path)
 * [`proxy`](#-r10k--config--proxy)
 * [`pool_size`](#-r10k--config--pool_size)
-* [`r10k_yaml_template`](#-r10k--config--r10k_yaml_template)
 
 ##### <a name="-r10k--config--configfile"></a>`configfile`
 
@@ -451,7 +450,7 @@ Default value: `$r10k::params::configfile_symlink`
 
 ##### <a name="-r10k--config--git_settings"></a>`git_settings`
 
-Data type: `Hash`
+Data type: `Optional[Hash]`
 
 
 
@@ -459,7 +458,7 @@ Default value: `$r10k::params::git_settings`
 
 ##### <a name="-r10k--config--forge_settings"></a>`forge_settings`
 
-Data type: `Hash`
+Data type: `Optional[Hash]`
 
 
 
@@ -467,7 +466,7 @@ Default value: `$r10k::params::forge_settings`
 
 ##### <a name="-r10k--config--deploy_settings"></a>`deploy_settings`
 
-Data type: `Hash`
+Data type: `Optional[Hash]`
 
 
 
@@ -475,7 +474,7 @@ Default value: `$r10k::params::deploy_settings`
 
 ##### <a name="-r10k--config--postrun"></a>`postrun`
 
-Data type: `Array[String[1]]`
+Data type: `Optional[Array[String[1]]]`
 
 
 
@@ -520,14 +519,6 @@ Data type: `Optional[Integer[1]]`
 
 
 Default value: `$r10k::params::pool_size`
-
-##### <a name="-r10k--config--r10k_yaml_template"></a>`r10k_yaml_template`
-
-Data type: `String`
-
-
-
-Default value: `$r10k::params::r10k_yaml_template`
 
 ### <a name="r10k--install"></a>`r10k::install`
 

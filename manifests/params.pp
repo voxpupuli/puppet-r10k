@@ -1,7 +1,6 @@
 # Reasonable defaults for all classes
 class r10k::params {
-  $postrun                = []
-  $r10k_yaml_template     = 'r10k/r10k.yaml.erb'
+  $postrun                = undef
   $package_name           = ''
   $version                = 'installed'
   $manage_modulepath      = false
@@ -34,9 +33,9 @@ class r10k::params {
   $puppetconf_path           = '/etc/puppetlabs/puppet'
   $manage_configfile_symlink = false
   $configfile_symlink        = '/etc/r10k.yaml'
-  $git_settings              = {}
-  $forge_settings            = {}
-  $deploy_settings           = {}
+  $git_settings              = undef
+  $forge_settings            = undef
+  $deploy_settings           = undef
   # Git configuration
   $git_server = $settings::ca_server #lint:ignore:top_scope_facts
   $repo_path  = '/var/repos'

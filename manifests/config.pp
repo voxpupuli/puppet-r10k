@@ -61,22 +61,21 @@ class r10k::config (
   Stdlib::Absolutepath $r10k_basedir        = $r10k::params::r10k_basedir,
   Boolean $manage_configfile_symlink        = $r10k::params::manage_configfile_symlink,
   Stdlib::Absolutepath $configfile_symlink  = $r10k::params::configfile_symlink,
-  Hash $git_settings                        = $r10k::params::git_settings,
-  Hash $forge_settings                      = $r10k::params::forge_settings,
-  Hash $deploy_settings                     = $r10k::params::deploy_settings,
-  Array[String[1]] $postrun                 = $r10k::params::postrun,
+  Optional[Hash] $git_settings              = $r10k::params::git_settings,
+  Optional[Hash] $forge_settings            = $r10k::params::forge_settings,
+  Optional[Hash] $deploy_settings           = $r10k::params::deploy_settings,
+  Optional[Array[String[1]]] $postrun       = $r10k::params::postrun,
   $root_user                                = $r10k::params::root_user,
   $root_group                               = $r10k::params::root_group,
   Stdlib::Absolutepath $puppetconf_path     = $r10k::params::puppetconf_path,
   Optional[String[1]] $proxy                = $r10k::params::proxy,
   Optional[Integer[1]] $pool_size           = $r10k::params::pool_size,
-  String $r10k_yaml_template                = $r10k::params::r10k_yaml_template,
 ) inherits r10k::params {
   if $sources == undef {
     $r10k_sources  = {
       'puppet' => {
-        'remote'  => $remote,
         'basedir' => $r10k_basedir,
+        'remote'  => $remote,
       },
     }
     $source_keys = keys($r10k_sources)
@@ -94,13 +93,23 @@ class r10k::config (
     }
   }
 
+  $config = {
+    'pool_size' => $pool_size,
+    'proxy'     => $proxy,
+    'forge'     => $forge_settings,
+    'git'       => $git_settings,
+    'deploy'    => $deploy_settings,
+    'cachedir'  => $cachedir,
+    'postrun'   => $postrun,
+    'sources'   => $r10k_sources,
+  }.delete_undef_values
   file { 'r10k.yaml':
     ensure  => file,
     owner   => $root_user,
     group   => $root_group,
     mode    => '0644',
     path    => $configfile,
-    content => template($r10k_yaml_template),
+    content => stdlib::to_yaml($config),
   }
 
   if $manage_configfile_symlink {
