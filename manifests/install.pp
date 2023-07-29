@@ -1,42 +1,23 @@
-# This class is used by the ruby or pe_ruby class
-class r10k::install (
-  $package_name,
-  $version,
-  $provider,
-  $keywords,
-  $install_options,
-  $manage_ruby_dependency,
-  $puppet_master = true,
-  $is_pe_server = $r10k::params::is_pe_server,
-  Optional[String[1]] $gem_source = undef,
-) inherits r10k::params {
-  if $package_name == '' {
-    case $provider {
-      'openbsd': {
-        if (versioncmp("${facts['kernelversion']}", '5.8') < 0) { #lint:ignore:only_variable_string
-          $real_package_name = 'ruby21-r10k'
-        } else {
-          $real_package_name = 'ruby22-r10k'
-        }
-      }
-      default:   { $real_package_name = 'r10k' }
-    }
-  } else {
-    $real_package_name = $package_name
-  }
+#
+# @summary This class is used by the ruby or pe_ruby class
+#
+# @api private
+#
+class r10k::install {
+  assert_private()
 
-  case $provider {
+  case $r10k::provider {
     'bundle': {
       include r10k::install::bundle
     }
     'puppet_gem', 'gem', 'openbsd', 'pkgng', 'pacman', 'portage': {
-      if $provider == 'gem' {
+      if $r10k::provider == 'gem' {
         class { 'r10k::install::gem':
-          manage_ruby_dependency => $manage_ruby_dependency,
-          version                => $version;
+          manage_ruby_dependency => $r10k::manage_ruby_dependency,
+          version                => $r10k::version;
         }
       }
-      elsif $provider == 'puppet_gem' {
+      elsif $r10k::provider == 'puppet_gem' {
         # Puppet FOSS 4.2 and up ships a vendor provided ruby.
         # Using puppet_gem uses that instead of the system ruby.
         include r10k::install::puppet_gem
@@ -47,21 +28,21 @@ class r10k::install (
       # empty to value to the gem providers This code
       # converts an empty array to semi-standard gem options
       # This was previously undef but that caused strict var issues
-      if $provider in ['puppet_gem', 'gem'] and $install_options == [] {
+      if $r10k::provider in ['puppet_gem', 'gem'] and $r10k::install_options == [] {
         $provider_install_options = ['--no-document']
       } else {
-        $provider_install_options = $install_options
+        $provider_install_options = $r10k::install_options
       }
 
       # Puppet Enterprise 3.8 and ships an embedded r10k so thats all thats supported
       # This conditional should not effect FOSS customers based on the fact
-      package { $real_package_name:
-        ensure          => $version,
-        provider        => $provider,
-        source          => $gem_source,
+      package { $r10k::package_name:
+        ensure          => $r10k::version,
+        provider        => $r10k::provider,
+        source          => $r10k::gem_source,
         install_options => $provider_install_options,
       }
     }
-    default: { fail("${module_name}: ${provider} is not supported. Valid values are: 'gem', 'puppet_gem', 'bundle', 'openbsd'") }
+    default: { fail("${module_name}: ${r10k::provider} is not supported. Valid values are: 'gem', 'puppet_gem', 'bundle', 'openbsd'") }
   }
 }

@@ -9,7 +9,6 @@
 #### Public Classes
 
 * [`r10k`](#r10k): This class configures r10k
-* [`r10k::install`](#r10k--install): This class is used by the ruby or pe_ruby class
 * [`r10k::install::bundle`](#r10k--install--bundle): This class installs the r10k bundle
 * [`r10k::install::gem`](#r10k--install--gem): Install the r10k gem using system ruby
 * [`r10k::install::puppet_gem`](#r10k--install--puppet_gem): This class links the r10k binary for Puppet FOSS 4.2 and up
@@ -26,6 +25,7 @@
 #### Private Classes
 
 * `r10k::config`: Set up the root r10k config file (/etc/r10k.yaml).
+* `r10k::install`: This class is used by the ruby or pe_ruby class
 
 ### Data types
 
@@ -310,84 +310,6 @@ Data type: `Stdlib::Absolutepath`
 
 
 Default value: `$r10k::params::puppetconf_path`
-
-### <a name="r10k--install"></a>`r10k::install`
-
-This class is used by the ruby or pe_ruby class
-
-#### Parameters
-
-The following parameters are available in the `r10k::install` class:
-
-* [`package_name`](#-r10k--install--package_name)
-* [`version`](#-r10k--install--version)
-* [`provider`](#-r10k--install--provider)
-* [`keywords`](#-r10k--install--keywords)
-* [`install_options`](#-r10k--install--install_options)
-* [`manage_ruby_dependency`](#-r10k--install--manage_ruby_dependency)
-* [`puppet_master`](#-r10k--install--puppet_master)
-* [`is_pe_server`](#-r10k--install--is_pe_server)
-* [`gem_source`](#-r10k--install--gem_source)
-
-##### <a name="-r10k--install--package_name"></a>`package_name`
-
-Data type: `Any`
-
-
-
-##### <a name="-r10k--install--version"></a>`version`
-
-Data type: `Any`
-
-
-
-##### <a name="-r10k--install--provider"></a>`provider`
-
-Data type: `Any`
-
-
-
-##### <a name="-r10k--install--keywords"></a>`keywords`
-
-Data type: `Any`
-
-
-
-##### <a name="-r10k--install--install_options"></a>`install_options`
-
-Data type: `Any`
-
-
-
-##### <a name="-r10k--install--manage_ruby_dependency"></a>`manage_ruby_dependency`
-
-Data type: `Any`
-
-
-
-##### <a name="-r10k--install--puppet_master"></a>`puppet_master`
-
-Data type: `Any`
-
-
-
-Default value: `true`
-
-##### <a name="-r10k--install--is_pe_server"></a>`is_pe_server`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::is_pe_server`
-
-##### <a name="-r10k--install--gem_source"></a>`gem_source`
-
-Data type: `Optional[String[1]]`
-
-
-
-Default value: `undef`
 
 ### <a name="r10k--install--bundle"></a>`r10k::install::bundle`
 
