@@ -55,17 +55,7 @@ class r10k (
     include r10k::postrun_command
   }
 
-  class { 'r10k::install':
-    install_options        => $install_options,
-    keywords               => $gentoo_keywords,
-    manage_ruby_dependency => $manage_ruby_dependency,
-    package_name           => $package_name,
-    provider               => $provider,
-    gem_source             => $gem_source,
-    version                => $version,
-    puppet_master          => $puppet_master,
-  }
-
+  contain r10k::install
   contain r10k::config
 
   if $mcollective {

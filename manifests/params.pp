@@ -1,7 +1,9 @@
 # Reasonable defaults for all classes
 class r10k::params {
-  $postrun                = undef
-  $package_name           = ''
+  $package_name = $facts['os']['name'] ? {
+    'OpenBSD' => 'ruby31-r10k',
+    default   => 'r10k'
+  }
   $version                = 'installed'
   $manage_modulepath      = false
   $manage_ruby_dependency = 'ignore'

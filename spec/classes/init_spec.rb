@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+
+version = '2.0.0'
+
 describe 'r10k' do
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
@@ -155,6 +158,153 @@ describe 'r10k' do
         end
 
         it { is_expected.to contain_file('r10k.yaml').with_content(%r{^pool_size: 5$}) }
+      end
+      # This install method uses the archived puppetlabs/ruby module
+      # It doesn't support Gentoo
+
+      context 'with gem provider', if: os_facts[:os]['name'] != 'Gentoo' do
+        let :params do
+          {
+            install_options: '',
+            manage_ruby_dependency: 'declare',
+            provider: 'gem',
+            version: version,
+            puppet_master: true
+          }
+        end
+
+        it { is_expected.to contain_class('r10k::install::gem').with(version: version) }
+
+        it do
+          expect(subject).to contain_package('r10k').with(
+            ensure: version,
+            provider: 'gem'
+          )
+        end
+      end
+
+      context 'with gem with empty install_options', if: os_facts[:os]['name'] != 'Gentoo' do
+        let :params do
+          {
+            manage_ruby_dependency: 'include',
+            provider: 'gem',
+            version: version,
+            install_options: [],
+            puppet_master: true
+          }
+        end
+
+        it do
+          expect(subject).to contain_package('r10k').with(
+            ensure: version,
+            provider: 'gem',
+            install_options: ['--no-document']
+          )
+        end
+      end
+
+      context 'with gem with populated install_options', if: os_facts[:os]['name'] != 'Gentoo' do
+        let :params do
+          {
+            manage_ruby_dependency: 'include',
+            provider: 'gem',
+            version: version,
+            install_options: ['BOGON'],
+            puppet_master: true
+          }
+        end
+
+        it do
+          expect(subject).to contain_package('r10k').with(
+            ensure: version,
+            provider: 'gem',
+            install_options: ['BOGON']
+          )
+        end
+      end
+
+      context 'with puppet_gem provider' do
+        let :params do
+          {
+            version: version,
+            provider: 'puppet_gem',
+            manage_ruby_dependency: 'declare',
+            install_options: ''
+          }
+        end
+
+        it { is_expected.to contain_class('r10k::install::puppet_gem') }
+
+        it do
+          expect(subject).to contain_package('r10k').with(
+            ensure: version,
+            provider: 'puppet_gem'
+          )
+        end
+      end
+
+      context 'with puppet_gem on Puppet FOSS' do
+        let :params do
+          {
+            manage_ruby_dependency: 'declare',
+            install_options: '',
+            provider: 'puppet_gem',
+            version: version,
+          }
+        end
+
+        it {
+          is_expected.to contain_package('r10k').with(
+            ensure: version,
+            provider: 'puppet_gem'
+          )
+        }
+
+        it do
+          expect(subject).to contain_file('/usr/bin/r10k').with(
+            ensure: 'link',
+            target: '/opt/puppetlabs/puppet/bin/r10k',
+            require: 'Package[r10k]'
+          )
+        end
+      end
+
+      context 'with defaults and source specified', if: os_facts[:os]['name'] != 'Gentoo' do
+        let :params do
+          {
+            manage_ruby_dependency: 'include',
+            provider: 'gem',
+            version: version,
+            gem_source: 'https://some.alternate.source.com/',
+            install_options: [],
+            puppet_master: true
+          }
+        end
+
+        it { is_expected.to contain_class('r10k::install::gem') }
+
+        it do
+          expect(subject).to contain_package('r10k').with(
+            ensure: version,
+            provider: 'gem',
+            source: 'https://some.alternate.source.com/'
+          )
+        end
+      end
+
+      context 'with bundle provider' do
+        let :params do
+          {
+            version: version,
+            provider: 'bundle',
+            manage_ruby_dependency: 'declare',
+            install_options: '',
+            puppet_master: true
+          }
+        end
+
+        it { is_expected.to contain_class('r10k::install::bundle') }
+        it { is_expected.not_to contain_package('r10k') }
       end
     end
   end
