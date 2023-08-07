@@ -4,6 +4,32 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v12.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v12.0.0) (2023-08-06)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v11.0.1...v12.0.0)
+
+**Breaking changes:**
+
+- install.pp: Make class private; Update OpenBSD package name ruby22-r10k-\>ruby31-r10k [\#615](https://github.com/voxpupuli/puppet-r10k/pull/615) ([bastelfreak](https://github.com/bastelfreak))
+- replace r10k template with native puppet code [\#613](https://github.com/voxpupuli/puppet-r10k/pull/613) ([bastelfreak](https://github.com/bastelfreak))
+- r10k::config: don't inherit params class [\#611](https://github.com/voxpupuli/puppet-r10k/pull/611) ([bastelfreak](https://github.com/bastelfreak))
+- pre\_postrun\_command: replace deprecated `--puppetfile` with `--modules` [\#610](https://github.com/voxpupuli/puppet-r10k/pull/610) ([bastelfreak](https://github.com/bastelfreak))
+- deploy settings: generate types by default and dont deploy spec dir [\#609](https://github.com/voxpupuli/puppet-r10k/pull/609) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- move static data to init.pp [\#616](https://github.com/voxpupuli/puppet-r10k/pull/616) ([bastelfreak](https://github.com/bastelfreak))
+- Add Rocky/AlmaLinux support [\#614](https://github.com/voxpupuli/puppet-r10k/pull/614) ([bastelfreak](https://github.com/bastelfreak))
+- Add Puppet 8 support [\#608](https://github.com/voxpupuli/puppet-r10k/pull/608) ([bastelfreak](https://github.com/bastelfreak))
+
+**Fixed bugs:**
+
+- Bugfix: Fix service name of webhook-go service [\#605](https://github.com/voxpupuli/puppet-r10k/pull/605) ([tmu-sprd](https://github.com/tmu-sprd))
+
+**Merged pull requests:**
+
+- config.pp: move all defaults to params.pp [\#612](https://github.com/voxpupuli/puppet-r10k/pull/612) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v11.0.1](https://github.com/voxpupuli/puppet-r10k/tree/v11.0.1) (2023-06-08)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v11.0.0...v11.0.1)
