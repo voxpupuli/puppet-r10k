@@ -4,7 +4,15 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v12.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v12.0.0) (2023-08-06)
+## [v12.1.0](https://github.com/voxpupuli/puppet-r10k/tree/v12.1.0) (2023-08-09)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v12.0.0...v12.1.0)
+
+**Implemented enhancements:**
+
+- Implement global $ensure param to purge r10k [\#618](https://github.com/voxpupuli/puppet-r10k/pull/618) ([bastelfreak](https://github.com/bastelfreak))
+
+## [v12.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v12.0.0) (2023-08-07)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v11.0.1...v12.0.0)
 
