@@ -36,8 +36,12 @@ class r10k::install {
 
       # Puppet Enterprise 3.8 and ships an embedded r10k so thats all thats supported
       # This conditional should not effect FOSS customers based on the fact
+      $ensure = $r10k::ensure ? {
+        'present' => $r10k::version,
+        'absent'  => 'absent',
+      }
       package { $r10k::package_name:
-        ensure          => $r10k::version,
+        ensure          => $ensure,
         provider        => $r10k::provider,
         source          => $r10k::gem_source,
         install_options => $provider_install_options,

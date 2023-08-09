@@ -23,12 +23,24 @@ class r10k::config {
     $source_keys = keys($r10k_sources)
   }
 
+  $dir_ensure = $r10k::ensure ? {
+    'absent'  => { ensure => 'absent', recurse => true, force => true },
+    'present' => { ensure => 'directory', },
+  }
+  $file_ensure = $r10k::ensure ? {
+    'absent'  => 'absent',
+    'present' => 'file',
+  }
+  $link_ensure = $r10k::ensure ? {
+    'absent'  => 'absent',
+    'present' => 'link',
+  }
   if $r10k::configfile == '/etc/puppetlabs/r10k/r10k.yaml' {
     file { '/etc/puppetlabs/r10k':
-      ensure => 'directory',
-      owner  => $r10k::root_user,
-      group  => $r10k::root_group,
-      mode   => '0755',
+      owner => $r10k::root_user,
+      group => $r10k::root_group,
+      mode  => '0755',
+      *     => $dir_ensure,
     }
   }
 
@@ -43,7 +55,7 @@ class r10k::config {
     'sources'   => $r10k_sources,
   }.delete_undef_values
   file { 'r10k.yaml':
-    ensure  => file,
+    ensure  => $file_ensure,
     owner   => $r10k::root_user,
     group   => $r10k::root_group,
     mode    => '0644',
@@ -53,7 +65,7 @@ class r10k::config {
 
   if $r10k::manage_configfile_symlink {
     file { 'symlink_r10k.yaml':
-      ensure => 'link',
+      ensure => $link_ensure,
       path   => $r10k::configfile_symlink,
       target => $r10k::configfile,
     }
@@ -61,7 +73,7 @@ class r10k::config {
 
   if $r10k::manage_modulepath {
     ini_setting { 'R10k Modulepath':
-      ensure  => present,
+      ensure  => $r10k::ensure,
       path    => "${r10k::puppetconf_path}/puppet.conf",
       section => 'main',
       setting => 'modulepath',

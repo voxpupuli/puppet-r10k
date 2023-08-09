@@ -8,6 +8,7 @@
 # @param forge_settings Hash containing settings for downloading modules from the Puppet Forge
 # @param proxy String containing proxy setting for r10k.yaml
 # @param pool_size Integer defining how many threads should be spawn while updating modules
+# @param ensure if r10k should be installed or purged
 class r10k (
   $remote                                                     = $r10k::params::remote,
   Optional[Hash] $sources                                     = undef,
@@ -38,6 +39,7 @@ class r10k (
   Boolean $include_prerun_command                             = false,
   Boolean $include_postrun_command                            = false,
   Stdlib::Absolutepath $puppetconf_path                       = $r10k::params::puppetconf_path,
+  Enum['absent','present'] $ensure                            = 'present',
 ) inherits r10k::params {
   # Check if user is declaring both classes
   # Other classes like r10k::webhook is supported but
