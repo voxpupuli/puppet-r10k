@@ -57,6 +57,7 @@ The following parameters are available in the `r10k` class:
 * [`forge_settings`](#-r10k--forge_settings)
 * [`proxy`](#-r10k--proxy)
 * [`pool_size`](#-r10k--pool_size)
+* [`ensure`](#-r10k--ensure)
 * [`remote`](#-r10k--remote)
 * [`configfile`](#-r10k--configfile)
 * [`version`](#-r10k--version)
@@ -142,6 +143,14 @@ Data type: `Integer[1]`
 Integer defining how many threads should be spawn while updating modules
 
 Default value: `$facts['processors']['count']`
+
+##### <a name="-r10k--ensure"></a>`ensure`
+
+Data type: `Enum['absent','present']`
+
+if r10k should be installed or purged
+
+Default value: `'present'`
 
 ##### <a name="-r10k--remote"></a>`remote`
 
