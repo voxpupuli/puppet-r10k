@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v12.1.1](https://github.com/voxpupuli/puppet-r10k/tree/v12.1.1) (2023-08-12)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v12.1.0...v12.1.1)
+
+**Merged pull requests:**
+
+- puppetlabs/stdlib: require 9.x [\#620](https://github.com/voxpupuli/puppet-r10k/pull/620) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v12.1.0](https://github.com/voxpupuli/puppet-r10k/tree/v12.1.0) (2023-08-09)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v12.0.0...v12.1.0)
