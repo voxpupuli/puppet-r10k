@@ -17,7 +17,7 @@
 * [`r10k::params`](#r10k--params): Reasonable defaults for all classes
 * [`r10k::postrun_command`](#r10k--postrun_command): This class will configure r10k to run as part of the masters agent run
 * [`r10k::prerun_command`](#r10k--prerun_command): This class will configure r10k to run as part of the masters agent run
-* [`r10k::webhook`](#r10k--webhook): Class: r10k::webhook
+* [`r10k::webhook`](#r10k--webhook): install and configure the webhook-go package as local webhook receiver to trigger r10k runs
 * [`r10k::webhook::config`](#r10k--webhook--config): Class: r10k::webhook::config
 * [`r10k::webhook::package`](#r10k--webhook--package): Class: r10k::webhook::package
 * [`r10k::webhook::service`](#r10k--webhook--service): Class: r10k::webhook::service
@@ -551,12 +551,13 @@ Default value: `'present'`
 
 ### <a name="r10k--webhook"></a>`r10k::webhook`
 
-Class: r10k::webhook
+install and configure the webhook-go package as local webhook receiver to trigger r10k runs
 
 #### Parameters
 
 The following parameters are available in the `r10k::webhook` class:
 
+* [`install_method`](#-r10k--webhook--install_method)
 * [`ensure`](#-r10k--webhook--ensure)
 * [`version`](#-r10k--webhook--version)
 * [`service_ensure`](#-r10k--webhook--service_ensure)
@@ -568,6 +569,14 @@ The following parameters are available in the `r10k::webhook` class:
 * [`server`](#-r10k--webhook--server)
 * [`r10k`](#-r10k--webhook--r10k)
 * [`config`](#-r10k--webhook--config)
+
+##### <a name="-r10k--webhook--install_method"></a>`install_method`
+
+Data type: `Enum['package', 'repo', 'none']`
+
+how the package should be installed
+
+Default value: `'package'`
 
 ##### <a name="-r10k--webhook--ensure"></a>`ensure`
 
