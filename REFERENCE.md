@@ -584,7 +584,7 @@ Data type: `Boolean`
 
 
 
-Default value: `$r10k::params::webhook_ensure`
+Default value: `false`
 
 ##### <a name="-r10k--webhook--version"></a>`version`
 
@@ -592,7 +592,7 @@ Data type: `String`
 
 
 
-Default value: `$r10k::params::webhook_version`
+Default value: `'2.1.0'`
 
 ##### <a name="-r10k--webhook--service_ensure"></a>`service_ensure`
 
@@ -607,7 +607,7 @@ Variant[
 
 
 
-Default value: `$r10k::params::webhook_service_ensure`
+Default value: `'running'`
 
 ##### <a name="-r10k--webhook--service_enabled"></a>`service_enabled`
 
@@ -615,7 +615,7 @@ Data type: `Boolean`
 
 
 
-Default value: `$r10k::params::webhook_service_enabled`
+Default value: `true`
 
 ##### <a name="-r10k--webhook--config_ensure"></a>`config_ensure`
 
@@ -643,12 +643,12 @@ Default value:
 
 ```puppet
 {
-    enabled    => $r10k::params::webhook_chatops_enabled,
-    service    => $r10k::params::webhook_chatops_service,
-    channel    => $r10k::params::webhook_chatops_channel,
-    user       => $r10k::params::webhook_chatops_user,
-    auth_token => $r10k::params::webhook_chatops_token,
-    server_uri => $r10k::params::webhook_chatops_uri,
+    enabled    => false,
+    service    => '',
+    channel    => '',
+    user       => '',
+    auth_token => '',
+    server_uri => '',
   }
 ```
 
@@ -662,9 +662,9 @@ Default value:
 
 ```puppet
 {
-    enabled     => $r10k::params::webhook_tls_enabled,
-    certificate => $r10k::params::webhook_tls_cert_path,
-    key         => $r10k::params::webhook_tls_key_path,
+    enabled     => false,
+    certificate => undef,
+    key         => undef,
   }
 ```
 
@@ -678,10 +678,10 @@ Default value:
 
 ```puppet
 {
-    protected => $r10k::params::webhook_protected,
-    user      => $r10k::params::webhook_user,
-    password  => $r10k::params::webhook_password,
-    port      => $r10k::params::webhook_port,
+    protected => true,
+    user      => 'puppet',
+    password  => 'puppet',
+    port      => 4000,
     tls       => $tls,
   }
 ```
@@ -696,14 +696,14 @@ Default value:
 
 ```puppet
 {
-    command_path    => $r10k::params::webhook_r10k_command_path,
-    config_path     => $r10k::params::webhook_r10k_config_path,
-    default_branch  => $r10k::params::webhook_r10k_default_branch,
-    prefix          => $r10k::params::webhook_r10k_branch_prefix,
-    allow_uppercase => $r10k::params::webhook_r10k_allow_uppercase,
-    verbose         => $r10k::params::webhook_r10k_verbose,
-    deploy_modules  => $r10k::params::webhook_r10k_deploy_modules,
-    generate_types  => $r10k::params::webhook_r10k_generate_types,
+    command_path    => '/opt/puppetlabs/puppet/bin/r10k',
+    config_path     => '/etc/puppetlabs/r10k/r10k.yaml',
+    default_branch  => 'production',
+    prefix          => '',
+    allow_uppercase => false,
+    verbose         => true,
+    deploy_modules  => true,
+    generate_types  => true,
   }
 ```
 

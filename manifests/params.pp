@@ -60,31 +60,4 @@ class r10k::params {
     $is_pe_server      = false
     $modulepath = "${r10k_basedir}/\$environment/modules"
   }
-
-  # Webhook Go parameters
-  $webhook_ensure = false
-  $webhook_protected = true
-  $webhook_version = '2.1.0'
-  $webhook_user = 'puppet'
-  $webhook_password = 'puppet'
-  $webhook_port = 4000
-  $webhook_tls_enabled = false
-  $webhook_tls_cert_path = undef
-  $webhook_tls_key_path = undef
-  $webhook_chatops_enabled = false
-  $webhook_chatops_service = ''
-  $webhook_chatops_channel = ''
-  $webhook_chatops_user = ''
-  $webhook_chatops_token = ''
-  $webhook_chatops_uri = ''
-  $webhook_r10k_command_path = "/opt/puppetlabs/puppet/bin/${r10k_binary}"
-  $webhook_r10k_config_path = '/etc/puppetlabs/r10k/r10k.yaml'
-  $webhook_r10k_default_branch = 'production'
-  $webhook_r10k_branch_prefix = ''
-  $webhook_r10k_allow_uppercase = false
-  $webhook_r10k_verbose = true
-  $webhook_r10k_deploy_modules = true
-  $webhook_r10k_generate_types = true
-  $webhook_service_ensure = 'running'
-  $webhook_service_enabled = true
 }
