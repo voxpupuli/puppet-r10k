@@ -16,7 +16,7 @@ class r10k::install::bundle (
     source   => $source,
     revision => $revision,
   }
-  exec { "${module_name}-install-via-bundle":
+  exec { "${module_name}-install-via-bundle": # lint:ignore:check_unsafe_interpolations
     command => 'bundle && bundle install --path /opt/ --binstubs /usr/local/bin/',
     cwd     => '/tmp/r10k',
     require => [Package["${module_name}-bundle"], Vcsrepo["${module_name}-r10k-github"]],
