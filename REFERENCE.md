@@ -644,11 +644,11 @@ Default value:
 ```puppet
 {
     enabled    => false,
-    service    => '',
-    channel    => '',
-    user       => '',
-    auth_token => '',
-    server_uri => '',
+    service    => undef,
+    channel    => undef,
+    user       => undef,
+    auth_token => undef,
+    server_uri => undef,
   }
 ```
 
@@ -699,7 +699,7 @@ Default value:
     command_path    => '/opt/puppetlabs/puppet/bin/r10k',
     config_path     => '/etc/puppetlabs/r10k/r10k.yaml',
     default_branch  => 'production',
-    prefix          => '',
+    prefix          => undef,
     allow_uppercase => false,
     verbose         => true,
     deploy_modules  => true,
