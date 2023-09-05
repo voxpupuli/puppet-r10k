@@ -592,7 +592,7 @@ Data type: `String`
 
 
 
-Default value: `'2.1.0'`
+Default value: `'2.2.0'`
 
 ##### <a name="-r10k--webhook--service_ensure"></a>`service_ensure`
 
