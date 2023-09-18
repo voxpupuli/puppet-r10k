@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
+# Managed by modulesync - DO NOT EDIT
+# https://voxpupuli.org/docs/updating-files-managed-with-modulesync/
+
 require 'voxpupuli/acceptance/spec_helper_acceptance'
 
-configure_beaker do |host|
-  on host, puppet('resource', 'user', 'puppet', 'ensure=present')
-end
+configure_beaker(modules: :metadata)
+
+Dir['./spec/support/acceptance/**/*.rb'].sort.each { |f| require f }
