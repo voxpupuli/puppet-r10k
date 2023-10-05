@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v12.2.0](https://github.com/voxpupuli/puppet-r10k/tree/v12.2.0) (2023-10-05)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v12.1.1...v12.2.0)
+
+**Implemented enhancements:**
+
+- webhook: Update default version 2.1.0-\>2.2.0 [\#631](https://github.com/voxpupuli/puppet-r10k/pull/631) ([bastelfreak](https://github.com/bastelfreak))
+- Implement acceptance tests for webhook-go [\#627](https://github.com/voxpupuli/puppet-r10k/pull/627) ([bastelfreak](https://github.com/bastelfreak))
+- webhook: Allow people to host the repo on their own [\#626](https://github.com/voxpupuli/puppet-r10k/pull/626) ([bastelfreak](https://github.com/bastelfreak))
+
+**Fixed bugs:**
+
+- webhook: Fix default parameter values and add unit tests [\#630](https://github.com/voxpupuli/puppet-r10k/pull/630) ([bastelfreak](https://github.com/bastelfreak))
+
+**Merged pull requests:**
+
+- replace to\_yaml\(\) with stdlib::to\_yaml\(\) [\#632](https://github.com/voxpupuli/puppet-r10k/pull/632) ([bastelfreak](https://github.com/bastelfreak))
+- puppet/systemd: Allow 6.x [\#629](https://github.com/voxpupuli/puppet-r10k/pull/629) ([bastelfreak](https://github.com/bastelfreak))
+- webhook-go: Move static data from params to webhook class [\#628](https://github.com/voxpupuli/puppet-r10k/pull/628) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v12.1.1](https://github.com/voxpupuli/puppet-r10k/tree/v12.1.1) (2023-08-12)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v12.1.0...v12.1.1)
