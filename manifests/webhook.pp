@@ -53,4 +53,8 @@ class r10k::webhook (
   contain r10k::webhook::package
   contain r10k::webhook::config
   contain r10k::webhook::service
+
+  Class['r10k::webhook::package']
+  -> Class['r10k::webhook::config']
+  ~> Class['r10k::webhook::service']
 }
