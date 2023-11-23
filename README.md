@@ -250,7 +250,7 @@ servers at time of push in git. More modern git systems use webhooks, for  those
 The mcollective agent can be configured to supply r10k/git environment `http_proxy`, `https_proxy` variables via the following example
 
 ```puppet
-class { '::r10k::mcollective':
+class { 'r10k::mcollective':
   http_proxy     => 'http://proxy.example.lan:3128',
   git_ssl_no_verify => 1,
 }
