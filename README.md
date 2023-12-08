@@ -539,7 +539,7 @@ class { 'r10k::webhook':
 To aid in debugging, or to give you some hints as to how to trigger the webhook by unsupported systems, here's a curl command to trigger the webhook to deploy the 'production' environment:
 
 ```bash
-curl -d '
+curl --header "X-Gitlab-Event: Push Hook" -d '
   {
     "repository": {"name": "foo", "owner": {"login": "foo"}},
     "ref": "production"
@@ -549,7 +549,7 @@ curl -d '
 If you are utilizing environment prefixes, you'll need to specify the full environment title (including the prefix) in the 'ref' parameter:
 
 ```bash
-curl -d '
+curl --header "X-Gitlab-Event: Push Hook" -d '
   {
     "repository": {"name": "bar", "owner": {"login": "foo"}},
     "ref": "bar_production"
