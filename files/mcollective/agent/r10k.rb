@@ -20,7 +20,7 @@ module MCollective
           action act do
             validate :path, :shellsafe
             path = request[:path]
-            reply.fail "Path not found #{path}" unless File.exists?(path)
+            reply.fail "Path not found #{path}" unless File.exist?(path)
             return unless reply.statuscode == 0
             lock do
               run_cmd act, path
