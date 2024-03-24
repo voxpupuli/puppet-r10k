@@ -29,11 +29,11 @@
 
 ### Data types
 
-* [`R10k::Webhook::Config`](#R10k--Webhook--Config)
-* [`R10k::Webhook::Config::Chatops`](#R10k--Webhook--Config--Chatops)
-* [`R10k::Webhook::Config::R10k`](#R10k--Webhook--Config--R10k)
-* [`R10k::Webhook::Config::Server`](#R10k--Webhook--Config--Server)
-* [`R10k::Webhook::Config::Server::Tls`](#R10k--Webhook--Config--Server--Tls)
+* [`R10k::Webhook::Config`](#R10k--Webhook--Config): webhook config type
+* [`R10k::Webhook::Config::Chatops`](#R10k--Webhook--Config--Chatops): webhook config chatops type
+* [`R10k::Webhook::Config::R10k`](#R10k--Webhook--Config--R10k): webhook config r10k type
+* [`R10k::Webhook::Config::Server`](#R10k--Webhook--Config--Server): webhook config server type
+* [`R10k::Webhook::Config::Server::Tls`](#R10k--Webhook--Config--Server--Tls): webhook config server tls type
 
 ### Tasks
 
@@ -739,7 +739,7 @@ Class: r10k::webhook::service
 
 ### <a name="R10k--Webhook--Config"></a>`R10k::Webhook::Config`
 
-The R10k::Webhook::Config data type.
+webhook config type
 
 Alias of
 
@@ -753,7 +753,7 @@ Struct[{
 
 ### <a name="R10k--Webhook--Config--Chatops"></a>`R10k::Webhook::Config::Chatops`
 
-The R10k::Webhook::Config::Chatops data type.
+webhook config chatops type
 
 Alias of
 
@@ -770,7 +770,7 @@ Struct[{
 
 ### <a name="R10k--Webhook--Config--R10k"></a>`R10k::Webhook::Config::R10k`
 
-The R10k::Webhook::Config::R10k data type.
+webhook config r10k type
 
 Alias of
 
@@ -789,7 +789,7 @@ Struct[{
 
 ### <a name="R10k--Webhook--Config--Server"></a>`R10k::Webhook::Config::Server`
 
-The R10k::Webhook::Config::Server data type.
+webhook config server type
 
 Alias of
 
@@ -805,7 +805,7 @@ Struct[{
 
 ### <a name="R10k--Webhook--Config--Server--Tls"></a>`R10k::Webhook::Config::Server::Tls`
 
-The R10k::Webhook::Config::Server::Tls data type.
+webhook config server tls type
 
 Alias of
 

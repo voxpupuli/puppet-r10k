@@ -1,3 +1,4 @@
+# @summary webhook config r10k type
 type R10k::Webhook::Config::R10k = Struct[{
     command_path    => Optional[Stdlib::Absolutepath],
     config_path     => Optional[Stdlib::Absolutepath],
