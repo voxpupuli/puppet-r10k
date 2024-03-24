@@ -1,4 +1,11 @@
-# Install the r10k mcollective agent
+# @summary Install the r10k mcollective agent
+#
+# @param ensure
+# @param server
+# @param client
+# @param http_proxy
+# @param policies
+#
 class r10k::mcollective (
   $ensure            = 'present',
   $server            = true,

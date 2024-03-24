@@ -1,4 +1,9 @@
-# Install the r10k gem using system ruby
+# @summary Install the r10k gem using system ruby
+#
+# @param manage_ruby_dependency
+# @param version
+#   R10k gem version
+#
 class r10k::install::gem (
   $manage_ruby_dependency,
   $version,

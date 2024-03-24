@@ -1,4 +1,8 @@
-# This class will configure r10k to run as part of the masters agent run
+# @summary This class will configure r10k to run as part of the masters agent run
+#
+# @param command
+# @param ensure
+#
 class r10k::prerun_command (
   $command                          = $r10k::params::pre_postrun_command,
   Enum['present', 'absent'] $ensure = 'present',

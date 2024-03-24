@@ -368,7 +368,7 @@ Data type: `Any`
 
 Data type: `Any`
 
-
+R10k gem version
 
 ### <a name="r10k--install--puppet_gem"></a>`r10k::install::puppet_gem`
 

@@ -1,4 +1,8 @@
-# This class installs the r10k bundle
+# @summary This class installs the r10k bundle
+#
+# @param revision
+# @param source
+#
 class r10k::install::bundle (
   $revision = 'master',
   $source   = 'https://github.com/adrienthebo/r10k.git',

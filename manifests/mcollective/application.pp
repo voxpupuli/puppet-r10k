@@ -1,4 +1,12 @@
-# Install the r10k mcollective application to a client
+# @summary Install the r10k mcollective application to a client
+#
+# @param agent_name
+# @param app_name
+# @param agent_ddl
+# @param agent_path
+# @param app_path
+# @param mc_service
+#
 class r10k::mcollective::application (
   $agent_name        = $r10k::params::mc_agent_name,
   $app_name          = $r10k::params::mc_app_name,
