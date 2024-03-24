@@ -49,15 +49,6 @@ This class configures r10k
 
 The following parameters are available in the `r10k` class:
 
-* [`cachedir`](#-r10k--cachedir)
-* [`sources`](#-r10k--sources)
-* [`postrun`](#-r10k--postrun)
-* [`manage_configfile_symlink`](#-r10k--manage_configfile_symlink)
-* [`configfile_symlink`](#-r10k--configfile_symlink)
-* [`forge_settings`](#-r10k--forge_settings)
-* [`proxy`](#-r10k--proxy)
-* [`pool_size`](#-r10k--pool_size)
-* [`ensure`](#-r10k--ensure)
 * [`remote`](#-r10k--remote)
 * [`configfile`](#-r10k--configfile)
 * [`version`](#-r10k--version)
@@ -79,78 +70,15 @@ The following parameters are available in the `r10k` class:
 * [`include_prerun_command`](#-r10k--include_prerun_command)
 * [`include_postrun_command`](#-r10k--include_postrun_command)
 * [`puppetconf_path`](#-r10k--puppetconf_path)
-
-##### <a name="-r10k--cachedir"></a>`cachedir`
-
-Data type: `Stdlib::Absolutepath`
-
-Path to a directory to be used by r10k for caching data
-
-Default value: `"${facts['puppet_vardir']}/r10k"`
-
-##### <a name="-r10k--sources"></a>`sources`
-
-Data type: `Optional[Hash]`
-
-Hash containing data sources to be used by r10k to create dynamic Puppet environments
-
-Default value: `undef`
-
-##### <a name="-r10k--postrun"></a>`postrun`
-
-Data type: `Optional[Array[String[1]]]`
-
-Array containing the parts of a system call Example: ['/usr/bin/curl', '-F', 'deploy=done', 'http://my-app.site/endpoint']
-
-Default value: `undef`
-
-##### <a name="-r10k--manage_configfile_symlink"></a>`manage_configfile_symlink`
-
-Data type: `Boolean`
-
-determine if a symlink to the r10k config file is to be managed
-
-Default value: `false`
-
-##### <a name="-r10k--configfile_symlink"></a>`configfile_symlink`
-
-Data type: `Stdlib::Absolutepath`
-
-Location of symlink that points to configfile
-
-Default value: `'/etc/r10k.yaml'`
-
-##### <a name="-r10k--forge_settings"></a>`forge_settings`
-
-Data type: `Optional[Hash]`
-
-Hash containing settings for downloading modules from the Puppet Forge
-
-Default value: `undef`
-
-##### <a name="-r10k--proxy"></a>`proxy`
-
-Data type: `Optional[String[1]]`
-
-String containing proxy setting for r10k.yaml
-
-Default value: `undef`
-
-##### <a name="-r10k--pool_size"></a>`pool_size`
-
-Data type: `Integer[1]`
-
-Integer defining how many threads should be spawn while updating modules
-
-Default value: `$facts['processors']['count']`
-
-##### <a name="-r10k--ensure"></a>`ensure`
-
-Data type: `Enum['absent','present']`
-
-if r10k should be installed or purged
-
-Default value: `'present'`
+* [`cachedir`](#-r10k--cachedir)
+* [`sources`](#-r10k--sources)
+* [`postrun`](#-r10k--postrun)
+* [`manage_configfile_symlink`](#-r10k--manage_configfile_symlink)
+* [`configfile_symlink`](#-r10k--configfile_symlink)
+* [`forge_settings`](#-r10k--forge_settings)
+* [`proxy`](#-r10k--proxy)
+* [`pool_size`](#-r10k--pool_size)
+* [`ensure`](#-r10k--ensure)
 
 ##### <a name="-r10k--remote"></a>`remote`
 
@@ -319,6 +247,78 @@ Data type: `Stdlib::Absolutepath`
 
 
 Default value: `$r10k::params::puppetconf_path`
+
+##### <a name="-r10k--cachedir"></a>`cachedir`
+
+Data type: `Stdlib::Absolutepath`
+
+Path to a directory to be used by r10k for caching data
+
+Default value: `"${facts['puppet_vardir']}/r10k"`
+
+##### <a name="-r10k--sources"></a>`sources`
+
+Data type: `Optional[Hash]`
+
+Hash containing data sources to be used by r10k to create dynamic Puppet environments
+
+Default value: `undef`
+
+##### <a name="-r10k--postrun"></a>`postrun`
+
+Data type: `Optional[Array[String[1]]]`
+
+Array containing the parts of a system call Example: ['/usr/bin/curl', '-F', 'deploy=done', 'http://my-app.site/endpoint']
+
+Default value: `undef`
+
+##### <a name="-r10k--manage_configfile_symlink"></a>`manage_configfile_symlink`
+
+Data type: `Boolean`
+
+determine if a symlink to the r10k config file is to be managed
+
+Default value: `false`
+
+##### <a name="-r10k--configfile_symlink"></a>`configfile_symlink`
+
+Data type: `Stdlib::Absolutepath`
+
+Location of symlink that points to configfile
+
+Default value: `'/etc/r10k.yaml'`
+
+##### <a name="-r10k--forge_settings"></a>`forge_settings`
+
+Data type: `Optional[Hash]`
+
+Hash containing settings for downloading modules from the Puppet Forge
+
+Default value: `undef`
+
+##### <a name="-r10k--proxy"></a>`proxy`
+
+Data type: `Optional[String[1]]`
+
+String containing proxy setting for r10k.yaml
+
+Default value: `undef`
+
+##### <a name="-r10k--pool_size"></a>`pool_size`
+
+Data type: `Integer[1]`
+
+Integer defining how many threads should be spawn while updating modules
+
+Default value: `$facts['processors']['count']`
+
+##### <a name="-r10k--ensure"></a>`ensure`
+
+Data type: `Enum['absent','present']`
+
+if r10k should be installed or purged
+
+Default value: `'present'`
 
 ### <a name="r10k--install--bundle"></a>`r10k::install::bundle`
 
