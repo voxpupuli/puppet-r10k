@@ -82,7 +82,7 @@ The following parameters are available in the `r10k` class:
 
 ##### <a name="-r10k--remote"></a>`remote`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -98,7 +98,7 @@ Default value: `'/etc/puppetlabs/r10k/r10k.yaml'`
 
 ##### <a name="-r10k--version"></a>`version`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -106,7 +106,7 @@ Default value: `$r10k::params::version`
 
 ##### <a name="-r10k--puppet_master"></a>`puppet_master`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -114,7 +114,7 @@ Default value: `$r10k::params::puppet_master`
 
 ##### <a name="-r10k--modulepath"></a>`modulepath`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -146,7 +146,7 @@ Default value: `$r10k::params::r10k_basedir`
 
 ##### <a name="-r10k--package_name"></a>`package_name`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -154,7 +154,7 @@ Default value: `$r10k::params::package_name`
 
 ##### <a name="-r10k--provider"></a>`provider`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -178,7 +178,7 @@ Default value: `[]`
 
 ##### <a name="-r10k--mcollective"></a>`mcollective`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -202,7 +202,7 @@ Default value: `{ 'generate_types' => true, 'exclude_spec' => true, }`
 
 ##### <a name="-r10k--root_user"></a>`root_user`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -218,7 +218,7 @@ Default value: `undef`
 
 ##### <a name="-r10k--root_group"></a>`root_group`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -333,7 +333,7 @@ The following parameters are available in the `r10k::install::bundle` class:
 
 ##### <a name="-r10k--install--bundle--revision"></a>`revision`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -341,7 +341,7 @@ Default value: `'master'`
 
 ##### <a name="-r10k--install--bundle--source"></a>`source`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -360,13 +360,13 @@ The following parameters are available in the `r10k::install::gem` class:
 
 ##### <a name="-r10k--install--gem--manage_ruby_dependency"></a>`manage_ruby_dependency`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
 ##### <a name="-r10k--install--gem--version"></a>`version`
 
-Data type: `Any`
+Data type: `String[1]`
 
 R10k gem version
 
@@ -390,7 +390,7 @@ The following parameters are available in the `r10k::mcollective` class:
 
 ##### <a name="-r10k--mcollective--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -398,7 +398,7 @@ Default value: `'present'`
 
 ##### <a name="-r10k--mcollective--server"></a>`server`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -406,7 +406,7 @@ Default value: `true`
 
 ##### <a name="-r10k--mcollective--client"></a>`client`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -414,7 +414,7 @@ Default value: `true`
 
 ##### <a name="-r10k--mcollective--http_proxy"></a>`http_proxy`
 
-Data type: `Any`
+Data type: `String`
 
 
 
@@ -422,7 +422,7 @@ Default value: `''`
 
 ##### <a name="-r10k--mcollective--policies"></a>`policies`
 
-Data type: `Any`
+Data type: `Array`
 
 
 
@@ -445,7 +445,7 @@ The following parameters are available in the `r10k::mcollective::application` c
 
 ##### <a name="-r10k--mcollective--application--agent_name"></a>`agent_name`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
@@ -453,7 +453,7 @@ Default value: `$r10k::params::mc_agent_name`
 
 ##### <a name="-r10k--mcollective--application--app_name"></a>`app_name`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
@@ -461,7 +461,7 @@ Default value: `$r10k::params::mc_app_name`
 
 ##### <a name="-r10k--mcollective--application--agent_ddl"></a>`agent_ddl`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
@@ -469,7 +469,7 @@ Default value: `$r10k::params::mc_agent_ddl_name`
 
 ##### <a name="-r10k--mcollective--application--agent_path"></a>`agent_path`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
@@ -477,7 +477,7 @@ Default value: `$r10k::params::mc_agent_path`
 
 ##### <a name="-r10k--mcollective--application--app_path"></a>`app_path`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
@@ -485,7 +485,7 @@ Default value: `$r10k::params::mc_application_path`
 
 ##### <a name="-r10k--mcollective--application--mc_service"></a>`mc_service`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
@@ -508,7 +508,7 @@ The following parameters are available in the `r10k::postrun_command` class:
 
 ##### <a name="-r10k--postrun_command--command"></a>`command`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -535,7 +535,7 @@ The following parameters are available in the `r10k::prerun_command` class:
 
 ##### <a name="-r10k--prerun_command--command"></a>`command`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 

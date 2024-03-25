@@ -5,8 +5,8 @@
 #   R10k gem version
 #
 class r10k::install::gem (
-  $manage_ruby_dependency,
-  $version,
+  String[1] $manage_ruby_dependency,
+  String[1] $version,
 ) {
   case $manage_ruby_dependency {
     'include': {
