@@ -1,3 +1,4 @@
+# @summary webhook config chatops type
 type R10k::Webhook::Config::Chatops = Struct[{
     enabled    => Boolean,
     service    => Optional[Enum['slack', 'rocketchat']],

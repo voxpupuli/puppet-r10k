@@ -1,7 +1,18 @@
-#
 # @summary install and configure the webhook-go package as local webhook receiver to trigger r10k runs
 #
-# @param install_method how the package should be installed
+# @param install_method
+#   how the package should be installed
+# @param ensure
+# @param version
+# @param service_ensure
+# @param service_enabled
+# @param config_ensure
+# @param config_path
+# @param chatops
+# @param tls
+# @param server
+# @param r10k
+# @param config
 #
 class r10k::webhook (
   Enum['package', 'repo', 'none'] $install_method = 'package',

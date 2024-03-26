@@ -1,7 +1,11 @@
-# This class installs the r10k bundle
+# @summary This class installs the r10k bundle
+#
+# @param revision
+# @param source
+#
 class r10k::install::bundle (
-  $revision = 'master',
-  $source   = 'https://github.com/adrienthebo/r10k.git',
+  String[1] $revision = 'master',
+  String[1] $source   = 'https://github.com/adrienthebo/r10k.git',
 ) {
   # The bundle install has prefix support as of writing this, I want bleeding edge.
   package { "${module_name}-bundle":

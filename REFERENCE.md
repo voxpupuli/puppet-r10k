@@ -29,11 +29,11 @@
 
 ### Data types
 
-* [`R10k::Webhook::Config`](#R10k--Webhook--Config)
-* [`R10k::Webhook::Config::Chatops`](#R10k--Webhook--Config--Chatops)
-* [`R10k::Webhook::Config::R10k`](#R10k--Webhook--Config--R10k)
-* [`R10k::Webhook::Config::Server`](#R10k--Webhook--Config--Server)
-* [`R10k::Webhook::Config::Server::Tls`](#R10k--Webhook--Config--Server--Tls)
+* [`R10k::Webhook::Config`](#R10k--Webhook--Config): webhook config type
+* [`R10k::Webhook::Config::Chatops`](#R10k--Webhook--Config--Chatops): webhook config chatops type
+* [`R10k::Webhook::Config::R10k`](#R10k--Webhook--Config--R10k): webhook config r10k type
+* [`R10k::Webhook::Config::Server`](#R10k--Webhook--Config--Server): webhook config server type
+* [`R10k::Webhook::Config::Server::Tls`](#R10k--Webhook--Config--Server--Tls): webhook config server tls type
 
 ### Tasks
 
@@ -49,15 +49,6 @@ This class configures r10k
 
 The following parameters are available in the `r10k` class:
 
-* [`cachedir`](#-r10k--cachedir)
-* [`sources`](#-r10k--sources)
-* [`postrun`](#-r10k--postrun)
-* [`manage_configfile_symlink`](#-r10k--manage_configfile_symlink)
-* [`configfile_symlink`](#-r10k--configfile_symlink)
-* [`forge_settings`](#-r10k--forge_settings)
-* [`proxy`](#-r10k--proxy)
-* [`pool_size`](#-r10k--pool_size)
-* [`ensure`](#-r10k--ensure)
 * [`remote`](#-r10k--remote)
 * [`configfile`](#-r10k--configfile)
 * [`version`](#-r10k--version)
@@ -79,6 +70,183 @@ The following parameters are available in the `r10k` class:
 * [`include_prerun_command`](#-r10k--include_prerun_command)
 * [`include_postrun_command`](#-r10k--include_postrun_command)
 * [`puppetconf_path`](#-r10k--puppetconf_path)
+* [`cachedir`](#-r10k--cachedir)
+* [`sources`](#-r10k--sources)
+* [`postrun`](#-r10k--postrun)
+* [`manage_configfile_symlink`](#-r10k--manage_configfile_symlink)
+* [`configfile_symlink`](#-r10k--configfile_symlink)
+* [`forge_settings`](#-r10k--forge_settings)
+* [`proxy`](#-r10k--proxy)
+* [`pool_size`](#-r10k--pool_size)
+* [`ensure`](#-r10k--ensure)
+
+##### <a name="-r10k--remote"></a>`remote`
+
+Data type: `String[1]`
+
+
+
+Default value: `$r10k::params::remote`
+
+##### <a name="-r10k--configfile"></a>`configfile`
+
+Data type: `Stdlib::Absolutepath`
+
+
+
+Default value: `'/etc/puppetlabs/r10k/r10k.yaml'`
+
+##### <a name="-r10k--version"></a>`version`
+
+Data type: `String[1]`
+
+
+
+Default value: `$r10k::params::version`
+
+##### <a name="-r10k--puppet_master"></a>`puppet_master`
+
+Data type: `Boolean`
+
+
+
+Default value: `$r10k::params::puppet_master`
+
+##### <a name="-r10k--modulepath"></a>`modulepath`
+
+Data type: `String[1]`
+
+
+
+Default value: `$r10k::params::modulepath`
+
+##### <a name="-r10k--manage_modulepath"></a>`manage_modulepath`
+
+Data type: `Boolean`
+
+
+
+Default value: `$r10k::params::manage_modulepath`
+
+##### <a name="-r10k--manage_ruby_dependency"></a>`manage_ruby_dependency`
+
+Data type: `Enum['include','declare','ignore']`
+
+
+
+Default value: `$r10k::params::manage_ruby_dependency`
+
+##### <a name="-r10k--r10k_basedir"></a>`r10k_basedir`
+
+Data type: `Stdlib::Absolutepath`
+
+
+
+Default value: `$r10k::params::r10k_basedir`
+
+##### <a name="-r10k--package_name"></a>`package_name`
+
+Data type: `String[1]`
+
+
+
+Default value: `$r10k::params::package_name`
+
+##### <a name="-r10k--provider"></a>`provider`
+
+Data type: `String[1]`
+
+
+
+Default value: `$r10k::params::provider`
+
+##### <a name="-r10k--gentoo_keywords"></a>`gentoo_keywords`
+
+Data type: `String`
+
+
+
+Default value: `''`
+
+##### <a name="-r10k--install_options"></a>`install_options`
+
+Data type: `Variant[Array,String]`
+
+
+
+Default value: `[]`
+
+##### <a name="-r10k--mcollective"></a>`mcollective`
+
+Data type: `Boolean`
+
+
+
+Default value: `$r10k::params::mcollective`
+
+##### <a name="-r10k--git_settings"></a>`git_settings`
+
+Data type: `Optional[Hash]`
+
+
+
+Default value: `undef`
+
+##### <a name="-r10k--deploy_settings"></a>`deploy_settings`
+
+Data type: `Hash`
+
+
+
+Default value: `{ 'generate_types' => true, 'exclude_spec' => true, }`
+
+##### <a name="-r10k--root_user"></a>`root_user`
+
+Data type: `String[1]`
+
+
+
+Default value: `$r10k::params::root_user`
+
+##### <a name="-r10k--gem_source"></a>`gem_source`
+
+Data type: `Optional[String[1]]`
+
+
+
+Default value: `undef`
+
+##### <a name="-r10k--root_group"></a>`root_group`
+
+Data type: `String[1]`
+
+
+
+Default value: `$r10k::params::root_group`
+
+##### <a name="-r10k--include_prerun_command"></a>`include_prerun_command`
+
+Data type: `Boolean`
+
+
+
+Default value: `false`
+
+##### <a name="-r10k--include_postrun_command"></a>`include_postrun_command`
+
+Data type: `Boolean`
+
+
+
+Default value: `false`
+
+##### <a name="-r10k--puppetconf_path"></a>`puppetconf_path`
+
+Data type: `Stdlib::Absolutepath`
+
+
+
+Default value: `$r10k::params::puppetconf_path`
 
 ##### <a name="-r10k--cachedir"></a>`cachedir`
 
@@ -152,174 +320,6 @@ if r10k should be installed or purged
 
 Default value: `'present'`
 
-##### <a name="-r10k--remote"></a>`remote`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::remote`
-
-##### <a name="-r10k--configfile"></a>`configfile`
-
-Data type: `Stdlib::Absolutepath`
-
-
-
-Default value: `'/etc/puppetlabs/r10k/r10k.yaml'`
-
-##### <a name="-r10k--version"></a>`version`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::version`
-
-##### <a name="-r10k--puppet_master"></a>`puppet_master`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::puppet_master`
-
-##### <a name="-r10k--modulepath"></a>`modulepath`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::modulepath`
-
-##### <a name="-r10k--manage_modulepath"></a>`manage_modulepath`
-
-Data type: `Boolean`
-
-
-
-Default value: `$r10k::params::manage_modulepath`
-
-##### <a name="-r10k--manage_ruby_dependency"></a>`manage_ruby_dependency`
-
-Data type: `Enum['include','declare','ignore']`
-
-
-
-Default value: `$r10k::params::manage_ruby_dependency`
-
-##### <a name="-r10k--r10k_basedir"></a>`r10k_basedir`
-
-Data type: `Stdlib::Absolutepath`
-
-
-
-Default value: `$r10k::params::r10k_basedir`
-
-##### <a name="-r10k--package_name"></a>`package_name`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::package_name`
-
-##### <a name="-r10k--provider"></a>`provider`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::provider`
-
-##### <a name="-r10k--gentoo_keywords"></a>`gentoo_keywords`
-
-Data type: `String`
-
-
-
-Default value: `''`
-
-##### <a name="-r10k--install_options"></a>`install_options`
-
-Data type: `Variant[Array,String]`
-
-
-
-Default value: `[]`
-
-##### <a name="-r10k--mcollective"></a>`mcollective`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::mcollective`
-
-##### <a name="-r10k--git_settings"></a>`git_settings`
-
-Data type: `Optional[Hash]`
-
-
-
-Default value: `undef`
-
-##### <a name="-r10k--deploy_settings"></a>`deploy_settings`
-
-Data type: `Hash`
-
-
-
-Default value: `{ 'generate_types' => true, 'exclude_spec' => true, }`
-
-##### <a name="-r10k--root_user"></a>`root_user`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::root_user`
-
-##### <a name="-r10k--gem_source"></a>`gem_source`
-
-Data type: `Optional[String[1]]`
-
-
-
-Default value: `undef`
-
-##### <a name="-r10k--root_group"></a>`root_group`
-
-Data type: `Any`
-
-
-
-Default value: `$r10k::params::root_group`
-
-##### <a name="-r10k--include_prerun_command"></a>`include_prerun_command`
-
-Data type: `Boolean`
-
-
-
-Default value: `false`
-
-##### <a name="-r10k--include_postrun_command"></a>`include_postrun_command`
-
-Data type: `Boolean`
-
-
-
-Default value: `false`
-
-##### <a name="-r10k--puppetconf_path"></a>`puppetconf_path`
-
-Data type: `Stdlib::Absolutepath`
-
-
-
-Default value: `$r10k::params::puppetconf_path`
-
 ### <a name="r10k--install--bundle"></a>`r10k::install::bundle`
 
 This class installs the r10k bundle
@@ -333,7 +333,7 @@ The following parameters are available in the `r10k::install::bundle` class:
 
 ##### <a name="-r10k--install--bundle--revision"></a>`revision`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -341,7 +341,7 @@ Default value: `'master'`
 
 ##### <a name="-r10k--install--bundle--source"></a>`source`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -360,15 +360,15 @@ The following parameters are available in the `r10k::install::gem` class:
 
 ##### <a name="-r10k--install--gem--manage_ruby_dependency"></a>`manage_ruby_dependency`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
 ##### <a name="-r10k--install--gem--version"></a>`version`
 
-Data type: `Any`
+Data type: `String[1]`
 
-
+R10k gem version
 
 ### <a name="r10k--install--puppet_gem"></a>`r10k::install::puppet_gem`
 
@@ -390,7 +390,7 @@ The following parameters are available in the `r10k::mcollective` class:
 
 ##### <a name="-r10k--mcollective--ensure"></a>`ensure`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -398,7 +398,7 @@ Default value: `'present'`
 
 ##### <a name="-r10k--mcollective--server"></a>`server`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -406,7 +406,7 @@ Default value: `true`
 
 ##### <a name="-r10k--mcollective--client"></a>`client`
 
-Data type: `Any`
+Data type: `Boolean`
 
 
 
@@ -414,7 +414,7 @@ Default value: `true`
 
 ##### <a name="-r10k--mcollective--http_proxy"></a>`http_proxy`
 
-Data type: `Any`
+Data type: `String`
 
 
 
@@ -422,7 +422,7 @@ Default value: `''`
 
 ##### <a name="-r10k--mcollective--policies"></a>`policies`
 
-Data type: `Any`
+Data type: `Array`
 
 
 
@@ -445,7 +445,7 @@ The following parameters are available in the `r10k::mcollective::application` c
 
 ##### <a name="-r10k--mcollective--application--agent_name"></a>`agent_name`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
@@ -453,7 +453,7 @@ Default value: `$r10k::params::mc_agent_name`
 
 ##### <a name="-r10k--mcollective--application--app_name"></a>`app_name`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
@@ -461,7 +461,7 @@ Default value: `$r10k::params::mc_app_name`
 
 ##### <a name="-r10k--mcollective--application--agent_ddl"></a>`agent_ddl`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
@@ -469,7 +469,7 @@ Default value: `$r10k::params::mc_agent_ddl_name`
 
 ##### <a name="-r10k--mcollective--application--agent_path"></a>`agent_path`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
@@ -477,7 +477,7 @@ Default value: `$r10k::params::mc_agent_path`
 
 ##### <a name="-r10k--mcollective--application--app_path"></a>`app_path`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
@@ -485,7 +485,7 @@ Default value: `$r10k::params::mc_application_path`
 
 ##### <a name="-r10k--mcollective--application--mc_service"></a>`mc_service`
 
-Data type: `Any`
+Data type: `Optional[String]`
 
 
 
@@ -508,7 +508,7 @@ The following parameters are available in the `r10k::postrun_command` class:
 
 ##### <a name="-r10k--postrun_command--command"></a>`command`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -535,7 +535,7 @@ The following parameters are available in the `r10k::prerun_command` class:
 
 ##### <a name="-r10k--prerun_command--command"></a>`command`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -739,7 +739,7 @@ Class: r10k::webhook::service
 
 ### <a name="R10k--Webhook--Config"></a>`R10k::Webhook::Config`
 
-The R10k::Webhook::Config data type.
+webhook config type
 
 Alias of
 
@@ -753,7 +753,7 @@ Struct[{
 
 ### <a name="R10k--Webhook--Config--Chatops"></a>`R10k::Webhook::Config::Chatops`
 
-The R10k::Webhook::Config::Chatops data type.
+webhook config chatops type
 
 Alias of
 
@@ -770,7 +770,7 @@ Struct[{
 
 ### <a name="R10k--Webhook--Config--R10k"></a>`R10k::Webhook::Config::R10k`
 
-The R10k::Webhook::Config::R10k data type.
+webhook config r10k type
 
 Alias of
 
@@ -789,7 +789,7 @@ Struct[{
 
 ### <a name="R10k--Webhook--Config--Server"></a>`R10k::Webhook::Config::Server`
 
-The R10k::Webhook::Config::Server data type.
+webhook config server type
 
 Alias of
 
@@ -805,7 +805,7 @@ Struct[{
 
 ### <a name="R10k--Webhook--Config--Server--Tls"></a>`R10k::Webhook::Config::Server::Tls`
 
-The R10k::Webhook::Config::Server::Tls data type.
+webhook config server tls type
 
 Alias of
 

@@ -1,11 +1,19 @@
-# Install the r10k mcollective application to a client
+# @summary Install the r10k mcollective application to a client
+#
+# @param agent_name
+# @param app_name
+# @param agent_ddl
+# @param agent_path
+# @param app_path
+# @param mc_service
+#
 class r10k::mcollective::application (
-  $agent_name        = $r10k::params::mc_agent_name,
-  $app_name          = $r10k::params::mc_app_name,
-  $agent_ddl         = $r10k::params::mc_agent_ddl_name,
-  $agent_path        = $r10k::params::mc_agent_path,
-  $app_path          = $r10k::params::mc_application_path,
-  $mc_service        = $r10k::params::mc_service_name,
+  Optional[String] $agent_name = $r10k::params::mc_agent_name,
+  Optional[String] $app_name   = $r10k::params::mc_app_name,
+  Optional[String] $agent_ddl  = $r10k::params::mc_agent_ddl_name,
+  Optional[String] $agent_path = $r10k::params::mc_agent_path,
+  Optional[String] $app_path   = $r10k::params::mc_application_path,
+  Optional[String] $mc_service = $r10k::params::mc_service_name,
 ) inherits r10k::params {
   require r10k
 

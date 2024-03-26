@@ -1,3 +1,4 @@
+# @summary webhook config server type
 type R10k::Webhook::Config::Server = Struct[{
     protected => Boolean,
     user      => Optional[String[1]],
