@@ -2,10 +2,3 @@
   enabled_lint_checks:
     - parameter_documentation
     - parameter_types
-Gemfile:
-  optional:
-    ':test':
-      - gem: faraday-net_http
-        version: '~> 2.8.1'
-        ruby-operator: '<'
-        ruby-version: '3.2'
