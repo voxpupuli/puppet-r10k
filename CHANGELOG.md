@@ -4,6 +4,32 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v13.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v13.0.0) (2024-04-26)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v12.2.0...v13.0.0)
+
+**Breaking changes:**
+
+- Drop Ubuntu 18.04 support [\#648](https://github.com/voxpupuli/puppet-r10k/pull/648) ([zilchms](https://github.com/zilchms))
+
+**Implemented enhancements:**
+
+- Add OracleLinux 8 and 9 support [\#650](https://github.com/voxpupuli/puppet-r10k/pull/650) ([zilchms](https://github.com/zilchms))
+- Add RHEL 9 support [\#649](https://github.com/voxpupuli/puppet-r10k/pull/649) ([zilchms](https://github.com/zilchms))
+- Add Ubuntu 20.04 and 22.04 support [\#647](https://github.com/voxpupuli/puppet-r10k/pull/647) ([zilchms](https://github.com/zilchms))
+- Add documentation stubs [\#646](https://github.com/voxpupuli/puppet-r10k/pull/646) ([zilchms](https://github.com/zilchms))
+
+**Fixed bugs:**
+
+- Use File.exist? instead of File.exists? [\#645](https://github.com/voxpupuli/puppet-r10k/pull/645) ([tuxmea](https://github.com/tuxmea))
+- restore support for EoL Ruby / Puppet 7; enable acceptance tests [\#642](https://github.com/voxpupuli/puppet-r10k/pull/642) ([zilchms](https://github.com/zilchms))
+- Remove legacy top-scope syntax [\#639](https://github.com/voxpupuli/puppet-r10k/pull/639) ([smortex](https://github.com/smortex))
+- Update ordering on webhook and docu [\#638](https://github.com/voxpupuli/puppet-r10k/pull/638) ([tuxmea](https://github.com/tuxmea))
+
+**Merged pull requests:**
+
+- puppet/systemd: Allow 7.x [\#656](https://github.com/voxpupuli/puppet-r10k/pull/656) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v12.2.0](https://github.com/voxpupuli/puppet-r10k/tree/v12.2.0) (2023-10-05)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v12.1.1...v12.2.0)
