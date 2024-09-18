@@ -615,9 +615,6 @@ Deprecated: for older [configfile](https://docs.puppetlabs.com/puppet/latest/ref
 ##### `manage_modulepath`
 Deprecated: declare a resource for managing `modulepath` in Puppet.conf
 
-##### `manage_ruby_dependency`
-When using system ruby , options on how to declare
-
 ##### `proxy`
 A string setting the`r10k.yaml` configuration value of the same name
 
@@ -628,22 +625,7 @@ An optional string specifying location to retrieve gem
 Integer defining how many threads should be spawn while updating modules. Only available for r10k >= 3.3.0.
 
 ##### `r10k_basedir`
-This module requires the [puppetlabs-ruby](https://github.com/puppetlabs/puppetlabs-ruby.git) module. In the event that your environment already includes
-the module with some customization, you can use the `manage_ruby_dependency`
-parameter to adjust how this module expresses that requirement.
-The supported values are `include`,`declare`, or `ignore`. The values' behavior
-is outlined below:
 
-  * *declare* **default** This will explicitly declare the ruby module.
-    Additional declarations of the ruby module will result in an inability to
-    compile a catalog.
-
-  * *include* This will simply include the ruby module. When combined with class
-    ordering, this will permit the user to manage the instantiation of the ruby module elsewhere, potentially with non-standard parameter values.
-
-  * *ignore* This will assume that ruby is handled via some other mechanism than
-    a puppet module named `ruby`. It is left to the user to insure the
-    requirement be met.
 ##### `package_name`
 The name of the package to be installed via the provider
 

@@ -11,13 +11,7 @@ class r10k::install {
       include r10k::install::bundle
     }
     'puppet_gem', 'gem', 'openbsd', 'pkgng', 'pacman', 'portage': {
-      if $r10k::provider == 'gem' {
-        class { 'r10k::install::gem':
-          manage_ruby_dependency => $r10k::manage_ruby_dependency,
-          version                => $r10k::version;
-        }
-      }
-      elsif $r10k::provider == 'puppet_gem' {
+      if $r10k::provider == 'puppet_gem' {
         # Puppet FOSS 4.2 and up ships a vendor provided ruby.
         # Using puppet_gem uses that instead of the system ruby.
         include r10k::install::puppet_gem

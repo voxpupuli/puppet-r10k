@@ -6,7 +6,6 @@
 # @param puppet_master
 # @param modulepath
 # @param manage_modulepath
-# @param manage_ruby_dependency
 # @param r10k_basedir
 # @param package_name
 # @param provider
@@ -23,7 +22,7 @@
 # @param puppetconf_path
 # @param cachedir
 #   Path to a directory to be used by r10k for caching data
-# @param sources 
+# @param sources
 #   Hash containing data sources to be used by r10k to create dynamic Puppet environments
 # @param postrun
 #   Array containing the parts of a system call Example: ['/usr/bin/curl', '-F', 'deploy=done', 'http://my-app.site/endpoint']
@@ -48,7 +47,6 @@ class r10k (
   Boolean $puppet_master                                      = $r10k::params::puppet_master,
   String[1] $modulepath                                       = $r10k::params::modulepath,
   Boolean $manage_modulepath                                  = $r10k::params::manage_modulepath,
-  Enum['include','declare','ignore'] $manage_ruby_dependency  = $r10k::params::manage_ruby_dependency,
   Stdlib::Absolutepath $r10k_basedir                          = $r10k::params::r10k_basedir,
   String[1] $package_name                                     = $r10k::params::package_name,
   String[1] $provider                                         = $r10k::params::provider,

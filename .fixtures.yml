@@ -7,7 +7,6 @@ fixtures:
     git: https://github.com/puppetlabs/puppetlabs-git.git
     inifile: https://github.com/puppetlabs/puppetlabs-inifile.git
     mcollective: https://github.com/choria-io/puppet-mcollective.git
-    ruby: https://github.com/puppetlabs/puppetlabs-ruby.git
     systemd: https://github.com/voxpupuli/puppet-systemd.git
     vcsrepo: https://github.com/puppetlabs/puppetlabs-vcsrepo.git
     yumrepo_core: https://github.com/puppetlabs/puppetlabs-yumrepo_core.git

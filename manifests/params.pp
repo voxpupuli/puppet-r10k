@@ -6,7 +6,6 @@ class r10k::params {
   }
   $version                = 'installed'
   $manage_modulepath      = false
-  $manage_ruby_dependency = 'ignore'
   $root_user              = 'root'
   $root_group             = 'root'
 
