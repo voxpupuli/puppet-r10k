@@ -10,7 +10,7 @@ describe 'r10k::webhook' do
       end
 
       context 'with default params' do
-        if %w[archlinux-rolling-x86_64 gentoo-2-x86_64].include?(os)
+        if %w[archlinux-rolling-x86_64 archlinux-6-x86_64 gentoo-2-x86_64].include?(os)
           it { is_expected.not_to compile }
         else
           it { is_expected.to compile.with_all_deps }
@@ -89,7 +89,7 @@ r10k:
   generate_types: true
 '
         context 'with default install_method' do
-          if %w[archlinux-rolling-x86_64 gentoo-2-x86_64].include?(os)
+          if %w[archlinux-rolling-x86_64 archlinux-6-x86_64 gentoo-2-x86_64].include?(os)
             it { is_expected.not_to compile }
           else
             it { is_expected.to compile.with_all_deps }

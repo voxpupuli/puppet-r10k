@@ -10,7 +10,6 @@
 
 * [`r10k`](#r10k): This class configures r10k
 * [`r10k::install::bundle`](#r10k--install--bundle): This class installs the r10k bundle
-* [`r10k::install::gem`](#r10k--install--gem): Install the r10k gem using system ruby
 * [`r10k::install::puppet_gem`](#r10k--install--puppet_gem): This class links the r10k binary for Puppet FOSS 4.2 and up
 * [`r10k::mcollective`](#r10k--mcollective): Install the r10k mcollective agent
 * [`r10k::mcollective::application`](#r10k--mcollective--application): Install the r10k mcollective application to a client
@@ -55,7 +54,6 @@ The following parameters are available in the `r10k` class:
 * [`puppet_master`](#-r10k--puppet_master)
 * [`modulepath`](#-r10k--modulepath)
 * [`manage_modulepath`](#-r10k--manage_modulepath)
-* [`manage_ruby_dependency`](#-r10k--manage_ruby_dependency)
 * [`r10k_basedir`](#-r10k--r10k_basedir)
 * [`package_name`](#-r10k--package_name)
 * [`provider`](#-r10k--provider)
@@ -127,14 +125,6 @@ Data type: `Boolean`
 
 
 Default value: `$r10k::params::manage_modulepath`
-
-##### <a name="-r10k--manage_ruby_dependency"></a>`manage_ruby_dependency`
-
-Data type: `Enum['include','declare','ignore']`
-
-
-
-Default value: `$r10k::params::manage_ruby_dependency`
 
 ##### <a name="-r10k--r10k_basedir"></a>`r10k_basedir`
 
@@ -346,29 +336,6 @@ Data type: `String[1]`
 
 
 Default value: `'https://github.com/adrienthebo/r10k.git'`
-
-### <a name="r10k--install--gem"></a>`r10k::install::gem`
-
-Install the r10k gem using system ruby
-
-#### Parameters
-
-The following parameters are available in the `r10k::install::gem` class:
-
-* [`manage_ruby_dependency`](#-r10k--install--gem--manage_ruby_dependency)
-* [`version`](#-r10k--install--gem--version)
-
-##### <a name="-r10k--install--gem--manage_ruby_dependency"></a>`manage_ruby_dependency`
-
-Data type: `String[1]`
-
-
-
-##### <a name="-r10k--install--gem--version"></a>`version`
-
-Data type: `String[1]`
-
-R10k gem version
 
 ### <a name="r10k--install--puppet_gem"></a>`r10k::install::puppet_gem`
 
