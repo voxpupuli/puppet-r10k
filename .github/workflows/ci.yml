@@ -23,3 +23,5 @@ jobs:
   puppet:
     name: Puppet
     uses: voxpupuli/gha-puppet/.github/workflows/beaker.yml@v3
+    with:
+      acceptance_runs_on: ubuntu-20.04
