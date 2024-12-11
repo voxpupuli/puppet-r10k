@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v14.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v14.0.0) (2024-12-11)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v13.0.0...v14.0.0)
+
+**Breaking changes:**
+
+- rm manage\_ruby\_dependency param & r10k::install::gem [\#661](https://github.com/voxpupuli/puppet-r10k/pull/661) ([jhoblitt](https://github.com/jhoblitt))
+- drop support for EL7 [\#660](https://github.com/voxpupuli/puppet-r10k/pull/660) ([jhoblitt](https://github.com/jhoblitt))
+
+**Implemented enhancements:**
+
+- Add Debian 12 support [\#669](https://github.com/voxpupuli/puppet-r10k/pull/669) ([bastelfreak](https://github.com/bastelfreak))
+- Add Ubuntu 24.04 support [\#668](https://github.com/voxpupuli/puppet-r10k/pull/668) ([bastelfreak](https://github.com/bastelfreak))
+- Add CentOS 9 support [\#667](https://github.com/voxpupuli/puppet-r10k/pull/667) ([bastelfreak](https://github.com/bastelfreak))
+- Add Support for r10k 4 & 5 [\#666](https://github.com/voxpupuli/puppet-r10k/pull/666) ([bastelfreak](https://github.com/bastelfreak))
+- Update webhook-go 2.2.0-\>2.8.0 [\#665](https://github.com/voxpupuli/puppet-r10k/pull/665) ([saz](https://github.com/saz))
+
 ## [v13.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v13.0.0) (2024-04-26)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v12.2.0...v13.0.0)
