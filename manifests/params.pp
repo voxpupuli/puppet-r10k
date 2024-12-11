@@ -4,7 +4,14 @@ class r10k::params {
     'OpenBSD' => 'ruby31-r10k',
     default   => 'r10k'
   }
-  $version                = 'installed'
+  # 4.1.0 is the oldest version that supports ruby >=2.6.0
+  # That's required on Puppet 7
+  # pacman provider has no versionable flag
+  $version = if versioncmp($facts['puppetversion'], '8.0.0') < 0 and $facts['os']['name'] != 'Archlinux' {
+    '4.1.0'
+  } else {
+    'installed'
+  }
   $manage_modulepath      = false
   $root_user              = 'root'
   $root_group             = 'root'
