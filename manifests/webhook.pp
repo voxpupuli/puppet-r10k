@@ -17,7 +17,7 @@
 class r10k::webhook (
   Enum['package', 'repo', 'none'] $install_method = 'package',
   Boolean $ensure = false,
-  String $version = '2.2.0',
+  String $version = '2.8.0',
   Variant[
     Enum['running', 'stopped'],
     Boolean
