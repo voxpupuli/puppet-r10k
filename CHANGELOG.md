@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v14.1.0](https://github.com/voxpupuli/puppet-r10k/tree/v14.1.0) (2025-02-11)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v14.0.0...v14.1.0)
+
+**Implemented enhancements:**
+
+- Integrate puppet\_webhook [\#430](https://github.com/voxpupuli/puppet-r10k/issues/430)
+
+**Merged pull requests:**
+
+- puppet/systemd: allow 8.x [\#672](https://github.com/voxpupuli/puppet-r10k/pull/672) ([jay7x](https://github.com/jay7x))
+
 ## [v14.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v14.0.0) (2024-12-11)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v13.0.0...v14.0.0)
