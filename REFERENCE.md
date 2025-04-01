@@ -555,11 +555,11 @@ Default value: `false`
 
 ##### <a name="-r10k--webhook--version"></a>`version`
 
-Data type: `String`
+Data type: `String[1]`
 
 
 
-Default value: `'2.8.0'`
+Default value: `'2.9.0'`
 
 ##### <a name="-r10k--webhook--service_ensure"></a>`service_ensure`
 
