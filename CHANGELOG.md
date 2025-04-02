@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v14.2.0](https://github.com/voxpupuli/puppet-r10k/tree/v14.2.0) (2025-04-02)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v14.1.0...v14.2.0)
+
+**Implemented enhancements:**
+
+- webhook-go: Update 2.8.0-\>2.9.0 [\#677](https://github.com/voxpupuli/puppet-r10k/pull/677) ([bastelfreak](https://github.com/bastelfreak))
+- metadata.json: Add OpenVox [\#676](https://github.com/voxpupuli/puppet-r10k/pull/676) ([jstraw](https://github.com/jstraw))
+
 ## [v14.1.0](https://github.com/voxpupuli/puppet-r10k/tree/v14.1.0) (2025-02-11)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v14.0.0...v14.1.0)
