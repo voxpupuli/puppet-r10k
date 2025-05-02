@@ -5,4 +5,5 @@ type R10k::Webhook::Config::Server = Struct[{
     password  => Optional[String[1]],
     port      => Optional[Stdlib::Port],
     tls       => Optional[R10k::Webhook::Config::Server::Tls],
+    queue     => Optional[R10k::Webhook::Config::Server::Queue],
 }]
