@@ -32,6 +32,7 @@
 * [`R10k::Webhook::Config::Chatops`](#R10k--Webhook--Config--Chatops): webhook config chatops type
 * [`R10k::Webhook::Config::R10k`](#R10k--Webhook--Config--R10k): webhook config r10k type
 * [`R10k::Webhook::Config::Server`](#R10k--Webhook--Config--Server): webhook config server type
+* [`R10k::Webhook::Config::Server::Queue`](#R10k--Webhook--Config--Server--Queue): webhook config server queue type
 * [`R10k::Webhook::Config::Server::Tls`](#R10k--Webhook--Config--Server--Tls): webhook config server tls type
 
 ### Tasks
@@ -533,6 +534,7 @@ The following parameters are available in the `r10k::webhook` class:
 * [`config_path`](#-r10k--webhook--config_path)
 * [`chatops`](#-r10k--webhook--chatops)
 * [`tls`](#-r10k--webhook--tls)
+* [`queue`](#-r10k--webhook--queue)
 * [`server`](#-r10k--webhook--server)
 * [`r10k`](#-r10k--webhook--r10k)
 * [`config`](#-r10k--webhook--config)
@@ -635,6 +637,22 @@ Default value:
   }
 ```
 
+##### <a name="-r10k--webhook--queue"></a>`queue`
+
+Data type: `R10k::Webhook::Config::Server::Queue`
+
+
+
+Default value:
+
+```puppet
+{
+    enabled             => false,
+    max_concurrent_jobs => undef,
+    max_history_items   => undef,
+  }
+```
+
 ##### <a name="-r10k--webhook--server"></a>`server`
 
 Data type: `R10k::Webhook::Config::Server`
@@ -650,6 +668,7 @@ Default value:
     password  => 'puppet',
     port      => 4000,
     tls       => $tls,
+    queue     => $queue,
   }
 ```
 
@@ -767,6 +786,21 @@ Struct[{
     password  => Optional[String[1]],
     port      => Optional[Stdlib::Port],
     tls       => Optional[R10k::Webhook::Config::Server::Tls],
+    queue     => Optional[R10k::Webhook::Config::Server::Queue],
+}]
+```
+
+### <a name="R10k--Webhook--Config--Server--Queue"></a>`R10k::Webhook::Config::Server::Queue`
+
+webhook config server queue type
+
+Alias of
+
+```puppet
+Struct[{
+    enabled             => Boolean,
+    max_concurrent_jobs => Optional[Integer],
+    max_history_items   => Optional[Integer],
 }]
 ```
 

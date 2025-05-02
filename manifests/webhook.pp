@@ -10,6 +10,7 @@
 # @param config_path
 # @param chatops
 # @param tls
+# @param queue
 # @param server
 # @param r10k
 # @param config
@@ -38,12 +39,18 @@ class r10k::webhook (
     certificate => undef,
     key         => undef,
   },
+  R10k::Webhook::Config::Server::Queue $queue    = {
+    enabled             => false,
+    max_concurrent_jobs => undef,
+    max_history_items   => undef,
+  },
   R10k::Webhook::Config::Server $server      = {
     protected => true,
     user      => 'puppet',
     password  => 'puppet',
     port      => 4000,
     tls       => $tls,
+    queue     => $queue,
   },
   R10k::Webhook::Config::R10k $r10k = {
     command_path    => '/opt/puppetlabs/puppet/bin/r10k',

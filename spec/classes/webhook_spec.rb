@@ -49,6 +49,11 @@ describe 'r10k::webhook' do
                 certificate: '/path/to/cert',
                 key: '/path/to/key',
               },
+              queue: {
+                enabled: true,
+                max_concurrent_jobs: 10,
+                max_history_items: 20,
+              }
             },
             r10k: {
               command_path: '/opt/puppetlabs/puppet/bin/r10k',
@@ -72,6 +77,10 @@ server:
     enabled: true
     certificate: "/path/to/cert"
     key: "/path/to/key"
+  queue:
+    enabled: true
+    max_concurrent_jobs: 10
+    max_history_items: 20
 chatops:
   enabled: true
   service: slack

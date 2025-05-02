@@ -16,6 +16,11 @@ describe 'R10k::Webhook::Config' do
             certificate: '/some/path/to/cert.pem',
             key: '/some/path/to/key.pem',
           },
+          queue: {
+            enabled: true,
+            max_concurrent_jobs: 10,
+            max_history_items: 20,
+          },
         },
         chatops: {
           enabled: true,
