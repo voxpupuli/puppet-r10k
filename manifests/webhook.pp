@@ -1,5 +1,6 @@
 # @summary install and configure the webhook-go package as local webhook receiver to trigger r10k runs
 #
+# @param service_user the user that should run the service
 # @param install_method
 #   how the package should be installed
 # @param ensure
@@ -16,6 +17,7 @@
 # @param config
 #
 class r10k::webhook (
+  Optional $service_user = undef,
   Enum['package', 'repo', 'none'] $install_method = 'package',
   Boolean $ensure = false,
   String[1] $version = '2.10.0',

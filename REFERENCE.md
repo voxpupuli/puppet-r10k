@@ -525,6 +525,7 @@ install and configure the webhook-go package as local webhook receiver to trigge
 
 The following parameters are available in the `r10k::webhook` class:
 
+* [`service_user`](#-r10k--webhook--service_user)
 * [`install_method`](#-r10k--webhook--install_method)
 * [`ensure`](#-r10k--webhook--ensure)
 * [`version`](#-r10k--webhook--version)
@@ -538,6 +539,14 @@ The following parameters are available in the `r10k::webhook` class:
 * [`server`](#-r10k--webhook--server)
 * [`r10k`](#-r10k--webhook--r10k)
 * [`config`](#-r10k--webhook--config)
+
+##### <a name="-r10k--webhook--service_user"></a>`service_user`
+
+Data type: `Optional`
+
+the user that should run the service
+
+Default value: `undef`
 
 ##### <a name="-r10k--webhook--install_method"></a>`install_method`
 
