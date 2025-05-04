@@ -533,6 +533,7 @@ The following parameters are available in the `r10k::webhook` class:
 * [`service_enabled`](#-r10k--webhook--service_enabled)
 * [`config_ensure`](#-r10k--webhook--config_ensure)
 * [`config_path`](#-r10k--webhook--config_path)
+* [`blocked_branches`](#-r10k--webhook--blocked_branches)
 * [`chatops`](#-r10k--webhook--chatops)
 * [`tls`](#-r10k--webhook--tls)
 * [`queue`](#-r10k--webhook--queue)
@@ -610,6 +611,14 @@ Data type: `String`
 
 
 Default value: `'/etc/voxpupuli/webhook.yml'`
+
+##### <a name="-r10k--webhook--blocked_branches"></a>`blocked_branches`
+
+Data type: `Array[String[1]]`
+
+array of branches that the webhook will not deploy
+
+Default value: `[]`
 
 ##### <a name="-r10k--webhook--chatops"></a>`chatops`
 
@@ -691,14 +700,15 @@ Default value:
 
 ```puppet
 {
-    command_path    => '/opt/puppetlabs/puppet/bin/r10k',
-    config_path     => '/etc/puppetlabs/r10k/r10k.yaml',
-    default_branch  => 'production',
-    prefix          => undef,
-    allow_uppercase => false,
-    verbose         => true,
-    deploy_modules  => true,
-    generate_types  => true,
+    command_path     => '/opt/puppetlabs/puppet/bin/r10k',
+    config_path      => '/etc/puppetlabs/r10k/r10k.yaml',
+    default_branch   => 'production',
+    prefix           => undef,
+    allow_uppercase  => false,
+    verbose          => true,
+    deploy_modules   => true,
+    generate_types   => true,
+    blocked_branches => $blocked_branches,
   }
 ```
 
@@ -771,14 +781,15 @@ Alias of
 
 ```puppet
 Struct[{
-    command_path    => Optional[Stdlib::Absolutepath],
-    config_path     => Optional[Stdlib::Absolutepath],
-    default_branch  => Optional[String[1]],
-    prefix          => Optional[String[1]],
-    allow_uppercase => Optional[Boolean],
-    verbose         => Optional[Boolean],
-    deploy_modules  => Optional[Boolean],
-    generate_types  => Optional[Boolean],
+    command_path     => Optional[Stdlib::Absolutepath],
+    config_path      => Optional[Stdlib::Absolutepath],
+    default_branch   => Optional[String[1]],
+    prefix           => Optional[String[1]],
+    allow_uppercase  => Optional[Boolean],
+    verbose          => Optional[Boolean],
+    deploy_modules   => Optional[Boolean],
+    generate_types   => Optional[Boolean],
+    blocked_branches => Optional[Array[String[1]]],
 }]
 ```
 
