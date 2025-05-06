@@ -7,5 +7,8 @@ class r10k::webhook::config (
     ensure  => $r10k::webhook::config_ensure,
     path    => $r10k::webhook::config_path,
     content => stdlib::to_yaml($r10k::webhook::config),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
   }
 }

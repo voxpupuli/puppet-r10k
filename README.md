@@ -585,7 +585,14 @@ class { 'r10k::webhook':
 
 ### Ignore deploying some environments
 
-Webhook Go does not support this yet, but will in the future.
+Since [2.10.0](https://github.com/voxpupuli/webhook-go/releases/tag/v2.10.0) the webhook has support for ignoring certain branches.
+This is not yet configureable via the puppet module.
+
+### configuring the webservice/deploy user
+
+For historic reasons, webhook-go runs as root and executes r10k with the same user.
+Via `r10k::webhook::service_user` you can change the user.
+With the 15.0.0 release the default will switch from root to puppet.
 
 ## Reference
 

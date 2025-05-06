@@ -18,7 +18,7 @@ describe 'r10k::webhook' do
           it { is_expected.to contain_class('r10k::webhook::service') }
           it { is_expected.to contain_class('r10k::webhook::config') }
           it { is_expected.to contain_package('webhook-go').with_ensure('present') }
-          it { is_expected.to contain_service('webhook-go').with_ensure('running') }
+          it { is_expected.to contain_service('webhook-go.service').with_ensure('running') }
         end
       end
 
@@ -106,7 +106,8 @@ r10k:
             it { is_expected.to contain_class('r10k::webhook::service') }
             it { is_expected.to contain_class('r10k::webhook::config') }
             it { is_expected.to contain_package('webhook-go').with_ensure('present') }
-            it { is_expected.to contain_service('webhook-go').with_ensure('running') }
+            it { is_expected.to contain_service('webhook-go.service').with_ensure('running') }
+            it { is_expected.not_to contain_systemd__dropin_file('user.conf') }
             it { is_expected.to contain_file('webhook.yml').with_content(content) }
 
             if os_facts[:os]['family'] == 'RedHat'
@@ -125,6 +126,18 @@ r10k:
           end
 
           it { is_expected.to compile.with_all_deps }
+        end
+
+        context 'with service_user = puppet' do
+          let :params do
+            super().merge({ service_user: 'puppet' })
+          end
+
+          if %w[archlinux-rolling-x86_64 archlinux-6-x86_64 gentoo-2-x86_64].include?(os)
+            it { is_expected.not_to compile }
+          else
+            it { is_expected.to contain_systemd__dropin_file('user.conf').with_content("[Service]\nUser=puppet\n") }
+          end
         end
       end
     end
