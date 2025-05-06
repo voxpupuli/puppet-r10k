@@ -9,6 +9,7 @@
 # @param service_enabled
 # @param config_ensure
 # @param config_path
+# @param blocked_branches array of branches that the webhook will not deploy
 # @param chatops
 # @param tls
 # @param queue
@@ -28,6 +29,7 @@ class r10k::webhook (
   Boolean $service_enabled = true,
   String $config_ensure                      = 'file',
   String $config_path                        = '/etc/voxpupuli/webhook.yml',
+  Array[String[1]] $blocked_branches         = [],
   R10k::Webhook::Config::ChatOps $chatops    = {
     enabled    => false,
     service    => undef,
@@ -55,14 +57,15 @@ class r10k::webhook (
     queue     => $queue,
   },
   R10k::Webhook::Config::R10k $r10k = {
-    command_path    => '/opt/puppetlabs/puppet/bin/r10k',
-    config_path     => '/etc/puppetlabs/r10k/r10k.yaml',
-    default_branch  => 'production',
-    prefix          => undef,
-    allow_uppercase => false,
-    verbose         => true,
-    deploy_modules  => true,
-    generate_types  => true,
+    command_path     => '/opt/puppetlabs/puppet/bin/r10k',
+    config_path      => '/etc/puppetlabs/r10k/r10k.yaml',
+    default_branch   => 'production',
+    prefix           => undef,
+    allow_uppercase  => false,
+    verbose          => true,
+    deploy_modules   => true,
+    generate_types   => true,
+    blocked_branches => $blocked_branches,
   },
   R10k::Webhook::Config $config              = {
     server  => $server,
