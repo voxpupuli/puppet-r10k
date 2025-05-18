@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v14.3.0](https://github.com/voxpupuli/puppet-r10k/tree/v14.3.0) (2025-05-18)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v14.2.0...v14.3.0)
+
+**Implemented enhancements:**
+
+- webhook: Make service user configureable [\#682](https://github.com/voxpupuli/puppet-r10k/pull/682) ([bastelfreak](https://github.com/bastelfreak))
+- Add support for webhook queue options [\#680](https://github.com/voxpupuli/puppet-r10k/pull/680) ([elfranne](https://github.com/elfranne))
+- \(metadata.json\) allow puppetlabs-vcsrepo 7.x [\#679](https://github.com/voxpupuli/puppet-r10k/pull/679) ([badenerb](https://github.com/badenerb))
+
 ## [v14.2.0](https://github.com/voxpupuli/puppet-r10k/tree/v14.2.0) (2025-04-02)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v14.1.0...v14.2.0)
