@@ -30,6 +30,7 @@
 
 * [`R10k::Webhook::Config`](#R10k--Webhook--Config): webhook config type
 * [`R10k::Webhook::Config::Chatops`](#R10k--Webhook--Config--Chatops): webhook config chatops type
+* [`R10k::Webhook::Config::Mappings`](#R10k--Webhook--Config--Mappings): webhook config mappings type
 * [`R10k::Webhook::Config::R10k`](#R10k--Webhook--Config--R10k): webhook config r10k type
 * [`R10k::Webhook::Config::Server`](#R10k--Webhook--Config--Server): webhook config server type
 * [`R10k::Webhook::Config::Server::Queue`](#R10k--Webhook--Config--Server--Queue): webhook config server queue type
@@ -547,6 +548,7 @@ The following parameters are available in the `r10k::webhook` class:
 * [`queue`](#-r10k--webhook--queue)
 * [`server`](#-r10k--webhook--server)
 * [`r10k`](#-r10k--webhook--r10k)
+* [`mappings`](#-r10k--webhook--mappings)
 * [`config`](#-r10k--webhook--config)
 
 ##### <a name="-r10k--webhook--service_user"></a>`service_user`
@@ -711,6 +713,14 @@ Default value:
   }
 ```
 
+##### <a name="-r10k--webhook--mappings"></a>`mappings`
+
+Data type: `R10k::Webhook::Config::Mappings`
+
+
+
+Default value: `{}`
+
 ##### <a name="-r10k--webhook--config"></a>`config`
 
 Data type: `R10k::Webhook::Config`
@@ -724,6 +734,7 @@ Default value:
     server  => $server,
     chatops => $chatops,
     r10k    => $r10k,
+    mappings => $mappings,
   }
 ```
 
@@ -752,6 +763,7 @@ Struct[{
     server  => Optional[R10k::Webhook::Config::Server],
     chatops => Optional[R10k::Webhook::Config::Chatops],
     r10k    => Optional[R10k::Webhook::Config::R10k],
+    mappings => Optional[R10k::Webhook::Config::Mappings],
   }]
 ```
 
@@ -771,6 +783,12 @@ Struct[{
     server_uri => Optional[String[1]],
   }]
 ```
+
+### <a name="R10k--Webhook--Config--Mappings"></a>`R10k::Webhook::Config::Mappings`
+
+webhook config mappings type
+
+Alias of `Hash[String, String]`
 
 ### <a name="R10k--Webhook--Config--R10k"></a>`R10k::Webhook::Config::R10k`
 
