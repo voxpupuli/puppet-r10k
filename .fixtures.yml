@@ -1,3 +1,4 @@
+---
 fixtures:
   repositories:
     apt: https://github.com/puppetlabs/puppetlabs-apt.git
@@ -7,14 +8,13 @@ fixtures:
     git: https://github.com/puppetlabs/puppetlabs-git.git
     inifile: https://github.com/puppetlabs/puppetlabs-inifile.git
     mcollective: https://github.com/choria-io/puppet-mcollective.git
+    stdlib: https://github.com/puppetlabs/puppetlabs-stdlib.git
     systemd: https://github.com/voxpupuli/puppet-systemd.git
     vcsrepo: https://github.com/puppetlabs/puppetlabs-vcsrepo.git
     yumrepo_core: https://github.com/puppetlabs/puppetlabs-yumrepo_core.git
-    stdlib: https://github.com/puppetlabs/puppetlabs-stdlib.git
-  forge_modules:
-    mcollective_agent_filemgr: "choria/mcollective_agent_filemgr"
-    mcollective_agent_package: "choria/mcollective_agent_package"
-    mcollective_agent_puppet: "choria/mcollective_agent_puppet"
-    mcollective_agent_service: "choria/mcollective_agent_service"
-    mcollective_choria: "choria/mcollective_choria"
-    mcollective_util_actionpolicy: "choria/mcollective_util_actionpolicy"
+    mcollective_agent_filemgr: https://github.com/choria-plugins/filemgr-agent.git
+    mcollective_agent_package: https://github.com/choria-plugins/package-agent.git
+    mcollective_agent_puppet: https://github.com/choria-plugins/puppet-agent.git
+    mcollective_agent_service: https://github.com/choria-plugins/service-agent.git
+    mcollective_choria: https://github.com/choria-plugins/mcollective_choria.git
+    mcollective_util_actionpolicy: https://github.com/choria-plugins/action-policy.git
