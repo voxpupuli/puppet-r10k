@@ -54,8 +54,8 @@ describe 'r10k::webhook tests', if: fact('os.name') != 'Archlinux' do
       end
     end
 
-    describe package('webhook-go') do
-      it { is_expected.to be_installed }
+    describe command('systemctl cat webhook-go') do
+      its(:stdout) { is_expected.to match(%r{User=puppet}) }
     end
 
     describe file('/etc/voxpupuli/webhook.yml') do
@@ -65,6 +65,19 @@ describe 'r10k::webhook tests', if: fact('os.name') != 'Archlinux' do
         expect(subject).to be_grouped_into 'root'
       end
     end
+  end
+
+  context 'with blocked_branches' do
+    it_behaves_like 'an idempotent resource' do
+      let(:manifest) do
+        <<-PUPPET
+        class { 'r10k': }
+        -> class { 'r10k::webhook':
+          blocked_branches => ['production'],
+        }
+        PUPPET
+      end
+    end
 
     describe service('webhook-go') do
       it { is_expected.to be_enabled }
@@ -72,7 +85,16 @@ describe 'r10k::webhook tests', if: fact('os.name') != 'Archlinux' do
     end
 
     describe command('systemctl cat webhook-go') do
-      its(:stdout) { is_expected.to match(%r{User=puppet}) }
+      its(:stdout) { is_expected.not_to match(%r{User=puppet}) }
+    end
+
+    describe file('/etc/voxpupuli/webhook.yml') do
+      it 'exists and has content' do
+        expect(subject).to exist
+        expect(subject).to be_owned_by 'root'
+        expect(subject).to be_grouped_into 'root'
+        expect(subject).to contain "---\nserver:\n  protected: true\n  user: puppet\n  password: puppet\n  blocked_branches: ['production']\n"
+      end
     end
   end
 end

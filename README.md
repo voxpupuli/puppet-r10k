@@ -586,7 +586,8 @@ class { 'r10k::webhook':
 ### Ignore deploying some environments
 
 Since [2.10.0](https://github.com/voxpupuli/webhook-go/releases/tag/v2.10.0) the webhook has support for ignoring certain branches.
-This is not yet configureable via the puppet module.
+When a deployment is triggered for that branch, it will return am HTTP 403 error code.
+You can configure an array of branches via `r10k::webhook::blocked_branches`.
 
 ### configuring the webservice/deploy user
 
