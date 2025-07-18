@@ -5,7 +5,6 @@ fixtures:
     choria: https://github.com/choria-io/puppet-choria.git
     concat: https://github.com/puppetlabs/puppetlabs-concat.git
     cron_core: https://github.com/puppetlabs/puppetlabs-cron_core.git
-    git: https://github.com/puppetlabs/puppetlabs-git.git
     inifile: https://github.com/puppetlabs/puppetlabs-inifile.git
     mcollective: https://github.com/choria-io/puppet-mcollective.git
     stdlib: https://github.com/puppetlabs/puppetlabs-stdlib.git
