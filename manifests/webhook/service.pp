@@ -6,7 +6,7 @@ class r10k::webhook::service () {
     ensure => $r10k::webhook::service_ensure,
     enable => $r10k::webhook::service_enabled,
   }
-  $dropin_ensure = if $r10k::webhook::service_user and $r10k::webhook::service_ensure {
+  $dropin_ensure = if $r10k::webhook::service_user {
     'present'
   } else {
     'absent'
