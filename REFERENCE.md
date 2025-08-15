@@ -171,7 +171,8 @@ Default value: `[]`
 
 Data type: `Boolean`
 
-
+Install the r10k mcollective agent
+Requires the choria/mcollective module to be installed
 
 Default value: `$r10k::params::mcollective`
 
