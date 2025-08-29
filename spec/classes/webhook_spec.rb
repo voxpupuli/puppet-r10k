@@ -107,7 +107,7 @@ r10k:
             it { is_expected.to contain_class('r10k::webhook::config') }
             it { is_expected.to contain_package('webhook-go').with_ensure('present') }
             it { is_expected.to contain_service('webhook-go.service').with_ensure('running') }
-            it { is_expected.not_to contain_systemd__dropin_file('user.conf') }
+            it { is_expected.to contain_systemd__dropin_file('user.conf').with_ensure('absent') }
             it { is_expected.to contain_file('webhook.yml').with_content(content) }
 
             if os_facts[:os]['family'] == 'RedHat'
