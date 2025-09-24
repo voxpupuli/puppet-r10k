@@ -1,5 +1,6 @@
 # @summary webhook config r10k type
-type R10k::Webhook::Config::R10k = Struct[{
+type R10k::Webhook::Config::R10k = Struct[
+  {
     command_path    => Optional[Stdlib::Absolutepath],
     config_path     => Optional[Stdlib::Absolutepath],
     default_branch  => Optional[String[1]],
@@ -8,4 +9,5 @@ type R10k::Webhook::Config::R10k = Struct[{
     verbose         => Optional[Boolean],
     deploy_modules  => Optional[Boolean],
     generate_types  => Optional[Boolean],
-}]
+  }
+]

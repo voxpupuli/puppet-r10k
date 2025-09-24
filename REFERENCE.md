@@ -743,7 +743,7 @@ Struct[{
     server  => Optional[R10k::Webhook::Config::Server],
     chatops => Optional[R10k::Webhook::Config::Chatops],
     r10k    => Optional[R10k::Webhook::Config::R10k],
-}]
+  }]
 ```
 
 ### <a name="R10k--Webhook--Config--Chatops"></a>`R10k::Webhook::Config::Chatops`
@@ -760,7 +760,7 @@ Struct[{
     user       => Optional[String[1]],
     auth_token => Optional[String[1]],
     server_uri => Optional[String[1]],
-}]
+  }]
 ```
 
 ### <a name="R10k--Webhook--Config--R10k"></a>`R10k::Webhook::Config::R10k`
@@ -779,7 +779,7 @@ Struct[{
     verbose         => Optional[Boolean],
     deploy_modules  => Optional[Boolean],
     generate_types  => Optional[Boolean],
-}]
+  }]
 ```
 
 ### <a name="R10k--Webhook--Config--Server"></a>`R10k::Webhook::Config::Server`
@@ -796,7 +796,7 @@ Struct[{
     port      => Optional[Stdlib::Port],
     tls       => Optional[R10k::Webhook::Config::Server::Tls],
     queue     => Optional[R10k::Webhook::Config::Server::Queue],
-}]
+  }]
 ```
 
 ### <a name="R10k--Webhook--Config--Server--Queue"></a>`R10k::Webhook::Config::Server::Queue`
@@ -810,7 +810,7 @@ Struct[{
     enabled             => Boolean,
     max_concurrent_jobs => Optional[Integer],
     max_history_items   => Optional[Integer],
-}]
+  }]
 ```
 
 ### <a name="R10k--Webhook--Config--Server--Tls"></a>`R10k::Webhook::Config::Server::Tls`
@@ -824,7 +824,7 @@ Struct[{
     enabled     => Boolean,
     certificate => Optional[Stdlib::Absolutepath],
     key         => Optional[Stdlib::Absolutepath],
-}]
+  }]
 ```
 
 ## Tasks
