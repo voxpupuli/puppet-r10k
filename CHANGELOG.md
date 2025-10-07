@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v15.0.0](https://github.com/voxpupuli/puppet-r10k/tree/v15.0.0) (2025-10-07)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v14.3.0...v15.0.0)
+
+**Breaking changes:**
+
+- Drop puppet, update openvox minimum version to 8.19 [\#689](https://github.com/voxpupuli/puppet-r10k/pull/689) ([TheMeier](https://github.com/TheMeier))
+- Drop EOL Ubuntu 20.04 [\#688](https://github.com/voxpupuli/puppet-r10k/pull/688) ([h-haaks](https://github.com/h-haaks))
+
+**Implemented enhancements:**
+
+- puppet/systemd: Allow 9.x [\#696](https://github.com/voxpupuli/puppet-r10k/pull/696) ([bastelfreak](https://github.com/bastelfreak))
+- Add Debian 13 support [\#695](https://github.com/voxpupuli/puppet-r10k/pull/695) ([bastelfreak](https://github.com/bastelfreak))
+- Add EL10 support [\#694](https://github.com/voxpupuli/puppet-r10k/pull/694) ([bastelfreak](https://github.com/bastelfreak))
+
+**Closed issues:**
+
+- Remove dependency on puppetlabs/ruby module [\#538](https://github.com/voxpupuli/puppet-r10k/issues/538)
+
 ## [v14.3.0](https://github.com/voxpupuli/puppet-r10k/tree/v14.3.0) (2025-05-18)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v14.2.0...v14.3.0)
@@ -134,7 +153,7 @@ These should not affect the functionality of the module.
 
 **Fixed bugs:**
 
-- Bugfix: Fix service name of webhook-go service [\#605](https://github.com/voxpupuli/puppet-r10k/pull/605) ([tmu-sprd](https://github.com/tmu-sprd))
+- Bugfix: Fix service name of webhook-go service [\#605](https://github.com/voxpupuli/puppet-r10k/pull/605) ([sprd-tmu](https://github.com/sprd-tmu))
 
 **Merged pull requests:**
 
@@ -348,7 +367,7 @@ These should not affect the functionality of the module.
 
 **Fixed bugs:**
 
-- Trim "full\_name" when module name has no dash [\#498](https://github.com/voxpupuli/puppet-r10k/pull/498) ([posledov](https://github.com/posledov))
+- Trim "full\_name" when module name has no dash [\#498](https://github.com/voxpupuli/puppet-r10k/pull/498) ([posliedov](https://github.com/posliedov))
 
 **Closed issues:**
 
