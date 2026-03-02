@@ -39,6 +39,8 @@ describe 'R10k::Webhook::Config' do
           verbose: true,
           deploy_modules: true,
           generate_types: true,
+          env_incremental: false,
+          blocked_branches: 'blocked',
         }
       }
     end

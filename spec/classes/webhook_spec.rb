@@ -63,6 +63,9 @@ describe 'r10k::webhook' do
               verbose: true,
               deploy_modules: true,
               generate_types: true,
+              env_incremental: false,
+              blocked_branches: 'blocked',
+
             }
           }
         end
@@ -96,6 +99,8 @@ r10k:
   verbose: true
   deploy_modules: true
   generate_types: true
+  env_incremental: false
+  blocked_branches: blocked
 '
         context 'with default install_method' do
           if %w[archlinux-rolling-x86_64 archlinux-6-x86_64 gentoo-2-x86_64].include?(os)

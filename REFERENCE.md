@@ -700,14 +700,16 @@ Default value:
 
 ```puppet
 {
-    command_path    => '/opt/puppetlabs/puppet/bin/r10k',
-    config_path     => '/etc/puppetlabs/r10k/r10k.yaml',
-    default_branch  => 'production',
-    prefix          => undef,
-    allow_uppercase => false,
-    verbose         => true,
-    deploy_modules  => true,
-    generate_types  => true,
+    command_path     => '/opt/puppetlabs/puppet/bin/r10k',
+    config_path      => '/etc/puppetlabs/r10k/r10k.yaml',
+    default_branch   => 'production',
+    prefix           => undef,
+    allow_uppercase  => false,
+    verbose          => true,
+    deploy_modules   => true,
+    generate_types   => true,
+    env_incremental  => false,
+    blocked_branches => undef,
   }
 ```
 
@@ -780,14 +782,16 @@ Alias of
 
 ```puppet
 Struct[{
-    command_path    => Optional[Stdlib::Absolutepath],
-    config_path     => Optional[Stdlib::Absolutepath],
-    default_branch  => Optional[String[1]],
-    prefix          => Optional[String[1]],
-    allow_uppercase => Optional[Boolean],
-    verbose         => Optional[Boolean],
-    deploy_modules  => Optional[Boolean],
-    generate_types  => Optional[Boolean],
+    command_path     => Optional[Stdlib::Absolutepath],
+    config_path      => Optional[Stdlib::Absolutepath],
+    default_branch   => Optional[String[1]],
+    prefix           => Optional[String[1]],
+    allow_uppercase  => Optional[Boolean],
+    verbose          => Optional[Boolean],
+    deploy_modules   => Optional[Boolean],
+    generate_types   => Optional[Boolean],
+    env_incremental  => Optional[Boolean],
+    blocked_branches => Optional[Variant[String[1],Array[String[1]]]],
   }]
 ```
 
