@@ -12,6 +12,8 @@
 # @param gentoo_keywords
 # @param install_options
 # @param mcollective
+#   Install the r10k mcollective agent
+#   Requires the choria/mcollective module to be installed
 # @param git_settings
 # @param deploy_settings
 # @param root_user
