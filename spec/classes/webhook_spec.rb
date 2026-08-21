@@ -13,12 +13,20 @@ describe 'r10k::webhook' do
         if %w[archlinux-rolling-x86_64 archlinux-6-x86_64 gentoo-2-x86_64].include?(os)
           it { is_expected.not_to compile }
         else
+          package_url = 'https://github.com/voxpupuli/webhook-go/releases/download/v2.14.3/webhook-go_2.14.3_linux_amd64'
+
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to contain_class('r10k::webhook::package') }
           it { is_expected.to contain_class('r10k::webhook::service') }
           it { is_expected.to contain_class('r10k::webhook::config') }
           it { is_expected.to contain_package('webhook-go').with_ensure('present') }
           it { is_expected.to contain_service('webhook-go.service').with_ensure('running') }
+
+          if os_facts[:os]['family'] == 'RedHat'
+            it { is_expected.to contain_file('/tmp/webhook-go.rpm').with_source("#{package_url}.rpm") }
+          elsif os_facts[:os]['family'] == 'Debian'
+            it { is_expected.to contain_file('/tmp/webhook-go.deb').with_source("#{package_url}.deb") }
+          end
         end
       end
 
@@ -111,12 +119,16 @@ mappings: {}
             it { is_expected.not_to contain_systemd__dropin_file('user.conf') }
             it { is_expected.to contain_file('webhook.yml').with_content(content) }
 
+            package_url = 'https://github.com/voxpupuli/webhook-go/releases/download/v1.0.0/webhook-go_1.0.0_linux_amd64'
+
             if os_facts[:os]['family'] == 'RedHat'
-              it { is_expected.to contain_file('/tmp/webhook-go.rpm') }
+              it { is_expected.to contain_file('/tmp/webhook-go.rpm').with(ensure: 'file', source: "#{package_url}.rpm") }
               it { is_expected.not_to contain_file('/tmp/webhook-go.deb') }
+              it { is_expected.to contain_package('webhook-go').with(source: '/tmp/webhook-go.rpm', provider: 'rpm') }
             elsif os_facts[:os]['family'] == 'Debian'
               it { is_expected.not_to contain_file('/tmp/webhook-go.rpm') }
-              it { is_expected.to contain_file('/tmp/webhook-go.deb') }
+              it { is_expected.to contain_file('/tmp/webhook-go.deb').with(ensure: 'file', source: "#{package_url}.deb") }
+              it { is_expected.to contain_package('webhook-go').with(source: '/tmp/webhook-go.deb', provider: 'dpkg') }
             end
           end
         end
@@ -141,6 +153,37 @@ mappings: {}
           end
         end
       end
+    end
+  end
+
+  context 'on Debian aarch64' do
+    let :facts do
+      os_facts = on_supported_os['debian-12-x86_64']
+      os_facts.merge(os: os_facts[:os].merge('architecture' => 'aarch64'))
+    end
+
+    it { is_expected.to compile.with_all_deps }
+
+    it do
+      is_expected.to contain_file('/tmp/webhook-go.deb').with_source(
+        'https://github.com/voxpupuli/webhook-go/releases/download/v2.14.3/webhook-go_2.14.3_linux_arm64.deb',
+      )
+    end
+  end
+
+  context 'on RedHat with the dnf package provider' do
+    let :facts do
+      on_supported_os['redhat-9-x86_64'].merge(package_provider: 'dnf')
+    end
+
+    it { is_expected.to compile.with_all_deps }
+    it { is_expected.not_to contain_file('/tmp/webhook-go.rpm') }
+
+    it do
+      is_expected.to contain_package('webhook-go').with(
+        ensure: 'present',
+        source: 'https://github.com/voxpupuli/webhook-go/releases/download/v2.14.3/webhook-go_2.14.3_linux_amd64.rpm',
+      )
     end
   end
 end
