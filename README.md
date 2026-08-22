@@ -301,6 +301,16 @@ For version control systems that use web driven post-receive processes you can u
 When the webhook receives the post-receive event, it will synchronize environments on your puppet masters.
 These settings are all configurable for your specific use case, as shown below in these configuration examples.
 
+For git repositories accessed with short-term tokens provided by a CD pipeline, provide the path to a token file.
+This allows dynamic token replacement without reconfiguring r10k. When supplied,
+the module configures a git credential helper to supply the token for webhook-triggered r10k runs.
+
+```puppet
+class { 'r10k::webhook':
+  github_token_path => '/run/r10k/github.token',
+}
+```
+
 **NOTE: MCollective and Bolt aren't currently supported with Webhook Go. This will be addressed in a future release of Webhook Go, but is an issue related to the complex nature of Bolt and MCollective/Choria commands that cause issues with the way Go executes shell commands.**
 
 ### Webhook Github Enterprise - Non Authenticated

@@ -536,6 +536,7 @@ install and configure the webhook-go package as local webhook receiver to trigge
 The following parameters are available in the `r10k::webhook` class:
 
 * [`service_user`](#-r10k--webhook--service_user)
+* [`github_token_path`](#-r10k--webhook--github_token_path)
 * [`install_method`](#-r10k--webhook--install_method)
 * [`ensure`](#-r10k--webhook--ensure)
 * [`version`](#-r10k--webhook--version)
@@ -556,6 +557,15 @@ The following parameters are available in the `r10k::webhook` class:
 Data type: `Optional`
 
 the user that should run the service
+
+Default value: `undef`
+
+##### <a name="-r10k--webhook--github_token_path"></a>`github_token_path`
+
+Data type: `Optional[Stdlib::Absolutepath]`
+
+Path to a file containing a GitHub token used by webhook-triggered r10k runs.
+This could be a short-term, single-use token replaced before each run.
 
 Default value: `undef`
 
@@ -661,7 +671,8 @@ Default value:
 
 Data type: `R10k::Webhook::Config::Server::Queue`
 
-
+Accept a job and return success immediately. This can hide deployment failures,
+and will not work in situations where a deployment token lifetime matches the caller's lifetime.
 
 Default value:
 

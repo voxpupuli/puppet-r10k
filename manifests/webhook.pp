@@ -1,6 +1,9 @@
 # @summary install and configure the webhook-go package as local webhook receiver to trigger r10k runs
 #
 # @param service_user the user that should run the service
+# @param github_token_path
+#   Path to a file containing a GitHub token used by webhook-triggered r10k runs.
+#   This could be a short-term, single-use token replaced before each run.
 # @param install_method
 #   how the package should be installed
 # @param ensure
@@ -12,6 +15,8 @@
 # @param chatops
 # @param tls
 # @param queue
+#   Accept a job and return success immediately. This can hide deployment failures,
+#   and will not work in situations where a deployment token lifetime matches the caller's lifetime.
 # @param server
 # @param r10k
 # @param mappings
@@ -19,6 +24,7 @@
 #
 class r10k::webhook (
   Optional $service_user = undef,
+  Optional[Stdlib::Absolutepath] $github_token_path = undef,
   Enum['package', 'repo', 'none'] $install_method = 'package',
   Boolean $ensure = false,
   String[1] $version = '2.14.3',
