@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v15.2.0](https://github.com/voxpupuli/puppet-r10k/tree/v15.2.0) (2026-09-14)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v15.1.0...v15.2.0)
+
+**Implemented enhancements:**
+
+- Replace deprecated calls with `Facter::Core::Execution` [\#710](https://github.com/voxpupuli/puppet-r10k/pull/710) ([corporate-gadfly](https://github.com/corporate-gadfly))
+- Add mappings to webhook config. [\#707](https://github.com/voxpupuli/puppet-r10k/pull/707) ([markeganfuller](https://github.com/markeganfuller))
+
+**Fixed bugs:**
+
+- yum provider refers to ghost package [\#449](https://github.com/voxpupuli/puppet-r10k/issues/449)
+
+**Closed issues:**
+
+- Webhook-go url is hardcoded [\#606](https://github.com/voxpupuli/puppet-r10k/issues/606)
+
+**Merged pull requests:**
+
+- Fix arm64 package download, allow direct download [\#708](https://github.com/voxpupuli/puppet-r10k/pull/708) ([jorhett](https://github.com/jorhett))
+
 ## [v15.1.0](https://github.com/voxpupuli/puppet-r10k/tree/v15.1.0) (2026-03-18)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v15.0.0...v15.1.0)
