@@ -21,6 +21,16 @@ describe 'r10k::webhook' do
           it { is_expected.to contain_class('r10k::webhook::config') }
           it { is_expected.to contain_package('webhook-go').with_ensure('present') }
           it { is_expected.to contain_service('webhook-go.service').with_ensure('running') }
+          it { is_expected.to contain_file('/etc/voxpupuli').with_ensure('directory') }
+          it { is_expected.not_to contain_file('/etc/voxpupuli/r10k.gitconfig') }
+          it { is_expected.not_to contain_file('/etc/voxpupuli/r10k-git-credential-helper') }
+
+          it do
+            is_expected.to contain_systemd__dropin_file('webhook-go.service-override').with(
+              filename: 'override.conf',
+              content: "[Service]\n",
+            )
+          end
 
           if os_facts[:os]['family'] == 'RedHat'
             it { is_expected.to contain_file('/tmp/webhook-go.rpm').with_source("#{package_url}.rpm") }
@@ -116,7 +126,14 @@ mappings: {}
             it { is_expected.to contain_class('r10k::webhook::config') }
             it { is_expected.to contain_package('webhook-go').with_ensure('present') }
             it { is_expected.to contain_service('webhook-go.service').with_ensure('running') }
-            it { is_expected.not_to contain_systemd__dropin_file('user.conf') }
+
+            it do
+              is_expected.to contain_systemd__dropin_file('webhook-go.service-override').with(
+                filename: 'override.conf',
+                content: "[Service]\n",
+              )
+            end
+
             it { is_expected.to contain_file('webhook.yml').with_content(content) }
 
             package_url = 'https://github.com/voxpupuli/webhook-go/releases/download/v1.0.0/webhook-go_1.0.0_linux_amd64'
@@ -149,7 +166,93 @@ mappings: {}
           if %w[archlinux-rolling-x86_64 archlinux-6-x86_64 gentoo-2-x86_64].include?(os)
             it { is_expected.not_to compile }
           else
-            it { is_expected.to contain_systemd__dropin_file('user.conf').with_content("[Service]\nUser=puppet\n") }
+            it do
+              is_expected.to contain_systemd__dropin_file('webhook-go.service-override').with(
+                filename: 'override.conf',
+                content: "[Service]\nUser=puppet\n",
+              )
+            end
+          end
+        end
+
+        context 'with github_token_path' do
+          let :params do
+            super().merge(
+              github_token_path: '/etc/voxpupuli/github.token',
+              service_user: 'webhook',
+            )
+          end
+
+          if %w[archlinux-rolling-x86_64 archlinux-6-x86_64 gentoo-2-x86_64].include?(os)
+            it { is_expected.not_to compile }
+          else
+            it { is_expected.to compile.with_all_deps }
+
+            it do
+              is_expected.to contain_file('/etc/voxpupuli').with(
+                ensure: 'directory',
+                owner: 'root',
+                group: 'root',
+                mode: '0755',
+              )
+            end
+
+            it do
+              is_expected.to contain_file('/etc/voxpupuli/r10k.gitconfig').with(
+                ensure: 'file',
+                owner: 'root',
+                group: 'webhook',
+                mode: '0440',
+                content: "[credential \"https://github.com\"]\n  helper = /etc/voxpupuli/r10k-git-credential-helper\n",
+                require: [
+                  'File[/etc/voxpupuli]',
+                  'File[/etc/voxpupuli/r10k-git-credential-helper]',
+                ],
+              )
+            end
+
+            it do
+              is_expected.to contain_file('/etc/voxpupuli/r10k-git-credential-helper').with(
+                ensure: 'file',
+                owner: 'root',
+                group: 'webhook',
+                mode: '0550',
+              ).with_content(<<~'SCRIPT')
+                #!/bin/sh
+
+                if [ "$1" = 'get' ]; then
+                  if [ ! -f /etc/voxpupuli/github.token ]; then
+                    printf '%s: %s\n' 'r10k credential helper: token file does not exist or is not a regular file' /etc/voxpupuli/github.token >&2
+                    printf 'quit=true\n\n'
+                    exit 1
+                  elif [ ! -r /etc/voxpupuli/github.token ]; then
+                    printf '%s: %s\n' 'r10k credential helper: token file is not readable' /etc/voxpupuli/github.token >&2
+                    printf 'quit=true\n\n'
+                    exit 1
+                  fi
+
+                  printf '%s\n' 'username=x-access-token'
+                  printf 'password='
+                  cat -- /etc/voxpupuli/github.token
+                  printf '\n'
+                fi
+              SCRIPT
+            end
+
+            it do
+              is_expected.to contain_systemd__dropin_file('webhook-go.service-override').with(
+                unit: 'webhook-go.service',
+                filename: 'override.conf',
+                content: <<~DROPIN,
+                  [Service]
+                  User=webhook
+                  Environment=GIT_CONFIG_GLOBAL=/etc/voxpupuli/r10k.gitconfig
+                  Environment=GIT_TERMINAL_PROMPT=0
+                DROPIN
+                require: 'Class[R10k::Webhook::Config]',
+                notify: 'Service[webhook-go.service]',
+              )
+            end
           end
         end
       end
