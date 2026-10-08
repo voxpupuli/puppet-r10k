@@ -887,4 +887,3 @@ A module to deploy across all environments.
 Data type: `Optional[Pattern[/\A[a-z0-9_,]+\Z/]]`
 
 A comma separated list of modules to deploy. Takes precedence over `module`.
-

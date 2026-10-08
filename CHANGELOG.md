@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v15.3.0](https://github.com/voxpupuli/puppet-r10k/tree/v15.3.0) (2026-10-08)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v15.2.0...v15.3.0)
+
+**Implemented enhancements:**
+
+- Update requirements to allow OpenVox 9 [\#714](https://github.com/voxpupuli/puppet-r10k/pull/714) ([sebastianrakel](https://github.com/sebastianrakel))
+- allow vcsrepo 8.x [\#712](https://github.com/voxpupuli/puppet-r10k/pull/712) ([marcusdots](https://github.com/marcusdots))
+
 ## [v15.2.0](https://github.com/voxpupuli/puppet-r10k/tree/v15.2.0) (2026-09-14)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v15.1.0...v15.2.0)
