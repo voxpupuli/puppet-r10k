@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v15.4.0](https://github.com/voxpupuli/puppet-r10k/tree/v15.4.0) (2026-10-16)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v15.3.0...v15.4.0)
+
+**Implemented enhancements:**
+
+- puppet/systemd: Allow 10.x & puppetlabs/stdlib: Allow 10.x [\#716](https://github.com/voxpupuli/puppet-r10k/pull/716) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v15.3.0](https://github.com/voxpupuli/puppet-r10k/tree/v15.3.0) (2026-10-08)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-r10k/compare/v15.2.0...v15.3.0)
