@@ -1,0 +1,12 @@
+<%- |
+  Optional $service_user,
+  Optional[Stdlib::Absolutepath] $github_token_path,
+| -%>
+[Service]
+<% if $service_user { -%>
+User=<%= $service_user %>
+<% } -%>
+<% if $github_token_path { -%>
+Environment=GIT_CONFIG_GLOBAL=/etc/voxpupuli/r10k.gitconfig
+Environment=GIT_TERMINAL_PROMPT=0
+<% } -%>
