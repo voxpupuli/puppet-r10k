@@ -34,13 +34,19 @@ class r10k::install {
         'present' => $r10k::version,
         'absent'  => 'absent',
       }
-      # we need to pin the faraday-net_http version for puppet 7
+
+      # we need to pin faraday-net_http and fast_gettext versions for puppet 7
       if versioncmp($facts['puppetversion'], '8.0.0') < 0 {
         package { 'faraday':
           ensure          => '2.8.1',
           provider        => $r10k::provider,
         }
+        package { 'fast_gettext':
+          ensure          => '2.4.0',
+          provider        => $r10k::provider,
+        }
       }
+
       package { $r10k::package_name:
         ensure          => $ensure,
         provider        => $r10k::provider,
