@@ -37,11 +37,8 @@ class r10k::install {
       # we need to pin the faraday-net_http version for puppet 7
       if versioncmp($facts['puppetversion'], '8.0.0') < 0 {
         package { 'faraday':
-          ensure          => present,
+          ensure          => '2.8.1',
           provider        => $r10k::provider,
-          install_options => [
-            { '-v' => '2.8.1' },
-          ],
         }
       }
       package { $r10k::package_name:
